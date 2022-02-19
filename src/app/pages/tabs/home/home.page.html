@@ -1,0 +1,67 @@
+<ion-header no-border>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      ChainFox
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="logOut()">
+        <ion-icon name="lock-closed"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon name="qr-code"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <div class="titles">
+    <h4>
+      UNM Wallet
+    </h4>
+  </div>
+
+  <div class="ion-padding">
+
+    <ion-card color="warning">
+      <ion-card-content>
+        <ion-row>
+          <ion-col size="8" routerLink="/list" routerDirection="forward">
+            <ion-card-subtitle class="no">{{name}}</ion-card-subtitle>
+            <ion-card-subtitle>Email</ion-card-subtitle>
+          </ion-col>
+          <ion-card-subtitle>
+            <ion-badge>
+              <ion-card-subtitle>Balance: 100</ion-card-subtitle>
+            </ion-badge>
+          </ion-card-subtitle>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <div class="titles">
+    <h4>
+      Promotions
+    </h4>
+  </div>
+
+  <div class = ion-padding >
+    <ion-col size="4">
+        <ion-slides pager=“true” autoplay=“2000” loop=“true”>
+          <ion-slide>
+            <img  src="assets/imgs/screen1.png" alt="">
+          </ion-slide>
+          <ion-slide>
+            <img src="assets/imgs/screen2.png" alt="" width="640" height="360">
+          </ion-slide>
+          <ion-slide>
+            <img src="assets/imgs/screen3.png" alt="">
+          </ion-slide>
+        </ion-slides>
+    </ion-col>
+  </div>
+</ion-content>

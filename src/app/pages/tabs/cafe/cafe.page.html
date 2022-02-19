@@ -1,0 +1,33 @@
+<ion-header no-border>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      ChainFox
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="logOut()">
+        <ion-icon name="lock-closed"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon name="qr-code"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-app>
+    <div class="grid grid-rows-1 grid-cols-1">
+      <div>
+        <ion-router-outlet></ion-router-outlet>
+      </div>
+
+      <!-- layers -->
+      <div class="z-40">
+        <app-food-details-bottomsheet></app-food-details-bottomsheet>
+      </div>
+    </div>
+  </ion-app>
+</ion-content>

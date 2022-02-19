@@ -1,0 +1,82 @@
+
+version: '3.5'
+
+networks:
+  chainfox-net:
+    name: chainfox-net
+    attachable: true
+
+volumes:
+  chainfox-iroha-postgres-vol:
+   external: true
+   name: chainfox-iroha-postgres-vol
+  chainfox-iroha-vol:
+   external: true
+   name: chainfox-iroha-vol
+
+services:
+  chainfox-iroha:
+    image: hyperledger/iroha:1.1.1
+    container_name: chainfox-iroha
+    depends_on:
+      - chainfox-iroha-postgres
+    tty: true
+    environment:
+      - KEY=keys/node0
+    entrypoint:
+      - /opt/iroha_data/entrypoint.sh
+    networks:
+      - chainfox-net
+    volumes:
+      - ./iroha:/opt/iroha_data
+      - type: volume
+        source: chainfox-iroha-vol
+        target: /tmp/block_store
+    ports:
+      - 50051:50051
+    logging:
+      driver: json-file
+
+  chainfox-iroha-postgres:
+    image: postgres:9.5
+    container_name: chainfox-iroha-postgres
+    environment:
+      - POSTGRES_PASSWORD=mysecretpassword
+    networks:
+      - chainfox-net
+    volumes:
+      - type: volume
+        source: chainfox-iroha-postgres-vol
+        target: /var/lib/postgresql/data
+# ports can be disabled, just to have direct connection to db
+    ports:
+      - 5432:5432
+    logging:
+     driver: json-file
+
+  grpcwebproxy:
+    build:
+      context: grpcwebproxy/
+    container_name: chainfox-grpcwebproxy
+    depends_on:
+      - chainfox-iroha
+    volumes:
+      - type: bind
+        source: ./grpcwebproxy/tls
+        target: /tls
+    entrypoint:
+      - grpcwebproxy
+      - --backend_addr=chainfox-iroha:50051
+      - --run_tls_server=true
+      - --server_tls_cert_file=/tls/localhost.crt
+      - --server_tls_key_file=/tls/localhost.key
+#      - --server_tls_cert_file=/tls/fullchain4.pem
+#      - --server_tls_key_file=/tls/privkey4.pem
+      - --allow_all_origins=true
+    networks:
+      - chainfox-net
+    ports:
+      - 8081:8080
+      - 8443:8443
+    logging:
+      driver: json-file

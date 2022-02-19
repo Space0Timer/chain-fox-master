@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-title color="primary" class="text-center pr-12">
+      <span class="font-cursive">UNM Cafeteria</span>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="logOut()">
+        <ion-icon name="lock-closed"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon name="qr-code"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true">
+
+  <div class="bg-white p-1" @staggerFade>
+    <ng-container *ngFor="let option of options">
+      <div>
+        <app-main-option-card [option]="option"></app-main-option-card>
+      </div>
+    </ng-container>
+  </div>
+</ion-content>

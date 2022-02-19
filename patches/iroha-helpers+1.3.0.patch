@@ -1,0 +1,26 @@
+diff --git a/node_modules/iroha-helpers/lib/proto/endpoint_grpc_pb.d.ts b/node_modules/iroha-helpers/lib/proto/endpoint_grpc_pb.d.ts
+index 301f7e6..742f8dc 100644
+--- a/node_modules/iroha-helpers/lib/proto/endpoint_grpc_pb.d.ts
++++ b/node_modules/iroha-helpers/lib/proto/endpoint_grpc_pb.d.ts
+@@ -8,7 +8,7 @@ import * as transaction_pb from "./transaction_pb";
+ import * as queries_pb from "./queries_pb";
+ import * as qry_responses_pb from "./qry_responses_pb";
+ import * as google_protobuf_empty_pb from "google-protobuf/google/protobuf/empty_pb";
+-import * as grpc from "grpc";
++import * as grpc from "@grpc/grpc-js";
+ 
+ interface ICommandService_v1Service extends grpc.ServiceDefinition<grpc.UntypedServiceImplementation> {
+   torii: grpc.MethodDefinition<transaction_pb.Transaction, google_protobuf_empty_pb.Empty>;
+diff --git a/node_modules/iroha-helpers/lib/proto/endpoint_grpc_pb.js b/node_modules/iroha-helpers/lib/proto/endpoint_grpc_pb.js
+index ea4aa7f..ea87ca5 100644
+--- a/node_modules/iroha-helpers/lib/proto/endpoint_grpc_pb.js
++++ b/node_modules/iroha-helpers/lib/proto/endpoint_grpc_pb.js
+@@ -6,7 +6,7 @@
+ // SPDX-License-Identifier: Apache-2.0
+ //
+ 'use strict';
+-var grpc = require('grpc');
++var grpc = require('@grpc/grpc-js');
+ var endpoint_pb = require('./endpoint_pb.js');
+ var transaction_pb = require('./transaction_pb.js');
+ var queries_pb = require('./queries_pb.js');
