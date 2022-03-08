@@ -6,19 +6,40 @@ import { doc, Firestore, setDoc } from '@angular/fire/firestore';
 import { StorageService } from '../storage.service';
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
-export const user_key = 'maza_eats_user_id';
+export const user_key = 'chain_fox';
+
+export interface AccData {
+  mywallet: string;
+  mypuk: string;
+  myprk: string;
+  mywalletIsEncrypted: boolean;
+  assets: any;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  cur_assetId: string;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  cur_assetId_decimal: any;
+}
+
+export interface WalletDataTo {
+  wallet: string;
+  amount: string;
+  message: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
+  private id: string;
 
   constructor(
     private _fireAuth: Auth,
     private _firestore: Firestore,
-    private storage: StorageService
+    private storage: StorageService,
   ) { }
 
+  // Creating a firebase account
   async register(formValue) {
     try {
       // eslint-disable-next-line no-underscore-dangle
@@ -35,6 +56,7 @@ export class AuthService {
     }
   }
 
+  // Login Firebase User
   async login(formValue) {
     try {
       // eslint-disable-next-line no-underscore-dangle
@@ -52,6 +74,7 @@ export class AuthService {
     }
   }
 
+  // Check whether the firebase user is login or not
   checkAuth() {
     return new Promise((resolve, reject) => {
       // eslint-disable-next-line no-underscore-dangle
@@ -63,6 +86,14 @@ export class AuthService {
     });
   }
 
+  // Get the current user uid for querying purposes
+  getUid() {
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions,no-underscore-dangle
+    this.id = this._fireAuth.currentUser.uid;
+    return this.id;
+  }
+
+  // Logout, self explanatory
   async logout() {
     try {
       // eslint-disable-next-line no-underscore-dangle

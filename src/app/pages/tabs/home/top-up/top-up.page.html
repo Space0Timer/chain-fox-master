@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Top Up
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-icon (click)="back()" color="primary" slot="icon-only" name="chevron-back-outline"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="form" class="ion-margin">
+    <ion-item lines="full">
+      <ion-input formControlName="amount" type="text" placeholder="Enter amount"></ion-input>
+    </ion-item>
+    <ion-text
+      color="danger"
+      *ngIf="!form.get('amount').valid && form.get('amount').touched">
+      <ion-text
+        class="error"
+        *ngIf="form.get('amount').hasError('required')">
+        * Please enter the amount
+      </ion-text>
+    </ion-text>
+
+  </form>
+  <div class="ion-margin-horizontal">
+  <ion-button
+    *ngIf="!isLoading"
+    size="large"
+    expand="block"
+    shape="round"
+    color="primary" (click)="submitRequest()">
+    Confirm
+  </ion-button>
+  </div>
+
+</ion-content>

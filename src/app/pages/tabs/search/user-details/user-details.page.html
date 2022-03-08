@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Set Amount</ion-title>
+    <ion-buttons slot="start">
+      <ion-icon (click)="back()" color="primary" slot="icon-only" name="chevron-back-outline"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<form [formGroup]="form" class="ion-margin">
+  <div class="ion-margin-vertical">
+    <ion-item lines="full">
+      <ion-input formControlName="amount" type="text" placeholder="Enter amount"></ion-input>
+    </ion-item>
+    <ion-text
+      color="danger"
+      *ngIf="!form.get('amount').valid && form.get('amount').touched">
+      <ion-text
+        class="error"
+        *ngIf="form.get('amount').hasError('required')">
+        * Please enter the amount
+      </ion-text>
+    </ion-text>
+  </div>
+  <div class="ion-margin-vertical">
+    <ion-item lines="full">
+      <ion-input formControlName="reference" type="text" placeholder="Enter reference"></ion-input>
+    </ion-item>
+    <ion-text
+      color="danger"
+      *ngIf="!form.get('reference').valid && form.get('reference').touched">
+      <ion-text
+        class="error"
+        *ngIf="form.get('reference').hasError('required')">
+        * Please enter the reference
+      </ion-text>
+      <!-- for reference error -->
+      <ion-text
+        class="error"
+        *ngIf="!form.get('reference').hasError('required')
+          && form.get('reference')">
+        * Please enter the payment reference
+      </ion-text>
+    </ion-text>
+  </div>
+</form>
+
+<div class="ion-margin-horizontal">
+  <ion-button
+    *ngIf="!isLoading"
+    size="large"
+    expand="block"
+    shape="round"
+    color="primary"
+    (click)="onSubmit()">
+    <ion-text>Confirm</ion-text>
+  </ion-button>
+  <ion-button
+    *ngIf="isLoading"
+    size="large"
+    expand="block"
+    shape="round"
+    color="primary">
+    <ion-spinner></ion-spinner>
+  </ion-button>
+</div>
+
+

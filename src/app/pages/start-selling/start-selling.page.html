@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="primary" (click)="back()" routerDirection="forward">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Setup Store</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <form [formGroup]="form" class="ion-margin">
+      <div class="ion-margin-vertical">
+        <ion-item lines="full">
+          <ion-input formControlName="name" type="text" placeholder="Enter store name"></ion-input>
+        </ion-item>
+        <ion-text
+          color="danger"
+          *ngIf="!form.get('name').valid && form.get('name').touched">
+          <ion-text
+            class="error"
+            *ngIf="form.get('name').hasError('required')">
+            * Please enter the store name
+          </ion-text>
+        </ion-text>
+      </div>
+    </form>
+
+    <div>
+      <form method="post" enctype="multipart/form-data">
+        <div>
+          <div><b>⛰ Upload photo</b></div><br/>
+          <input type="file" (change)="uploadPhoto($event)" accept=".png,.jpg" multiple="true"/>
+          <div *ngIf="errorMessage" class="error">{{errorMessage}}</div>
+        </div>
+      </form>
+    </div>
+    <div *ngIf="barStatus">
+      Uploading.....
+    </div>
+
+    <div id="photoPreview">
+      <div *ngFor="let image of imageUploads">
+        <img loading="lazy" [src]="image" class="preview"/>
+      </div>
+    </div>
+
+    <div class="ion-margin-horizontal">
+      <ion-button
+        *ngIf="!isLoading"
+        size="large"
+        expand="block"
+        shape="round"
+        color="primary"
+        (click)="onSubmit()">
+        <ion-text>Confirm</ion-text>
+      </ion-button>
+      <ion-button
+        *ngIf="isLoading"
+        size="large"
+        expand="block"
+        shape="round"
+        color="primary">
+        <ion-spinner></ion-spinner>
+      </ion-button>
+    </div>
+</ion-content>

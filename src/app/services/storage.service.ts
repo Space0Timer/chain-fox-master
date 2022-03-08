@@ -8,7 +8,7 @@ export const INTRO_KEY = 'intro-slides';
   providedIn: 'root'
 })
 export class StorageService {
-
+  public data: string;
   constructor() { }
 
   async setStorage(key, value) {
@@ -24,6 +24,16 @@ export class StorageService {
 
   removeStorage(key) {
     return Storage.remove({key});
+  }
+
+
+
+  setData(data) {
+    this.data = data;
+  }
+
+  getData(){
+    return this.data;
   }
 
 }

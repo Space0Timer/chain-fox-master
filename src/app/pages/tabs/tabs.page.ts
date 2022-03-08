@@ -11,10 +11,12 @@ export class TabsPage implements OnInit {
   @ViewChild('tabs', {static: false}) tabs: IonTabs;
   selectedTab: any;
 
-  constructor() { }
+  constructor(
+  ) { }
 
   ngOnInit() {
   }
+
 
 
   setCurrentTab($event: any) {

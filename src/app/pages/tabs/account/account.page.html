@@ -1,22 +1,35 @@
-<ion-header no-border>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>
-      ChainFox
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-title color="primary" class="text-center pr-12">
+      <span class="font-cursive">Account</span>
     </ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="logOut()">
         <ion-icon name="lock-closed"></ion-icon>
       </ion-button>
-      <ion-button>
-        <ion-icon name="qr-code"></ion-icon>
+      <ion-button (click) = "qrCode()">
+          <ion-icon name="qr-code" ></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+
+<ion-content [color]="searchBar ? 'light' : ''">
+
+  <ion-grid class="ion-padding-horizontal" *ngIf="!searchBar">
+    <ion-row class="ion-align-items-center ion-margin-top">
+      <ion-col size="6" *ngFor="let category of categories" class="ion-text-center">
+        <ion-card color="light">
+          <ion-card-header>
+            <ion-icon name="book-outline"></ion-icon>
+            <ion-card-title (click)="getRoute(category?.id)">{{category?.name}}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+
 
 </ion-content>

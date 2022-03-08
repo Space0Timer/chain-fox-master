@@ -1,33 +1,30 @@
-<ion-header no-border>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>
-      ChainFox
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-title color="primary" class="text-center pr-12">
+      <span class="font-cursive">UNM Cafeteria</span>
     </ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="logOut()">
         <ion-icon name="lock-closed"></ion-icon>
       </ion-button>
-      <ion-button>
-        <ion-icon name="qr-code"></ion-icon>
-      </ion-button>
+        <ion-button (click) = "qrCode()">
+          <ion-icon name="qr-code" ></ion-icon>
+        </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-app>
-    <div class="grid grid-rows-1 grid-cols-1">
-      <div>
-        <ion-router-outlet></ion-router-outlet>
-      </div>
 
-      <!-- layers -->
-      <div class="z-40">
-        <app-food-details-bottomsheet></app-food-details-bottomsheet>
+<ion-content [fullscreen]="true">
+  <ion-toolbar>
+    <ion-searchbar animated="true" debounce="800"></ion-searchbar>
+  </ion-toolbar>
+  <div class="bg-white p-1" @staggerFade>
+    <ng-container *ngFor="let option of options">
+      <div>
+        <app-main-option-card [option]="option"></app-main-option-card>
       </div>
-    </div>
-  </ion-app>
+    </ng-container>
+  </div>
 </ion-content>
+

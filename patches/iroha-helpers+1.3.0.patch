@@ -1,3 +1,16 @@
+diff --git a/node_modules/iroha-helpers/lib/proto/commands_pb.d.ts b/node_modules/iroha-helpers/lib/proto/commands_pb.d.ts
+index af2fbab..5cdef3c 100644
+--- a/node_modules/iroha-helpers/lib/proto/commands_pb.d.ts
++++ b/node_modules/iroha-helpers/lib/proto/commands_pb.d.ts
+@@ -24,7 +24,7 @@ export class AddAssetQuantity extends jspb.Message {
+ export namespace AddAssetQuantity {
+   export type AsObject = {
+     assetId: string,
+-    amount: string,
++    amount: number,
+   }
+ }
+ 
 diff --git a/node_modules/iroha-helpers/lib/proto/endpoint_grpc_pb.d.ts b/node_modules/iroha-helpers/lib/proto/endpoint_grpc_pb.d.ts
 index 301f7e6..742f8dc 100644
 --- a/node_modules/iroha-helpers/lib/proto/endpoint_grpc_pb.d.ts

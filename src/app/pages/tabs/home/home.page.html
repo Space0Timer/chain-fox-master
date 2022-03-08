@@ -1,17 +1,17 @@
 <ion-header no-border>
-  <ion-toolbar>
+  <ion-toolbar color="light" >
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>
-      ChainFox
+    <ion-title color="primary">
+      Home
     </ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="logOut()">
         <ion-icon name="lock-closed"></ion-icon>
       </ion-button>
-      <ion-button>
-        <ion-icon name="qr-code"></ion-icon>
+      <ion-button (click) = "qrCode()">
+        <ion-icon name="qr-code" ></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -29,15 +29,20 @@
     <ion-card color="warning">
       <ion-card-content>
         <ion-row>
-          <ion-col size="8" routerLink="/list" routerDirection="forward">
-            <ion-card-subtitle class="no">{{name}}</ion-card-subtitle>
-            <ion-card-subtitle>Email</ion-card-subtitle>
+          <ion-col size="18" >
+            <ion-note class="no">{{this.iroha.wallet.name}}</ion-note>
           </ion-col>
-          <ion-card-subtitle>
-            <ion-badge>
-              <ion-card-subtitle>Balance: 100</ion-card-subtitle>
-            </ion-badge>
-          </ion-card-subtitle>
+          <ion-chip>
+            <ion-label class="ion-text-wrap">
+              Balance: RM {{this.iroha.wallet.balance}}
+            </ion-label>
+          </ion-chip>
+          <ion-col size="4" class="ion-text-end">
+              <ion-icon  name="calculator" className="center-right" routerLink="/list" routerDirection="forward"></ion-icon>
+          </ion-col>
+          <ion-col size="1.5" class="ion-text-end">
+              <ion-icon name="add-circle" className="center-right" routerLink="/top-up" routerDirection="forward"></ion-icon>
+          </ion-col>
         </ion-row>
       </ion-card-content>
     </ion-card>

@@ -3,12 +3,14 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { IrohaService } from 'src/app/services/iroha.service';
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss'],
 })
+
 export class SignUpComponent implements OnInit {
 
   form: FormGroup;
@@ -18,8 +20,9 @@ export class SignUpComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private alertController: AlertController
-    ) { 
+    private alertController: AlertController,
+    private iroha: IrohaService
+    ) {
     this.initForm();
   }
 
@@ -44,9 +47,10 @@ export class SignUpComponent implements OnInit {
     }
     this.isLoading = true;
     console.log(this.form.value);
-    this.authService.register(this.form.value).then((data) => {
+    this.authService.register(this.form.value).then(async (data) => {
       console.log(data);
-      this.router.navigateByUrl('/tabs', {replaceUrl: true});
+      await this.iroha.createAccount(this.form.value.username);
+      await this.router.navigateByUrl('/tabs', {replaceUrl: true});
       this.isLoading = false;
       this.form.reset();
     })
@@ -70,5 +74,6 @@ export class SignUpComponent implements OnInit {
 
     await alert.present();
   }
+
 
 }

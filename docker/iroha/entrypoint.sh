@@ -1,7 +1,3 @@
-#!/bin/sh
-#while ! curl http://wallet-js-iroha-postgres:5432/ 2>&1 | grep '52'
-#do
-#done
+#!/usr/bin/env bash
 sleep 10
-# --overwrite-ledger
-irohad --genesis_block genesis-chainfox.block.json --config config.docker --keypair_name $KEY
+irohad --genesis_block genesis-chainfox.block.json --config config.docker --keypair_name $KEY --overwrite-ledger true

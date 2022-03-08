@@ -1,26 +1,32 @@
 
 <ion-header no-border>
-  <ion-toolbar>
+  <ion-toolbar color="light" >
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>
-      ChainFox
+    <ion-title color="primary">
+      Send Money
     </ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="logOut()">
         <ion-icon name="lock-closed"></ion-icon>
       </ion-button>
-      <ion-button>
-        <ion-icon name="qr-code"></ion-icon>
+      <ion-button (click) = "qrCode()">
+        <ion-icon name="qr-code" ></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content>
   <ion-toolbar>
-    <ion-searchbar
-      animated="true"
-      debounce="800"></ion-searchbar>
+    <ion-searchbar animated="true" debounce="800" (ionChange)="_ionChange($event)"></ion-searchbar>
   </ion-toolbar>
+  <ion-content>
+    <ion-list>
+      <ion-item *ngIf="name!==''" routerLink="/user-details">
+        <ion-label>{{this.iroha.otherWallet.name}}</ion-label>
+      </ion-item>
+    </ion-list>
+
+  </ion-content>
 </ion-content>

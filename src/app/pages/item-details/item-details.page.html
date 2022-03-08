@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="primary" (click)="back()" routerDirection="forward">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class = ion-padding >
+    <ion-col size="4">
+          <img src="assets/images/food-rice-shrimp.png" alt="">
+    </ion-col>
+  </div>
+
+  <div>
+    <h1 class="item-name">Test Item</h1>
+
+    <h4 class="price">
+      RM 10
+    </h4>
+  </div>
+
+  <div class="seperator">
+    <hr>
+  </div>
+
+
+  <div class="description">
+    <h5>Description</h5>
+
+    <p>
+    Some nice food.
+    </p>
+
+  </div>
+
+  <div class="seperator">
+    <hr>
+  </div>
+
+
+
+</ion-content>
+<ion-footer>
+  <ion-row>
+    <ion-col size="6">
+      <ion-button expand="full" color="light">Add to cart</ion-button>
+    </ion-col>
+    <ion-col size="6">
+      <ion-button expand="full" color="dark">Buy Now</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

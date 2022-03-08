@@ -12,42 +12,18 @@
   </ion-toolbar>
 </ion-header>
 
+
 <ion-content>
-  <div class="padding-20">
+  <div class="ion-margin-horizontal">
     <h6>Recent transactions</h6>
-    <p>Today</p>
-
-    <ion-list lines="none" class="list-transactions">
-
-      <ion-item>
-        <ion-label>
-          <h2>Transaction 1</h2>
-          <p>Food</p>
-        </ion-label>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>
-          <h2>Transaction 2</h2>
-          <p>Food</p>
-        </ion-label>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>
-          <h2>Transaction 3</h2>
-          <p>Food</p>
-        </ion-label>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>
-          <h2>Transaction 4</h2>
-          <p>Food</p>
-        </ion-label>
-      </ion-item>
-
-    </ion-list>
-
+  <ion-grid>
+    <ion-row><ion-col>{{'COMMON.date'}}:</ion-col><ion-col>{{this.iroha.txDate | date:'yyyy-MM-dd HH:mm.ss'}}</ion-col></ion-row>
+    <ion-row><ion-col>{{'COMMON.from'}}:</ion-col><ion-col>{{txFrom}}</ion-col></ion-row>
+    <ion-row><ion-col>{{'COMMON.to'}}:</ion-col><ion-col>{{txTo}}</ion-col></ion-row>
+    <ion-row><ion-col>{{'COMMON.amount'}}:</ion-col><ion-col>{{txAmount}}</ion-col></ion-row>
+    <ion-row><ion-col>{{'COMMON.currency'}}:</ion-col><ion-col>{{txCurrency}}</ion-col></ion-row>
+    <ion-row><ion-col>{{'COMMON.msg'}}:</ion-col><ion-col>{{txMessage}}</ion-col></ion-row>
+  </ion-grid>
   </div>
 </ion-content>
+
