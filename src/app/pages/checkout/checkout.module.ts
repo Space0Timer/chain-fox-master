@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { CheckoutPageRoutingModule } from './checkout-routing.module';
 
 import { CheckoutPage } from './checkout.page';
+import {SharedModule} from "../../shared";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    CheckoutPageRoutingModule
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        CheckoutPageRoutingModule,
+        SharedModule
+    ],
   declarations: [CheckoutPage]
 })
 export class CheckoutPageModule {}

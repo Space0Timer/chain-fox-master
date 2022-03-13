@@ -1,3 +1,14 @@
-<p>
-  checkout-card works!
-</p>
+<ng-container *ngIf="checkout">
+<ion-card mode="ios">
+  <ion-card-content>
+    <div class="item-img">
+      <img [src]="checkout.image" />
+    </div>
+    <div class="item-info">
+      <p>{{checkout.name}}</p>
+      <p>{{checkout.owner}}</p>
+      <p>{{checkout.price}}</p>
+    </div>
+  </ion-card-content>
+</ion-card>
+</ng-container>

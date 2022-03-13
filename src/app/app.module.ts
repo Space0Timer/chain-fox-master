@@ -22,6 +22,7 @@ import { provideMessaging,getMessaging } from '@angular/fire/messaging';
 import { provideStorage,getStorage} from '@angular/fire/storage';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import {AngularFireModule} from "@angular/fire/compat";
+import { QRCodeModule } from 'angular2-qrcode';
 
 @NgModule({
   declarations: [AppComponent],
@@ -41,7 +42,7 @@ import {AngularFireModule} from "@angular/fire/compat";
     FormsModule,
     BrowserAnimationsModule,
     SharedModule,
-
+    QRCodeModule
   ],
   providers: [
     StatusBar,

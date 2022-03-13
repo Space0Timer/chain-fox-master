@@ -33,6 +33,8 @@ const DECREMENT = firebase.firestore.FieldValue.increment(-1);
 
 export class ProductService {
 
+  total = 0;
+
   public store: StoreData = {
     name: '',
   };
@@ -56,10 +58,6 @@ export class ProductService {
     private _firestore: Firestore,
   ) {
     this.productsCollection = this.afs.collection('carts');
-  }
-
-  getProduct(id) {
-
   }
 
   addToCart(id, owner) {
@@ -92,5 +90,8 @@ export class ProductService {
     await this.afs.collection('carts').add({
       id: this.id
     });
+  }
+  setTotal(total) {
+    this.total  = total;
   }
 }
