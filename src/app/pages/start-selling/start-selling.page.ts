@@ -3,15 +3,16 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {FirebaseUploadService} from "../../services/firebase-upload.service";
 import {Router} from "@angular/router";
 import {doc, Firestore, setDoc} from "@angular/fire/firestore";
-import {AuthService, user_key} from "../../services/auth/auth.service";
+import {AuthService} from "../../services/auth/auth.service";
 import {StorageService} from "../../services/storage.service";
-import {uploadString} from "@angular/fire/storage";
+import {AngularFirestore} from "@angular/fire/compat/firestore";
 
 @Component({
   selector: 'app-start-selling',
   templateUrl: './start-selling.page.html',
   styleUrls: ['./start-selling.page.scss'],
 })
+
 export class StartSellingPage implements OnInit {
 
   barStatus = false;
@@ -19,26 +20,32 @@ export class StartSellingPage implements OnInit {
   imageUploads = [];
   name = '';
   imageUrl = '';
+
   form: FormGroup;
   type = false;
   isLoading: boolean;
+  imageUploaded: boolean;
+
+  private id = this.ionicAuthService.getUid();
+
   private uid = this.ionicAuthService.getUid();
   constructor(private firebaseUploadService: FirebaseUploadService,
               private router: Router,
               private _firestore: Firestore,
               private storage: StorageService,
-              private ionicAuthService: AuthService) {
+              private ionicAuthService: AuthService,
+              private afs: AngularFirestore) {
     this.initForm();
   }
 
   ngOnInit() {
   }
 
+  // Upload photo
   uploadPhoto(event) {
     this.barStatus = true;
     this.firebaseUploadService.storeImage(event.target.files[0]).then(
       (res: any) => {
-
         if (res) {
           console.log(res);
           this.imageUrl = res;
@@ -68,9 +75,15 @@ export class StartSellingPage implements OnInit {
       this.form.markAllAsTouched();
       return;
     }
+    if(this.imageUrl === '') {
+      this.errorMessage = 'You must upload an image for your storefront to proceed.';
+      return;
+    }
     this.isLoading = true;
     console.log(this.form.value);
     await this.uploadStoreDetails(this.form.value);
+    await this.createTrackSales();
+    await this.createTrackOrders();
     this.isLoading = false;
   }
 
@@ -79,10 +92,22 @@ export class StartSellingPage implements OnInit {
     const dataRef = doc(this._firestore, `stores/${(this.uid)}`);
     await setDoc(dataRef, {
       name: formValue.name,
-      imageUrl: this.imageUrl
+      imageUrl: this.imageUrl,
+      id: this.uid,
     });
   }
 
+  async createTrackSales() {
+    await this.afs.collection('trackSales').add({
+      lastUpdate: this.id
+    });
+  }
+
+  async createTrackOrders() {
+    await this.afs.collection('trackOrders').add({
+      lastUpdate: this.id
+    });
+  }
 
   back() {
     this.router.navigateByUrl('tabs/account', {replaceUrl: true});

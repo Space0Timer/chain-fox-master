@@ -151,7 +151,7 @@ export class IrohaService {
     this.txs = [];// empty any previous transaction
     queries.getAccountAssetTransactions(QUERY_OPTIONS,
       {
-        accountId: 'test22@test',
+        accountId: this.wallet.name + '@test',
         assetId: 'coin#test',
         firstTxHash: undefined,
         firstTxHeight: undefined,

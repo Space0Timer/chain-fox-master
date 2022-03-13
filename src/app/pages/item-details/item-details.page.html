@@ -18,10 +18,10 @@
   </div>
 
   <div>
-    <h1 class="item-name">Test Item</h1>
+    <h1 class="item-name">{{this.name}}</h1>
 
     <h4 class="price">
-      RM 10
+      {{this.price}}
     </h4>
   </div>
 
@@ -34,7 +34,7 @@
     <h5>Description</h5>
 
     <p>
-    Some nice food.
+      {{this.description}}
     </p>
 
   </div>
@@ -49,10 +49,10 @@
 <ion-footer>
   <ion-row>
     <ion-col size="6">
-      <ion-button expand="full" color="light">Add to cart</ion-button>
+      <ion-button expand="full" color="light" (click)="addToCart(this.id, this.owner)">Add to cart</ion-button>
     </ion-col>
     <ion-col size="6">
-      <ion-button expand="full" color="dark">Buy Now</ion-button>
+      <ion-button expand="full" color="dark">Add to Favourites</ion-button>
     </ion-col>
   </ion-row>
 </ion-footer>

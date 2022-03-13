@@ -11,6 +11,7 @@ export interface IOption {
   templateUrl: 'main-option-card.component.html',
   styleUrls: ['./main-option-card.component.scss'],
 })
+
 export class MainOptionCardComponent {
   @Input() option: IOption;
 }

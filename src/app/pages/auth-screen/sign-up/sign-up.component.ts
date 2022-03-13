@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { IrohaService } from 'src/app/services/iroha.service';
+import {AngularFirestore} from "@angular/fire/compat/firestore";
 
 @Component({
   selector: 'app-sign-up',
@@ -16,12 +17,14 @@ export class SignUpComponent implements OnInit {
   form: FormGroup;
   type = false;
   isLoading: boolean;
-
+  private id = this.ionicAuthService.getUid();
   constructor(
     private authService: AuthService,
     private router: Router,
     private alertController: AlertController,
-    private iroha: IrohaService
+    private iroha: IrohaService,
+    private ionicAuthService: AuthService,
+    private afs: AngularFirestore
     ) {
     this.initForm();
   }
@@ -40,6 +43,26 @@ export class SignUpComponent implements OnInit {
     this.type = !this.type;
   }
 
+  async createCart() {
+    await this.afs.collection('carts').add({
+      id: this.id
+    });
+  }
+
+  async createFav() {
+    await this.afs.collection('favourites').add({
+      id: this.id
+    });
+  }
+
+  async createOrders() {
+    await this.afs.collection('orders').add({
+      id: this.id
+    });
+  }
+
+
+
   onSubmit() {
     if(!this.form.valid) {
       this.form.markAllAsTouched();
@@ -50,6 +73,9 @@ export class SignUpComponent implements OnInit {
     this.authService.register(this.form.value).then(async (data) => {
       console.log(data);
       await this.iroha.createAccount(this.form.value.username);
+      await this.createCart();
+      await this.createFav();
+      await this.createOrders();
       await this.router.navigateByUrl('/tabs', {replaceUrl: true});
       this.isLoading = false;
       this.form.reset();

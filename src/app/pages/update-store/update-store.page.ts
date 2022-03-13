@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {FirebaseUploadService} from '../../services/firebase-upload.service';
 import {Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {doc, setDoc} from "@angular/fire/firestore";
-import {user_key} from "../../services/auth/auth.service";
+import {doc, Firestore, setDoc} from "@angular/fire/firestore";
+import {AuthService, user_key} from "../../services/auth/auth.service";
+import {AngularFirestore} from "@angular/fire/compat/firestore";
 
 @Component({
   selector: 'app-update-store',
@@ -19,8 +20,14 @@ export class UpdateStorePage implements OnInit {
   form: FormGroup;
   type = false;
   isLoading: boolean;
+  imageUrl = '';
+  private uid = this.ionicAuthService.getUid();
+
   constructor(private firebaseUploadService: FirebaseUploadService,
-              private router: Router) {
+              private router: Router,
+              private _firestore: Firestore,
+              private ionicAuthService: AuthService,
+              private afs: AngularFirestore) {
     this.initForm();
   }
 
@@ -34,6 +41,7 @@ export class UpdateStorePage implements OnInit {
       (res: any) => {
         if (res) {
           console.log(res);
+          this.imageUrl = res;
           this.imageUploads.unshift(res);
           this.barStatus = false;
         }
@@ -63,10 +71,31 @@ export class UpdateStorePage implements OnInit {
       this.form.markAllAsTouched();
       return;
     }
-    console.log(this.form.value);
+    if(this.imageUrl === '') {
+      this.errorMessage = 'You must upload an image for your item to proceed.';
+      return;
+    }
     this.isLoading = true;
+    console.log(this.form.value);
+    await this.uploadStoreDetails(this.form.value);
     this.isLoading = false;
   }
+
+  async uploadStoreDetails(formValue) {
+    // eslint-disable-next-line no-underscore-dangle
+    const pushKey = this.afs.createId();
+    const dataRef = doc(this._firestore, `stores/${(this.uid)}/items/${(pushKey)}`);
+    await setDoc(dataRef, {
+      name: formValue.name,
+      price: formValue.price,
+      category: formValue.category,
+      description:  formValue.description,
+      imageUrl: this.imageUrl,
+      id: pushKey
+    });
+  }
+
+  // delete item
   back() {
     this.router.navigateByUrl('tabs/account', {replaceUrl: true});
   }

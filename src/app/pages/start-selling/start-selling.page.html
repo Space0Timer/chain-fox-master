@@ -10,7 +10,8 @@
 </ion-header>
 
 <ion-content>
-    <form [formGroup]="form" class="ion-margin">
+  <div class="ion-margin-horizontal">
+    <form [formGroup]="form" class="ion-margin-vertical">
       <div class="ion-margin-vertical">
         <ion-item lines="full">
           <ion-input formControlName="name" type="text" placeholder="Enter store name"></ion-input>
@@ -30,9 +31,14 @@
     <div>
       <form method="post" enctype="multipart/form-data">
         <div>
-          <div><b>⛰ Upload photo</b></div><br/>
+          <div><b>Upload a photo for your store front.</b></div><br/>
           <input type="file" (change)="uploadPhoto($event)" accept=".png,.jpg" multiple="true"/>
-          <div *ngIf="errorMessage" class="error">{{errorMessage}}</div>
+          <div *ngIf="errorMessage">
+            <ion-text color="danger">
+              <ion-text
+              class="error">* {{errorMessage}}</ion-text>
+            </ion-text>
+          </div>
         </div>
       </form>
     </div>
@@ -46,7 +52,7 @@
       </div>
     </div>
 
-    <div class="ion-margin-horizontal">
+    <div class="ion-margin-vertical">
       <ion-button
         *ngIf="!isLoading"
         size="large"
@@ -65,4 +71,5 @@
         <ion-spinner></ion-spinner>
       </ion-button>
     </div>
+  </div>
 </ion-content>

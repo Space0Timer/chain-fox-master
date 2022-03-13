@@ -1,0 +1,17 @@
+<ng-container *ngIf="order">
+  <ion-card mode="ios">
+    <ion-card-content>
+      <div class="item-img">
+        <img [src]="order.image" />
+      </div>
+
+      <div class="item-info">
+        <p>{{order.name}}</p>
+        <p>{{order.owner}}</p>
+        <p>{{order.price}}</p>
+
+        <ion-button expand="block" class="main-button">Check Status</ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ng-container>

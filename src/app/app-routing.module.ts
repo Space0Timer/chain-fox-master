@@ -101,6 +101,18 @@ const routes: Routes = [
   {
     path: 'start-selling',
     loadChildren: () => import('./pages/start-selling/start-selling.module').then( m => m.StartSellingPageModule)
+  },
+  {
+    path: 'track-orders',
+    loadChildren: () => import('./pages/track-orders/track-orders.module').then( m => m.TrackOrdersPageModule)
+  },
+  {
+    path: 'track-sales',
+    loadChildren: () => import('./pages/track-sales/track-sales.module').then( m => m.TrackSalesPageModule)
+  },
+  {
+    path: 'check-status',
+    loadChildren: () => import('./pages/check-status/check-status.module').then( m => m.CheckStatusPageModule)
   }
 ];
 

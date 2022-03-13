@@ -4,6 +4,9 @@ export interface IFoodCard {
   name: string;
   description: string;
   image: string;
+  price: string;
+  owner: string;
+  id: string;
 }
 
 @Component({

@@ -1,6 +1,5 @@
 import {Component,OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {DataService} from '../../../../services/data.service';
 import {ModalController, ToastController} from '@ionic/angular';
 import {AuthService} from 'src/app/services/auth/auth.service';
 import {doc, Firestore, getDoc} from '@angular/fire/firestore';
@@ -22,7 +21,7 @@ export class TopUpPage implements OnInit {
   private uid = this.ionicAuthService.getUid();
   private id: any;
 
-  constructor(private dataService: DataService,
+  constructor(
               private modalCtrl: ModalController,
               private toastCtrl: ToastController,
               private router: Router,

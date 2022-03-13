@@ -4,6 +4,11 @@ import {IOption} from 'src/app/shared';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import {Router} from '@angular/router';
 import {StorageService} from 'src/app/services/storage.service';
+import {AngularFirestore} from "@angular/fire/compat/firestore";
+import {collection, doc, Firestore, getDoc, getDocs, query, setDoc} from "@angular/fire/firestore";
+import * as firebase from 'firebase/compat';
+import {getStorage} from "@angular/fire/storage";
+import {ProductService} from "../../../services/product.service";
 
 @Component({
   selector: 'app-home',
@@ -11,54 +16,52 @@ import {StorageService} from 'src/app/services/storage.service';
   styleUrls: ['cafe.page.scss'],
   animations: [staggerFadeAnimation],
 })
-export class CafePage{
+export class CafePage implements OnInit{
 
   successMsg = '';
   errorMsg = '';
 
   options: IOption[] = [
-    {
-      name: 'Malay',
-      image: 'assets/images/main-reservation.png',
-      onTap: () => {
-        this.storage.setStorage('path', 'malay');
-        this.router.navigate(['lunch']);
-      },
-    },
-    {
-      name: 'Chinese',
-      image: 'assets/images/main-lunch.png',
-      onTap: () => {
-        this.storage.setStorage('path', 'chinese');
-        this.router.navigate(['lunch']);
-      },
-    },
-    {
-      name: 'Indian',
-      image: 'assets/images/main-dinner.png',
-      onTap: () => {
-        this.storage.setStorage('path', 'indian');
-        this.router.navigate(['lunch']);
-      },
-    },
-    {
-      name: 'Italian',
-      image: 'assets/images/main-wine.png',
-      onTap: () => {
-        this.storage.setStorage('path', 'italian');
-        this.router.navigate(['lunch']);
-      },
-    },
   ];
 
   constructor(
     private ionicAuthService: AuthService,
     private router: Router,
-    private storage: StorageService) {}
+    private storage: StorageService,
+    private afs: AngularFirestore,
+    private _firestore: Firestore,
+    private product: ProductService) {}
+
+  ngOnInit(){
+    this.addStoreToCafe();
+  }
 
   qrCode() {
     this.router.navigate(['qr-code']);
   }
+
+  async addStoreToCafe() {
+    // eslint-disable-next-line no-underscore-dangle
+    const dataRef = collection(this._firestore, 'stores');
+    const q = query(dataRef);
+    const querySnapshot = await getDocs(q);
+    // eslint-disable-next-line @typescript-eslint/no-shadow
+    querySnapshot.forEach((doc) => {
+      console.log(doc.id, ' => ', doc.data());
+      const data = doc.data();
+      this.options.push(
+        {
+          name: data.name,
+          image: data.imageUrl,
+          onTap: () => {
+            this.product.store.name = data.id;
+            this.router.navigate(['lunch']);
+          },
+        },
+      );
+    });
+  }
+
 
   logOut() {
     this.ionicAuthService.logout()
@@ -75,6 +78,8 @@ export class CafePage{
   goToLogin() {
     this.router.navigate(['auth-screen']);
   }
+
+
 
 
 }

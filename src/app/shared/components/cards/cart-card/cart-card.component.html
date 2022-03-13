@@ -1,0 +1,21 @@
+<ng-container *ngIf="cart">
+  <ion-card mode="ios">
+    <ion-card-content>
+      <div class="item-img">
+        <img [src]="cart.image" />
+      </div>
+
+      <div class="item-info">
+        <p>{{ cart.name }}</p>
+        <p>{{ cart.owner }}</p>
+        <p>{{ cart.price }}</p>
+
+        <div class="qty-selector">
+          <ion-button fill="clear" (click)="addToCart()">-</ion-button>
+          <ion-label>{{ cart.quantity }}</ion-label>
+          <ion-button fill="clear" (click)="removeFromCart()">+</ion-button>
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ng-container>
