@@ -13,9 +13,9 @@ ion-tabs {
   }
   ion-fab {
     ion-fab-button {
-      --background: linear-gradient(to bottom, #C13584, #E1306C, #FD1D1D, #F56040, #F77737, #FCAF45, #FFDC80);
+      --background: linear-gradient(90deg, rgba(255,169,0,1) 0%, rgba(228,166,0,1) 100%, rgba(0,212,255,1) 100%);
       // --background: var(--ion-color-white);
-      margin-bottom: 2vh;
+      margin-bottom: 0.5vh;
       ion-icon {
         font-size: 2rem;
         // font-size: 4rem;

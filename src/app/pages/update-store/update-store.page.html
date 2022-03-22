@@ -14,7 +14,7 @@
   <form [formGroup]="form" class="ion-margin">
     <div class="ion-margin-vertical">
       <ion-item lines="full">
-        <ion-input formControlName="name" type="text" placeholder="Enter item name"></ion-input>
+        <ion-input formControlName="name" [type]="type ? 'text' : 'text'" placeholder="Enter item name"></ion-input>
       </ion-item>
       <ion-text
         color="danger"
@@ -28,7 +28,7 @@
     </div>
     <div class="ion-margin-vertical">
       <ion-item lines="full">
-        <ion-input formControlName="price" type="number" placeholder="Enter price"></ion-input>
+        <ion-input formControlName="price" [type]="type ? 'number' : 'number'" placeholder="Enter price"></ion-input>
       </ion-item>
       <ion-text
         color="danger"
@@ -42,7 +42,7 @@
     </div>
     <div class="ion-margin-vertical">
       <ion-item lines="full">
-        <ion-input formControlName="category" type="text" placeholder="Enter category"></ion-input>
+        <ion-input formControlName="category" [type]="type ? 'text' : 'text'" placeholder="Enter category"></ion-input>
       </ion-item>
       <ion-text
         color="danger"
@@ -55,11 +55,11 @@
       </ion-text>
       <div class="ion-margin-vertical">
         <ion-item lines="full">
-          <ion-input formControlName="description" type="text" placeholder="Enter description"></ion-input>
+          <ion-input formControlName="description" [type]="type ? 'text' : 'text'" placeholder="Enter description"></ion-input>
         </ion-item>
         <ion-text
           color="danger"
-          *ngIf="!form.get('description').valid && form.get('category').touched">
+          *ngIf="!form.get('description').valid && form.get('description').touched">
           <ion-text
             class="error"
             *ngIf="form.get('description').hasError('required')">

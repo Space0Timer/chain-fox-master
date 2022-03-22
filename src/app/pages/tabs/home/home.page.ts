@@ -1,8 +1,9 @@
-import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthService} from 'src/app/services/auth/auth.service';
-import {doc, Firestore, getDoc, setDoc} from '@angular/fire/firestore';
+import {doc, Firestore, getDoc} from '@angular/fire/firestore';
 import {IrohaService} from '../../../services/iroha.service';
+
 
 @Component({
   selector: 'app-home',
@@ -10,10 +11,18 @@ import {IrohaService} from '../../../services/iroha.service';
   styleUrls: ['./home.page.scss'],
 })
 
-export class HomePage implements OnInit {
+export class HomePage implements OnInit{
 
   successMsg = '';
   errorMsg = '';
+  name = '';
+  highlights = [];
+  highlightSlideOpts =  {
+    slidesPerView: 1.05,
+    spaceBetween: 10,
+    centeredSlides: true,
+    loop: true
+  };
   private uid = this.ionicAuthService.getUid();
   private id: any;
 
@@ -21,13 +30,13 @@ export class HomePage implements OnInit {
     private router: Router,
     private ionicAuthService: AuthService,
     private _firestore: Firestore,
-    private changeRef: ChangeDetectorRef,
-    private iroha: IrohaService
+    public iroha: IrohaService,
   ) { }
 
-  ngOnInit() {
-    this.getUserId();
+  async ngOnInit() {
+    await this.getUserId();
   }
+
 
   logOut() {
     this.ionicAuthService.logout()
@@ -45,22 +54,29 @@ export class HomePage implements OnInit {
     this.router.navigate(['auth-screen']);
   }
 
+  chat() {
+    this.router.navigate(['chat-list']);
+  }
+
   async getUserId() {
     // eslint-disable-next-line no-underscore-dangle
     const docRef = doc(this._firestore, 'users', this.uid);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      console.log(docSnap.data().username.concat('@test'));
       this.id = docSnap.data().username.concat('@test');
-      this.iroha.setName(this.id);
-      this.iroha.setBalance(this.id);
+      this.iroha.wallet.name = '';
+      await this.iroha.setName(this.id);
+      this.iroha.wallet.balance = '0';
+      await this.iroha.setBalance(this.id);
     } else {
       // doc.data() will be undefined in this case
       console.log('No such document!');
     }
   }
 
+
   qrCode() {
     this.router.navigate(['qr-code']);
   }
+
 }

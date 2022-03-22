@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {FirebaseUploadService} from '../../services/firebase-upload.service';
+import {FirebaseUploadService} from '../../services/cafe/firebase-upload.service';
 import {Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {doc, Firestore, setDoc} from "@angular/fire/firestore";
-import {AuthService, user_key} from "../../services/auth/auth.service";
-import {AngularFirestore} from "@angular/fire/compat/firestore";
+import {doc, Firestore, setDoc} from '@angular/fire/firestore';
+import {AuthService} from '../../services/auth/auth.service';
+import {AngularFirestore} from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-update-store',
@@ -84,7 +84,7 @@ export class UpdateStorePage implements OnInit {
   async uploadStoreDetails(formValue) {
     // eslint-disable-next-line no-underscore-dangle
     const pushKey = this.afs.createId();
-    const dataRef = doc(this._firestore, `stores/${(this.uid)}/items/${(pushKey)}`);
+    let dataRef = doc(this._firestore, `stores/${(this.uid)}/items/${(pushKey)}`);
     await setDoc(dataRef, {
       name: formValue.name,
       price: formValue.price,
@@ -92,6 +92,10 @@ export class UpdateStorePage implements OnInit {
       description:  formValue.description,
       imageUrl: this.imageUrl,
       id: pushKey
+    });
+    dataRef = doc(this._firestore, `idOwner/${(pushKey)}`);
+    await setDoc(dataRef, {
+      owner: this.uid,
     });
   }
 

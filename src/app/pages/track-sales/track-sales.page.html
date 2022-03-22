@@ -1,9 +1,27 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>track-sales</ion-title>
+    <ion-buttons slot="start">
+      <ion-button color="primary" (click)="back()" routerDirection="forward">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
 
+<ion-content fullscreen="true">
+  <h1 class="title">My Orders</h1>
+<ion-datetime #datetime (ionChange)="dateChanges(datetime.value)"></ion-datetime>
+  <div class="ion-margin-vertical">
+    <ion-button
+      class="ion-margin-horizontal"
+      size="large"
+      expand="block"
+      shape="round"
+      color="primary"
+      (click)="checkSales()">
+      <ion-text>Check Sales</ion-text>
+    </ion-button>
+  </div>
 </ion-content>
+

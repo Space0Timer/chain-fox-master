@@ -6,11 +6,12 @@
       </div>
 
       <div class="item-info">
-        <p>{{order.name}}</p>
-        <p>{{order.owner}}</p>
-        <p>{{order.price}}</p>
+        <p>Item Name: {{order.name}}</p>
+        <p>Merchant: {{order.owner}}</p>
+        <p>Price: RM {{order.price}}</p>
+        <p>Order ID: {{order.id}}</p>
 
-        <ion-button expand="block" class="main-button">Check Status</ion-button>
+        <ion-button expand="block" class="main-button" (click) = 'goToCheckStatusUser(order.name, order.id, order.price, order.owner)'>Check Status</ion-button>
       </div>
     </ion-card-content>
   </ion-card>

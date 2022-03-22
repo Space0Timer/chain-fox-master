@@ -6,14 +6,15 @@
       </div>
 
       <div class="item-info">
-        <p>{{ cart.name }}</p>
-        <p>{{ cart.owner }}</p>
-        <p>{{ cart.price }}</p>
+        <p>Item Name: {{ cart.name }}</p>
+        <p>Merchant: {{ cart.owner }}</p>
+        <p>Price: RM {{ cart.price }}</p>
 
         <div class="qty-selector">
-          <ion-button fill="clear" (click)="addToCart()">-</ion-button>
+          <p>Quantity: </p>
+          <ion-button fill="clear" (click)="removeFromCart()">-</ion-button>
           <ion-label>{{ cart.quantity }}</ion-label>
-          <ion-button fill="clear" (click)="removeFromCart()">+</ion-button>
+          <ion-button fill="clear" (click)="addToCart()">+</ion-button>
         </div>
       </div>
     </ion-card-content>

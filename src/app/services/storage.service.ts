@@ -1,37 +1,30 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
+import {Storage} from '@capacitor/storage';
 
-import { Storage } from '@capacitor/storage';
+export interface Keys {
+  prk: string;
+}
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class StorageService {
-  public data: string;
-  constructor() { }
 
-  async setStorage(key, value) {
-    return Storage.set({
+export class StorageService {
+
+  constructor() {
+  }
+
+  public async set(key: string, value: any) {
+    await Storage.set({
       key,
-      value
+      value,
     });
   }
 
-  getStorage(key) {
-    return Storage.get({key});
+  public async get(key) {
+    const value = await Storage.get({key});
+    console.log(value.value);
+    return value.value;
   }
-
-  removeStorage(key) {
-    return Storage.remove({key});
-  }
-
-
-
-  setData(data) {
-    this.data = data;
-  }
-
-  getData(){
-    return this.data;
-  }
-
 }

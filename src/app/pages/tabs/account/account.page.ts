@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import {Router} from '@angular/router';
+import {IrohaService} from "../../../services/iroha.service";
 
 @Component({
   selector: 'app-account',
@@ -17,19 +18,16 @@ export class AccountPage implements OnInit {
   allRestaurants: any[] = [];
   restaurants: any[] = [];
   isLoading: boolean;
-  item = {
-    // icon: 'search-outline',
-    image: 'assets/imgs/sad.png',
-    color: 'primary',
-    title: 'Sorry! No results found',
-    // subTitle: 'No results found'
-  };
 
   constructor(
     private router: Router,
     private ionicAuthService: AuthService,
+    private iroha: IrohaService
   ) { }
 
+  chat() {
+    this.router.navigate(['chat-list']);
+  }
   logOut() {
     this.ionicAuthService.logout()
       .then((response) => {
@@ -52,15 +50,14 @@ export class AccountPage implements OnInit {
 
   ngOnInit() {
     this.categories = [
-      {id: 'my-cart', cover: 'assets/dishes/2.jpg', name: 'My Cart'},
-      {id: 'my-orders', cover: 'assets/dishes/3.jpg', name: 'My Orders'},
-      {id: 'favourites', cover: 'assets/dishes/10.jpeg', name: 'Favourites'},
-      {id: 'profile', cover: 'assets/dishes/9.jpeg', name: 'Profile'},
-      {id: 'start-selling', cover: 'assets/dishes/5.jpeg', name: 'Setup Store'},
-      {id: 'update-store', cover: 'assets/dishes/5.jpeg', name: 'Update Store'},
-      {id: 'track-orders', cover: 'assets/dishes/5.jpeg', name: 'Track Orders'},
-      {id: 'track-sales', cover: 'assets/dishes/5.jpeg', name: 'Track Sales'},
-      {id: 'preferences', cover: 'assets/dishes/5.jpeg', name: 'Preferences'},
+      {id: 'my-cart', name: 'My Cart', icon: 'cart-outline'},
+      {id: 'my-orders', name: 'My Orders', icon: 'bag-handle-outline'},
+      {id: 'favourites', name: 'Favourites', icon: 'heart-outline'},
+      {id: 'order-history', name: 'Order History', icon: 'receipt-outline'},
+      {id: 'start-selling', name: 'Setup Store', icon: 'storefront-outline'},
+      {id: 'update-store', name: 'Update Store', icon: 'construct-outline'},
+      {id: 'track-sales', name: 'Track Sales', icon: 'cash-outline'},
+      {id: 'track-orders', name: 'Track Orders', icon: 'file-tray-full-outline'},
     ];
   }
     getRoute(route) {

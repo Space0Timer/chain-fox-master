@@ -36,7 +36,7 @@ const routes: Routes = [
   {
     path: 'lunch',
     loadChildren: () =>
-      import('./pages/tabs/cafe/lunch/lunch.module').then((m) => m.LunchPageModule),
+      import('./pages/lunch/lunch.module').then((m) => m.LunchPageModule),
   },
   {
     path: 'item-details',
@@ -63,8 +63,8 @@ const routes: Routes = [
     loadChildren: () => import('./pages/my-cart/my-cart.module').then( m => m.MyCartPageModule)
   },
   {
-    path: 'profile',
-    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
+    path: 'my-cart-refresh',
+    loadChildren: () => import('./pages/my-cart/my-cart.module').then( m => m.MyCartPageModule)
   },
   {
     path: 'my-orders',
@@ -113,7 +113,39 @@ const routes: Routes = [
   {
     path: 'check-status',
     loadChildren: () => import('./pages/check-status/check-status.module').then( m => m.CheckStatusPageModule)
-  }
+  },
+  {
+    path: 'pin-code',
+    loadChildren: () => import('./pages/pin-code/pin-code.module').then( m => m.PinCodePageModule)
+  },
+  {
+    path: 'store-sales',
+    loadChildren: () => import('./pages/store-sales/store-sales.module').then( m => m.StoreSalesPageModule)
+  },
+  {
+    path: 'chat',
+    loadChildren: () => import('./pages/chat/chat.module').then( m => m.ChatPageModule)
+  },
+  {
+    path: 'chat-list',
+    loadChildren: () => import('./pages/chat-list/chat-list.module').then( m => m.ChatListPageModule)
+  },
+  {
+    path: 'chat-rooms',
+    loadChildren: () => import('./pages/chat-rooms/chat-rooms.module').then( m => m.ChatRoomsPageModule)
+  },
+  {
+    path: 'splash',
+    loadChildren: () => import('./pages/splash/splash.module').then( m => m.SplashPageModule)
+  },
+  {
+    path: 'check-status-user',
+    loadChildren: () => import('./pages/check-status-user/check-status-user.module').then( m => m.CheckStatusUserPageModule)
+  },
+  {
+    path: 'check-status-store',
+    loadChildren: () => import('./pages/check-status-store/check-status-store.module').then( m => m.CheckStatusStorePageModule)
+  },
 ];
 
 

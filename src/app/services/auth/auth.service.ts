@@ -1,12 +1,15 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {
-  Auth, createUserWithEmailAndPassword,
-  onAuthStateChanged, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
-import { doc, Firestore, setDoc } from '@angular/fire/firestore';
-import { StorageService } from '../storage.service';
-
-// eslint-disable-next-line @typescript-eslint/naming-convention
-export const user_key = 'chain_fox';
+  Auth,
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signOut
+} from '@angular/fire/auth';
+import {collection, doc, Firestore, getDocs, query, setDoc, where} from '@angular/fire/firestore';
+import {AngularFirestore} from "@angular/fire/compat/firestore";
+import firebase from "firebase/compat";
+import {tryCatch} from "rxjs/internal-compatibility";
 
 export interface AccData {
   mywallet: string;
@@ -31,30 +34,33 @@ export interface WalletDataTo {
 })
 
 export class AuthService {
+  uid = '';
   private id: string;
 
   constructor(
     private _fireAuth: Auth,
     private _firestore: Firestore,
-    private storage: StorageService,
+    private afs: AngularFirestore
   ) { }
 
   // Creating a firebase account
   async register(formValue) {
     try {
-      // eslint-disable-next-line no-underscore-dangle
       const registeredUser = await createUserWithEmailAndPassword(this._fireAuth, formValue.email, formValue.password);
       console.log('registered user: ', registeredUser);
-      const uid = registeredUser.user.uid;
+      this.uid = registeredUser.user.uid;
       // eslint-disable-next-line no-underscore-dangle
-      const dataRef = doc(this._firestore, `users/${uid}`);
-      await setDoc(dataRef, formValue);
-      await this.storage.setStorage(user_key, uid);
-      return uid;
+      const dataRef = doc(this._firestore, `users/${this.uid}`);
+      await setDoc(dataRef, {
+        username: formValue.username,
+        email: formValue.email,
+      });
+      return this.uid;
     } catch(e) {
       throw(e);
     }
   }
+
 
   // Login Firebase User
   async login(formValue) {
@@ -63,9 +69,7 @@ export class AuthService {
       const response = await signInWithEmailAndPassword(this._fireAuth, formValue.email, formValue.password);
       console.log('login user: ', response);
       if(response?.user) {
-        const uid = response.user.uid;
-        await this.storage.setStorage(user_key, uid);
-        return uid;
+        return response.user.uid;
       } else {
         return false;
       }
@@ -93,12 +97,11 @@ export class AuthService {
     return this.id;
   }
 
-  // Logout, self explanatory
+  // Logout, self-explanatory
   async logout() {
     try {
       // eslint-disable-next-line no-underscore-dangle
       await signOut(this._fireAuth);
-      await this.storage.removeStorage(user_key);
       return true;
     } catch(e) {
       throw(e);

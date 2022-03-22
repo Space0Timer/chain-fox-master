@@ -7,20 +7,18 @@
   </ion-fab>
   <ion-tab-bar slot="bottom">
     <ion-tab-button tab="home">
-      <ion-icon [name]="selectTab === 'home' ? 'home' : 'home-outline'"></ion-icon>
+      <ion-icon [name]="selectedTab === 'home' ? 'home' : 'home-outline'"></ion-icon>
     </ion-tab-button>
     <ion-tab-button tab="search">
-      <ion-icon [name]="selectTab === 'search' ? 'search' : 'search-outline'"></ion-icon>
+      <ion-icon [name]="selectedTab === 'search' ? 'search' : 'search-outline'"></ion-icon>
     </ion-tab-button>
 
     <ion-tab-button></ion-tab-button>
-
     <ion-tab-button tab="cafe">
-      <ion-icon [name]="selectTab === 'cafe' ? 'cafe' : 'cafe-outline'"></ion-icon>
-      <!-- <ion-badge color="danger">1</ion-badge> -->
+      <ion-icon [name]="selectedTab === 'cafe' ? 'restaurant' : 'restaurant-outline'"></ion-icon>
     </ion-tab-button>
     <ion-tab-button tab="account">
-      <ion-icon [name]="selectTab === 'account' ? 'person' : 'person-outline'"></ion-icon>
+      <ion-icon [name]="selectedTab === 'account' ? 'person' : 'person-outline'"></ion-icon>
     </ion-tab-button>
   </ion-tab-bar>
 

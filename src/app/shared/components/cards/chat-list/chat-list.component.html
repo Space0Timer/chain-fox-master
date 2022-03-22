@@ -1,0 +1,11 @@
+<ion-item (click)="this.goToChat(chat.name, chat.id)">
+  <ion-label>
+    <h2>{{chat.name}}</h2>
+    <p>{{chat.message}}</p>
+  </ion-label>
+  <ion-label slot="end" class="ion-text-right">
+    <p *ngIf="this.chatService.today">{{chat.time}}</p>
+    <p *ngIf="!this.chatService.today">{{chat.date}}</p>
+    <p>&nbsp;</p>
+  </ion-label>
+</ion-item>

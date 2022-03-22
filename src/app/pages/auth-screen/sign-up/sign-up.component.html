@@ -1,7 +1,7 @@
 <form [formGroup]="form" class="ion-margin">
   <div class="ion-margin-vertical">
-    <ion-item lines="full">
-      <ion-input formControlName="username" type="text" placeholder="Enter username"></ion-input>
+    <ion-item lines="full" color="light">
+      <ion-input formControlName="username" [type]="type ? 'text' : 'text'" placeholder="Enter username"></ion-input>
     </ion-item>
     <ion-text
       color="danger"
@@ -11,11 +11,16 @@
         *ngIf="form.get('username').hasError('required')">
         * Please enter the username
       </ion-text>
+      <ion-text
+        class="error"
+        *ngIf="form.get('username').hasError('pattern')">
+        * Invalid username. Only characters a-z and A-Z are allowed.
+      </ion-text>
     </ion-text>
   </div>
   <div class="ion-margin-vertical">
-    <ion-item lines="full">
-      <ion-input formControlName="email" type="text" placeholder="Enter email"></ion-input>
+    <ion-item lines="full" color="light">
+      <ion-input formControlName="email" [type]="type ? 'text' : 'text'" placeholder="Enter email"></ion-input>
     </ion-item>
     <ion-text
       color="danger"
@@ -35,30 +40,34 @@
     </ion-text>
   </div>
   <div class="ion-margin-vertical">
-    <ion-item lines="full">
+    <ion-item lines="full" color="light">
       <ion-icon
         [name]="type ? 'eye' : 'eye-off'"
         slot="end"
         color="dark"
         (click)="changeType()">
       </ion-icon>
-      <ion-input formControlName="password" [type]="type ? 'password' : 'text'"
-        placeholder="Enter password"></ion-input>
+      <ion-input formControlName="password" [type]="type ? 'password' : 'text'" placeholder="Enter password"></ion-input>
     </ion-item>
-    <ion-text
-      color="danger"
-      *ngIf="!form.get('password').valid && form.get('password').touched">
       <ion-text
-        class="error"
-        *ngIf="form.get('password').hasError('required')">
-        * Please enter the password
+        color="danger"
+        *ngIf="!form.get('password').valid && form.get('password').touched">
+        <ion-text
+          class="error"
+          *ngIf="form.get('password').hasError('required')">
+          * Please enter your password
+        </ion-text>
+        <ion-text
+          class="error"
+          *ngIf="!form.get('password').hasError('required') && form.get('password').hasError('minlength')">
+          * Please enter a password of at least 8 characters long
+        </ion-text>
+        <ion-text
+          class="error"
+          *ngIf="!form.get('password').hasError('required') && !form.get('password').hasError('minlength') && form.get('password').hasError('pattern')">
+          * Please enter a password with at least one uppercase letter, one lowercase letter, and one digit, and one special character
+        </ion-text>
       </ion-text>
-      <ion-text
-        class="error"
-        *ngIf="!form.get('password').hasError('required') && form.get('password').hasError('minlength')">
-        * Please enter a password of atleast 8 characters long
-      </ion-text>
-    </ion-text>
   </div>
 </form>
 

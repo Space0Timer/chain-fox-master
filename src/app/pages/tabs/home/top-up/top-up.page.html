@@ -12,10 +12,10 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-align-items-center">
   <form [formGroup]="form" class="ion-margin">
-    <ion-item lines="full">
-      <ion-input formControlName="amount" type="text" placeholder="Enter amount"></ion-input>
+    <ion-item lines="full" color="light">
+      <ion-input formControlName="amount" [type]="type ? 'text' : 'text'" placeholder="Enter amount"></ion-input>
     </ion-item>
     <ion-text
       color="danger"
@@ -37,6 +37,14 @@
     color="primary" (click)="submitRequest()">
     Confirm
   </ion-button>
+    <ion-button
+      *ngIf="isLoading"
+      size="large"
+      expand="block"
+      shape="round"
+      color="primary">
+      <ion-spinner></ion-spinner>
+    </ion-button>
   </div>
 
 </ion-content>

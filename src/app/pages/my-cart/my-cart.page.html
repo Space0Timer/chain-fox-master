@@ -14,14 +14,14 @@
   <div class="cart-items">
     <ng-container *ngFor="let cart of cart">
       <div>
-        <app-cart-card [cart]="cart"></app-cart-card>
+        <app-cart-card [cart]="cart" (childEvent)="updateQuantity()"></app-cart-card>
       </div>
     </ng-container>
-</div>
+  </div>
 
 </ion-content>
 <ion-footer translucent="true" class="ion-no-border" mode="md">
   <ion-toolbar color="translucent">
-    <ion-button expand="block" class="main-button" (click)="checkOut()")>Continue</ion-button>
+    <ion-button expand="block" class="main-button" (click)="checkOut()" >Checkout</ion-button>
   </ion-toolbar>
 </ion-footer>

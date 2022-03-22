@@ -5,9 +5,12 @@ import {
 } from 'iroha-helpers/lib/proto/endpoint_pb_service';
 
 import {commands, queries,cryptoHelper} from 'iroha-helpers';
-import {doc, getDoc} from '@angular/fire/firestore';
+import {doc, Firestore, getDoc, setDoc} from '@angular/fire/firestore';
+import {StorageService} from './storage.service';
+import {AuthService} from './auth/auth.service';
+import {AngularFireAuth} from "@angular/fire/compat/auth";
 
-const IROHA_ADDRESS = 'http://localhost:8081';
+const IROHA_ADDRESS = 'http://34.101.37.91:8081';
 
 const commandService = new CommandService(
   IROHA_ADDRESS,
@@ -18,8 +21,8 @@ const queryService = new QueryService(
 );
 
 const COMMAND_OPTIONS = {
-  privateKeys: ['e2e3c49be71ae0e1721b1a573f3d49756b87fce58679243dd4bbe09008158cf0'], // Array of private keys in hex format
-  creatorAccountId: 'admin@test', // Account id, ex. admin@test
+  privateKeys: ['e2e3c49be71ae0e1721b1a573f3d49756b87fce58679243dd4bbe09008158cf0'],
+  creatorAccountId: 'admin@test',
   quorum: 1,
   commandService,
   timeoutLimit: 5000 // Set timeout limit
@@ -51,13 +54,12 @@ export interface WalletDataTo {
 })
 
 export class IrohaService {
-
   public wallet: WalletData = {
     name: '',
     privateKey: null,
     publicKey: null,
     encrypted: false,
-    balance: null,
+    balance: 0.00,
   };
 
   public otherWallet: WalletData = {
@@ -65,11 +67,11 @@ export class IrohaService {
     privateKey: null,
     publicKey: null,
     encrypted: false,
-    balance: null,
+    balance: 0.00,
   };
 
   public txs: Array<{
-    from: string; to: string; amount: string; date: string; currency: string; puk: string; message: string;
+    from: string; to: string; amount: string; date: string; currency: string; message: string;
   }> = [];
 
   prevPage = false;
@@ -78,24 +80,25 @@ export class IrohaService {
   pageHash: Array<string> = [undefined];
   pageNum = 0;
 
-  txFrom = null;
-  txTo = null;
-  txAmount = null;
-  txDate = null;
-  txCurrency = null;
-  txPuk = null;
-  txMessage = null;
+  private currentUser = null;
 
-  constructor() { }
+  constructor(private storage: StorageService,
+              private ionicAuthService: AuthService,
+              private _firestore: Firestore,
+              private afAuth: AngularFireAuth) {
+    this.afAuth.onAuthStateChanged(user => {
+      this.currentUser = user;
+    });
+  }
 
   // create iroha account during user sign up
   async createAccount(username) {
     await this.generateKeypair()
       .then(async ({publicKey, privateKey}) => {
-        console.log(privateKey);
-        this.wallet.privateKey = privateKey;
-        console.log(this.wallet.privateKey);
-        commands.createAccount(COMMAND_OPTIONS, {
+        console.log(this.currentUser.uid);
+        await this.storage.set(this.currentUser.uid, privateKey);
+        await this.storage.get(this.currentUser.uid);
+        await commands.createAccount(COMMAND_OPTIONS, {
           accountName: username,
           domainId: 'test',
           publicKey
@@ -112,44 +115,85 @@ export class IrohaService {
     return { publicKey, privateKey };
   }
 
-  setName(id) {
-    queries.getAccount(QUERY_OPTIONS, {accountId: id})
-      .then(account =>  (this.wallet.name = Object.values(account)[0].slice(0, this.wallet.name.length - 5)));
+  async getKey() {
+    this.wallet.privateKey = await this.storage.get(this.currentUser.uid);
   }
 
-  setOtherName(id) {
-    queries.getAccount(QUERY_OPTIONS, {accountId: id})
-      .then(account =>  (this.otherWallet.name = Object.values(account)[0].slice(0, this.otherWallet.name.length - 5)));
+  async setName(id) {
+    await queries.getAccount(QUERY_OPTIONS, {accountId: id})
+      .then(account => (this.wallet.name = Object.values(account)[0].slice(0, this.wallet.name.length - 5)));
   }
 
-  setBalance(id) {
-    queries.getAccountAssets(QUERY_OPTIONS, {accountId: id, pageSize: 100, firstAssetId: 'coin#test'})
-      .then(account =>  this.wallet.balance = Object.values(account)[0].balance);
+  async setOtherName(id) {
+    await queries.getAccount(QUERY_OPTIONS, {accountId: id})
+      .then(account => (this.otherWallet.name = Object.values(account)[0].slice(0, this.otherWallet.name.length - 5)));
   }
 
-  topUp(id, message, amount){
+  async setBalance(id) {
+    await queries.getAccountAssets(QUERY_OPTIONS, {accountId: id, pageSize: 100, firstAssetId: 'coin#test'})
+      .then(account => this.wallet.balance = Object.values(account)[0].balance);
+  }
+
+  async topUp(id, message, amount) {
     // eslint-disable-next-line max-len
-    commands.transferAsset(COMMAND_OPTIONS,
-      {srcAccountId: 'admin@test', destAccountId: id, assetId: 'coin#test', description: message, amount});
+    try {
+      const transfer = await commands.transferAsset(COMMAND_OPTIONS,
+        {srcAccountId: 'admin@test', destAccountId: id, assetId: 'coin#test', description: message, amount});
+    }
+    catch(e) {
+      throw(e);
+    }
+
   }
 
-  sendMoney(message, amount){
-    // eslint-disable-next-line max-len
+  async sendMoney(message, amount) {
+    await this.getKey();
+    console.log(this.wallet.name);
     console.log(this.wallet.privateKey);
-    commands.transferAsset({
-        privateKeys: ['83c89cb6f951737ed1b07e2b2f058877932e2ce2014d0fefd997232d483d0e1e'], // Array of private keys in hex format
-        creatorAccountId: this.wallet.name + '@test' ,// Account id, ex. admin@test
+    console.log(this.otherWallet.name);
+    // eslint-disable-next-line max-len
+    await commands.transferAsset({
+        privateKeys: [this.wallet.privateKey], // Array of private keys in hex format
+        creatorAccountId: this.wallet.name + '@test',// Account id, ex. admin@test
         quorum: 1,
         commandService,
         timeoutLimit: 5000 // Set timeout limit
       },
       // eslint-disable-next-line max-len
-      {srcAccountId: this.wallet.name + '@test', destAccountId: this.otherWallet.name + '@test', assetId: 'coin#test', description: message, amount});
+      {
+        srcAccountId: this.wallet.name + '@test',
+        destAccountId: this.otherWallet.name + '@test',
+        assetId: 'coin#test',
+        description: message,
+        amount
+      });
   }
 
-  getTransactions() {
+  async payment(dest, message, amount) {
+    await this.getKey();
+    console.log(this.wallet.privateKey);
+    console.log(dest);
+    console.log(this.wallet.name);
+    await commands.transferAsset({
+        privateKeys: [this.wallet.privateKey], // Array of private keys in hex format
+        creatorAccountId: this.wallet.name + '@test',// Account id, ex. admin@test
+        quorum: 1,
+        commandService,
+        timeoutLimit: 5000 // Set timeout limit
+      },
+      // eslint-disable-next-line max-len
+      {
+        srcAccountId: this.wallet.name + '@test',
+        destAccountId: dest + '@test',
+        assetId: 'coin#test',
+        description: message,
+        amount
+      });
+  }
+
+  async getTransactions() {
     this.txs = [];// empty any previous transaction
-    queries.getAccountAssetTransactions(QUERY_OPTIONS,
+    await queries.getAccountAssetTransactions(QUERY_OPTIONS,
       {
         accountId: this.wallet.name + '@test',
         assetId: 'coin#test',
@@ -191,21 +235,14 @@ export class IrohaService {
             } = c.transferAsset;
 
             const tx = {
-              /*
-              from: srcAccountId === this.irohautil.wallet.mywallet ? 'you' : srcAccountId,
-              to: destAccountId === this.irohautil.wallet.mywallet ? 'you' : destAccountId,
-              */
-              from: srcAccountId.split('@')[0],
-              to: destAccountId.split('@')[0],
+              from: srcAccountId === (this.wallet.name + '@test')  ? 'You' : srcAccountId.split('@')[0],
+              to: destAccountId === (this.wallet.name + '@test')? 'You' : destAccountId.split('@')[0],
               amount,
               date: createdTime,
               currency: assetId.split('#')[0],
-              puk: t.signaturesList[0].publicKey,
               message: description
             };
             this.txs.push(tx);
-            this.txDate =tx.date;
-
           });
 
         });

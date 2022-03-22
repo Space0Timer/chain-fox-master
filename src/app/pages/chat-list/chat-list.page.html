@@ -1,0 +1,27 @@
+<ion-header translucent="true">
+<ion-toolbar color="white">
+  <ion-buttons slot="start">
+    <ion-button color="primary" (click)="back()" routerDirection="forward">
+      <ion-icon name="chevron-back-outline"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+  <ion-title>
+    <div class="title">
+      <ion-text>Chat</ion-text>
+    </div>
+  </ion-title>
+</ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="ion-padding">
+    <ng-container *ngFor="let chat of chat">
+      <div>
+        <app-chat-list-component [chat]="chat"></app-chat-list-component>
+      </div>
+    </ng-container>
+  </div>
+
+
+
+</ion-content>

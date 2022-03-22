@@ -17,11 +17,8 @@ export class TabsPage implements OnInit {
   ngOnInit() {
   }
 
-
-
   setCurrentTab($event: any) {
     this.selectedTab = this.tabs.getSelected();
-    console.log(this.selectedTab);
   }
 
 }

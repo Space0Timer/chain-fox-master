@@ -1,43 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
-import {AlertController, ToastController} from '@ionic/angular';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
-
-import {
-  CommandService_v1Client as CommandService,
-  QueryService_v1Client as QueryService
-} from 'iroha-helpers/lib/proto/endpoint_pb_service';
-import {commands, queries} from 'iroha-helpers';
 import {doc, Firestore, getDoc} from '@angular/fire/firestore';
-import {StorageService} from '../../../../services/storage.service';
-import {IrohaService} from '../../../../services/iroha.service';
-
-const IROHA_ADDRESS = 'http://localhost:8081';
-
-const commandService = new CommandService(
-  IROHA_ADDRESS,
-);
-
-const queryService = new QueryService(
-  IROHA_ADDRESS,
-);
-
-const COMMAND_OPTIONS = {
-  privateKeys: ['e2e3c49be71ae0e1721b1a573f3d49756b87fce58679243dd4bbe09008158cf0'], // Array of private keys in hex format
-  creatorAccountId: 'admin@test', // Account id, ex. admin@test
-  quorum: 1,
-  commandService,
-  timeoutLimit: 5000
-};
-
-const QUERY_OPTIONS = {
-  privateKey: 'e2e3c49be71ae0e1721b1a573f3d49756b87fce58679243dd4bbe09008158cf0',
-  creatorAccountId: 'admin@test',
-  queryService,
-  timeoutLimit: 5000
-};
-
+import { IrohaService } from '../../../../services/iroha.service';
+import {AlertController, LoadingController} from '@ionic/angular';
+import {AngularFireAuth} from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'app-user-details',
@@ -50,15 +18,23 @@ export class UserDetailsPage implements OnInit {
   form: FormGroup;
   type = false;
   isLoading: boolean;
+  loading: any;
+  private currentUser: any;
 
   constructor(
     private authService: AuthService,
     private router: Router,
     private _firestore: Firestore,
     private ionicAuthService: AuthService,
-    private iroha: IrohaService
+    private iroha: IrohaService,
+    private loadingController: LoadingController,
+    private afAuth: AngularFireAuth,
+    private alertController: AlertController
 ) {
     this.initForm();
+    this.afAuth.onAuthStateChanged(user => {
+      this.currentUser = user;
+    });
     };
 
   ngOnInit() {
@@ -80,19 +56,49 @@ export class UserDetailsPage implements OnInit {
       this.form.markAllAsTouched();
       return;
     }
-    console.log(this.form.value);
-    this.isLoading = true;
-    await this.transferMoney();
-    this.isLoading = false;
-  }
-
-  async transferMoney() {
-    this.iroha.sendMoney(this.form.value.reference, this.form.value.amount);
+    this.loadingController.create({
+      message: 'Sending coins...',
+    }).then(async overlay => {
+      this.loading = overlay;
+      this.loading.present();
+      // eslint-disable-next-line no-underscore-dangle
+    const docRef = doc(this._firestore, 'users', this.currentUser.uid);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      const name = docSnap.data().username.concat('@test');
+      this.iroha.wallet.name = '';
+      await this.iroha.setName(name);
+      this.iroha.wallet.balance = 0;
+      await this.iroha.topUp(name, '', '1');
+      await this.iroha.setBalance(name);
+      await this.iroha.payment('admin', '', '1');
+    }
+      await this.iroha.sendMoney(this.form.value.reference, this.form.value.amount)
+        .then(async d => {
+          this.loading.dismiss();
+          // eslint-disable-next-line max-len
+          await this.showAlert('Transfer Success', 'You have sent RM' + this.form.value.amount + ' to ' + this.iroha.otherWallet.name + '.');
+          this.form.reset();
+          this.iroha.otherWallet.name = '';
+        })
+        .catch(e => {
+      this.loading.dismiss();
+      this.showAlert('Transfer Failed', e);
+    });
+  });
   }
 
   back() {
     this.router.navigateByUrl('/tabs/home', {replaceUrl: true});
   }
 
+  async showAlert(header, message) {
+    const alert = await this.alertController.create({
+      header,
+      message,
+      buttons: ['OK'],
+    });
+    await alert.present();
+  }
 }
 

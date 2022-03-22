@@ -14,7 +14,7 @@
     <form [formGroup]="form" class="ion-margin-vertical">
       <div class="ion-margin-vertical">
         <ion-item lines="full">
-          <ion-input formControlName="name" type="text" placeholder="Enter store name"></ion-input>
+          <ion-input formControlName="name" [type]="type ? 'text' : 'text'" placeholder="Enter store name"></ion-input>
         </ion-item>
         <ion-text
           color="danger"

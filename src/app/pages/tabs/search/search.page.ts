@@ -1,28 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {commands, queries} from 'iroha-helpers';
-import {
-  CommandService_v1Client as CommandService,
-  QueryService_v1Client as QueryService
-} from 'iroha-helpers/lib/proto/endpoint_pb_service';
-import {NavigationExtras, Router} from '@angular/router';
+import {Router} from '@angular/router';
 import {AuthService} from 'src/app/services/auth/auth.service';
 import {IonSearchbar, NavController, NavParams} from '@ionic/angular';
-import {doc, Firestore, getDoc} from '@angular/fire/firestore';
-import {StorageService} from '../../../services/storage.service';
-import {IrohaService} from "../../../services/iroha.service";
-
-const IROHA_ADDRESS = 'http://localhost:8081';
-
-const queryService = new QueryService(
-  IROHA_ADDRESS,
-);
-
-const QUERY_OPTIONS = {
-  privateKey: 'e2e3c49be71ae0e1721b1a573f3d49756b87fce58679243dd4bbe09008158cf0',
-  creatorAccountId: 'admin@test',
-  queryService,
-  timeoutLimit: 5000
-};
+import {Firestore} from '@angular/fire/firestore';
+import {IrohaService} from '../../../services/iroha.service';
 
 @Component({
   selector: 'app-search',
@@ -55,11 +36,17 @@ export class SearchPage implements OnInit {
     });
   }
 
+  chat() {
+    this.router.navigate(['chat-list']);
+  }
+
   async _ionChange(event) {
-    const val = event.target.value;
-    // eslint-disable-next-line eqeqeq
-    if (val && val.trim() != '') {
-      this.iroha.setOtherName(val + '@test');
+    const val = event.target.value.toLowerCase();
+    if (val && val.trim() !== '') {
+      await this.iroha.setOtherName(val + '@test');
+    }
+    if (val.trim() !== this.iroha.otherWallet.name) {
+      this.iroha.otherWallet.name = '';
     }
   }
 

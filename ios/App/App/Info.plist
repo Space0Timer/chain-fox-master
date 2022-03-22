@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-        <string>ChainFox</string>
+	<string>ChainFoxTest</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -50,5 +50,15 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+	<key>NSCameraDescription</key>
+	<string>To scan QR Codes</string>
+	<key>NSCameraUsageDescription</key>
+	<string>To scan QR Codes</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>To scan confirm payments</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>To upload photo</string>
+	<key>UIRequiresPersistentWiFi</key>
+	<string>To connect to backend servers</string>
 </dict>
 </plist>

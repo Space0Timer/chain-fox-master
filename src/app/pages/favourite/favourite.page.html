@@ -5,54 +5,14 @@
         <ion-icon name="chevron-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-
-    <ion-buttons slot="end">
-      <ion-button class="notification">
-        <ion-icon name="notifications-outline" color="dark"></ion-icon>
-      </ion-button>
-    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <h1 class="title">Favourite</h1>
-
   <ion-row class="favorite-items">
-    <ion-col size="6" class="ion-text-left padding-left0">
-      <img src="../../assets/products/prod-1.png" />
-      <p>Test Item 1</p>
-      <p>Merchant</p>
-      <p>RM10.00</p>
-    </ion-col>
-    <ion-col size="6" class="ion-text-left padding-left0">
-      <img src="../../assets/products/prod-1.png" />
-      <p>Test Item 2</p>
-      <p>Merchant</p>
-      <p>RM10.00</p>
-    </ion-col>
-    <ion-col size="6" class="ion-text-left padding-left0">
-      <img src="../../assets/products/prod-1.png" />
-      <p>Test Item 3</p>
-      <p>Merchant</p>
-      <p>RM10.00</p>
-    </ion-col>
-    <ion-col size="6" class="ion-text-left padding-left0">
-      <img src="../../assets/products/prod-1.png" />
-      <p>Test Item 4</p>
-      <p>Merchant</p>
-      <p>RM10.00</p>
-    </ion-col>
-    <ion-col size="6" class="ion-text-left padding-left0">
-      <img src="../../assets/products/prod-1.png" />
-      <p>Test Item 5</p>
-      <p>Merchant</p>
-      <p>RM10.00</p>
-    </ion-col>
-    <ion-col size="6" class="ion-text-left padding-left0">
-      <img src="../../assets/products/prod-1.png" />
-      <p>Test Item 6</p>
-      <p>Merchant</p>
-      <p>RM10.00</p>
-    </ion-col>
+    <ng-container *ngFor="let fav of fav">
+    <app-fav-card [fav]="fav"></app-fav-card>
+    </ng-container>
   </ion-row>
 </ion-content>

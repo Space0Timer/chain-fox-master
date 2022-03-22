@@ -1,6 +1,6 @@
 import {Component,OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {ModalController, ToastController} from '@ionic/angular';
+import {AlertController, LoadingController, ModalController, ToastController} from '@ionic/angular';
 import {AuthService} from 'src/app/services/auth/auth.service';
 import {doc, Firestore, getDoc} from '@angular/fire/firestore';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
@@ -16,8 +16,8 @@ export class TopUpPage implements OnInit {
 
   form: FormGroup;
   type = false;
-  isLoading: boolean;
-
+  isLoading = false;
+  private loading;
   private uid = this.ionicAuthService.getUid();
   private id: any;
 
@@ -27,7 +27,9 @@ export class TopUpPage implements OnInit {
               private router: Router,
               private _firestore: Firestore,
               private ionicAuthService: AuthService,
-              private iroha: IrohaService)
+              private iroha: IrohaService,
+              private alertController: AlertController,
+              private loadingController: LoadingController)
   {
     this.initForm();
   }
@@ -46,8 +48,19 @@ export class TopUpPage implements OnInit {
       this.form.markAllAsTouched();
       return;
     }
-    console.log(this.form.value);
-    await this.transferMoney();
+    this.loadingController.create({
+      message: 'Collecting coins...',
+    }).then(async overlay => {
+      this.loading = overlay;
+      this.loading.present();
+      console.log(this.form.value);
+      await this.transferMoney();
+      this.iroha.wallet.name = '';
+      await this.iroha.setName(this.id);
+      this.iroha.wallet.balance = 0;
+      await this.iroha.setBalance(this.id);
+      this.loading.dismiss();
+    });
   }
 
   back() {
@@ -62,14 +75,28 @@ export class TopUpPage implements OnInit {
       console.log(docSnap.data().username.concat('@test'));
       this.id = docSnap.data().username.concat('@test');
       // eslint-disable-next-line max-len
-      this.iroha.setName(this.id);
-      this.iroha.topUp(this.id, '', this.form.value.amount);
+      await this.iroha.setName(this.id);
+      await this.iroha.topUp(this.id, '', this.form.value.amount).then(d => {
+          this.showAlert('RM' + this.form.value.amount + ' has been added to your balance.', 'Top Up Success');
+        }
+      ).catch(e => {
+        this.showAlert(e, 'Top Up Failed');
+      });
     }
     else {
       console.log('Error! No such account.');
     }
   }
 
+  async showAlert(message, header) {
+    const alert = await this.alertController.create({
+      header,
+      message,
+      buttons: ['OK'],
+    });
+
+    await alert.present();
+  }
 
 
 

@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { TrackSalesPageRoutingModule } from './track-sales-routing.module';
 
 import { TrackSalesPage } from './track-sales.page';
+import {StoreSalesComponent} from "../../shared/components/modal/store-sales/store-sales.component";
 
 @NgModule({
   imports: [
@@ -15,6 +16,9 @@ import { TrackSalesPage } from './track-sales.page';
     IonicModule,
     TrackSalesPageRoutingModule
   ],
-  declarations: [TrackSalesPage]
+  exports: [
+    StoreSalesComponent
+  ],
+  declarations: [TrackSalesPage, StoreSalesComponent]
 })
 export class TrackSalesPageModule {}

@@ -1,43 +1,50 @@
+
 <form [formGroup]="form" class="ion-margin">
   <div class="ion-margin-vertical">
-    <ion-item lines="full">
-      <ion-input formControlName="email" type="text" placeholder="Enter email"></ion-input>
-    </ion-item>
+  <ion-item lines="full" color="light">
+    <ion-input formControlName="email" [type]="type ? 'text' : 'text'" placeholder="Enter email"></ion-input>
+  </ion-item>
+  <ion-text
+    color="danger"
+    *ngIf="!form.get('email').valid && form.get('email').touched">
     <ion-text
-      color="danger"
-      *ngIf="!form.get('email').valid && form.get('email').touched">
-      <ion-text
-        class="error"
-        *ngIf="form.get('email').hasError('required')">
-        * Please enter email
-      </ion-text>
+      class="error"
+      *ngIf="form.get('email').hasError('required')">
+      * Please enter the email
     </ion-text>
+    <!-- for email error -->
+    <ion-text
+      class="error"
+      *ngIf="!form.get('email').hasError('required')">
+      * Please enter a proper email
+    </ion-text>
+  </ion-text>
   </div>
+
   <div class="ion-margin-vertical">
-    <ion-item lines="full">
+    <ion-item lines="full" color="light" shape="round">
       <ion-icon
         [name]="type ? 'eye' : 'eye-off'"
         slot="end"
         color="dark"
         (click)="changeType()">
       </ion-icon>
-      <ion-input formControlName="password" [type]="type ? 'password' : 'text'"
-        placeholder="Enter password"></ion-input>
+      <ion-input formControlName="password" [type]="type ? 'password' : 'text'" placeholder="Enter password"></ion-input>
     </ion-item>
-    <ion-text
-      color="danger"
-      *ngIf="!form.get('password').valid && form.get('password').touched">
       <ion-text
-        class="error"
-        *ngIf="form.get('password').hasError('required')">
-        * Please enter your password
+        color="danger"
+        *ngIf="!form.get('password').valid && form.get('password').touched">
+        <ion-text
+          class="error"
+          *ngIf="form.get('password').hasError('required')">
+          * Please enter your password
+        </ion-text>
+        <ion-text
+          class="error"
+          *ngIf="!form.get('password').hasError('required') && form.get('password').hasError('minlength')">
+          * Please enter a password of at least 8 characters long
+        </ion-text>
       </ion-text>
-      <ion-text
-        class="error"
-        *ngIf="!form.get('password').hasError('required') && form.get('password').hasError('minlength')">
-        * Please enter a password of atleast 8 characters long
-      </ion-text>
-    </ion-text>
   </div>
 </form>
 

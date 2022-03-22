@@ -3,7 +3,7 @@ import { Component, Input } from '@angular/core';
 export interface IOption {
   name: string;
   image: string;
-  onTap: () => void;
+  id: string;
 }
 
 @Component({

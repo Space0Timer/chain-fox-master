@@ -1,27 +1,26 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="light">
     <ion-buttons slot="start">
       <ion-button color="primary" (click)="back()" routerDirection="forward">
         <ion-icon name="chevron-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-
+    <ion-title color ="primary">{{this.name}}</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
 
   <div class = ion-padding >
     <ion-col size="4">
-          <img src="assets/images/food-rice-shrimp.png" alt="">
+          <img [src] = this.image alt="">
     </ion-col>
   </div>
 
-  <div>
+  <div color="primary">
     <h1 class="item-name">{{this.name}}</h1>
 
     <h4 class="price">
-      {{this.price}}
+      RM {{this.price}}
     </h4>
   </div>
 
@@ -30,7 +29,7 @@
   </div>
 
 
-  <div class="description">
+  <div class="description" color="light">
     <h5>Description</h5>
 
     <p>
@@ -42,7 +41,11 @@
   <div class="seperator">
     <hr>
   </div>
-
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click) = "goToCart()">
+    <ion-fab-button>
+      <ion-icon name="cart-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
 
 </ion-content>
@@ -52,7 +55,7 @@
       <ion-button expand="full" color="light" (click)="addToCart(this.id, this.owner)">Add to cart</ion-button>
     </ion-col>
     <ion-col size="6">
-      <ion-button expand="full" color="dark">Add to Favourites</ion-button>
+      <ion-button expand="full" color="dark" (click)="addToFav(this.id, this.owner)">Add to Favourites</ion-button>
     </ion-col>
   </ion-row>
 </ion-footer>

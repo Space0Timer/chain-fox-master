@@ -1,0 +1,10 @@
+
+  <ion-item lines="none">
+    <ion-label size="large" class="ion-text-wrap">
+      <b>{{transactions.from}} to {{transactions.to}}</b>
+      <p>
+        {{transactions?.date}}
+      </p>
+    </ion-label>
+    <ion-text slot="end" [color]="transactions.from!=='You' ? 'success' : 'danger'">RM {{transactions?.amount}}</ion-text>
+  </ion-item>

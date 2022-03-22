@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>74998749627-7n6vdjbq0v3o98b7cuk6r9nccar485g3.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.74998749627-7n6vdjbq0v3o98b7cuk6r9nccar485g3</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBuvOBt6tSAZJdb37qOE6wNX6Ht-nFHVWk</string>
+	<key>GCM_SENDER_ID</key>
+	<string>74998749627</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>io.ionic.chainfox</string>
+	<key>PROJECT_ID</key>
+	<string>chainfox-bae68</string>
+	<key>STORAGE_BUCKET</key>
+	<string>chainfox-bae68.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:74998749627:ios:099b28aa1dab320a050c9e</string>
+</dict>
+</plist>

@@ -1,34 +1,10 @@
-.confirmation {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    .outer-circle {
-        width: 200px;
-        height: 200px;
-        background: #f8f8f8;
-        margin-left: auto;
-        margin-right: auto;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        .inner-circle {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            background: #eeeeee;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            img {
-                max-width: 30%;
-            }
-        }
-    }
+.fallback {
+  margin: 20px;
+  text-align: center;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 ion-footer {
     padding-left: 20px;

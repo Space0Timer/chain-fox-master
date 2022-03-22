@@ -1,16 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import {ProductService} from '../../services/product.service';
+import {ProductService} from '../../services/cafe/product.service';
 import {Router} from '@angular/router';
 import {doc, Firestore, getDoc} from "@angular/fire/firestore";
 import {ICartCard} from "../../shared";
-import {AngularFirestore} from "@angular/fire/compat/firestore";
+import {AngularFirestore, DocumentData} from "@angular/fire/compat/firestore";
 import {AuthService} from "../../services/auth/auth.service";
-
+import {MyCartPage} from "../my-cart/my-cart.page";
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.page.html',
   styleUrls: ['./checkout.page.scss'],
 })
+
+
 export class CheckoutPage implements OnInit {
 
   total = 0;
@@ -24,32 +26,32 @@ export class CheckoutPage implements OnInit {
     private router: Router,
     private afs: AngularFirestore,
     private _firestore: Firestore,
-    private ionicAuthService: AuthService
+    private ionicAuthService: AuthService,
   ) { }
 
   ngOnInit() {
     this.addItemsToCart();
-    this.setTotal();
-  }
-
-  setTotal() {
-    this.total = this.product.total;
   }
 
   async addItemsToCart() {
+    let data: DocumentData;
     this.total = 0;
     // eslint-disable-next-line no-underscore-dangle
-    const itemIdRef = doc(this._firestore, 'carts/' + this.id);
-    const itemId = await getDoc(itemIdRef);
-    const data = itemId.data();
+    const itemIdRef = doc(this._firestore, `carts/${(this.id)}`);
+    await getDoc(itemIdRef)
+      .then(snap =>   { data = snap.data(); delete data.lastUpdate; delete data.id;});
     for (const key in data) {
-      this.owner = this.product.item.owner;
-      // eslint-disable-next-line no-underscore-dangle
-      const ownerRef = doc(this._firestore, 'stores/' + this.owner);
+      console.log(key);
+      const idOwnerRef = doc(this._firestore, `idOwner/${(key)}`);
+      const idOwnerSnap = await getDoc(idOwnerRef);
+      const idOwnerName = idOwnerSnap.data();
+      this.owner = idOwnerName.owner;
+      console.log(this.owner);
+      const ownerRef = doc(this._firestore, `stores/${(this.owner)}`);
       const ownerSnap = await getDoc(ownerRef);
       const ownerName = ownerSnap.data();
       // eslint-disable-next-line no-underscore-dangle
-      const dataRef = doc(this._firestore, 'stores/' + this.owner + '/items/' + key);
+      const dataRef = doc(this._firestore, `stores/${(this.owner)}/items/${(key)}`);
       const docSnap = await getDoc(dataRef);
       const dataSnap = docSnap.data();
       const value = data[key];
@@ -59,10 +61,11 @@ export class CheckoutPage implements OnInit {
           owner: ownerName.name,
           price: dataSnap.price,
           image: dataSnap.imageUrl,
-          id: dataSnap.id,
+          id: key,
           quantity: value,
         },
       );
+      this.total += dataSnap.price*value;
     }
   }
 

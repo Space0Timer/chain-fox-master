@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {FirebaseUploadService} from "../../services/firebase-upload.service";
+import {FirebaseUploadService} from "../../services/cafe/firebase-upload.service";
 import {Router} from "@angular/router";
 import {doc, Firestore, setDoc} from "@angular/fire/firestore";
 import {AuthService} from "../../services/auth/auth.service";
-import {StorageService} from "../../services/storage.service";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 
 @Component({
@@ -32,7 +31,6 @@ export class StartSellingPage implements OnInit {
   constructor(private firebaseUploadService: FirebaseUploadService,
               private router: Router,
               private _firestore: Firestore,
-              private storage: StorageService,
               private ionicAuthService: AuthService,
               private afs: AngularFirestore) {
     this.initForm();
@@ -98,14 +96,16 @@ export class StartSellingPage implements OnInit {
   }
 
   async createTrackSales() {
-    await this.afs.collection('trackSales').add({
-      lastUpdate: this.id
+    const dataRef = doc(this._firestore, `trackSales/${(this.uid)}`);
+    await setDoc(dataRef, {
+      id: this.uid,
     });
   }
 
   async createTrackOrders() {
-    await this.afs.collection('trackOrders').add({
-      lastUpdate: this.id
+    const dataRef = doc(this._firestore, `trackOrders/${(this.uid)}`);
+    await setDoc(dataRef, {
+      id: this.uid,
     });
   }
 

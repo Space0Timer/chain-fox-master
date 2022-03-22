@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "74998749627",
+    "project_id": "chainfox-bae68",
+    "storage_bucket": "chainfox-bae68.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:74998749627:android:ab6d65133b829241050c9e",
+        "android_client_info": {
+          "package_name": "io.ionic.chainfox"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "74998749627-dk8og5prn3248mrhlfqspnn9llv792iu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9jeHFhOJUtbKliCmTmsVxCpo9rZBxtaM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "74998749627-dk8og5prn3248mrhlfqspnn9llv792iu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "74998749627-7n6vdjbq0v3o98b7cuk6r9nccar485g3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "io.ionic.chainfox"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,72 +1,82 @@
-<ion-header no-border>
-  <ion-toolbar color="light" >
+<ion-header translucent="true">
+  <ion-toolbar color="white">
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title color="primary">
-      Home
-    </ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="logOut()">
-        <ion-icon name="lock-closed"></ion-icon>
+      <ion-button>
+        <ion-icon name="menu-outline"></ion-icon>
       </ion-button>
       <ion-button (click) = "qrCode()">
         <ion-icon name="qr-code" ></ion-icon>
       </ion-button>
     </ion-buttons>
+    <ion-title>
+      <div class="title">
+        <img style="height: 30px" src='assets/header/chainfoxhome.png'>
+      </div>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="chat()">
+        <ion-icon name="chatbubbles-outline"></ion-icon>
+      </ion-button>
+      <ion-button (click)="logOut()">
+        <ion-icon name="lock-closed"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
+
 <ion-content>
-
-  <div class="titles">
-    <h4>
-      UNM Wallet
-    </h4>
+  <div class ="ion-padding-bottom">
   </div>
-
+  <div class="titles" >
+    <ion-text  color="primary" style="font-size: 20px; font-weight: bold">UNM Wallet</ion-text>
+  </div>
   <div class="ion-padding">
-
     <ion-card color="warning">
       <ion-card-content>
-        <ion-row>
-          <ion-col size="18" >
-            <ion-note class="no">{{this.iroha.wallet.name}}</ion-note>
-          </ion-col>
+        <ion-col class="ion-no-padding">
+          <ion-note class="no" color="black">Hello, {{this.iroha.wallet.name}}!</ion-note>
+          <ion-chip color="warning" style="margin-left:40px " class="ion-no-padding">
+            <ion-button shape="round" size="small" routerLink="/list" routerDirection="forward">
+              <ion-text>History</ion-text>
+              <ion-icon name="archive-outline" slot="start"></ion-icon>
+            </ion-button>
+          </ion-chip>
           <ion-chip>
-            <ion-label class="ion-text-wrap">
+            <ion-label color="light">
               Balance: RM {{this.iroha.wallet.balance}}
             </ion-label>
           </ion-chip>
-          <ion-col size="4" class="ion-text-end">
-              <ion-icon  name="calculator" className="center-right" routerLink="/list" routerDirection="forward"></ion-icon>
-          </ion-col>
-          <ion-col size="1.5" class="ion-text-end">
-              <ion-icon name="add-circle" className="center-right" routerLink="/top-up" routerDirection="forward"></ion-icon>
-          </ion-col>
-        </ion-row>
+        </ion-col>
+        <ion-col class="ion-no-padding">
+          <ion-chip color="warning" style="margin-left:30px " class="ion-no-padding">
+          <ion-button shape="round" size="small" routerLink="/top-up" routerDirection="forward">
+            <ion-text>Top Up</ion-text>
+            <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+          </ion-button>
+          </ion-chip>
+        </ion-col>
       </ion-card-content>
     </ion-card>
   </div>
 
   <div class="titles">
-    <h4>
-      Promotions
-    </h4>
+    <ion-text color="primary" style="font-size: 20px; font-weight: bold">Promotions</ion-text>
   </div>
 
-  <div class = ion-padding >
+  <div class="ion-padding">
     <ion-col size="4">
-        <ion-slides pager=“true” autoplay=“2000” loop=“true”>
-          <ion-slide>
-            <img  src="assets/imgs/screen1.png" alt="">
-          </ion-slide>
-          <ion-slide>
-            <img src="assets/imgs/screen2.png" alt="" width="640" height="360">
-          </ion-slide>
-          <ion-slide>
-            <img src="assets/imgs/screen3.png" alt="">
-          </ion-slide>
-        </ion-slides>
+      <ion-slides pager=“true” autoplay=“2000” loop=“true”>
+        <ion-slide>
+          <img  src="assets/imgs/screen1.png" alt="">
+        </ion-slide>
+        <ion-slide>
+          <img src="assets/imgs/screen2.png" alt="" width="640" height="360">
+        </ion-slide>
+        <ion-slide>
+          <img src="assets/imgs/screen3.png" alt="">
+        </ion-slide>
+      </ion-slides>
     </ion-col>
   </div>
+
 </ion-content>

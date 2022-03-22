@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Receive Money</ion-title>
+    <ion-title color = "primary">Receive Money</ion-title>
     <ion-buttons slot="start">
       <ion-button color="primary" (click)="back()" routerDirection="forward">
         <ion-icon name="chevron-back-outline"></ion-icon>
@@ -9,6 +9,14 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <qr-code [value]=this.iroha.wallet.name+'test'></qr-code>
+<ion-content fullscreen="true" >
+  <qr-code class="ion"
+    background="white"
+    foreground="black"
+    size="300"
+    padding="10"
+    canvas="true"
+    level="H"
+    [value]=id
+  ></qr-code>
 </ion-content>

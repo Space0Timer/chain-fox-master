@@ -14,16 +14,12 @@
 
 
 <ion-content>
-  <div class="ion-margin-horizontal">
-    <h6>Recent transactions</h6>
-  <ion-grid>
-    <ion-row><ion-col>{{'COMMON.date'}}:</ion-col><ion-col>{{this.iroha.txDate | date:'yyyy-MM-dd HH:mm.ss'}}</ion-col></ion-row>
-    <ion-row><ion-col>{{'COMMON.from'}}:</ion-col><ion-col>{{txFrom}}</ion-col></ion-row>
-    <ion-row><ion-col>{{'COMMON.to'}}:</ion-col><ion-col>{{txTo}}</ion-col></ion-row>
-    <ion-row><ion-col>{{'COMMON.amount'}}:</ion-col><ion-col>{{txAmount}}</ion-col></ion-row>
-    <ion-row><ion-col>{{'COMMON.currency'}}:</ion-col><ion-col>{{txCurrency}}</ion-col></ion-row>
-    <ion-row><ion-col>{{'COMMON.msg'}}:</ion-col><ion-col>{{txMessage}}</ion-col></ion-row>
-  </ion-grid>
-  </div>
+  <ng-container *ngFor="let transactions of transactions">
+    <div>
+      <ion-list>
+      <app-transactions [transactions]="transactions"></app-transactions>
+      </ion-list>
+    </div>
+  </ng-container>
 </ion-content>
 

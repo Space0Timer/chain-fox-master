@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {IrohaService} from '../../services/iroha.service';
-import {doc, Firestore, getDoc} from '@angular/fire/firestore';
-import {Auth} from "@angular/fire/auth";
-import {AuthService} from "../../services/auth/auth.service";
+import {Firestore} from '@angular/fire/firestore';
+import {AuthService} from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-qr-code',
@@ -14,7 +13,7 @@ export class QrCodePage implements OnInit {
 
 
   uid = this.ionicAuthService.getUid();
-  id = '';
+  id = this.iroha.wallet.name;
 
   constructor(
     private router: Router,

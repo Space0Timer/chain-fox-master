@@ -9,14 +9,16 @@ import { AuthScreenPageRoutingModule } from './auth-screen-routing.module';
 import { AuthScreenPage } from './auth-screen.page';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import {SwiperModule} from "swiper/angular";
 
 @NgModule({
-  imports: [
-    CommonModule, 
-    ReactiveFormsModule,
-    IonicModule,
-    AuthScreenPageRoutingModule
-  ],
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        IonicModule,
+        AuthScreenPageRoutingModule,
+        SwiperModule
+    ],
   declarations: [AuthScreenPage, SignInComponent, SignUpComponent],
 })
 export class AuthScreenPageModule {}

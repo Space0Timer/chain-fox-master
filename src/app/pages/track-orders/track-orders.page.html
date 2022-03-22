@@ -1,9 +1,22 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>track-orders</ion-title>
+    <ion-title color = "primary">Track Orders</ion-title>
+    <ion-buttons slot="start">
+      <ion-button color="primary" (click)="back()" routerDirection="forward">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <h1 class="title">Track Orders</h1>
 
+  <div class="order-items">
+    <ng-container *ngFor="let trackOrder of trackOrder">
+      <div>
+        <app-track-orders [trackOrder]="trackOrder"></app-track-orders>
+      </div>
+    </ng-container>
+  </div>
 </ion-content>

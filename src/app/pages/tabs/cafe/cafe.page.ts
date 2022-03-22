@@ -1,20 +1,15 @@
 import {Component, OnInit} from '@angular/core';
-import {staggerFadeAnimation } from 'src/app/services/animations';
 import {IOption} from 'src/app/shared';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import {Router} from '@angular/router';
-import {StorageService} from 'src/app/services/storage.service';
-import {AngularFirestore} from "@angular/fire/compat/firestore";
-import {collection, doc, Firestore, getDoc, getDocs, query, setDoc} from "@angular/fire/firestore";
-import * as firebase from 'firebase/compat';
-import {getStorage} from "@angular/fire/storage";
-import {ProductService} from "../../../services/product.service";
+import {AngularFirestore} from '@angular/fire/compat/firestore';
+import {collection, doc, Firestore, getDoc, getDocs, query, setDoc} from '@angular/fire/firestore';
+import {ProductService} from '../../../services/cafe/product.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'cafe.page.html',
   styleUrls: ['cafe.page.scss'],
-  animations: [staggerFadeAnimation],
 })
 export class CafePage implements OnInit{
 
@@ -27,7 +22,6 @@ export class CafePage implements OnInit{
   constructor(
     private ionicAuthService: AuthService,
     private router: Router,
-    private storage: StorageService,
     private afs: AngularFirestore,
     private _firestore: Firestore,
     private product: ProductService) {}
@@ -36,6 +30,9 @@ export class CafePage implements OnInit{
     this.addStoreToCafe();
   }
 
+  chat() {
+    this.router.navigate(['chat-list']);
+  }
   qrCode() {
     this.router.navigate(['qr-code']);
   }
@@ -47,17 +44,13 @@ export class CafePage implements OnInit{
     const querySnapshot = await getDocs(q);
     // eslint-disable-next-line @typescript-eslint/no-shadow
     querySnapshot.forEach((doc) => {
-      console.log(doc.id, ' => ', doc.data());
       const data = doc.data();
       this.options.push(
         {
           name: data.name,
           image: data.imageUrl,
-          onTap: () => {
-            this.product.store.name = data.id;
-            this.router.navigate(['lunch']);
-          },
-        },
+          id: data.id
+        }
       );
     });
   }
@@ -73,6 +66,11 @@ export class CafePage implements OnInit{
         this.errorMsg = error.message;
         this.successMsg = '';
       });
+  }
+
+  goToLunch(storeName) {
+    this.product.store.name = storeName;
+    this.router.navigate(['lunch']);
   }
 
   goToLogin() {

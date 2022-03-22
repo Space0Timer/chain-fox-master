@@ -1,0 +1,15 @@
+<ng-container *ngIf="trackOrder">
+  <ion-card mode="ios">
+    <ion-card-content>
+      <div class="item-info">
+        <p>Order ID: {{ trackOrder.id}}</p>
+        <p>Item Name: {{trackOrder.name}}</p>
+        <p>Customer: {{trackOrder.user}}</p>
+        <p>Price: {{trackOrder.price}}</p>
+        <p>Time: {{trackOrder.time}}</p>
+        <p>Status: {{trackOrder.status}}</p>
+        <ion-button expand="block" class="main-button" (click)="goToCheckStatusStore(trackOrder.name, trackOrder.id, trackOrder.price, trackOrder.user, trackOrder.status)">Check Status</ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ng-container>
