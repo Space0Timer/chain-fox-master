@@ -4,7 +4,6 @@ import { RouteReuseStrategy } from '@angular/router';
 
 import {IonicModule, IonicRouteStrategy, NavParams} from '@ionic/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SplashScreen } from '@capacitor/splash-screen';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -19,9 +18,12 @@ import { provideFunctions,getFunctions } from '@angular/fire/functions';
 import { provideMessaging,getMessaging } from '@angular/fire/messaging';
 import { provideStorage,getStorage} from '@angular/fire/storage';
 import {AngularFireModule} from '@angular/fire/compat';
-import { QRCodeModule } from 'angular2-qrcode';
 import { indexedDBLocalPersistence, initializeAuth } from 'firebase/auth';
 import {Capacitor} from '@capacitor/core';
+
+
+import {HttpClientModule} from "@angular/common/http";
+import { FileOpener } from "@ionic-native/file-opener/ngx";
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,6 +32,7 @@ import {Capacitor} from '@capacitor/core';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
+    HttpClientModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideAuth(() => {
@@ -49,11 +52,12 @@ import {Capacitor} from '@capacitor/core';
     FormsModule,
     BrowserAnimationsModule,
     SharedModule,
-    QRCodeModule,
+
   ],
   providers: [
     FormBuilder,
     NavParams,
+    FileOpener,
     {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
   ],
   exports: [],

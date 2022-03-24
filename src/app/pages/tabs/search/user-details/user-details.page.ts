@@ -6,6 +6,7 @@ import {doc, Firestore, getDoc} from '@angular/fire/firestore';
 import { IrohaService } from '../../../../services/iroha.service';
 import {AlertController, LoadingController} from '@ionic/angular';
 import {AngularFireAuth} from '@angular/fire/compat/auth';
+import {AvailableResult, BiometryType, Credentials, NativeBiometric} from 'capacitor-native-biometric';
 
 @Component({
   selector: 'app-user-details',
@@ -19,6 +20,7 @@ export class UserDetailsPage implements OnInit {
   type = false;
   isLoading: boolean;
   loading: any;
+  id = this.ionicAuthService.getUid();
   private currentUser: any;
 
   constructor(
@@ -51,6 +53,43 @@ export class UserDetailsPage implements OnInit {
     this.type = !this.type;
   }
 
+  biometricAuth() {
+    NativeBiometric.isAvailable().then(
+      (result: AvailableResult) => {
+        const isAvailable = result.isAvailable;
+        const isFaceId = result.biometryType === BiometryType.FACE_ID;
+
+        if (isAvailable) {
+          // Get user's credentials
+          NativeBiometric.getCredentials({
+            server: 'chainfox',
+          }).then((credentials: Credentials) => {
+            // Authenticate using biometrics before logging the user in
+            NativeBiometric.verifyIdentity({
+              reason: 'For easy log in',
+              title: 'Log in',
+              subtitle: 'Maybe add subtitle here?',
+              description: 'Maybe a description too?',
+            }).then(
+              () => {
+                // Authentication successful
+                this.onSubmit();
+              },
+              (error) => {
+                // Failed to authenticate
+              }
+            );
+          });
+        }
+        else {
+
+        }
+      },
+      (error) => {
+        // Couldn't check availability
+      }
+    );
+  }
   async onSubmit() {
     if(!this.form.valid) {
       this.form.markAllAsTouched();
@@ -75,6 +114,8 @@ export class UserDetailsPage implements OnInit {
     }
       await this.iroha.sendMoney(this.form.value.reference, this.form.value.amount)
         .then(async d => {
+          this.iroha.wallet.balance = '0';
+          await this.iroha.setBalance(this.iroha.wallet.name + '@test');
           this.loading.dismiss();
           // eslint-disable-next-line max-len
           await this.showAlert('Transfer Success', 'You have sent RM' + this.form.value.amount + ' to ' + this.iroha.otherWallet.name + '.');

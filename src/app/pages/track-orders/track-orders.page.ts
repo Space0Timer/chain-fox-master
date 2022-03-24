@@ -27,7 +27,7 @@ export class TrackOrdersPage implements OnInit {
 
   async ngOnInit() {
     await this.addItemsToOrder();
-    await this.product.setOrderStatus();
+    await this.product.setOrderStatus('status');
   }
 
   async addItemsToOrder() {

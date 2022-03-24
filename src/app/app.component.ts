@@ -12,11 +12,11 @@ export class AppComponent {
   constructor(
     private platform: Platform,
   ) {
+    SplashScreen.hide();
     this.initializeApp();
   }
 
   async initializeApp() {
-    await SplashScreen.hide();
     this.platform.ready().then(() => {
     });
   }

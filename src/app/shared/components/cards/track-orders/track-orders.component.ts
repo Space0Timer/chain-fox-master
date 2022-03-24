@@ -31,8 +31,7 @@ export class TrackOrdersComponent implements OnInit {
     this.product.price = price;
     this.product.user = user;
     this.product.status = status;
-    await this.product.changeStatus();
-    console.log(this.product.percentage);
+    await this.product.changeStatus('status');
     await this.router.navigate(['check-status-store']);
   }
 

@@ -8,6 +8,7 @@ import { MyOrdersPageRoutingModule } from './my-orders-routing.module';
 
 import { MyOrdersPage } from './my-orders.page';
 import {SharedModule} from "../../shared";
+import {ErrorComponent} from "../../shared/components/screens/error/error.component";
 
 @NgModule({
     imports: [
@@ -17,6 +18,6 @@ import {SharedModule} from "../../shared";
         MyOrdersPageRoutingModule,
         SharedModule
     ],
-  declarations: [MyOrdersPage]
+    declarations: [MyOrdersPage, ErrorComponent]
 })
 export class MyOrdersPageModule {}

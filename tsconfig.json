@@ -37,7 +37,20 @@
       ],
       "http": [
         "node_modules/stream-http"
+      ],
+      "https": [
+        "node_modules/https-browserify"
+      ],
+      "timers": [
+        "node_modules/timers-browserify"
+      ],
+      "vm": [
+        "node_modules/vm-browserify"
+      ],
+      "scripts": [
+        "node_modules/jquery/dist/jquery.min.js"
       ]
+
     }
   },
   "angularCompilerOptions": {

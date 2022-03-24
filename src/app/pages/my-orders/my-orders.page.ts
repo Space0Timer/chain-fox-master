@@ -15,6 +15,7 @@ export class MyOrdersPage implements OnInit {
   order: IOrderCard [] = [
   ];
   owner = '';
+  isEmpty = true;
   private id = this.ionicAuthService.getUid();
   constructor(
     private router: Router,
@@ -26,6 +27,7 @@ export class MyOrdersPage implements OnInit {
 
   async ngOnInit() {
     await this.addItemsToOrder();
+    console.log(this.isEmpty);
   }
 
   async addItemsToOrder() {
@@ -40,9 +42,14 @@ export class MyOrdersPage implements OnInit {
           price: docs.data().price,
           image: docs.data().imageUrl,
           id: docs.data().orderId,
+          itemId: docs.data().itemId,
+          status: docs.data().status
         },
       );
+      this.isEmpty = false;
     });
+
+
   }
 
   back() {

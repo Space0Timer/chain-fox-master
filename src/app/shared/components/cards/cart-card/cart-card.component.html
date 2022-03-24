@@ -15,8 +15,11 @@
           <ion-button fill="clear" (click)="removeFromCart()">-</ion-button>
           <ion-label>{{ cart.quantity }}</ion-label>
           <ion-button fill="clear" (click)="addToCart()">+</ion-button>
+          <ion-icon name="trash-outline"></ion-icon>
         </div>
+        <ion-button expand="block" (click) = "openNoteModal()">Add Note</ion-button>
       </div>
-    </ion-card-content>
+      <ion-label>Pick Up Time</ion-label>
+      <ion-datetime  [hourValues]="hourValues" [min]="minTime" [max]="maxTime" displayFormat="hh:mm A" pickerFormat="HH:mm A" presentation="time"></ion-datetime>  </ion-card-content>
   </ion-card>
 </ng-container>

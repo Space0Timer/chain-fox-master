@@ -7,9 +7,7 @@ import {AuthService} from "../../services/auth/auth.service";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {Labels, ProductService} from "../../services/cafe/product.service";
 import {ModalController} from "@ionic/angular";
-import {StoreSalesComponent} from "../../shared/components/modal/store-sales/store-sales.component";
 import {StoreSalesPage} from "../store-sales/store-sales.page";
-import {ITrackOrderCard} from "../../shared/components/cards/track-orders/track-orders.component";
 
 @Component({
   selector: 'app-track-sales',
@@ -64,7 +62,7 @@ export class TrackSalesPage implements OnInit {
       }
     });
 
-    let data = [];
+    const data = [];
 
     for (const prop in holder) {
       data.push({ name: prop, value: holder[prop] });
@@ -79,7 +77,7 @@ export class TrackSalesPage implements OnInit {
     });
     console.log(this.product.label);
     console.log(this.product.data);
-    this.openStoreSalesModal();
+    await this.openStoreSalesModal();
   }
 
   dateChanges(date) {

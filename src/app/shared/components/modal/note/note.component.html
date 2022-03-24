@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button color="primary" (click)="back()" routerDirection="forward">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Your Sales</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true">
+  <div color="light">
+  <ion-row class="ion-align-items-center">
+    <ion-col size="10" >
+      <ion-textarea color="dark" class="message-input" autoGrow="true" rows="1" maxLength="500" [(ngModel)]="newMsg" >
+      </ion-textarea>
+    </ion-col>
+    <ion-col size="2">
+      <ion-button expand="block" fill="clear" color="primary" [disabled]="newMsg === ''"
+                  class="msg-btn" (click)="addNote()">
+        <ion-icon name="send" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+  </div>
+</ion-content>

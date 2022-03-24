@@ -8,6 +8,8 @@ export interface IOrderCard {
   price: number;
   image: string;
   id: string;
+  status: string;
+  itemId: string;
 }
 
 @Component({

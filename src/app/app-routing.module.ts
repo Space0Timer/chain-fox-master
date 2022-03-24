@@ -63,12 +63,12 @@ const routes: Routes = [
     loadChildren: () => import('./pages/my-cart/my-cart.module').then( m => m.MyCartPageModule)
   },
   {
-    path: 'my-cart-refresh',
-    loadChildren: () => import('./pages/my-cart/my-cart.module').then( m => m.MyCartPageModule)
-  },
-  {
     path: 'my-orders',
     loadChildren: () => import('./pages/my-orders/my-orders.module').then( m => m.MyOrdersPageModule)
+  },
+  {
+    path: 'order-history',
+    loadChildren: () => import('./pages/order-history/order-history.module').then( m => m.OrderHistoryPageModule)
   },
   {
     path: 'favourites',

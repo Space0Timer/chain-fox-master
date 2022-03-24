@@ -5,13 +5,15 @@
         <ion-icon name="chevron-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
+    <ion-title>My Orders</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <h1 class="title">My Orders</h1>
-
-  <div class="order-items">
+<ion-content [fullscreen]="true">
+  <ng-container *ngIf="isEmpty">
+    <app-error></app-error>
+  </ng-container>
+  <div class="order-items" *ngIf="!isEmpty">
     <ng-container *ngFor="let order of order">
       <div>
         <app-order-card [order]="order"></app-order-card>

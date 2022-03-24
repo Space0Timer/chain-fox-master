@@ -76,8 +76,10 @@ export class TopUpPage implements OnInit {
       this.id = docSnap.data().username.concat('@test');
       // eslint-disable-next-line max-len
       await this.iroha.setName(this.id);
-      await this.iroha.topUp(this.id, '', this.form.value.amount).then(d => {
+      await this.iroha.topUp(this.id, '', this.form.value.amount).then(async d => {
           this.showAlert('RM' + this.form.value.amount + ' has been added to your balance.', 'Top Up Success');
+          this.iroha.wallet.balance = '0';
+          await this.iroha.setBalance(this.id);
         }
       ).catch(e => {
         this.showAlert(e, 'Top Up Failed');

@@ -7,6 +7,7 @@ import { IrohaService } from 'src/app/services/iroha.service';
 import {AngularFirestore} from '@angular/fire/compat/firestore';
 import {collection, doc, Firestore, getDoc, getDocs, query, setDoc, where} from '@angular/fire/firestore';
 import {AngularFireAuth} from '@angular/fire/compat/auth';
+import {NativeBiometric} from "capacitor-native-biometric";
 
 @Component({
   selector: 'app-sign-up',
@@ -111,7 +112,11 @@ export class SignUpComponent implements OnInit {
         this.loading = overlay;
         this.loading.present();
         this.authService.register(this.form.value).then(async (data) => {
-          console.log(data);
+          NativeBiometric.setCredentials({
+            username: this.form.value.username,
+            password: this.form.value.password,
+            server: 'chainfox',
+          }).then();
           await this.iroha.createAccount(this.form.value.username);
           await this.createCart();
           await this.createFav();
@@ -123,8 +128,8 @@ export class SignUpComponent implements OnInit {
             await this.iroha.setName(name);
             this.iroha.wallet.balance = 0;
             await this.iroha.topUp(name, '', '1');
-            await this.iroha.setBalance(name);
             await this.iroha.payment('admin', '', '1');
+            await this.iroha.setBalance(name);
           }
           this.form.reset();
           this.loading.dismiss();

@@ -5,10 +5,10 @@ import {
 } from 'iroha-helpers/lib/proto/endpoint_pb_service';
 
 import {commands, queries,cryptoHelper} from 'iroha-helpers';
-import {doc, Firestore, getDoc, setDoc} from '@angular/fire/firestore';
+import {Firestore} from '@angular/fire/firestore';
 import {StorageService} from './storage.service';
 import {AuthService} from './auth/auth.service';
-import {AngularFireAuth} from "@angular/fire/compat/auth";
+import {AngularFireAuth} from '@angular/fire/compat/auth';
 
 const IROHA_ADDRESS = 'http://34.101.37.91:8081';
 
@@ -19,21 +19,6 @@ const commandService = new CommandService(
 const queryService = new QueryService(
   IROHA_ADDRESS,
 );
-
-const COMMAND_OPTIONS = {
-  privateKeys: ['e2e3c49be71ae0e1721b1a573f3d49756b87fce58679243dd4bbe09008158cf0'],
-  creatorAccountId: 'admin@test',
-  quorum: 1,
-  commandService,
-  timeoutLimit: 5000 // Set timeout limit
-};
-
-const QUERY_OPTIONS = {
-  privateKey: 'e2e3c49be71ae0e1721b1a573f3d49756b87fce58679243dd4bbe09008158cf0',
-  creatorAccountId: 'admin@test',
-  queryService,
-  timeoutLimit: 5000
-};
 
 export interface WalletData {
   name: string;
@@ -79,7 +64,8 @@ export class IrohaService {
 
   pageHash: Array<string> = [undefined];
   pageNum = 0;
-
+  pw = '';
+  note = '';
   private currentUser = null;
 
   constructor(private storage: StorageService,
@@ -98,7 +84,13 @@ export class IrohaService {
         console.log(this.currentUser.uid);
         await this.storage.set(this.currentUser.uid, privateKey);
         await this.storage.get(this.currentUser.uid);
-        await commands.createAccount(COMMAND_OPTIONS, {
+        await commands.createAccount({
+          privateKeys: ['e2e3c49be71ae0e1721b1a573f3d49756b87fce58679243dd4bbe09008158cf0'],
+          creatorAccountId: 'admin@test',
+          quorum: 1,
+          commandService,
+          timeoutLimit: 5000 // Set timeout limit
+        }, {
           accountName: username,
           domainId: 'test',
           publicKey
@@ -120,24 +112,48 @@ export class IrohaService {
   }
 
   async setName(id) {
-    await queries.getAccount(QUERY_OPTIONS, {accountId: id})
+    await this.getKey();
+    await queries.getAccount({
+      privateKey: this.wallet.privateKey, // Array of private keys in hex format
+      creatorAccountId: id  ,// Account id, ex. admin@test
+      queryService,
+      timeoutLimit: 5000 // Set timeout limit
+    }, {accountId: id})
       .then(account => (this.wallet.name = Object.values(account)[0].slice(0, this.wallet.name.length - 5)));
   }
 
   async setOtherName(id) {
-    await queries.getAccount(QUERY_OPTIONS, {accountId: id})
+    await this.getKey();
+    await queries.getAccount({
+      privateKey: this.wallet.privateKey, // Array of private keys in hex format
+      creatorAccountId: id,// Account id, ex. admin@test
+      queryService,
+      timeoutLimit: 5000 // Set timeout limit
+    }, {accountId: id})
       .then(account => (this.otherWallet.name = Object.values(account)[0].slice(0, this.otherWallet.name.length - 5)));
   }
 
   async setBalance(id) {
-    await queries.getAccountAssets(QUERY_OPTIONS, {accountId: id, pageSize: 100, firstAssetId: 'coin#test'})
+    await this.getKey();
+    await queries.getAccountAssets({
+      privateKey: this.wallet.privateKey, // Array of private keys in hex format
+      creatorAccountId: id,// Account id, ex. admin@test
+      queryService,
+      timeoutLimit: 5000 // Set timeout limit
+    }, {accountId: id, pageSize: 100, firstAssetId: 'coin#test'})
       .then(account => this.wallet.balance = Object.values(account)[0].balance);
   }
 
   async topUp(id, message, amount) {
     // eslint-disable-next-line max-len
     try {
-      const transfer = await commands.transferAsset(COMMAND_OPTIONS,
+      const transfer = await commands.transferAsset({
+        privateKeys: ['e2e3c49be71ae0e1721b1a573f3d49756b87fce58679243dd4bbe09008158cf0'],
+        creatorAccountId: 'admin@test',
+        quorum: 1,
+        commandService,
+        timeoutLimit: 5000 // Set timeout limit
+      },
         {srcAccountId: 'admin@test', destAccountId: id, assetId: 'coin#test', description: message, amount});
     }
     catch(e) {
@@ -192,8 +208,14 @@ export class IrohaService {
   }
 
   async getTransactions() {
+    await this.getKey();
     this.txs = [];// empty any previous transaction
-    await queries.getAccountAssetTransactions(QUERY_OPTIONS,
+    await queries.getAccountAssetTransactions({
+        privateKey: this.wallet.privateKey, // Array of private keys in hex format
+        creatorAccountId: this.wallet.name + '@test',// Account id, ex. admin@test
+        queryService,
+        timeoutLimit: 5000 // Set timeout limit
+      },
       {
         accountId: this.wallet.name + '@test',
         assetId: 'coin#test',
@@ -251,6 +273,37 @@ export class IrohaService {
         //this.txs = _.orderBy(this.txs, [object => new moment(object.date)], ['desc']);
       })
       .catch(err => console.log(err));
+  }
+
+  async setAccDetail(value) {
+    await this.getKey();
+    console.log(this.wallet.privateKey);
+    await commands.setAccountDetail({
+      privateKeys: [this.wallet.privateKey], // Array of private keys in hex format
+      creatorAccountId: this.wallet.name + '@test',// Account id, ex. admin@test
+      quorum: 1,
+      commandService,
+      timeoutLimit: 5000 // Set timeout limit
+    }, {accountId: this.wallet.name + '@test', key: 'sec', value});
+  }
+
+  async getAccDetail(value) {
+    await this.getKey();
+    await queries.getAccountDetail({
+      privateKey: this.wallet.privateKey, // Array of private keys in hex format
+      creatorAccountId: this.wallet.name + '@test',// Account id, ex. admin@test
+      queryService,
+      timeoutLimit: 5000 // Set timeout limit
+    }, {
+      accountId: this.wallet.name + '@test',
+      key: 'sec',
+      pageSize: 100,
+      paginationKey: 'sec',
+      paginationWriter: this.wallet.name + '@test',
+      writer: this.wallet.name + '@test'
+    }).then (d => {
+      this.pw = d[this.wallet.name + '@test'].sec;
+    });
   }
 }
 

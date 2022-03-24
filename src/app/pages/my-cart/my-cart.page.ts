@@ -47,7 +47,6 @@ export class MyCartPage implements OnInit, OnChanges{
       const idOwnerRef = doc(this._firestore, `idOwner/${(key)}`);
       const idOwnerSnap = await getDoc(idOwnerRef);
       const idOwnerName = idOwnerSnap.data();
-      console.log(key);
       this.owner = idOwnerName.owner;
       const ownerRef = doc(this._firestore, `stores/${(this.owner)}`);
       const ownerSnap = await getDoc(ownerRef);
@@ -57,7 +56,7 @@ export class MyCartPage implements OnInit, OnChanges{
       const docSnap = await getDoc(dataRef);
       const dataSnap = docSnap.data();
       const value = data[key];
-      console.log(value);
+      console.log(key);
       this.cart.push(
         {
           name: dataSnap.name,

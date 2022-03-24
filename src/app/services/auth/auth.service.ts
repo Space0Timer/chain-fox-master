@@ -10,6 +10,7 @@ import {collection, doc, Firestore, getDocs, query, setDoc, where} from '@angula
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 import firebase from "firebase/compat";
 import {tryCatch} from "rxjs/internal-compatibility";
+import {AngularFireAuth} from "@angular/fire/compat/auth";
 
 export interface AccData {
   mywallet: string;
@@ -35,13 +36,16 @@ export interface WalletDataTo {
 
 export class AuthService {
   uid = '';
+  currentUser:any;
   private id: string;
 
   constructor(
     private _fireAuth: Auth,
     private _firestore: Firestore,
-    private afs: AngularFirestore
-  ) { }
+    private afAuth: AngularFireAuth
+  ) {     this.afAuth.onAuthStateChanged(user => {
+    this.currentUser = user;
+  });}
 
   // Creating a firebase account
   async register(formValue) {

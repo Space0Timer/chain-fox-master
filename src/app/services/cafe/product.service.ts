@@ -133,23 +133,23 @@ export class ProductService {
     this.total  = total;
   }
 
-  async setOrderStatus() {
-    const q = collection(this._firestore, `status`);
+  async setOrderStatus(statusType) {
+    const q = collection(this._firestore, `${(statusType)}`);
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((docs) => {
       console.log(docs.id, ' => ', docs.data());
       this.statusPair.push(
         {
           name: docs.id,
-          status: docs.data().name
+          status: docs.data().status
         },
       );
     });
   }
 
 
-  async changeStatus() {
-    const dataRef = doc(this._firestore, `status/${(this.status)}`);
+  async changeStatus(statusType) {
+    const dataRef = doc(this._firestore, `${(statusType)}/${(this.status)}`);
     const docSnap = await getDoc(dataRef);
     this.orderStatus = docSnap.data().status;
     switch (this.status) {
@@ -166,6 +166,7 @@ export class ProductService {
         this.percentage = 100;
         break;
     }
+    await this.setOrderStatus(statusType);
     for (const key of this.statusPair) {
         if (key.name === this.status)  {
           this.statusName = key.status;

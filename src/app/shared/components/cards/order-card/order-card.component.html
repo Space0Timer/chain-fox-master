@@ -1,16 +1,13 @@
 <ng-container *ngIf="order">
   <ion-card mode="ios">
     <ion-card-content>
-      <div class="item-img">
-        <img [src]="order.image" />
-      </div>
 
       <div class="item-info">
         <p>Item Name: {{order.name}}</p>
         <p>Merchant: {{order.owner}}</p>
         <p>Price: RM {{order.price}}</p>
         <p>Order ID: {{order.id}}</p>
-
+        <p>Status: {{order.status}}</p>
         <ion-button expand="block" class="main-button" (click) = 'goToCheckStatusUser(order.name, order.id, order.price, order.owner)'>Check Status</ion-button>
       </div>
     </ion-card-content>
