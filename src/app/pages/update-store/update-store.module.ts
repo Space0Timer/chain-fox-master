@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { UpdateStorePageRoutingModule } from './update-store-routing.module';
 
 import { UpdateStorePage } from './update-store.page';
+import {UpdateStoreComponent} from '../../shared/components/cards/update-store/update-store.component';
 
 @NgModule({
   imports: [
@@ -16,6 +17,6 @@ import { UpdateStorePage } from './update-store.page';
     UpdateStorePageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [UpdateStorePage]
+    declarations: [UpdateStorePage, UpdateStoreComponent]
 })
 export class UpdateStorePageModule {}

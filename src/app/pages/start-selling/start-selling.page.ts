@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {doc, Firestore, setDoc} from "@angular/fire/firestore";
 import {AuthService} from "../../services/auth/auth.service";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
+import {AlertController} from "@ionic/angular";
 
 @Component({
   selector: 'app-start-selling',
@@ -32,7 +33,7 @@ export class StartSellingPage implements OnInit {
               private router: Router,
               private _firestore: Firestore,
               private ionicAuthService: AuthService,
-              private afs: AngularFirestore) {
+              private alertController: AlertController) {
     this.initForm();
   }
 
@@ -47,6 +48,7 @@ export class StartSellingPage implements OnInit {
         if (res) {
           console.log(res);
           this.imageUrl = res;
+          this.imageUploads = [];
           this.imageUploads.unshift(res);
           this.barStatus = false;
         }
@@ -83,6 +85,7 @@ export class StartSellingPage implements OnInit {
     await this.createTrackSales();
     await this.createTrackOrders();
     this.isLoading = false;
+    await this.showAlert('Creation Success', 'Your online store ' + this.form.value.name + ' has been created');
   }
 
   async uploadStoreDetails(formValue) {
@@ -112,4 +115,15 @@ export class StartSellingPage implements OnInit {
   back() {
     this.router.navigateByUrl('tabs/account', {replaceUrl: true});
   }
+
+  async showAlert(header,message) {
+    const alert = await this.alertController.create({
+      header,
+      message,
+      buttons: ['OK'],
+    });
+
+    await alert.present();
+  }
+
 }

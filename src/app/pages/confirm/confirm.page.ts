@@ -13,6 +13,7 @@ import {AvailableResult, BiometryType, Credentials, NativeBiometric} from "capac
 import {StoreSalesPage} from "../store-sales/store-sales.page";
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
+import {ICartCard} from "../../shared";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 @Component({
   selector: 'app-confirm',
@@ -24,9 +25,13 @@ export class ConfirmPage implements OnInit {
   logoutTimer = this.access.logoutTimer.asObservable();
   owner = '';
   total = 0;
-  showFallback = true;
-  password = '1234'
+  msg = '';
+  paymentDetails = '';
+  deliverTime = '';
   hasBiometricAuth = false;
+  showFallback = true;
+  checkout: ICartCard [] = [
+  ];
   private id = this.ionicAuthService.getUid();
   private loading: any;
 
@@ -44,6 +49,7 @@ export class ConfirmPage implements OnInit {
   }
 
   async ngOnInit() {
+    this.addItemsToCart();
   }
 
 
@@ -77,8 +83,8 @@ export class ConfirmPage implements OnInit {
           await this.presentPrompt();
         }
       },
-      (error) => {
-        // Couldn't check availability
+      async (error) => {
+        await this.presentPrompt();
       }
     );
 
@@ -86,6 +92,42 @@ export class ConfirmPage implements OnInit {
 
   ionViewDidEnter() {
     this.access.resetLogoutTimer();
+  }
+
+  async addItemsToCart() {
+    let data: DocumentData;
+    this.total = 0;
+    // eslint-disable-next-line no-underscore-dangle
+    const itemIdRef = doc(this._firestore, `carts/${(this.id)}`);
+    await getDoc(itemIdRef)
+      .then(snap =>   { data = snap.data(); delete data.lastUpdate; delete data.id;});
+    for (const key in data) {
+      console.log(key);
+      const idOwnerRef = doc(this._firestore, `idOwner/${(key)}`);
+      const idOwnerSnap = await getDoc(idOwnerRef);
+      const idOwnerName = idOwnerSnap.data();
+      this.owner = idOwnerName.owner;
+      console.log(this.owner);
+      const ownerRef = doc(this._firestore, `stores/${(this.owner)}`);
+      const ownerSnap = await getDoc(ownerRef);
+      const ownerName = ownerSnap.data();
+      // eslint-disable-next-line no-underscore-dangle
+      const dataRef = doc(this._firestore, `stores/${(this.owner)}/items/${(key)}`);
+      const docSnap = await getDoc(dataRef);
+      const dataSnap = docSnap.data();
+      const value = data[key];
+      this.checkout.push(
+        {
+          name: dataSnap.name,
+          owner: ownerName.name,
+          price: dataSnap.price,
+          image: dataSnap.imageUrl,
+          id: key,
+          quantity: value,
+        },
+      );
+      this.total += dataSnap.price*value;
+    }
   }
 
   async payment() {
@@ -136,7 +178,14 @@ export class ConfirmPage implements OnInit {
         const uname = unameSnap.data();
         const src = uname.username;
         // payment
-        await this.iroha.payment(dest, '', payString);
+        this.paymentDetails = this.product.orderNotePair.get(key);
+        this.deliverTime = this.product.orderTimePair.get(key);
+        console.log(this.deliverTime);
+        if (this.paymentDetails === undefined) {
+          this.paymentDetails = '';
+        }
+        console.log(src, dest, this.paymentDetails, payString);
+        await this.iroha.payment(dest, this.paymentDetails, payString);
         this.iroha.wallet.balance = '0';
         await this.iroha.setBalance(src+'@test');
         // add orders for buyer
@@ -151,6 +200,9 @@ export class ConfirmPage implements OnInit {
           orderId: pushKey,
           price: price,
           status: 'paid',
+          quantity: value,
+          amountPaid: payString,
+          deliverTime: this.deliverTime,
           orderTime: firebase.firestore.FieldValue.serverTimestamp()
         });
         // add to all orders for buyer
@@ -164,6 +216,9 @@ export class ConfirmPage implements OnInit {
           orderId: pushKey,
           price: price,
           status: 'paid',
+          quantity: value,
+          amountPaid: payString,
+          deliverTime: this.deliverTime,
           orderTime: firebase.firestore.FieldValue.serverTimestamp()
         });
         // add orders for stall
@@ -177,7 +232,11 @@ export class ConfirmPage implements OnInit {
           orderId: pushKey,
           price: price,
           user: src,
+          userId: this.id,
           status: 'paid',
+          quantity: value,
+          amountPaid: payString,
+          deliverTime: this.deliverTime,
           orderTime: firebase.firestore.FieldValue.serverTimestamp()
         });
         // add all orders for stall
@@ -187,10 +246,14 @@ export class ConfirmPage implements OnInit {
           imageUrl: dataSnap.imageUrl,
           itemId: dataSnap.id,
           user: src,
+          userId: this.id,
           ownerId: ownerName.id,
           orderId: pushKey,
           price,
           status: 'paid',
+          quantity: value,
+          amountPaid: payString,
+          deliverTime: this.deliverTime,
           orderTime: firebase.firestore.FieldValue.serverTimestamp()
         });
         // add to sales
@@ -207,6 +270,8 @@ export class ConfirmPage implements OnInit {
           ownerId: ownerName.id,
           orderId: pushKey,
           price,
+          quantity: value,
+          amountPaid: payString,
           day
         });
       }
@@ -215,8 +280,8 @@ export class ConfirmPage implements OnInit {
       await this.product.checkoutCart();
       this.loading.dismiss();
       await this.showAlert("Payment Success!", "You can check your purchases in My Orders.");
+      await this.router.navigate(['my-orders']);
 
-      await this.router.navigate['my-orders'];
     }).catch( e => {
         this.loading.dismiss();
         this.showAlert("Payment Failure!", e);
@@ -229,7 +294,7 @@ export class ConfirmPage implements OnInit {
     const alert = await this.alertController.create({
       header,
       message,
-      buttons: ['OK'],
+      buttons: ['Ok'],
     });
 
     await alert.present();
@@ -285,7 +350,7 @@ export class ConfirmPage implements OnInit {
             }).then(async overlay => {
               this.loading = overlay;
               this.loading.present();
-            await this.iroha.setAccDetail('12345678aA.');
+
             await this.iroha.getAccDetail('sec');
             if (data.password === this.iroha.pw) {
                 this.loading.dismiss();
@@ -314,6 +379,7 @@ export class ConfirmPage implements OnInit {
   back() {
     this.router.navigate(['checkout']);
   }
+
 
 
 }

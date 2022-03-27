@@ -1,5 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {ModalController} from "@ionic/angular";
+import {AlertController, ModalController} from "@ionic/angular";
+import {ProductService} from "../../../../services/cafe/product.service";
 
 @Component({
   selector: 'app-note',
@@ -9,14 +10,35 @@ import {ModalController} from "@ionic/angular";
 export class NoteComponent implements OnInit {
   @Output() childEvent: EventEmitter<any> = new EventEmitter();
   newMsg = '';
-  constructor(private modalController: ModalController) { }
+  constructor(private modalController: ModalController,
+              private product: ProductService,
+              private alertController: AlertController) { }
 
   ngOnInit() {}
 
+  async addNote() {
+    if (this.newMsg === '') {
+      await this.product.addNote(this.product.noteId, '');
+      await this.back();
+    }
+    else if (this.newMsg !== '' && this.newMsg.length > 63) {
+      await this.showAlert('Message too long.', 'Your message must not exceed 63 characters');
+      await this.back();
+    }
+    else {
+      await this.product.addNote(this.product.noteId, this.newMsg);
+      await this.back();
+    }
 
-  addNote() {
+  }
+  async showAlert(header, message) {
+    const alert = await this.alertController.create({
+      header,
+      message,
+      buttons: ['OK'],
+    });
 
-
+    await alert.present();
   }
   async back() {
     await this.modalController.dismiss();

@@ -47,6 +47,8 @@ export class ProductService {
 
   total = 0;
   idOwnerPair = new Map<string, string>();
+  orderNotePair = new Map<string, string>();
+  orderTimePair = new Map<string, string>();
   orderStatus: Status [] = [];
   statusPair: Status [] = [];
 
@@ -75,11 +77,14 @@ export class ProductService {
   public status = '';
   public percentage = 0;
   public statusName = '';
+  public editItemId = '';
+  public noteId = '';
+  public time = '';
+  public ownerId = '';
   productsCollection: AngularFirestoreCollection;
 
   cart = new BehaviorSubject({});
   private id = this.ionicAuthService.getUid();
-
 
   constructor(
     private afs: AngularFirestore,
@@ -108,8 +113,21 @@ export class ProductService {
 
   removeFromCart(id) {
     // Update the FB cart
+    this.afs.collection('carts').doc(this.id).get()
+      .subscribe((data) => {
+        if (data.data()[id] > 0) {
+          this.afs.collection('carts').doc(this.id).update({
+            [id]: DECREMENT,
+            lastUpdate: firebase.firestore.FieldValue.serverTimestamp()
+          });
+        }
+      }
+      );
+  }
+
+  deleteItem(id) {
     this.afs.collection('carts').doc(this.id).update({
-      [id]: DECREMENT,
+      [id]: firebase.firestore.FieldValue.delete(),
       lastUpdate: firebase.firestore.FieldValue.serverTimestamp()
     });
   }
@@ -147,6 +165,14 @@ export class ProductService {
     });
   }
 
+
+  async addNote(id, msg) {
+    this.orderNotePair.set(id, msg);
+  }
+
+  async addTime(id, time) {
+    this.orderTimePair.set(id, time);
+  }
 
   async changeStatus(statusType) {
     const dataRef = doc(this._firestore, `${(statusType)}/${(this.status)}`);

@@ -6,7 +6,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import {IrohaService} from '../../../services/iroha.service';
 import {AngularFirestore} from '@angular/fire/compat/firestore';
 import {AngularFireAuth} from '@angular/fire/compat/auth';
-import {doc, Firestore, getDoc} from '@angular/fire/firestore';
+import {doc, Firestore, getDoc, setDoc} from '@angular/fire/firestore';
 import {AvailableResult, BiometryType, Credentials, NativeBiometric} from 'capacitor-native-biometric';
 
 @Component({
@@ -51,6 +51,7 @@ export class SignInComponent implements OnInit {
   }
 
   biometricLogin() {
+    console.log('ts');
     NativeBiometric.isAvailable().then(
       (result: AvailableResult) => {
         const isAvailable = result.isAvailable;
@@ -63,19 +64,20 @@ export class SignInComponent implements OnInit {
           }).then((credentials: Credentials) => {
             // Authenticate using biometrics before logging the user in
             NativeBiometric.verifyIdentity({
-              reason: 'For easy log in',
+              reason: 'Login',
               title: 'Log in',
               subtitle: 'Maybe add subtitle here?',
               description: 'Maybe a description too?',
             }).then(
               () => {
+                const form = {email: credentials.username, password: credentials.password};
                 // Authentication successful
                 this.loadingController.create({
                   message: 'Logging in...',
                 }).then(async overlay => {
                   this.loading = overlay;
                   this.loading.present();
-                  this.authService.login(this.form.value).then(async (data) => {
+                  this.authService.login(form).then(async (data) => {
                     const docRef = doc(this._firestore, 'users', this.currentUser.uid);
                     const docSnap = await getDoc(docRef);
                     if (docSnap.exists()) {
@@ -84,8 +86,8 @@ export class SignInComponent implements OnInit {
                       await this.iroha.setName(name);
                       this.iroha.wallet.balance = 0;
                       await this.iroha.topUp(name, '', '1');
-                      await this.iroha.setBalance(name);
                       await this.iroha.payment('admin', '', '1');
+                      await this.iroha.setBalance(name);
                     }
                     this.form.reset();
                     this.loading.dismiss();
@@ -135,8 +137,8 @@ export class SignInComponent implements OnInit {
           await this.iroha.setName(name);
           this.iroha.wallet.balance = 0;
           await this.iroha.topUp(name, '', '1');
-          await this.iroha.setBalance(name);
           await this.iroha.payment('admin', '', '1');
+          await this.iroha.setBalance(name);
         }
         this.form.reset();
         this.loading.dismiss();
@@ -165,4 +167,6 @@ export class SignInComponent implements OnInit {
 
     await alert.present();
   }
+
+
 }

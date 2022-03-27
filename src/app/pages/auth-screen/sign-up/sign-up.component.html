@@ -1,27 +1,42 @@
 <form [formGroup]="form" class="ion-margin">
+  <!-- Username -->
   <div class="ion-margin-vertical">
+    <!-- Username input field -->
     <ion-item lines="full" color="light">
       <ion-input formControlName="username" [type]="type ? 'text' : 'text'" placeholder="Enter username"></ion-input>
     </ion-item>
+    <!-- Invalid username check -->
     <ion-text
       color="danger"
       *ngIf="!form.get('username').valid && form.get('username').touched">
       <ion-text
         class="error"
         *ngIf="form.get('username').hasError('required')">
-        * Please enter the username
+        * Please enter your username
       </ion-text>
       <ion-text
         class="error"
         *ngIf="form.get('username').hasError('pattern')">
         * Invalid username. Only characters a-z and A-Z are allowed.
       </ion-text>
+      <ion-text
+        class="error"
+        *ngIf="!form.get('username').hasError('required') &&!form.get('username').hasError('pattern') && form.get('username').hasError('minlength')">
+        * Invalid username. Your username must have at least 6 characters.
+      </ion-text>
+      <ion-text
+        class="error"
+        *ngIf="!form.get('username').hasError('required') && !form.get('username').hasError('pattern') && !form.get('username').hasError('minlength') && form.get('username').hasError('maxlength')">
+        * Invalid username. Your username must have at most 10 characters.
+      </ion-text>
     </ion-text>
   </div>
+  <!-- Email -->
   <div class="ion-margin-vertical">
     <ion-item lines="full" color="light">
       <ion-input formControlName="email" [type]="type ? 'text' : 'text'" placeholder="Enter email"></ion-input>
     </ion-item>
+    <!-- Invalid email check -->
     <ion-text
       color="danger"
       *ngIf="!form.get('email').valid && form.get('email').touched">
@@ -30,7 +45,6 @@
         *ngIf="form.get('email').hasError('required')">
         * Please enter the email
       </ion-text>
-      <!-- for email error -->
       <ion-text
         class="error"
         *ngIf="!form.get('email').hasError('required')
@@ -39,15 +53,19 @@
       </ion-text>
     </ion-text>
   </div>
+  <!-- Password -->
   <div class="ion-margin-vertical">
     <ion-item lines="full" color="light">
+      <!-- Password visibility -->
       <ion-icon
         [name]="type ? 'eye' : 'eye-off'"
         slot="end"
         color="dark"
         (click)="changeType()">
       </ion-icon>
+      <!-- Password input field -->
       <ion-input formControlName="password" [type]="type ? 'password' : 'text'" placeholder="Enter password"></ion-input>
+      <!-- Invalid password check -->
     </ion-item>
       <ion-text
         color="danger"
@@ -66,6 +84,11 @@
           class="error"
           *ngIf="!form.get('password').hasError('required') && !form.get('password').hasError('minlength') && form.get('password').hasError('pattern')">
           * Please enter a password with at least one uppercase letter, one lowercase letter, and one digit, and one special character
+        </ion-text>
+        <ion-text
+          class="error"
+          *ngIf="!form.get('password').hasError('required') && !form.get('password').hasError('minlength') && !form.get('password').hasError('pattern') && form.get('password').hasError('maxlength')">
+          * Please enter a password of at most 15 characters long
         </ion-text>
       </ion-text>
   </div>

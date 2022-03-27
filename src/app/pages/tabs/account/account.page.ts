@@ -41,7 +41,7 @@ export class AccountPage implements OnInit {
   }
 
   goToLogin() {
-    this.router.navigate(['login']);
+    this.router.navigate(['auth-screen']);
   }
 
   qrCode() {

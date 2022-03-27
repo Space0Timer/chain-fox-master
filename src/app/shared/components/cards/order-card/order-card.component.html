@@ -6,9 +6,13 @@
         <p>Item Name: {{order.name}}</p>
         <p>Merchant: {{order.owner}}</p>
         <p>Price: RM {{order.price}}</p>
+        <p>Quantity: {{order.quantity}}</p>
+        <p>Amount Paid: {{order.amountPaid}}</p>
         <p>Order ID: {{order.id}}</p>
         <p>Status: {{order.status}}</p>
-        <ion-button expand="block" class="main-button" (click) = 'goToCheckStatusUser(order.name, order.id, order.price, order.owner)'>Check Status</ion-button>
+        <p>Order Time: {{order.orderTime.toDate() | date:'yyyy/MM/dd h:mm:ss a'}}</p>
+        <p>Deliver Time: {{order.deliverTime}}</p>
+        <ion-button *ngIf="order.status !== 'complete'" expand="block" class="main-button" (click) = 'goToCheckStatusUser(order.name, order.id, order.price, order.owner, order.ownerId)'>Check Status</ion-button>
       </div>
     </ion-card-content>
   </ion-card>

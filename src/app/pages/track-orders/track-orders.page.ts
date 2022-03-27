@@ -39,10 +39,13 @@ export class TrackOrdersPage implements OnInit {
         {
           name: docs.data().itemName,
           user: docs.data().user,
+          userId: docs.data().userId,
           price: docs.data().price,
           time: docs.data().orderTime.toDate(),
           id: docs.data().orderId,
-          status: docs.data().status
+          status: docs.data().status,
+          amountPaid: docs.data().amountPaid,
+          deliverTime: docs.data().deliverTime
         },
       );
     });

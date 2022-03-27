@@ -66,6 +66,11 @@ export class IrohaService {
   pageNum = 0;
   pw = '';
   note = '';
+  transactionMsg = '';
+  transactionFrom = '';
+  transactionTo = '';
+  transactionAmount = '';
+  transactionDate = '';
   private currentUser = null;
 
   constructor(private storage: StorageService,
@@ -83,7 +88,8 @@ export class IrohaService {
       .then(async ({publicKey, privateKey}) => {
         console.log(this.currentUser.uid);
         await this.storage.set(this.currentUser.uid, privateKey);
-        await this.storage.get(this.currentUser.uid);
+        await this.getKey();
+        console.log(this.wallet.privateKey);
         await commands.createAccount({
           privateKeys: ['e2e3c49be71ae0e1721b1a573f3d49756b87fce58679243dd4bbe09008158cf0'],
           creatorAccountId: 'admin@test',
@@ -94,8 +100,7 @@ export class IrohaService {
           accountName: username,
           domainId: 'test',
           publicKey
-        })
-          .catch(e => console.log(e));
+        }).catch(e => console.log(e));
       });
   }
 
@@ -125,8 +130,8 @@ export class IrohaService {
   async setOtherName(id) {
     await this.getKey();
     await queries.getAccount({
-      privateKey: this.wallet.privateKey, // Array of private keys in hex format
-      creatorAccountId: id,// Account id, ex. admin@test
+      privateKey: 'e2e3c49be71ae0e1721b1a573f3d49756b87fce58679243dd4bbe09008158cf0', // Array of private keys in hex format
+      creatorAccountId: 'admin@test',// Account id, ex. admin@test
       queryService,
       timeoutLimit: 5000 // Set timeout limit
     }, {accountId: id})
@@ -188,7 +193,7 @@ export class IrohaService {
   async payment(dest, message, amount) {
     await this.getKey();
     console.log(this.wallet.privateKey);
-    console.log(dest);
+    console.log(message);
     console.log(this.wallet.name);
     await commands.transferAsset({
         privateKeys: [this.wallet.privateKey], // Array of private keys in hex format
@@ -264,13 +269,12 @@ export class IrohaService {
               currency: assetId.split('#')[0],
               message: description
             };
-            this.txs.push(tx);
+            if (!(tx.amount === '1' && (tx.to === 'admin' || tx.from === 'admin'))) {
+              this.txs.push(tx);
+            }
           });
-
+            this.txs.reverse();
         });
-        // comment orderBy to get txs order from irohad, i.e. oldest tx to latest
-        // remove comment to reverse txs, i.e. latest tx to oldest (better done in irohad imho)
-        //this.txs = _.orderBy(this.txs, [object => new moment(object.date)], ['desc']);
       })
       .catch(err => console.log(err));
   }

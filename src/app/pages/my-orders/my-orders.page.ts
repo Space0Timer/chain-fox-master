@@ -5,7 +5,7 @@ import {AuthService} from "../../services/auth/auth.service";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {ProductService} from "../../services/cafe/product.service";
 import {collection, Firestore, getDocs} from "@angular/fire/firestore";
-import firebase from "firebase/compat";
+import {format, parseISO} from 'date-fns';
 @Component({
   selector: 'app-my-orders',
   templateUrl: './my-orders.page.html',
@@ -27,7 +27,6 @@ export class MyOrdersPage implements OnInit {
 
   async ngOnInit() {
     await this.addItemsToOrder();
-    console.log(this.isEmpty);
   }
 
   async addItemsToOrder() {
@@ -43,7 +42,12 @@ export class MyOrdersPage implements OnInit {
           image: docs.data().imageUrl,
           id: docs.data().orderId,
           itemId: docs.data().itemId,
-          status: docs.data().status
+          status: docs.data().status,
+          ownerId: docs.data().ownerId,
+          amountPaid: docs.data().amountPaid,
+          deliverTime: docs.data().deliverTime,
+          orderTime: docs.data().orderTime,
+          quantity: docs.data().quantity
         },
       );
       this.isEmpty = false;

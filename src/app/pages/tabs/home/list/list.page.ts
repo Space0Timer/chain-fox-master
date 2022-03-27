@@ -34,7 +34,7 @@ export class ListPage implements OnInit {
         this.transactions.push(
           {
             date: format(new Date (c.date), 'yyyy-MM-dd HH:mm'),
-            message: '',
+            message: c.message,
             currency: c.currency,
             amount: c.amount,
             from: c.from,

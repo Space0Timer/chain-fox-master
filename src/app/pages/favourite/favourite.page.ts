@@ -52,12 +52,18 @@ export class FavouritePage implements OnInit {
           owner: ownerName.name,
           price: dataSnap.price,
           image: dataSnap.imageUrl,
+          itemId: key,
+          ownerId: idOwnerName.owner,
           id: key,
         },
       );
     }
+    console.log(this.fav);
   }
   back() {
     this.router.navigateByUrl('tabs/account', {replaceUrl: true});
+  }
+  goToCart() {
+    this.router.navigate(['my-cart']);
   }
 }

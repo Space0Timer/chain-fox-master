@@ -7,7 +7,7 @@ import { IrohaService } from 'src/app/services/iroha.service';
 import {AngularFirestore} from '@angular/fire/compat/firestore';
 import {collection, doc, Firestore, getDoc, getDocs, query, setDoc, where} from '@angular/fire/firestore';
 import {AngularFireAuth} from '@angular/fire/compat/auth';
-import {NativeBiometric} from "capacitor-native-biometric";
+import {NativeBiometric} from 'capacitor-native-biometric';
 
 @Component({
   selector: 'app-sign-up',
@@ -45,10 +45,10 @@ export class SignUpComponent implements OnInit {
 
   initForm() {
     this.form = new FormGroup({
-      username: new FormControl(null, {validators: [Validators.required, Validators.pattern('^[a-zA-Z]+$')]}),
+      username: new FormControl(null, {validators: [Validators.required, Validators.pattern('^[a-zA-Z]+$'), Validators.maxLength(10), Validators.minLength(6)]}),
       email: new FormControl(null, {validators: [Validators.required, Validators.email]}), // added email validator also
       // eslint-disable-next-line max-len
-      password: new FormControl(null, {validators: [Validators.required, Validators.minLength(8), Validators.pattern('^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\\s).{8,15}$'),]})
+      password: new FormControl(null, {validators: [Validators.required, Validators.minLength(8), Validators.maxLength(15),Validators.pattern('^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\\s).{8,}$'),]})
     });
   }
 
@@ -92,7 +92,10 @@ export class SignUpComponent implements OnInit {
     }
   }
 
+
+
   async onSubmit() {
+    console.log('tes');
     if (!this.form.valid) {
       this.form.markAllAsTouched();
       return;
@@ -112,28 +115,6 @@ export class SignUpComponent implements OnInit {
         this.loading = overlay;
         this.loading.present();
         this.authService.register(this.form.value).then(async (data) => {
-          NativeBiometric.setCredentials({
-            username: this.form.value.username,
-            password: this.form.value.password,
-            server: 'chainfox',
-          }).then();
-          await this.iroha.createAccount(this.form.value.username);
-          await this.createCart();
-          await this.createFav();
-          const docRef = doc(this._firestore, 'users', this.currentUser.uid);
-          const docSnap = await getDoc(docRef);
-          if (docSnap.exists()) {
-            const name = docSnap.data().username.concat('@test');
-            this.iroha.wallet.name = '';
-            await this.iroha.setName(name);
-            this.iroha.wallet.balance = 0;
-            await this.iroha.topUp(name, '', '1');
-            await this.iroha.payment('admin', '', '1');
-            await this.iroha.setBalance(name);
-          }
-          this.form.reset();
-          this.loading.dismiss();
-          await this.router.navigateByUrl('/tabs', {replaceUrl: true});
         })
           .catch(e => {
             console.log(e);

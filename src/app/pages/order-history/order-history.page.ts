@@ -5,7 +5,8 @@ import {AuthService} from '../../services/auth/auth.service';
 import {AngularFirestore} from '@angular/fire/compat/firestore';
 import {ProductService} from '../../services/cafe/product.service';
 import {collection, Firestore, getDocs} from '@angular/fire/firestore';
-
+import {format, parseISO} from 'date-fns';
+import {timestamp} from "rxjs/operators";
 @Component({
   selector: 'app-my-orders',
   templateUrl: './order-history.page.html',
@@ -29,7 +30,7 @@ export class OrderHistoryPage implements OnInit {
   }
 
   async addItemsToOrder() {
-    const q = collection(this._firestore, `users/${(this.id)}/activeOrders`);
+    const q = collection(this._firestore, `users/${(this.id)}/allOrders`);
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((docs) => {
       console.log(docs.id, ' => ', docs.data());
@@ -41,7 +42,12 @@ export class OrderHistoryPage implements OnInit {
           image: docs.data().imageUrl,
           id: docs.data().orderId,
           itemId: docs.data().itemId,
-          status: docs.data().status
+          ownerId: docs.data().ownerId,
+          status: docs.data().status,
+          amountPaid: docs.data().amountPaid,
+          deliverTime: docs.data().deliverTime,
+          orderTime: docs.data().orderTime,
+          quantity: docs.data().quantity
         },
       );
     });

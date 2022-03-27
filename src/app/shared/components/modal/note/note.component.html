@@ -5,21 +5,25 @@
         <ion-icon name="close-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>Your Sales</ion-title>
+    <ion-title>Add Note</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content fullscreen="true">
-  <div color="light">
+  <div class ="ion-padding-bottom">
+  </div>
+  <div class="titles">
+    <ion-text  color="primary" style="font-size: 20px; font-weight: bold">Send a message to the seller regarding this order</ion-text>
+  </div>
+  <div color="light" class="ion-padding">
   <ion-row class="ion-align-items-center">
     <ion-col size="10" >
-      <ion-textarea color="dark" class="message-input" autoGrow="true" rows="1" maxLength="500" [(ngModel)]="newMsg" >
+      <ion-textarea color="dark" class="message-input" autoGrow="true" rows="1" maxLength="500" [(ngModel)]="newMsg" placeholder="Enter your message here" >
       </ion-textarea>
     </ion-col>
     <ion-col size="2">
-      <ion-button expand="block" fill="clear" color="primary" [disabled]="newMsg === ''"
-                  class="msg-btn" (click)="addNote()">
-        <ion-icon name="send" slot="icon-only"></ion-icon>
+      <ion-button fill="clear" color="primary" [disabled]="newMsg === ''" (click)="addNote()">
+        <ion-icon name="send"></ion-icon>
       </ion-button>
     </ion-col>
   </ion-row>

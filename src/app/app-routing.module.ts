@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth/auth.guard';
+import {VerifyGuard} from './guards/verify/verify.guard';
 
 const routes: Routes = [
   {
@@ -15,7 +16,7 @@ const routes: Routes = [
   {
     path: 'tabs',
     loadChildren: () => import('./pages/tabs/tabs.module').then( m => m.TabsPageModule),
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard, VerifyGuard]
   },
   {
     path: 'home',
@@ -135,16 +136,24 @@ const routes: Routes = [
     loadChildren: () => import('./pages/chat-rooms/chat-rooms.module').then( m => m.ChatRoomsPageModule)
   },
   {
-    path: 'splash',
-    loadChildren: () => import('./pages/splash/splash.module').then( m => m.SplashPageModule)
-  },
-  {
     path: 'check-status-user',
     loadChildren: () => import('./pages/check-status-user/check-status-user.module').then( m => m.CheckStatusUserPageModule)
   },
   {
     path: 'check-status-store',
     loadChildren: () => import('./pages/check-status-store/check-status-store.module').then( m => m.CheckStatusStorePageModule)
+  },
+  {
+    path: 'add-item',
+    loadChildren: () => import('./shared/components/modal/add-item/add-item.module').then(m => m.AddItemPageModule)
+  },
+  {
+    path: 'edit-item',
+    loadChildren: () => import('./shared/components/modal/edit-item/edit-item.module').then(m => m.EditItemModule)
+  },
+  {
+    path: 'verify-email-address',
+    loadChildren: () => import('./pages/verify-email-address/verify-email-address.module').then( m => m.VerifyEmailAddressPageModule)
   },
 ];
 

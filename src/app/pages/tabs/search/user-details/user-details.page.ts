@@ -55,7 +55,7 @@ export class UserDetailsPage implements OnInit {
 
   biometricAuth() {
     NativeBiometric.isAvailable().then(
-      (result: AvailableResult) => {
+      async (result: AvailableResult) => {
         const isAvailable = result.isAvailable;
         const isFaceId = result.biometryType === BiometryType.FACE_ID;
 
@@ -80,13 +80,13 @@ export class UserDetailsPage implements OnInit {
               }
             );
           });
-        }
-        else {
-
+        } else {
+          await this.presentPrompt();
         }
       },
-      (error) => {
+      async (error) => {
         // Couldn't check availability
+        await this.presentPrompt();
       }
     );
   }
@@ -109,8 +109,8 @@ export class UserDetailsPage implements OnInit {
       await this.iroha.setName(name);
       this.iroha.wallet.balance = 0;
       await this.iroha.topUp(name, '', '1');
-      await this.iroha.setBalance(name);
       await this.iroha.payment('admin', '', '1');
+      await this.iroha.setBalance(name);
     }
       await this.iroha.sendMoney(this.form.value.reference, this.form.value.amount)
         .then(async d => {
@@ -138,6 +138,51 @@ export class UserDetailsPage implements OnInit {
       header,
       message,
       buttons: ['OK'],
+    });
+    await alert.present();
+  }
+
+  async presentPrompt() {
+    const alert = await this.alertController.create({
+      header: 'User verification',
+      inputs: [
+        {
+          name: 'password',
+          placeholder: 'Password',
+          type: 'password'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Confirm',
+          handler: async data => {
+            this.loadingController.create({
+              message: 'Verifying...',
+            }).then(async overlay => {
+              this.loading = overlay;
+              this.loading.present();
+              await this.iroha.getAccDetail('sec');
+              if (data.password === this.iroha.pw) {
+                this.loading.dismiss();
+                await this.onSubmit();
+
+              }
+              else {
+                this.loading.dismiss();
+                await this.showAlert('Verification Failed', 'You entered the wrong password');
+                await this.router.navigate(['tabs']);
+              }
+            });
+          }
+        }
+      ]
     });
     await alert.present();
   }

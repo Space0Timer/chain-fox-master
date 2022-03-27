@@ -6,8 +6,10 @@
         <p>Item Name: {{trackOrder.name}}</p>
         <p>Customer: {{trackOrder.user}}</p>
         <p>Price: {{trackOrder.price}}</p>
-        <p>Time: {{trackOrder.time}}</p>
+        <p>Order Time: {{trackOrder.time}}</p>
+        <p>Deliver Time: {{trackOrder.deliverTime}}</p>
         <p>Status: {{trackOrder.status}}</p>
+        <ion-button expand="block" class="main-button" (click) = 'cancelOrder(trackOrder.id, trackOrder.user, trackOrder.userId, trackOrder.amountPaid)'>Cancel Order</ion-button>
         <ion-button expand="block" class="main-button" (click)="goToCheckStatusStore(trackOrder.name, trackOrder.id, trackOrder.price, trackOrder.user, trackOrder.status)">Check Status</ion-button>
       </div>
     </ion-card-content>

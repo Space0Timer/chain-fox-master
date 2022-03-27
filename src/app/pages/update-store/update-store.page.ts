@@ -2,9 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import {FirebaseUploadService} from '../../services/cafe/firebase-upload.service';
 import {Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {doc, Firestore, setDoc} from '@angular/fire/firestore';
+import {collection, doc, Firestore, getDocs, query, setDoc} from '@angular/fire/firestore';
 import {AuthService} from '../../services/auth/auth.service';
 import {AngularFirestore} from '@angular/fire/compat/firestore';
+import {ProductService} from '../../services/cafe/product.service';
+import {IFoodCard} from '../../shared';
+import {AlertController, IonRouterOutlet, ModalController} from '@ionic/angular';
+import {AddItemComponent} from '../../shared/components/modal/add-item/add-item.component';
 
 @Component({
   selector: 'app-update-store',
@@ -12,7 +16,8 @@ import {AngularFirestore} from '@angular/fire/compat/firestore';
   styleUrls: ['./update-store.page.scss'],
 })
 export class UpdateStorePage implements OnInit {
-
+  foodStore: IFoodCard[] = [
+  ];
   barStatus = false;
   errorMessage = '';
   imageUploads = [];
@@ -27,13 +32,17 @@ export class UpdateStorePage implements OnInit {
               private router: Router,
               private _firestore: Firestore,
               private ionicAuthService: AuthService,
-              private afs: AngularFirestore) {
+              private afs: AngularFirestore,
+              private product: ProductService,
+              private modalCtrl: ModalController,
+              private routerOutlet: IonRouterOutlet,
+              private alertController: AlertController) {
     this.initForm();
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    await this.addItemToStoreInit();
   }
-
 
   uploadPhoto(event) {
     this.barStatus = true;
@@ -67,6 +76,7 @@ export class UpdateStorePage implements OnInit {
   }
 
   async onSubmit() {
+    this.errorMessage = '';
     if(!this.form.valid) {
       this.form.markAllAsTouched();
       return;
@@ -79,6 +89,7 @@ export class UpdateStorePage implements OnInit {
     console.log(this.form.value);
     await this.uploadStoreDetails(this.form.value);
     this.isLoading = false;
+    await this.addItemToStoreInit();
   }
 
   async uploadStoreDetails(formValue) {
@@ -97,9 +108,57 @@ export class UpdateStorePage implements OnInit {
     await setDoc(dataRef, {
       owner: this.uid,
     });
+    // create categories
+    dataRef = doc(this._firestore, `stores/${(this.uid)}/categories/${(formValue.category)}`);
+    await setDoc(dataRef, {
+      name: formValue.name,
+    });
+    // add items to categories
+    await this.afs.collection(`stores/${(this.uid)}/categories/`).doc(formValue.category).update({
+      [pushKey]: 1,
+      name: formValue.category
+    });
+    dataRef = doc(this._firestore, `idOwner/${(pushKey)}`);
+    await setDoc(dataRef, {
+      owner: this.uid,
+    });
   }
 
-  // delete item
+  async addItemToStoreInit() {
+    this.foodStore = [];
+    const dataRef = collection(this._firestore, 'stores/'+this.uid+'/items');
+    const q = query(dataRef);
+    const querySnapshot = await getDocs(q);
+    // eslint-disable-next-line @typescript-eslint/no-shadow
+    querySnapshot.forEach((doc) => {
+      const data = doc.data();
+      console.log(data);
+      this.foodStore.push(
+        {
+          owner: '',
+          name: data.name,
+          description: data.description,
+          image: data.imageUrl,
+          price: data.price,
+          id: data.id,
+          category: data.category
+        },
+      );
+    });
+  }
+
+  async openAddItemModal() {
+    const modal = await this.modalCtrl.create({
+      component: AddItemComponent,
+      swipeToClose: true,
+      presentingElement: this.routerOutlet.nativeEl,
+    });
+    modal.onDidDismiss().then((data) => {
+      console.log('test');
+      this.ngOnInit();
+    });
+    return await modal.present();
+  }
   back() {
     this.router.navigateByUrl('tabs/account', {replaceUrl: true});
   }

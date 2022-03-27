@@ -50,6 +50,11 @@ export class LunchPage implements OnInit {
   }
 
   async setCategory() {
+    this.drawerOptions.push(
+      {
+        name: 'All',
+        type: 'sectionHeader'
+      });
     const dataRef = collection(this._firestore, 'stores/' + this.product.store.name + '/categories');
     const q = query(dataRef);
     const querySnapshot = await getDocs(q);
@@ -79,13 +84,15 @@ export class LunchPage implements OnInit {
           description: data.description,
           image: data.imageUrl,
           price: data.price,
-          id: data.id
+          id: data.id,
+          category: data.category
         },
       );
     });
   }
 
   async addItemToStore() {
+
     // eslint-disable-next-line no-underscore-dangle
     for (const entry of this.foodList) {
       console.log(entry);
@@ -103,7 +110,8 @@ export class LunchPage implements OnInit {
               description: data.description,
               image: data.imageUrl,
               price: data.price,
-              id: data.id
+              id: data.id,
+              category: data.category
             },
           );
         }
@@ -126,19 +134,25 @@ export class LunchPage implements OnInit {
   }
 
   async selectCategory(name) {
-    this.foodList = [];
-    let data: DocumentData;
-    const itemIdRef = doc(this._firestore, 'stores/' + this.product.store.name + '/categories/' + name);
-    await getDoc(itemIdRef)
-      .then(snap => {data = snap.data(); delete data.name;});
-    for (const key in data) {
-      console.log(key);
-      this.foodList.push(key);
-      console.log(this.foodList);
+    if (name === 'All') {
+      this.category = 'All';
+      await this.addItemToStoreInit();
     }
-    this.category = name;
-    this.foodOptions = [];
-    await this.addItemToStore();
+    else {
+      this.foodList = [];
+      let data: DocumentData;
+      const itemIdRef = doc(this._firestore, 'stores/' + this.product.store.name + '/categories/' + name);
+      await getDoc(itemIdRef)
+        .then(snap => {data = snap.data(); delete data.name;});
+      for (const key in data) {
+        console.log(key);
+        this.foodList.push(key);
+        console.log(this.foodList);
+      }
+      this.category = name;
+      this.foodOptions = [];
+      await this.addItemToStore();
+    }
   }
 
   itemDetails(id, name, price, description, owner, image) {

@@ -28,6 +28,7 @@ export class SearchPage implements OnInit {
   }
 
   ngOnInit() {
+    this.iroha.otherWallet.name = '';
   }
 
   ionViewWillEnter() {
@@ -42,11 +43,11 @@ export class SearchPage implements OnInit {
 
   async _ionChange(event) {
     const val = event.target.value.toLowerCase();
-    if (val && val.trim() !== '') {
-      await this.iroha.setOtherName(val + '@test');
-    }
     if (val.trim() !== this.iroha.otherWallet.name) {
       this.iroha.otherWallet.name = '';
+    }
+    if (val && val.trim() !== '') {
+      await this.iroha.setOtherName(val + '@test');
     }
   }
 

@@ -119,6 +119,7 @@
     "tls": false,
     "net": false,
     "dns": false,
-    "fs": false
+    "fs": false,
+    "child_process": false
   }
 }

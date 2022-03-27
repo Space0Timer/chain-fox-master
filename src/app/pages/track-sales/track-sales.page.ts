@@ -84,6 +84,7 @@ export class TrackSalesPage implements OnInit {
     this.dayValue = format(parseISO(date), 'dd').replace(/^0+/, '').trim();
     this.monthValue = format(parseISO(date), 'MM').replace(/^0+/, '').trim();
     this.yearValue = format(parseISO(date), 'yyyy');
+    console.log(this.dayValue);
   }
 
   async openStoreSalesModal() {

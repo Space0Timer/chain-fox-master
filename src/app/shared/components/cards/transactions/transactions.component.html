@@ -1,6 +1,6 @@
 
   <ion-item lines="none">
-    <ion-label size="large" class="ion-text-wrap">
+    <ion-label size="large" class="ion-text-wrap" (click)="openTransactionModal(transactions.message)">
       <b>{{transactions.from}} to {{transactions.to}}</b>
       <p>
         {{transactions?.date}}

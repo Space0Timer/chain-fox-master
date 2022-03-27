@@ -1,0 +1,115 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button color="primary" (click)="back()" routerDirection="forward">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Add New Item</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content fullscreen="true">
+  <div class="ion-padding">
+    <form [formGroup]="form" class="ion-margin">
+      <div class="ion-margin-vertical">
+        <ion-item lines="full">
+          <ion-input formControlName="name" [type]="type ? 'text' : 'text'" placeholder="Enter item name"></ion-input>
+        </ion-item>
+        <ion-text
+          color="danger"
+          *ngIf="!form.get('name').valid && form.get('name').touched">
+          <ion-text
+            class="error"
+            *ngIf="form.get('name').hasError('required')">
+            * Please enter the store name
+          </ion-text>
+        </ion-text>
+      </div>
+      <div class="ion-margin-vertical">
+        <ion-item lines="full">
+          <ion-input formControlName="price" [type]="type ? 'number' : 'number'" placeholder="Enter price"></ion-input>
+        </ion-item>
+        <ion-text
+          color="danger"
+          *ngIf="!form.get('price').valid && form.get('price').touched">
+          <ion-text
+            class="error"
+            *ngIf="form.get('price').hasError('required')">
+            * Please enter the price
+          </ion-text>
+        </ion-text>
+      </div>
+      <div class="ion-margin-vertical">
+        <ion-item lines="full">
+          <ion-input formControlName="category" [type]="type ? 'text' : 'text'" placeholder="Enter category"></ion-input>
+        </ion-item>
+        <ion-text
+          color="danger"
+          *ngIf="!form.get('category').valid && form.get('category').touched">
+          <ion-text
+            class="error"
+            *ngIf="form.get('category').hasError('required')">
+            * Please enter the category
+          </ion-text>
+        </ion-text>
+        <div class="ion-margin-vertical">
+          <ion-item lines="full">
+            <ion-input formControlName="description" [type]="type ? 'text' : 'text'" placeholder="Enter description"></ion-input>
+          </ion-item>
+          <ion-text
+            color="danger"
+            *ngIf="!form.get('description').valid && form.get('description').touched">
+            <ion-text
+              class="error"
+              *ngIf="form.get('description').hasError('required')">
+              * Please enter the description
+            </ion-text>
+          </ion-text>
+        </div>
+      </div>
+    </form>
+
+    <div>
+      <form method="post" enctype="multipart/form-data">
+        <div>
+          <div><b>Upload a photo for your item.</b></div><br/>
+          <input type="file" (change)="uploadPhoto($event)" accept=".png,.jpg" multiple="true"/>
+          <div *ngIf="errorMessage">
+            <ion-text color="danger">
+              <ion-text
+                class="error">* {{errorMessage}}</ion-text>
+            </ion-text>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div *ngIf="barStatus">
+      Uploading.....
+    </div>
+
+    <div id="photoPreview">
+      <div *ngFor="let image of imageUploads">
+        <img loading="lazy" [src]="image" class="preview"/>
+      </div>
+    </div>
+
+    <ion-button
+      *ngIf="!isLoading"
+      size="large"
+      expand="block"
+      shape="round"
+      color="primary"
+      (click)="onSubmit()">
+      <ion-text>Confirm</ion-text>
+    </ion-button>
+    <ion-button
+      *ngIf="isLoading"
+      size="large"
+      expand="block"
+      shape="round"
+      color="primary">
+      <ion-spinner></ion-spinner>
+    </ion-button>
+  </div>
+</ion-content>
+

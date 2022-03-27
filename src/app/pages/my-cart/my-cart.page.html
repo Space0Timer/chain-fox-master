@@ -20,7 +20,7 @@
   </div>
 
 </ion-content>
-<ion-footer translucent="true" class="ion-no-border" mode="md">
+<ion-footer translucent="true" class="ion-no-border" mode="md" *ngIf="cart.length !== 0">
   <ion-toolbar color="translucent">
     <ion-button expand="block" class="main-button" (click)="checkOut()" >Checkout</ion-button>
   </ion-toolbar>

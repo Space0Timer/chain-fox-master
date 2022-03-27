@@ -1,6 +1,11 @@
-<ion-col size="6" class="ion-text-left padding-left0">
+<ion-card mode="ios">
+  <ion-card-content>
+<ion-col size="6" class="ion-padding">
   <img [src]="fav.image" />
-  <p>Item Name: {{ fav.name }}</p>
+  <p style="margin-top: 5px">Item Name: {{ fav.name }}</p>
   <p>Merchant: {{ fav.owner }}</p>
-  <p>Price: RM {{ fav.price }}</p>
+  <p style="margin-bottom: 5px">Price: RM {{ fav.price }}</p>
+  <ion-button expand="block" (click)="addToCart(fav.name, fav.itemId, fav.ownerId)">Add to Cart</ion-button>
 </ion-col>
+  </ion-card-content>
+</ion-card>

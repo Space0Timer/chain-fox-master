@@ -8,6 +8,7 @@ import { ConfirmPageRoutingModule } from './confirm-routing.module';
 
 import { ConfirmPage } from './confirm.page';
 import {PinCodePageModule} from "../pin-code/pin-code.module";
+import {SharedModule} from "../../shared";
 
 @NgModule({
     imports: [
@@ -15,7 +16,8 @@ import {PinCodePageModule} from "../pin-code/pin-code.module";
         FormsModule,
         IonicModule,
         ConfirmPageRoutingModule,
-        PinCodePageModule
+        PinCodePageModule,
+        SharedModule
     ],
   declarations: [ConfirmPage]
 })

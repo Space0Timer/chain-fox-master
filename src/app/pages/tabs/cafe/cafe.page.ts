@@ -26,8 +26,8 @@ export class CafePage implements OnInit{
     private _firestore: Firestore,
     private product: ProductService) {}
 
-  ngOnInit(){
-    this.addStoreToCafe();
+  async ngOnInit() {
+    await this.addStoreToCafe();
   }
 
   chat() {

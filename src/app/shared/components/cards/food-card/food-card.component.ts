@@ -7,6 +7,7 @@ export interface IFoodCard {
   price: string;
   owner: string;
   id: string;
+  category: string;
 }
 
 @Component({
