@@ -24,8 +24,12 @@ export class UpdateStoreComponent{
 
   }
 
-  async openEditItemModal(id) {
+  async openEditItemModal(id, name, price, category, description) {
     this.product.editItemId = id;
+    this.product.editItemName = name;
+    this.product.editItemPrice = price;
+    this.product.editItemCategory = category;
+    this.product.editItemDescription= description;
     const modal = await this.modalCtrl.create({
       component: EditItemComponent,
       swipeToClose: true,
@@ -35,6 +39,17 @@ export class UpdateStoreComponent{
   }
 
 
+  async soldOut(id) {
+    await this.afs.collection(`stores/${(this.id)}/items`).doc(id).update({
+      status: 'sold out'
+    });
+  }
+
+  async restock(id) {
+    await this.afs.collection(`stores/${(this.id)}/items`).doc(id).update({
+      status: 'available'
+    });
+  }
 
   async delete(id) {
     await this.afs.collection(`stores/${(this.id)}/items`).doc(id).delete();

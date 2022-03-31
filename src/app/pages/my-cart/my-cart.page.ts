@@ -5,20 +5,26 @@ import {AngularFirestore, DocumentData} from '@angular/fire/compat/firestore';
 import {doc, Firestore, getDoc, onSnapshot, query} from '@angular/fire/firestore';
 import {ICartCard} from '../../shared';
 import {ProductService} from '../../services/cafe/product.service';
-import {LoadingController} from "@ionic/angular";
+import {AlertController, LoadingController} from '@ionic/angular';
 
+export interface Keys {
+  id: string;
+}
 @Component({
   selector: 'app-my-cart',
   templateUrl: './my-cart.page.html',
   styleUrls: ['./my-cart.page.scss'],
 })
 
+
 export class MyCartPage implements OnInit{
 
   cart: ICartCard [] = [
   ];
+  keys: Keys [] = [];
   owner: string;
   loading: any;
+  counter = 0;
   public total = 0;
   private id = this.ionicAuthService.getUid();
   constructor(
@@ -27,7 +33,8 @@ export class MyCartPage implements OnInit{
     private afs: AngularFirestore,
     private product: ProductService,
     private _firestore: Firestore,
-    private loadingController: LoadingController
+    private loadingController: LoadingController,
+    private alertController: AlertController
   ) { }
 
   async ngOnInit() {
@@ -47,6 +54,7 @@ export class MyCartPage implements OnInit{
         });
       for (const key in data) {
         // get owner id from item id
+        this.keys.push({id: key});
         const idOwnerRef = doc(this._firestore, `idOwner/${(key)}`);
         const idOwnerSnap = await getDoc(idOwnerRef);
         const idOwnerName = idOwnerSnap.data();
@@ -79,13 +87,35 @@ export class MyCartPage implements OnInit{
     this.addItemsToCart();
   }
 
-
-
-  checkOut() {
-    this.router.navigate(['checkout']);
+  async checkOut() {
+    for (const key in this.keys) {
+      const illegalTime = ['00', '01', '01', '02', '03', '04', '05', '06', '07', '22', '23'];
+      if (this.product.orderTimePair.get(this.keys[key].id) === undefined) {
+        await this.showAlert('Please choose a valid pickup date for your orders.');
+        this.counter = 1;
+      }
+      if(illegalTime.includes(this.product.orderTimePair.get(this.keys[key].id).substring(11, 13))) {
+        await this.showAlert('Please choose a valid pickup date for your orders.');
+        this.counter = 1;
+      }
+    }
+    if (this.counter === 0) {
+      await this.router.navigate(['checkout']);
+    }
+    this.counter = 0;
   }
 
   back() {
     this.router.navigateByUrl('tabs/account', {replaceUrl: true});
+  }
+
+  async showAlert(message) {
+    const alert = await this.alertController.create({
+      header: 'Invalid pickup date',
+      message,
+      buttons: ['OK'],
+    });
+
+    await alert.present();
   }
 }

@@ -6,7 +6,6 @@ import { IFoodCard } from 'src/app/shared';
 import {collection, doc, Firestore, getDoc, getDocs, query} from '@angular/fire/firestore';
 import {AngularFirestore, DocumentData} from '@angular/fire/compat/firestore';
 import {ProductService} from '../../services/cafe/product.service';
-import firebase from "firebase/compat";
 import {IonSearchbar} from "@ionic/angular";
 
 @Component({
@@ -85,7 +84,8 @@ export class LunchPage implements OnInit {
           image: data.imageUrl,
           price: data.price,
           id: data.id,
-          category: data.category
+          category: data.category,
+          status: data.status
         },
       );
     });
@@ -111,7 +111,8 @@ export class LunchPage implements OnInit {
               image: data.imageUrl,
               price: data.price,
               id: data.id,
-              category: data.category
+              category: data.category,
+              status: data.status
             },
           );
         }
@@ -155,13 +156,14 @@ export class LunchPage implements OnInit {
     }
   }
 
-  itemDetails(id, name, price, description, owner, image) {
+  itemDetails(id, name, price, description, owner, image, status) {
     this.product.item.id = id;
     this.product.item.name = name;
     this.product.item.price = price;
     this.product.item.owner = owner;
     this.product.item.description = description;
     this.product.item.image = image;
+    this.product.item.status = status;
     this.router.navigateByUrl('/item-details', {replaceUrl: true});
   }
 

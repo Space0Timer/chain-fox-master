@@ -3,9 +3,10 @@ import firebase from 'firebase/compat/app';
 import { Observable } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
 import {AngularFirestore} from '@angular/fire/compat/firestore';
-import {AngularFireAuth} from "@angular/fire/compat/auth";
-import {ProductService} from "./cafe/product.service";
-import {collection, doc, Firestore, getDoc, query, setDoc} from "@angular/fire/firestore";
+import {AngularFireAuth} from '@angular/fire/compat/auth';
+import {ProductService} from './cafe/product.service';
+import {collection, doc, Firestore, getDoc, getDocs, query, setDoc, where} from '@angular/fire/firestore';
+import {getDate, getMonth, getYear} from 'date-fns';
 
 export interface User {
   uid: string;
@@ -19,6 +20,7 @@ export interface Message {
   msg: string;
   fromName: string;
   myMsg: boolean;
+  status: string;
 }
 
 @Injectable({
@@ -49,6 +51,7 @@ export class ChatService {
     await this.afs.collection('messages/' + this.currentUser.uid + '/' + id).add({
       msg,
       from: this.currentUser.uid,
+      status: 'unread',
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
     });
   }
@@ -61,6 +64,7 @@ export class ChatService {
     await this.afs.collection('messages/' + id + '/' + this.currentUser.uid).add({
       msg,
       from: this.currentUser.uid,
+      status: 'unread',
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
     });
   }
@@ -72,6 +76,7 @@ export class ChatService {
     return this.afs.collection('messages/' + this.product.store.name + '/' + this.currentUser.uid).add({
       msg,
       from: this.currentUser.uid,
+      status: 'unread',
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
     });
   }
@@ -84,15 +89,16 @@ export class ChatService {
     await this.afs.collection('messages/' + this.currentUser.uid + '/' + this.product.store.name).add({
       msg,
       from: this.currentUser.uid,
+      status: 'unread',
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
     });
   }
 
   getDate(date) {
     const curDate = new Date();
-    this.today = (date.getDate() === curDate.getDate() &&
-      date.getMonth() === curDate.getMonth() &&
-      date.getFullYear() === curDate.getFullYear());
+    this.today = (getDate(date) ===getDate(curDate) &&
+      getMonth(date) === getMonth(curDate) &&
+      getYear(date) === getYear(curDate));
   }
 
   // user chat
@@ -102,12 +108,13 @@ export class ChatService {
       switchMap(res => {
         users = res;
         // eslint-disable-next-line max-len
-        return this.afs.collection('messages/' + this.currentUser.uid + '/' + id, ref => ref.orderBy('createdAt')).valueChanges({ idField: 'id' }) as Observable<Message[]>;
+        return this.afs.collection('messages/' + this.currentUser.uid + '/' + id, ref => ref.orderBy('createdAt')).valueChanges({idField: 'id'}) as Observable<Message[]>;
       }),
       map(messages => {
         for (const m of messages) {
           m.fromName = this.getUserForMsg(m.from, users);
           m.myMsg = this.currentUser.uid === m.from;
+          console.log(m.status);
         }
         return messages;
       })
@@ -127,6 +134,7 @@ export class ChatService {
         for (const m of messages) {
           m.fromName = this.getUserForMsg(m.from, users);
           m.myMsg = this.currentUser.uid === m.from;
+
         }
         return messages;
       })

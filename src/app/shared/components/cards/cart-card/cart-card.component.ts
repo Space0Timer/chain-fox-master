@@ -1,11 +1,11 @@
 import {Component, EventEmitter, Injectable, Input, OnInit, Output} from '@angular/core';
-import {ProductService} from "../../../../services/cafe/product.service";
-import {Router} from "@angular/router";
-import {doc, Firestore, onSnapshot} from "@angular/fire/firestore";
-import {IonRouterOutlet, ModalController} from "@ionic/angular";
-import {StoreSalesPage} from "../../../../pages/store-sales/store-sales.page";
-import {NoteComponent} from "../../modal/note/note.component";
-import {format, parseISO} from 'date-fns';
+import {ProductService} from '../../../../services/cafe/product.service';
+import {Router} from '@angular/router';
+import {doc, Firestore, onSnapshot} from '@angular/fire/firestore';
+import {AlertController, IonRouterOutlet, ModalController} from '@ionic/angular';
+import {StoreSalesPage} from '../../../../pages/store-sales/store-sales.page';
+import {NoteComponent} from '../../modal/note/note.component';
+import {addDays, addMinutes, format, getDay, getHours, getMinutes, parseISO} from 'date-fns';
 export interface ICartCard {
   name: string;
   owner: string;
@@ -23,12 +23,11 @@ export interface ICartCard {
 export class CartCardComponent implements OnInit{
   @Input() cart: ICartCard;
   @Output() childEvent: EventEmitter<any> = new EventEmitter();
-  myDate: string = new Date().toISOString();
-
-  hourValue = String(new Date().getDate()).replace(/^0+/, '').trim();
-  minValue = String((new Date().getMonth() + 1)).replace(/^0+/, '').trim();
-  yearValue = (new Date().getFullYear().toString());
-  disable = false;
+  myDate = addMinutes(new Date(), 510);
+  myDateString: string;
+  date = 'Not selected.';
+  nextWeek = addDays(new Date(), 7).toISOString();
+  private time: string;
 
   constructor(
     private product: ProductService,
@@ -36,18 +35,14 @@ export class CartCardComponent implements OnInit{
     private _firestore: Firestore,
     private modalCtrl: ModalController,
     private routerOutlet: IonRouterOutlet,
+    private alertController: AlertController
   ) {
   }
 
   ngOnInit(){
-    const currentDate = new Date();
-    const futureDate = format(new Date(currentDate.getTime() + 30*60000), 'yyyy-MM-dd');
-    const futureTime = format(new Date(currentDate.getTime() + 30*60000), 'HH:mm');
-    const futureDateTime = futureDate + 'T'+ futureTime;
-    const maxDate = format(new Date(currentDate.getTime() + 10080*60000), 'yyyy-MM-dd HH:mm');
-    console.log(futureDateTime);
-    console.log(maxDate);
+    this.myDateString = this.myDate.toISOString();
   }
+
     addToCart() {
       this.product.addToCart(this.cart.id, this.cart.owner);
       setTimeout(()=>{this.childEvent.emit();}, 500);
@@ -69,11 +64,11 @@ export class CartCardComponent implements OnInit{
       return await modal.present();
     }
 
-    async dateChanges(date, id) {
-      this.product.time = format(parseISO(date), 'yyyy-MM-dd HH:mm');;
-      await this.product.addTime(id, this.product.time);
-      console.log(this.product.orderTimePair.get(id));
-    }
+  async dateChanges(date, id) {
+    this.date = date.split('T')[0] + ' ' + date.split('T')[1].substring(0, 5);;
+    await this.product.addTime(id, this.date);
+    console.log(this.product.orderTimePair.get(id));
+  }
 
     async deleteItem() {
       await this.product.deleteItem(this.cart.id);
@@ -81,5 +76,7 @@ export class CartCardComponent implements OnInit{
         this.childEvent.emit();
       }, 500);
     }
+
+
 
 }

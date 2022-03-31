@@ -4,7 +4,6 @@ import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/compat
 import {AuthService} from '../auth/auth.service';
 import {collection, doc, Firestore, getDoc, getDocs, query, setDoc} from '@angular/fire/firestore';
 import {BehaviorSubject} from 'rxjs';
-import {ICartCard} from "../../shared";
 
 export interface StoreData {
   name: string;
@@ -12,6 +11,7 @@ export interface StoreData {
 }
 
 export interface ItemData {
+  status: string;
   name: string;
   price: string;
   description: string;
@@ -64,6 +64,7 @@ export class ProductService {
     owner: '',
     id: '',
     image: '',
+    status:''
   };
 
   public label = [];
@@ -77,14 +78,22 @@ export class ProductService {
   public status = '';
   public percentage = 0;
   public statusName = '';
-  public editItemId = '';
+
   public noteId = '';
   public time = '';
   public ownerId = '';
+  public userId = '';
+  public editItemId = '';
+  editItemName = '';
+  editItemPrice = '';
+  editItemCategory = '';
+  editItemDescription= '';
   productsCollection: AngularFirestoreCollection;
 
   cart = new BehaviorSubject({});
   private id = this.ionicAuthService.getUid();
+
+
 
   constructor(
     private afs: AngularFirestore,
@@ -175,6 +184,7 @@ export class ProductService {
   }
 
   async changeStatus(statusType) {
+    console.log(statusType);
     const dataRef = doc(this._firestore, `${(statusType)}/${(this.status)}`);
     const docSnap = await getDoc(dataRef);
     this.orderStatus = docSnap.data().status;
@@ -182,7 +192,7 @@ export class ProductService {
       case 'paid':
         this.percentage = 25;
         break;
-      case 'preparing':
+      case 'prepare':
         this.percentage = 50;
         break;
       case 'done':

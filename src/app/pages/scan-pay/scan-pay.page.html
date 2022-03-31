@@ -1,0 +1,89 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Scan to Pay</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="titles" >
+    <ion-text  color="primary" style="font-size: 20px; font-weight: bold;">Recipient: {{this.iroha.result.split('@')[0]}}</ion-text>
+  </div>
+  <div class="ion-padding">
+  <form [formGroup]="form" class="ion-margin">
+    <div class="ion-margin-vertical">
+      <ion-item lines="full" color="light" >
+        <ion-input formControlName="amount" [type]="type ? 'text' : 'text'" placeholder="Enter amount to transfer"></ion-input>
+      </ion-item>
+      <ion-text
+        color="danger"
+        *ngIf="!form.get('amount').valid && form.get('amount').touched">
+        <ion-text
+          class="error"
+          *ngIf="form.get('amount').hasError('required')">
+          * Please enter the amount
+        </ion-text>
+        <!-- for email error -->
+        <ion-text
+          class="error"
+          *ngIf="!form.get('amount').hasError('required') && form.get('amount').hasError('pattern')">
+          * Please enter a proper amount
+        </ion-text>
+      </ion-text>
+    </div>
+    <div class="ion-margin-vertical">
+      <ion-item lines="full" color="light">
+        <ion-input formControlName="reference" [type]="type ? 'text' : 'text'" placeholder="Enter reference"></ion-input>
+      </ion-item>
+      <ion-text
+        color="danger"
+        *ngIf="!form.get('reference').valid && form.get('reference').touched">
+        <ion-text
+          class="error"
+          *ngIf="form.get('reference').hasError('required')">
+          * Please enter the reference
+        </ion-text>
+        <!-- for reference error -->
+        <ion-text
+          class="error"
+          *ngIf="!form.get('reference').hasError('required')
+          && form.get('reference')">
+          * Please enter the payment reference
+        </ion-text>
+      </ion-text>
+    </div>
+  </form>
+  </div>
+  <div class="ion-margin-horizontal">
+    <ion-button
+      *ngIf="!isLoading"
+      class="ion-margin-horizontal"
+      size="large"
+      expand="block"
+      shape="round"
+      color="primary"
+      (click)="biometricAuth()">
+      <ion-text>Confirm</ion-text>
+    </ion-button>
+    <ion-button
+      *ngIf="isLoading"
+      class="ion-margin-horizontal"
+      size="large"
+      expand="block"
+      shape="round"
+      color="primary">
+      <ion-spinner></ion-spinner>
+    </ion-button>
+  </div>
+  <div class="ion-margin-horizontal">
+    <ion-button
+      *ngIf="!isLoading"
+      class="ion-margin-horizontal"
+      size="large"
+      expand="block"
+      shape="round"
+      color="danger"
+      (click)="biometricAuth()">
+      <ion-text>Cancel</ion-text>
+    </ion-button>
+  </div>
+</ion-content>

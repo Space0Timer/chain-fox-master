@@ -18,6 +18,7 @@ export class ItemDetailsPage implements OnInit {
   id: string;
   owner: string;
   image: string;
+  cartIcon = 'Add to Cart';
 
   constructor(
     private animatioCntrl: AnimationController,
@@ -32,16 +33,22 @@ export class ItemDetailsPage implements OnInit {
 
   ngOnInit() {
     this.getItemDetails();
+    if (this.product.item.status === 'available') {
+      this.cartIcon = 'Add to Cart';
+    }
+    else if (this.product.item.status === 'sold out') {
+      this.cartIcon = 'Sold Out';
+    }
   }
 
   async addToCart(id, owner) {
-    this.product.addToCart(id, owner);
+    await this.product.addToCart(id, owner);
     await this.showAlert(this.product.item.name + ' (x1) is added to your cart!');
   }
 
-  addToFav(id, owner) {
-    this.product.addToFav(id, owner);
-    this.showAlert(this.product.item.name + ' is added to your favourites!');
+  async addToFav(id, owner) {
+    await this.product.addToFav(id, owner);
+    await this.showAlert(this.product.item.name + ' is added to your favourites!');
   }
   getItemDetails() {
     this.name = this.product.item.name;

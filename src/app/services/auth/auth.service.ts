@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {
   Auth,
-  createUserWithEmailAndPassword,
-  onAuthStateChanged,
+  createUserWithEmailAndPassword, deleteUser,
+  onAuthStateChanged, reauthenticateWithCredential, sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signOut
 } from '@angular/fire/auth';
@@ -112,6 +112,26 @@ export class AuthService {
     });
   }
 
+  async reAuth(email, pw) {
+    try {
+      const credential = firebase.auth.EmailAuthProvider.credential(
+        email,
+        pw
+      );
+      const response = await reauthenticateWithCredential(this.currentUser, credential);
+      }
+     catch (e) {
+      throw(e);
+    }
+  }
+
+  async deleteUser() {
+    try {
+      const response = await deleteUser(this.currentUser);
+    } catch (e) {
+      throw(e);
+    }
+  }
   checkVerify() {
     return new Promise((resolve, reject) => {
       // eslint-disable-next-line no-underscore-dangle
@@ -138,5 +158,19 @@ export class AuthService {
     } catch(e) {
       throw(e);
     }
+  }
+  
+  async resetPassword(email) {
+    // eslint-disable-next-line no-underscore-dangle
+    await sendPasswordResetEmail(this._fireAuth, email)
+      .then(() => {
+        // Password reset email sent!
+        // ..
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+      });
   }
 }

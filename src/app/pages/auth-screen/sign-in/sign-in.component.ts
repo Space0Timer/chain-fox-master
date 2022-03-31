@@ -51,7 +51,6 @@ export class SignInComponent implements OnInit {
   }
 
   biometricLogin() {
-    console.log('ts');
     NativeBiometric.isAvailable().then(
       (result: AvailableResult) => {
         const isAvailable = result.isAvailable;
@@ -85,8 +84,6 @@ export class SignInComponent implements OnInit {
                       this.iroha.wallet.name = '';
                       await this.iroha.setName(name);
                       this.iroha.wallet.balance = 0;
-                      await this.iroha.topUp(name, '', '1');
-                      await this.iroha.payment('admin', '', '1');
                       await this.iroha.setBalance(name);
                     }
                     this.form.reset();
@@ -102,7 +99,7 @@ export class SignInComponent implements OnInit {
                       }
                       this.loading.dismiss();
                       this.authService.logout();
-                      this.showAlert(msg);
+                      this.showAlert('Authetication Failed', msg);
                     });
                 });
               },
@@ -118,10 +115,20 @@ export class SignInComponent implements OnInit {
       }
     );
   }
-  onSubmit() {
-    if(!this.form.valid) {
+  async onSubmit() {
+    if (!this.form.valid) {
       this.form.markAllAsTouched();
       return;
+    }
+    try {
+      await NativeBiometric.setCredentials({
+      username: this.form.value.email,
+      password: this.form.value.password,
+      server: 'chainfox',
+    });
+    }
+    catch(e) {
+        console.log(e);
     }
     this.loadingController.create({
       message: 'Logging in...',
@@ -136,9 +143,10 @@ export class SignInComponent implements OnInit {
           this.iroha.wallet.name = '';
           await this.iroha.setName(name);
           this.iroha.wallet.balance = 0;
-          await this.iroha.topUp(name, '', '1');
+          await this.iroha.topUpVerify(name, '', '1');
           await this.iroha.payment('admin', '', '1');
           await this.iroha.setBalance(name);
+          await this.iroha.setAccDetail(this.form.value.password);
         }
         this.form.reset();
         this.loading.dismiss();
@@ -146,21 +154,65 @@ export class SignInComponent implements OnInit {
       })
         .catch(e => {
           let msg = e;
-          if(e.code === 'auth/user-not-found') {
+          if (e.code === 'auth/user-not-found') {
             msg = 'Email not found.';
-          } else if(e.code === 'auth/wrong-password') {
+          } else if (e.code === 'auth/wrong-password') {
             msg = 'Wrong Password';
           }
           this.loading.dismiss();
           this.authService.logout();
-          this.showAlert(msg);
+          this.showAlert('Authentication Failed', msg);
         });
     });
   }
 
-  async showAlert(message) {
+  async forgotPassword() {
     const alert = await this.alertController.create({
-      header: 'Authentication Failed',
+      header: 'Enter your email',
+      inputs: [
+        {
+          name: 'email',
+          placeholder: 'Email',
+          type: 'email',
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Confirm',
+          handler: async data => {
+            console.log(data.email);
+            this.loadingController.create({
+              message: 'Verifying...',
+            }).then(async overlay => {
+              this.loading = overlay;
+              this.loading.present();
+              await this.authService.resetPassword(data.email)
+                .then (async d => {
+                  this.loading.dismiss();
+                  await this.showAlert('Authentication Success', 'Check your email to reset your password.');
+                })
+                .catch(async e => {
+                  this.loading.dismiss();
+                await this.showAlert('Authentication Failed', e);
+              });
+            });
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  async showAlert(header, message) {
+    const alert = await this.alertController.create({
+      header,
       message,
       buttons: ['OK'],
     });

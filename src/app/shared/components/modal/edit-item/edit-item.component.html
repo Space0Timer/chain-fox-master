@@ -13,7 +13,7 @@
     <form [formGroup]="form" class="ion-margin">
       <div class="ion-margin-vertical">
         <ion-item lines="full">
-          <ion-input formControlName="name" [type]="type ? 'text' : 'text'" placeholder="Enter item name"></ion-input>
+          <ion-input formControlName="name" [type]="type ? 'text' : 'text'" placeholder="Enter item name" ngModel="{{this.product.editItemName}}"></ion-input>
         </ion-item>
         <ion-text
           color="danger"
@@ -27,7 +27,7 @@
       </div>
       <div class="ion-margin-vertical">
         <ion-item lines="full">
-          <ion-input formControlName="price" [type]="type ? 'number' : 'number'" placeholder="Enter price"></ion-input>
+          <ion-input formControlName="price" [type]="type ? 'number' : 'number'" ngModel="{{this.product.editItemPrice}}" placeholder="Enter price"></ion-input>
         </ion-item>
         <ion-text
           color="danger"
@@ -41,7 +41,7 @@
       </div>
       <div class="ion-margin-vertical">
         <ion-item lines="full">
-          <ion-input formControlName="category" [type]="type ? 'text' : 'text'" placeholder="Enter category"></ion-input>
+          <ion-input formControlName="category" [type]="type ? 'text' : 'text' " ngModel="{{this.product.editItemCategory}}" placeholder="Enter category"></ion-input>
         </ion-item>
         <ion-text
           color="danger"
@@ -54,7 +54,7 @@
         </ion-text>
         <div class="ion-margin-vertical">
           <ion-item lines="full">
-            <ion-input formControlName="description" [type]="type ? 'text' : 'text'" placeholder="Enter description"></ion-input>
+            <ion-input formControlName="description" [type]="type ? 'text' : 'text'" ngModel="{{this.product.editItemDescription}}" placeholder="Enter description"></ion-input>
           </ion-item>
           <ion-text
             color="danger"
@@ -68,31 +68,6 @@
         </div>
       </div>
     </form>
-
-    <div>
-      <form method="post" enctype="multipart/form-data">
-        <div>
-          <div><b>Upload a photo for your item.</b></div><br/>
-          <input type="file" (change)="uploadPhoto($event)" accept=".png,.jpg" multiple="true"/>
-          <div *ngIf="errorMessage">
-            <ion-text color="danger">
-              <ion-text
-                class="error">* {{errorMessage}}</ion-text>
-            </ion-text>
-          </div>
-        </div>
-      </form>
-    </div>
-    <div *ngIf="barStatus">
-      Uploading.....
-    </div>
-
-    <div id="photoPreview">
-      <div *ngFor="let image of imageUploads">
-        <img loading="lazy" [src]="image" class="preview"/>
-      </div>
-    </div>
-
     <ion-button
       *ngIf="!isLoading"
       size="large"
@@ -111,3 +86,4 @@
       <ion-spinner></ion-spinner>
     </ion-button>
   </div>
+</ion-content>

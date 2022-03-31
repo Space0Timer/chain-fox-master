@@ -19,9 +19,8 @@ const updateIosProject = async () => {
   const appTarget = project.ios?.getAppTarget();
   project.ios.setBundleId((appTarget.name), null, 'io.ionic.chainfox');
   await project.ios.setDisplayName(appTarget.name, 'Release', 'ChainFox');
-  await project.ios.setDisplayName(appTarget.name, 'Debug', 'ChainFoxTest');
+  await project.ios.setDisplayName(appTarget.name, 'Debug', 'ChainFox');
   await project.ios.setVersion(appTarget.name, null, '0.0.1');
-  await project.ios.getInfoPlist(appTarget.name, './configure/GoogleService-Info.plist');
   await project.ios?.updateInfoPlist(appTarget.name, null, {
     NSCameraUsageDescription: 'To scan QR Codes',
     NSFaceIDUsageDescription: 'To scan confirm payments',

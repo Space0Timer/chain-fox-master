@@ -71,7 +71,11 @@ export class IrohaService {
   transactionTo = '';
   transactionAmount = '';
   transactionDate = '';
+  result = '';
+  private testprivateKey = '';
+  private testpublicKey = '';
   private currentUser = null;
+
 
   constructor(private storage: StorageService,
               private ionicAuthService: AuthService,
@@ -149,11 +153,11 @@ export class IrohaService {
       .then(account => this.wallet.balance = Object.values(account)[0].balance);
   }
 
-  async topUp(id, message, amount) {
+  async topUp(id, message, amount, prk) {
     // eslint-disable-next-line max-len
     try {
       const transfer = await commands.transferAsset({
-        privateKeys: ['e2e3c49be71ae0e1721b1a573f3d49756b87fce58679243dd4bbe09008158cf0'],
+        privateKeys: [prk],
         creatorAccountId: 'admin@test',
         quorum: 1,
         commandService,
@@ -164,7 +168,23 @@ export class IrohaService {
     catch(e) {
       throw(e);
     }
+  }
 
+  async topUpVerify(id, message, amount) {
+    // eslint-disable-next-line max-len
+    try {
+      const transfer = await commands.transferAsset({
+          privateKeys: ['e2e3c49be71ae0e1721b1a573f3d49756b87fce58679243dd4bbe09008158cf0'],
+          creatorAccountId: 'admin@test',
+          quorum: 1,
+          commandService,
+          timeoutLimit: 5000 // Set timeout limit
+        },
+        {srcAccountId: 'admin@test', destAccountId: id, assetId: 'coin#test', description: message, amount});
+    }
+    catch(e) {
+      throw(e);
+    }
   }
 
   async sendMoney(message, amount) {
@@ -192,9 +212,6 @@ export class IrohaService {
 
   async payment(dest, message, amount) {
     await this.getKey();
-    console.log(this.wallet.privateKey);
-    console.log(message);
-    console.log(this.wallet.name);
     await commands.transferAsset({
         privateKeys: [this.wallet.privateKey], // Array of private keys in hex format
         creatorAccountId: this.wallet.name + '@test',// Account id, ex. admin@test
@@ -308,6 +325,26 @@ export class IrohaService {
     }).then (d => {
       this.pw = d[this.wallet.name + '@test'].sec;
     });
+  }
+
+  async addSignatory(result){
+    await commands.addSignatory({
+      privateKeys: ['e2e3c49be71ae0e1721b1a573f3d49756b87fce58679243dd4bbe09008158cf0'],
+      creatorAccountId: 'admin@test',
+      quorum: 1,
+      commandService,
+      timeoutLimit: 5000 // Set timeout limit
+    }, {accountId: 'admin@test', publicKey: result});
+  }
+
+  async removeSignatory(result){
+      await commands.removeSignatory({
+        privateKeys: ['e2e3c49be71ae0e1721b1a573f3d49756b87fce58679243dd4bbe09008158cf0'],
+        creatorAccountId: 'admin@test',
+        quorum: 1,
+        commandService,
+        timeoutLimit: 5000 // Set timeout limit
+      }, {accountId: 'admin@test', publicKey: result});
   }
 }
 

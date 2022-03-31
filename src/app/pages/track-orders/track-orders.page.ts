@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
-import {collection, Firestore, getDocs} from "@angular/fire/firestore";
+import {collection, Firestore, getDocs, orderBy, query} from "@angular/fire/firestore";
 import {AuthService} from "../../services/auth/auth.service";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {ProductService} from "../../services/cafe/product.service";
@@ -31,7 +31,7 @@ export class TrackOrdersPage implements OnInit {
   }
 
   async addItemsToOrder() {
-    const q = collection(this._firestore, `trackOrders/${(this.id)}/activeOrders`);
+    const q = query(collection(this._firestore, `trackOrders/${(this.id)}/activeOrders`), orderBy('deliverTime', 'desc'));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((docs) => {
       console.log(docs.id, ' => ', docs.data());
@@ -50,6 +50,7 @@ export class TrackOrdersPage implements OnInit {
       );
     });
   }
+
   back() {
     this.router.navigateByUrl('tabs/account', {replaceUrl: true});
   }

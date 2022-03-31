@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
-import {SplashScreen} from "@capacitor/splash-screen";
 
 @Component({
   selector: 'app-root',
@@ -12,7 +11,6 @@ export class AppComponent {
   constructor(
     private platform: Platform,
   ) {
-    SplashScreen.hide();
     this.initializeApp();
   }
 

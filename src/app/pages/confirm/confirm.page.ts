@@ -10,11 +10,12 @@ import {ProductService} from '../../services/cafe/product.service';
 import firebase from 'firebase/compat/app';
 import {AlertController, IonRouterOutlet, LoadingController, ModalController} from "@ionic/angular";
 import {AvailableResult, BiometryType, Credentials, NativeBiometric} from "capacitor-native-biometric";
-import {StoreSalesPage} from "../store-sales/store-sales.page";
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import {ICartCard} from "../../shared";
+
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
 @Component({
   selector: 'app-confirm',
   templateUrl: './confirm.page.html',
@@ -74,8 +75,9 @@ export class ConfirmPage implements OnInit {
                 // Authentication successful
                 await this.payment();
               },
-              (error) => {
+              async (error) => {
                 // Failed to authenticate
+                await this.presentPrompt();
               }
             );
           });
@@ -166,7 +168,6 @@ export class ConfirmPage implements OnInit {
         const price = dataSnap.price;
         const pay = price * value;
         const payString = pay.toString();
-        console.log(pay);
         // get owner name
         const nameRef = doc(this._firestore, `users/${(this.owner)}`);
         const nameSnap = await getDoc(nameRef);
@@ -180,11 +181,9 @@ export class ConfirmPage implements OnInit {
         // payment
         this.paymentDetails = this.product.orderNotePair.get(key);
         this.deliverTime = this.product.orderTimePair.get(key);
-        console.log(this.deliverTime);
         if (this.paymentDetails === undefined) {
           this.paymentDetails = '';
         }
-        console.log(src, dest, this.paymentDetails, payString);
         await this.iroha.payment(dest, this.paymentDetails, payString);
         this.iroha.wallet.balance = '0';
         await this.iroha.setBalance(src+'@test');
@@ -203,6 +202,7 @@ export class ConfirmPage implements OnInit {
           quantity: value,
           amountPaid: payString,
           deliverTime: this.deliverTime,
+          message: this.paymentDetails,
           orderTime: firebase.firestore.FieldValue.serverTimestamp()
         });
         // add to all orders for buyer
@@ -300,30 +300,6 @@ export class ConfirmPage implements OnInit {
     await alert.present();
   }
 
-  async pdfAlert(header, message) {
-    const alert = await this.alertController.create({
-      header,
-      message,
-      buttons: [
-        {
-          text: 'No',
-          role: "cancel",
-          handler: () => {
-            console.log('cancel');
-          }
-        },
-        {
-          text: 'Yes',
-          handler: () => {
-            this.generatePdf();
-          }
-        },
-      ]
-    });
-
-    await alert.present();
-  }
-
   async presentPrompt() {
     const alert = await this.alertController.create({
       header: 'User verification',
@@ -350,12 +326,10 @@ export class ConfirmPage implements OnInit {
             }).then(async overlay => {
               this.loading = overlay;
               this.loading.present();
-
             await this.iroha.getAccDetail('sec');
             if (data.password === this.iroha.pw) {
                 this.loading.dismiss();
                 await this.payment();
-
             }
             else {
               this.loading.dismiss();
@@ -371,10 +345,7 @@ export class ConfirmPage implements OnInit {
   }
 
 
-  generatePdf(){
-    const documentDefinition = { content: 'This is an sample PDF printed with pdfMake' };
-    pdfMake.createPdf(documentDefinition).open();
-  }
+
 
   back() {
     this.router.navigate(['checkout']);

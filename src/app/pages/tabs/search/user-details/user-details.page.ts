@@ -90,6 +90,7 @@ export class UserDetailsPage implements OnInit {
       }
     );
   }
+
   async onSubmit() {
     if(!this.form.valid) {
       this.form.markAllAsTouched();
@@ -108,7 +109,7 @@ export class UserDetailsPage implements OnInit {
       this.iroha.wallet.name = '';
       await this.iroha.setName(name);
       this.iroha.wallet.balance = 0;
-      await this.iroha.topUp(name, '', '1');
+      await this.iroha.topUpVerify(name, '', '1');
       await this.iroha.payment('admin', '', '1');
       await this.iroha.setBalance(name);
     }
@@ -172,7 +173,6 @@ export class UserDetailsPage implements OnInit {
               if (data.password === this.iroha.pw) {
                 this.loading.dismiss();
                 await this.onSubmit();
-
               }
               else {
                 this.loading.dismiss();

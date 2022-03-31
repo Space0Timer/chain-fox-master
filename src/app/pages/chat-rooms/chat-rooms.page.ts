@@ -19,8 +19,7 @@ export class ChatRoomsPage implements OnInit {
 
   constructor(private chatService: ChatService, private router: Router) { }
 
-  ngOnInit() {
-    console.log(this.chatService.chatId);
+  async ngOnInit() {
     this.messages = this.chatService.getChatMessages(this.chatService.chatId);
   }
 

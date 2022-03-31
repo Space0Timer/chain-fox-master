@@ -8,6 +8,7 @@ export interface IFoodCard {
   owner: string;
   id: string;
   category: string;
+  status: string;
 }
 
 @Component({

@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {AuthService} from "../../../../services/auth/auth.service";
 import {IrohaService} from "../../../../services/iroha.service";
+import {AlertController} from "@ionic/angular";
 
 export interface ITrackOrderCard {
   name: string;
@@ -30,17 +31,19 @@ export class TrackOrdersComponent implements OnInit {
               private router: Router,
               private afs: AngularFirestore,
               private ionicAuthService: AuthService,
-              private iroha: IrohaService) { }
+              private iroha: IrohaService,
+              private alertController: AlertController) { }
 
   ngOnInit(
   ) {}
 
-  async goToCheckStatusStore(name, id, price, user, status) {
+  async goToCheckStatusStore(name, id, price, user, status, userId) {
     this.product.orderName = name;
     this.product.orderId = id;
     this.product.price = price;
     this.product.user = user;
     this.product.status = status;
+    this.product.userId = userId;
     await this.product.changeStatus('status');
     await this.router.navigate(['check-status-store']);
   }
@@ -52,5 +55,17 @@ export class TrackOrdersComponent implements OnInit {
       status: 'cancelled',
     });
     await this.iroha.payment(user, 'refund', paid);
+    await this.showAlert('This order has been cancelled. Money has been refunded to the customer.');
+    await this.router.navigateByUrl('tabs/account', {replaceUrl: true});
+  }
+
+  async showAlert(message) {
+    const alert = await this.alertController.create({
+      header: 'Order cancelled.',
+      message,
+      buttons: ['OK'],
+    });
+
+    await alert.present();
   }
 }

@@ -7,7 +7,7 @@ import {collection, doc, Firestore, getDoc, getDocs} from "@angular/fire/firesto
 import {AuthService} from "../../services/auth/auth.service";
 import {ProductService} from "../../services/cafe/product.service";
 import firebase from "firebase/compat/app";
-import {format, parseISO} from "date-fns";
+import {format, formatISO, getDate, parseISO, toDate} from "date-fns";
 import {ChatService} from "../../services/chat.service";
 @Component({
   selector: 'app-chat-list',
@@ -54,7 +54,7 @@ export class ChatListPage implements OnInit {
         .onSnapshot((docSnapshot) => {
           const dataSource = [];
           docSnapshot.forEach((docu) => {
-            dataSource.push(docu.data().createdAt);
+            dataSource.push((docu.data().createdAt.toDate()));
             this.chat.push({
               name: data.username,
               time: format(docu.data().createdAt.toDate(), 'HH:MM'),
@@ -65,7 +65,7 @@ export class ChatListPage implements OnInit {
           });
           this.chat.length = 1;
           dataSource.length = 1;
-          this.chatService.getDate(dataSource);
+          this.chatService.getDate(dataSource[0]);
         });
     }
   }

@@ -21,7 +21,7 @@ export class StoreSalesComponent implements OnInit{
   }
 
   showChart() {
-    const ctx = (<any>document.getElementById('yudhatp-chart')).getContext('2d');
+    const ctx = (<any>document.getElementById('sales-chart')).getContext('2d');
     const chart = new Chart(ctx, {
       type: 'doughnut',
       data: {

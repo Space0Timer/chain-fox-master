@@ -19,15 +19,15 @@
         </div>
         <ion-button expand="block" (click) = "openNoteModal(cart.id)">Add Note</ion-button>
       </div>
-      <ion-label>Pick Up Time</ion-label>
-      <ion-item lines="none">
-        <ion-label>
-          <ion-datetime
-            #datetime (ionChange)="dateChanges(datetime.value, cart.id)"
-            presentation= 'date-time'>
-          </ion-datetime>
-        </ion-label>
-      </ion-item>
+      <ion-row><ion-label>Pick Up Time:</ion-label></ion-row>
+      <ion-row><ion-label>{{this.date}}</ion-label></ion-row>
+        <ion-datetime
+          #datetime (ionChange)="dateChanges(datetime.value, cart.id)"
+          presentation= 'date-time'
+          [min]="myDateString"
+          [max]="nextWeek"
+          [hourValues]="[8,9,10,11,12,13,14,15,16,17,18,19,20,21]">
+        </ion-datetime>
   </ion-card-content>
   </ion-card>
 </ng-container>

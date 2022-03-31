@@ -1,0 +1,15 @@
+diff --git a/node_modules/@capacitor-community/barcode-scanner/ios/Plugin/Plugin.swift b/node_modules/@capacitor-community/barcode-scanner/ios/Plugin/Plugin.swift
+index fb3e7ea..124b457 100644
+--- a/node_modules/@capacitor-community/barcode-scanner/ios/Plugin/Plugin.swift
++++ b/node_modules/@capacitor-community/barcode-scanner/ios/Plugin/Plugin.swift
+@@ -339,8 +339,8 @@ public class BarcodeScanner: CAPPlugin, AVCaptureMetadataOutputObjectsDelegate {
+ 
+             self.bridge?.webView!.evaluateJavaScript(javascript) { (result, error) in
+                 self.bridge?.webView!.isOpaque = true
+-                self.bridge?.webView!.backgroundColor = UIColor.white
+-                self.bridge?.webView!.scrollView.backgroundColor = UIColor.white
++                self.bridge?.webView!.backgroundColor = UIColor.clear
++                self.bridge?.webView!.scrollView.backgroundColor = UIColor.clear
+             }
+         }
+     }

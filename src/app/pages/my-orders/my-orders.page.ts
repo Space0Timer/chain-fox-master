@@ -4,7 +4,7 @@ import {IOrderCard} from '../../shared';
 import {AuthService} from "../../services/auth/auth.service";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {ProductService} from "../../services/cafe/product.service";
-import {collection, Firestore, getDocs} from "@angular/fire/firestore";
+import {collection, Firestore, getDocs, orderBy, query} from "@angular/fire/firestore";
 import {format, parseISO} from 'date-fns';
 @Component({
   selector: 'app-my-orders',
@@ -30,7 +30,7 @@ export class MyOrdersPage implements OnInit {
   }
 
   async addItemsToOrder() {
-    const q = collection(this._firestore, `users/${(this.id)}/activeOrders`);
+    const q = query(collection(this._firestore, `users/${(this.id)}/activeOrders`), orderBy('deliverTime', 'desc'));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((docs) => {
       console.log(docs.id, ' => ', docs.data());

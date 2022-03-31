@@ -3,7 +3,8 @@ import {Router} from '@angular/router';
 import {AuthService} from 'src/app/services/auth/auth.service';
 import {doc, Firestore, getDoc} from '@angular/fire/firestore';
 import {IrohaService} from '../../../services/iroha.service';
-
+import {Network} from "@capacitor/network";
+import {AlertController} from "@ionic/angular";
 
 @Component({
   selector: 'app-home',
@@ -31,13 +32,28 @@ export class HomePage implements OnInit{
     private ionicAuthService: AuthService,
     private _firestore: Firestore,
     public iroha: IrohaService,
+    public alertController: AlertController
   ) { }
 
   async ngOnInit() {
+    Network.addListener('networkStatusChange', async status => {
+      if (status.connected === false) {
+        await this.showAlert('You must have an Internet Connection to use this app. You will be redirected to the login page.');
+        await this.router.navigate(['auth-screen']);
+      }
+    });
     await this.getUserId();
   }
 
+  async showAlert(message) {
+    const alert = await this.alertController.create({
+      header: 'No Internet Connection',
+      message,
+      buttons: ['OK'],
+    });
 
+    await alert.present();
+  }
   logOut() {
     this.ionicAuthService.logout()
       .then((response) => {

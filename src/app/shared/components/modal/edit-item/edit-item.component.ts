@@ -4,7 +4,7 @@ import {AuthService} from '../../../../services/auth/auth.service';
 import {AngularFirestore} from '@angular/fire/compat/firestore';
 import {FirebaseUploadService} from '../../../../services/cafe/firebase-upload.service';
 import {Router} from '@angular/router';
-import {Firestore} from '@angular/fire/firestore';
+import {doc, Firestore, setDoc} from '@angular/fire/firestore';
 import {ProductService} from '../../../../services/cafe/product.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AlertController, ModalController} from '@ionic/angular';
@@ -36,6 +36,7 @@ export class EditItemComponent implements OnInit {
   }
 
   async ngOnInit() {
+    console.log(this.product.editItemDescription);
   }
 
   async showAlert(header,message) {
@@ -46,24 +47,6 @@ export class EditItemComponent implements OnInit {
     });
 
     await alert.present();
-  }
-
-  uploadPhoto(event) {
-    this.barStatus = true;
-    this.firebaseUploadService.storeImage(event.target.files[0]).then(
-      (res: any) => {
-        if (res) {
-          console.log(res);
-          this.imageUrl = res;
-          this.imageUploads.unshift(res);
-          this.barStatus = false;
-        }
-      },
-      (error: any) => {
-        this.errorMessage = 'File size exceeded. Maximum file size 1 MB';
-        this.barStatus = false;
-      }
-    );
   }
 
   initForm() {
@@ -85,25 +68,27 @@ export class EditItemComponent implements OnInit {
       this.form.markAllAsTouched();
       return;
     }
-    if(this.imageUrl === '') {
-      this.errorMessage = 'You must upload an image for your item to proceed.';
-      return;
-    }
     this.isLoading = true;
     console.log(this.form.value);
-    this.edit(this.product.editItemId);
+    await this.edit(this.product.editItemId);
     await this.showAlert('Editing Item', 'Item successfully edited.');
     this.isLoading = false;
   }
 
-  edit(id) {
-    this.afs.collection(`stores/${(this.uid)}/items`).doc(id).update({
+  async edit(id) {
+    await this.afs.collection(`stores/${(this.uid)}/items`).doc(id).update({
       name: this.form.value.name,
-      price:this.form.value.price,
+      price: this.form.value.price,
       category: this.form.value.category,
       description: this.form.value.description,
-      image: this.imageUrl,
       lastUpdate: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    const dataRef = doc(this._firestore, `stores/${(this.uid)}/categories/${(this.form.value.category)}`);
+    await setDoc(dataRef, {
+      name: this.form.value.category,
+    });
+    await this.afs.collection(`stores/${(this.uid)}/categories/`).doc(this.form.value.category).update({
+      [id]: 1,
     });
   }
 

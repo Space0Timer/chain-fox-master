@@ -1,11 +1,13 @@
 import { Component, Input } from '@angular/core';
-import {Router} from "@angular/router";
-import {ProductService} from "../../../../services/cafe/product.service";
-import firebase from "firebase/compat/app";
-import {AngularFirestore} from "@angular/fire/compat/firestore";
-import {AuthService} from "../../../../services/auth/auth.service";
-import {IrohaService} from "../../../../services/iroha.service";
-import {doc} from "@angular/fire/firestore";
+import {Router} from '@angular/router';
+import {ProductService} from '../../../../services/cafe/product.service';
+import {AngularFirestore} from '@angular/fire/compat/firestore';
+import {AuthService} from '../../../../services/auth/auth.service';
+import {IrohaService} from '../../../../services/iroha.service';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 export interface IOrderCard {
   name: string;
@@ -45,4 +47,11 @@ export class OrderCardComponent {
     this.router.navigate(['check-status-user']);
   }
 
+  generatePdf(name, id, price, owner, ownerId, quantity, amountPaid, status, orderTime, deliverTime){
+    const documentDefinition = { content: 'Name : ' + name + '\nOrder ID : '
+        + id + '\nPrice: RM ' + price + '\nPrice: RM ' +   owner + '\nPrice: RM ' +  ownerId + '\nPrice: RM '
+        +  quantity + '\nPrice: RM ' + amountPaid + '\nPrice: RM ' +
+        status + '\nPrice: RM ' +  orderTime + '\nPrice: RM ' +  deliverTime };
+    pdfMake.createPdf(documentDefinition).open();
+  }
 }

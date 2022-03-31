@@ -10,8 +10,8 @@
         <p>Deliver Time: {{trackOrder.deliverTime}}</p>
         <p>Status: {{trackOrder.status}}</p>
         <ion-button expand="block" class="main-button" (click) = 'cancelOrder(trackOrder.id, trackOrder.user, trackOrder.userId, trackOrder.amountPaid)'>Cancel Order</ion-button>
-        <ion-button expand="block" class="main-button" (click)="goToCheckStatusStore(trackOrder.name, trackOrder.id, trackOrder.price, trackOrder.user, trackOrder.status)">Check Status</ion-button>
-      </div>
+        <ion-button expand="block" class="main-button" (click)="goToCheckStatusStore(trackOrder.name, trackOrder.id, trackOrder.price, trackOrder.user, trackOrder.status, trackOrder.userId)">Check Status</ion-button>
+     </div>
     </ion-card-content>
   </ion-card>
 </ng-container>

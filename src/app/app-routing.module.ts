@@ -27,6 +27,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/tabs/home/list/list.module').then(m => m.ListPageModule)
   },
   {
+    path: 'scan-pay',
+    loadChildren: () => import('./pages/scan-pay/scan-pay.module').then(m => m.ScanPayPageModule)
+  },
+  {
     path: 'pay',
     loadChildren: () => import('./pages/tabs/pay/pay.module').then(m => m.PayPageModule)
   },
@@ -157,11 +161,11 @@ const routes: Routes = [
   },
 ];
 
-
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+// @ts-ignore
+export class AppRoutingModule{}

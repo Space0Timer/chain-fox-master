@@ -1,7 +1,9 @@
 import {AfterViewInit, Component, OnDestroy} from '@angular/core';
 import {Router} from '@angular/router';
-import {AlertController} from '@ionic/angular';
+import {AlertController, IonRouterOutlet, ModalController, Platform} from '@ionic/angular';
 import {BarcodeScanner, SupportedFormat} from '@capacitor-community/barcode-scanner';
+import {IrohaService} from '../../../services/iroha.service';
+import {ProductService} from "../../../services/cafe/product.service";
 
 @Component({
   selector: 'app-home',
@@ -12,11 +14,19 @@ export class PayPage implements AfterViewInit, OnDestroy{
   scanActive = false;
   result = null;
   constructor(private router: Router,
-              private alertCtrl: AlertController) {}
+              private platform: Platform,
+              private iroha: IrohaService,
+              private alertController: AlertController){}
 
   ngAfterViewInit(){
     BarcodeScanner.prepare();
     this.startScanner();
+  }
+
+  async ionViewDidEnter() {
+    await this.platform.ready().then(() => {
+      document.body.classList.toggle('dark', false);
+    });
   }
 
   ngOnDestroy(){
@@ -29,8 +39,10 @@ export class PayPage implements AfterViewInit, OnDestroy{
       this.scanActive = true;
       const result = await BarcodeScanner.startScan({ targetedFormats: [SupportedFormat.QR_CODE] });
       if (result.hasContent) {
-        this.result = result.content;
+        this.iroha.result = result.content;
         this.scanActive = false;
+        console.log(this.iroha.result);
+        await this.router.navigate(['scan-pay']);
       }
     }
   }
@@ -42,7 +54,7 @@ export class PayPage implements AfterViewInit, OnDestroy{
         resolve(true);
       }
       else if(status.denied) {
-        const alert = await this.alertCtrl.create({
+        const alert = await this.alertController.create({
           header: 'No permissions',
           message: 'Please enable camera in your settings.',
           buttons: [{
@@ -68,6 +80,18 @@ export class PayPage implements AfterViewInit, OnDestroy{
     BarcodeScanner.stopScan();
     this.scanActive = false;
   }
+
+
+  async showAlert(header, message) {
+    const alert = await this.alertController.create({
+      header,
+      message,
+      buttons: ['Ok'],
+    });
+
+    await alert.present();
+  }
+
   back() {
     this.router.navigateByUrl('/tabs', {replaceUrl: true});
   }

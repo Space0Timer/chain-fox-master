@@ -1,0 +1,89 @@
+PODS:
+  - Capacitor (3.4.3):
+    - CapacitorCordova
+  - CapacitorApp (1.1.0):
+    - Capacitor
+  - CapacitorCommunityBarcodeScanner (2.1.0):
+    - Capacitor
+  - CapacitorCordova (3.4.3)
+  - CapacitorHaptics (1.1.4):
+    - Capacitor
+  - CapacitorKeyboard (1.2.1):
+    - Capacitor
+  - CapacitorNativeBiometric (0.0.1):
+    - Capacitor
+  - CapacitorNetwork (1.0.7):
+    - Capacitor
+    - ReachabilitySwift (~> 5.0)
+  - CapacitorSplashScreen (1.2.2):
+    - Capacitor
+  - CapacitorStatusBar (1.0.7):
+    - Capacitor
+  - CapacitorStorage (1.2.5):
+    - Capacitor
+  - CordovaPlugins (3.4.0):
+    - CapacitorCordova
+  - ReachabilitySwift (5.0.0)
+
+DEPENDENCIES:
+  - "Capacitor (from `../../node_modules/@capacitor/ios`)"
+  - "CapacitorApp (from `../../node_modules/@capacitor/app`)"
+  - "CapacitorCommunityBarcodeScanner (from `../../node_modules/@capacitor-community/barcode-scanner`)"
+  - "CapacitorCordova (from `../../node_modules/@capacitor/ios`)"
+  - "CapacitorHaptics (from `../../node_modules/@capacitor/haptics`)"
+  - "CapacitorKeyboard (from `../../node_modules/@capacitor/keyboard`)"
+  - CapacitorNativeBiometric (from `../../node_modules/capacitor-native-biometric`)
+  - "CapacitorNetwork (from `../../node_modules/@capacitor/network`)"
+  - "CapacitorSplashScreen (from `../../node_modules/@capacitor/splash-screen`)"
+  - "CapacitorStatusBar (from `../../node_modules/@capacitor/status-bar`)"
+  - "CapacitorStorage (from `../../node_modules/@capacitor/storage`)"
+  - CordovaPlugins (from `../capacitor-cordova-ios-plugins`)
+
+SPEC REPOS:
+  trunk:
+    - ReachabilitySwift
+
+EXTERNAL SOURCES:
+  Capacitor:
+    :path: "../../node_modules/@capacitor/ios"
+  CapacitorApp:
+    :path: "../../node_modules/@capacitor/app"
+  CapacitorCommunityBarcodeScanner:
+    :path: "../../node_modules/@capacitor-community/barcode-scanner"
+  CapacitorCordova:
+    :path: "../../node_modules/@capacitor/ios"
+  CapacitorHaptics:
+    :path: "../../node_modules/@capacitor/haptics"
+  CapacitorKeyboard:
+    :path: "../../node_modules/@capacitor/keyboard"
+  CapacitorNativeBiometric:
+    :path: "../../node_modules/capacitor-native-biometric"
+  CapacitorNetwork:
+    :path: "../../node_modules/@capacitor/network"
+  CapacitorSplashScreen:
+    :path: "../../node_modules/@capacitor/splash-screen"
+  CapacitorStatusBar:
+    :path: "../../node_modules/@capacitor/status-bar"
+  CapacitorStorage:
+    :path: "../../node_modules/@capacitor/storage"
+  CordovaPlugins:
+    :path: "../capacitor-cordova-ios-plugins"
+
+SPEC CHECKSUMS:
+  Capacitor: a8d7fa9fb3b50adc610247bb8d0310e83424f746
+  CapacitorApp: c927de41f3853ffcccf5944090af8b501cf7ba9b
+  CapacitorCommunityBarcodeScanner: cdc2b3604229abd95fb1ac2f036c5fc1e74c83c5
+  CapacitorCordova: 687b7d3ef4872c03aa2a2eb052d23008be9ad76b
+  CapacitorHaptics: cbf7ea645db90c005c96bedd0034aa7a447fe5cc
+  CapacitorKeyboard: a80157079045a0353ecb33eac1c94e202afc97c6
+  CapacitorNativeBiometric: 454f14f2cc471d8c3972431b997fa97f6070ad0d
+  CapacitorNetwork: 185fc56570cfd4e3d41119d3ccd2a3ab3bd07806
+  CapacitorSplashScreen: 466ab02fdfcfc0efdb6167631386289e82efe2c6
+  CapacitorStatusBar: 8248570b9e06618a13932fe7330b0831c5a50220
+  CapacitorStorage: 63255170c2f7e9f7363b3e5e015584e6d18f2969
+  CordovaPlugins: 8778ef6034fa96cbb59a950606399a253fea59fe
+  ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
+
+PODFILE CHECKSUM: 2d453ec78aa6ec6daf06853139429dd75b108617
+
+COCOAPODS: 1.11.2

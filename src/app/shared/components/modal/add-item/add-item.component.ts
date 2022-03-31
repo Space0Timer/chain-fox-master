@@ -97,9 +97,23 @@ export class AddItemComponent implements OnInit {
       name: formValue.name,
       price: formValue.price,
       category: formValue.category,
-      description: formValue.description,
+      description:  formValue.description,
       imageUrl: this.imageUrl,
+      status: 'available',
       id: pushKey
+    });
+    dataRef = doc(this._firestore, `idOwner/${(pushKey)}`);
+    await setDoc(dataRef, {
+      owner: this.uid,
+    });
+    // create categories
+    dataRef = doc(this._firestore, `stores/${(this.uid)}/categories/${(formValue.category)}`);
+    await setDoc(dataRef, {
+      name: formValue.name,
+    });
+    // add items to categories
+    await this.afs.collection(`stores/${(this.uid)}/categories/`).doc(formValue.category).update({
+      [pushKey]: 1,
     });
     dataRef = doc(this._firestore, `idOwner/${(pushKey)}`);
     await setDoc(dataRef, {

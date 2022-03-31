@@ -17,11 +17,7 @@ export class NoteComponent implements OnInit {
   ngOnInit() {}
 
   async addNote() {
-    if (this.newMsg === '') {
-      await this.product.addNote(this.product.noteId, '');
-      await this.back();
-    }
-    else if (this.newMsg !== '' && this.newMsg.length > 63) {
+    if (this.newMsg !== '' && this.newMsg.length > 63) {
       await this.showAlert('Message too long.', 'Your message must not exceed 63 characters');
       await this.back();
     }

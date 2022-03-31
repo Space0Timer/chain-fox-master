@@ -21,9 +21,8 @@ import {AngularFireModule} from '@angular/fire/compat';
 import { indexedDBLocalPersistence, initializeAuth } from 'firebase/auth';
 import {Capacitor} from '@capacitor/core';
 
-
-import {HttpClientModule} from "@angular/common/http";
-import { FileOpener } from "@ionic-native/file-opener/ngx";
+import {HttpClientModule} from '@angular/common/http';
+import { FileOpener } from '@ionic-native/file-opener/ngx';
 
 @NgModule({
   declarations: [AppComponent],

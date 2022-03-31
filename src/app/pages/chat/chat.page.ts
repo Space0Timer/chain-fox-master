@@ -22,8 +22,8 @@ export class ChatPage implements OnInit {
   constructor(private chatService: ChatService, private router: Router,
               private _firestore: Firestore, private product: ProductService) { }
 
-  ngOnInit() {
-    this.getStoreName();
+  async ngOnInit() {
+    await this.getStoreName();
     this.messages = this.chatService.getChatMessagesCafe();
   }
 

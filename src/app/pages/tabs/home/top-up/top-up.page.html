@@ -12,7 +12,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-align-items-center">
+<ion-content class="ion-align-items-center" [style.--background]="scanActive ? 'transparent' : '#ffffff'">
   <form [formGroup]="form" class="ion-margin">
     <ion-item lines="full" color="light">
       <ion-input formControlName="amount" [type]="type ? 'text' : 'text'" placeholder="Enter amount"></ion-input>
@@ -24,6 +24,11 @@
         class="error"
         *ngIf="form.get('amount').hasError('required')">
         * Please enter the amount
+      </ion-text>
+      <ion-text
+        class="error"
+        *ngIf="!form.get('amount').hasError('required') && form.get('amount').hasError('pattern')">
+        * Please enter a proper amount
       </ion-text>
     </ion-text>
 

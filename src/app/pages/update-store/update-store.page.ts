@@ -102,6 +102,7 @@ export class UpdateStorePage implements OnInit {
       category: formValue.category,
       description:  formValue.description,
       imageUrl: this.imageUrl,
+      status: 'available',
       id: pushKey
     });
     dataRef = doc(this._firestore, `idOwner/${(pushKey)}`);
@@ -116,7 +117,6 @@ export class UpdateStorePage implements OnInit {
     // add items to categories
     await this.afs.collection(`stores/${(this.uid)}/categories/`).doc(formValue.category).update({
       [pushKey]: 1,
-      name: formValue.category
     });
     dataRef = doc(this._firestore, `idOwner/${(pushKey)}`);
     await setDoc(dataRef, {
@@ -141,7 +141,8 @@ export class UpdateStorePage implements OnInit {
           image: data.imageUrl,
           price: data.price,
           id: data.id,
-          category: data.category
+          category: data.category,
+          status: data.status
         },
       );
     });
