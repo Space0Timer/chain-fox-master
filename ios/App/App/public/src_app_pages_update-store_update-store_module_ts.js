@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-button color=\"primary\" (click)=\"back()\" routerDirection=\"forward\">\n        <ion-icon name=\"chevron-back-outline\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>Update Store</ion-title>\n  </ion-toolbar>\n</ion-header>\n<ion-content>\n  <div class=\"ion-margin-horizontal\">\n    <ion-card mode=\"ios\" class=\"ion-padding\">\n      <ion-row>\n        <ion-col size=\"10\">\n          <ion-card-title style=\"font-size: 18px; padding-top: 3px\" >Add New Item</ion-card-title>\n        </ion-col>\n        <ion-col size=\"2\" class=\"ion-text-right\">\n          <ion-buttons>\n            <ion-button (click)=\"openAddItemModal()\">\n            <ion-icon name=\"add-circle-outline\"></ion-icon>\n            </ion-button>\n          </ion-buttons>\n        </ion-col>\n      </ion-row>\n    </ion-card>\n      <ion-row style=\"padding-left: 0\">\n      <ion-col size=\"10\">\n      <ion-text  color=\"primary\" style=\"font-size: 26px; font-weight: bold\">Current Items</ion-text>\n      </ion-col>\n      <ion-col size=\"2\" class=\"ion-text-right\">\n      <ion-buttons>\n      <ion-button>\n        <ion-icon slot=\"end\" name=\"refresh-circle-outline\"(click)=\"addItemToStoreInit()\">\n        </ion-icon>\n      </ion-button>\n      </ion-buttons>\n      </ion-col>\n      </ion-row>\n    <ng-container *ngFor=\"let food of foodStore\">\n      <app-update-store-component [food]=\"food\" (childEvent)=\"addItemToStoreInit()\"></app-update-store-component>\n    </ng-container>\n  </div>\n</ion-content>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-button color=\"primary\" (click)=\"back()\" routerDirection=\"forward\">\n        <ion-icon name=\"chevron-back-outline\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>Update Store</ion-title>\n  </ion-toolbar>\n</ion-header>\n<ion-content>\n  <ion-refresher slot=\"fixed\" (ionRefresh)=\"doRefresh($event)\">\n    <ion-refresher-content></ion-refresher-content>\n  </ion-refresher>\n  <div class=\"ion-margin-horizontal\">\n    <ion-card mode=\"ios\" class=\"ion-padding\">\n      <ion-row>\n        <ion-col size=\"10\">\n          <ion-card-title style=\"font-size: 18px; padding-top: 3px\" >Add New Item</ion-card-title>\n        </ion-col>\n        <ion-col size=\"2\" class=\"ion-text-right\">\n          <ion-buttons>\n            <ion-button (click)=\"openAddItemModal()\">\n            <ion-icon name=\"add-circle-outline\"></ion-icon>\n            </ion-button>\n          </ion-buttons>\n        </ion-col>\n      </ion-row>\n    </ion-card>\n      <ion-row style=\"padding-left: 0\">\n      <ion-col size=\"10\">\n      <ion-text  color=\"primary\" style=\"font-size: 26px; font-weight: bold\">Current Items</ion-text>\n      </ion-col>\n      </ion-row>\n    <ng-container *ngFor=\"let food of foodStore\">\n      <app-update-store-component [food]=\"food\" (childEvent)=\"addItemToStoreInit()\"></app-update-store-component>\n    </ng-container>\n  </div>\n</ion-content>\n");
 
 /***/ }),
 
@@ -25,7 +25,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ng-container *ngIf=\"food\">\n<ion-card mode=\"ios\" class=\"ion-padding\">\n  <ion-row>\n    <ion-col size=\"8\">\n      <ion-card-title style=\"font-size: 18px; padding-bottom: 5px\">Item Name: {{food.name}}</ion-card-title>\n      <ion-card-subtitle>Price: RM {{food.price}}</ion-card-subtitle>\n      <ion-card-subtitle>Category: {{food.category}}</ion-card-subtitle>\n    </ion-col>\n    <ion-col size=\"6\" class=\"ion-text-right\">\n      <ion-buttons>\n        <ion-button (click)=\"openEditItemModal(food.id)\">\n        <ion-icon name=\"pencil-outline\" ></ion-icon>\n      </ion-button>\n        <ion-button (click)=\"delete(food.id)\">\n          <ion-icon name=\"trash-outline\" ></ion-icon>\n        </ion-button>\n        <ion-button (click)=\"soldOut(food.id)\">\n          <ion-icon name=\"lock-closed-outline\"></ion-icon>\n        </ion-button>\n        <ion-button (click)=\"restock(food.id)\">\n          <ion-icon name=\"lock-open-outline\"></ion-icon>\n        </ion-button>\n      </ion-buttons>\n    </ion-col>\n  </ion-row>\n</ion-card>\n</ng-container>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ng-container *ngIf=\"food\">\n<ion-card mode=\"ios\" class=\"ion-padding\">\n  <ion-row>\n    <ion-col size=\"8\">\n      <ion-card-title style=\"font-size: 18px; padding-bottom: 5px\">Item Name: {{food.name}}</ion-card-title>\n      <ion-card-subtitle>Price: RM {{food.price}}</ion-card-subtitle>\n      <ion-card-subtitle>Category: {{food.category}}</ion-card-subtitle>\n    </ion-col>\n    <ion-col size=\"6\" class=\"ion-text-right\">\n      <ion-buttons>\n        <ion-button (click)=\"openEditItemModal(food.id, food.name, food.price, food.category, food.description)\">\n        <ion-icon name=\"pencil-outline\" ></ion-icon>\n      </ion-button>\n        <ion-button (click)=\"delete(food.id)\">\n          <ion-icon name=\"trash-outline\" ></ion-icon>\n        </ion-button>\n        <ion-button (click)=\"soldOut(food.id)\">\n          <ion-icon name=\"lock-closed-outline\"></ion-icon>\n        </ion-button>\n        <ion-button (click)=\"restock(food.id)\">\n          <ion-icon name=\"lock-open-outline\"></ion-icon>\n        </ion-button>\n      </ion-buttons>\n    </ion-col>\n  </ion-row>\n</ion-card>\n</ng-container>\n");
 
 /***/ }),
 
@@ -148,7 +148,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let UpdateStorePage = class UpdateStorePage {
-    constructor(firebaseUploadService, router, _firestore, ionicAuthService, afs, product, modalCtrl, routerOutlet, alertController) {
+    constructor(firebaseUploadService, router, _firestore, ionicAuthService, afs, product, modalCtrl, routerOutlet) {
         this.firebaseUploadService = firebaseUploadService;
         this.router = router;
         this._firestore = _firestore;
@@ -157,7 +157,6 @@ let UpdateStorePage = class UpdateStorePage {
         this.product = product;
         this.modalCtrl = modalCtrl;
         this.routerOutlet = routerOutlet;
-        this.alertController = alertController;
         this.foodStore = [];
         this.barStatus = false;
         this.errorMessage = '';
@@ -171,6 +170,14 @@ let UpdateStorePage = class UpdateStorePage {
     ngOnInit() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
             yield this.addItemToStoreInit();
+        });
+    }
+    doRefresh(event) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+            yield this.addItemToStoreInit();
+            setTimeout(() => {
+                event.target.complete();
+            }, 1000);
         });
     }
     uploadPhoto(event) {
@@ -242,7 +249,6 @@ let UpdateStorePage = class UpdateStorePage {
             // add items to categories
             yield this.afs.collection(`stores/${(this.uid)}/categories/`).doc(formValue.category).update({
                 [pushKey]: 1,
-                name: formValue.category
             });
             dataRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_8__.doc)(this._firestore, `idOwner/${(pushKey)}`);
             yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_8__.setDoc)(dataRef, {
@@ -299,8 +305,7 @@ UpdateStorePage.ctorParameters = () => [
     { type: _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_10__.AngularFirestore },
     { type: _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_4__.ProductService },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_11__.ModalController },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_11__.IonRouterOutlet },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_11__.AlertController }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_11__.IonRouterOutlet }
 ];
 UpdateStorePage = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_12__.Component)({
@@ -352,9 +357,13 @@ let UpdateStoreComponent = class UpdateStoreComponent {
         this.childEvent = new _angular_core__WEBPACK_IMPORTED_MODULE_5__.EventEmitter();
         this.id = this.ionicAuthService.getUid();
     }
-    openEditItemModal(id) {
+    openEditItemModal(id, name, price, category, description) {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
             this.product.editItemId = id;
+            this.product.editItemName = name;
+            this.product.editItemPrice = price;
+            this.product.editItemCategory = category;
+            this.product.editItemDescription = description;
             const modal = yield this.modalCtrl.create({
                 component: _modal_edit_item_edit_item_component__WEBPACK_IMPORTED_MODULE_3__.EditItemComponent,
                 swipeToClose: true,

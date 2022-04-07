@@ -49,19 +49,27 @@ export class TrackOrdersComponent implements OnInit {
   }
 
   async cancelOrder(id, user, userId, paid) {
-    await this.afs.collection(`users/${(userId)}/activeOrders`).doc(id).delete();
-    await this.afs.collection(`trackOrders/${(this.id)}/activeOrders`).doc(id).delete();
-    await this.afs.collection(`trackOrders/${(this.id)}/allOrders`).doc(id).update({
-      status: 'cancelled',
-    });
-    await this.iroha.payment(user, 'refund', paid);
-    await this.showAlert('This order has been cancelled. Money has been refunded to the customer.');
-    await this.router.navigateByUrl('tabs/account', {replaceUrl: true});
+    await this.iroha.payment(user, 'refund', paid).then(async r => {
+        await this.afs.collection(`users/${(userId)}/activeOrders`).doc(id).delete();
+        await this.afs.collection(`users/${(userId)}/allOrders`).doc(id).update({
+          status: 'cancelled',
+        });
+        await this.afs.collection(`trackOrders/${(this.id)}/activeOrders`).doc(id).delete();
+        await this.afs.collection(`trackOrders/${(this.id)}/allOrders`).doc(id).update({
+          status: 'cancelled',
+        });
+
+        await this.showAlert('Order cancelled.', 'This order has been cancelled. Money has been refunded to the customer.');
+        await this.router.navigateByUrl('tabs/account', {replaceUrl: true});
+      }
+    )
+      .catch( async e => await this.showAlert('Cancellation failed', e))
+
   }
 
-  async showAlert(message) {
+  async showAlert(header, message) {
     const alert = await this.alertController.create({
-      header: 'Order cancelled.',
+      header,
       message,
       buttons: ['OK'],
     });

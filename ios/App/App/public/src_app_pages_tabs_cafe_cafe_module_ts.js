@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header translucent=\"true\">\n  <ion-toolbar color=\"white\" >\n    <ion-buttons slot=\"start\">\n      <ion-button>\n        <ion-icon name=\"menu-outline\"></ion-icon>\n      </ion-button>\n      <ion-button (click) = \"qrCode()\">\n        <ion-icon name=\"qr-code\" ></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>\n      <div class=\"title\">\n        <img style=\"height: 30px\" src='assets/header/chainfoxcafe.png'>\n      </div>\n    </ion-title>\n    <ion-buttons slot=\"end\">\n      <ion-button (click)=\"chat()\">\n        <ion-icon name=\"chatbubbles-outline\"></ion-icon>\n      </ion-button>\n      <ion-button (click)=\"logOut()\">\n        <ion-icon name=\"lock-closed\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n\n<ion-content [fullscreen]=\"true\">\n  <div class=\"p-1\">\n    <ng-container *ngFor=\"let option of options\">\n      <div>\n        <app-main-option-card (click)=\"goToLunch(option.id)\" [option]=\"option\"></app-main-option-card>\n      </div>\n    </ng-container>\n  </div>\n</ion-content>\n\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header translucent=\"true\">\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-button>\n        <ion-icon name=\"menu-outline\"></ion-icon>\n      </ion-button>\n      <ion-button (click) = \"qrCode()\">\n        <ion-icon name=\"qr-code\" ></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>\n      <div class=\"title\">\n        <img style=\"height: 30px\" src='assets/header/chainfoxcafe.png'>\n      </div>\n    </ion-title>\n    <ion-buttons slot=\"end\">\n      <ion-button (click)=\"chat()\">\n        <ion-icon name=\"chatbubbles-outline\"></ion-icon>\n      </ion-button>\n      <ion-button (click)=\"logOut()\">\n        <ion-icon name=\"lock-closed\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n  <ion-toolbar class=\"ion-padding-top\">\n    <ion-searchbar animated=\"true\" debounce=\"800\" placeholder=\"Enter store name\" show-cancel-button=\"focus\" (ionChange)=\"_ionChange($event)\"></ion-searchbar>\n  </ion-toolbar>\n</ion-header>\n\n\n<ion-content [fullscreen]=\"true\">\n  <ion-refresher slot=\"fixed\" (ionRefresh)=\"doRefresh($event)\">\n    <ion-refresher-content></ion-refresher-content>\n  </ion-refresher>\n  <div class=\"p-1\">\n    <ng-container *ngFor=\"let option of searchedItem\">\n      <div>\n        <app-main-option-card (click)=\"goToLunch(option.id)\" [option]=\"option\"></app-main-option-card>\n      </div>\n    </ng-container>\n  </div>\n</ion-content>\n\n");
 
 /***/ }),
 
@@ -139,6 +139,16 @@ let CafePage = class CafePage {
     ngOnInit() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             yield this.addStoreToCafe();
+            this.searchedItem = this.options;
+        });
+    }
+    doRefresh(event) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            yield this.addStoreToCafe();
+            this.searchedItem = this.options;
+            setTimeout(() => {
+                event.target.complete();
+            }, 1000);
         });
     }
     chat() {
@@ -163,6 +173,14 @@ let CafePage = class CafePage {
                 });
             });
         });
+    }
+    _ionChange(event) {
+        const val = event.target.value;
+        this.searchedItem = this.options;
+        if (val && val.trim() !== '') {
+            this.searchedItem = this.searchedItem.filter((item) => (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1));
+        }
+        // this.search.getInputElement().then(item => console.log(item))
     }
     logOut() {
         this.ionicAuthService.logout()

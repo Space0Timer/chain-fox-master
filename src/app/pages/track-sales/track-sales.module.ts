@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { TrackSalesPageRoutingModule } from './track-sales-routing.module';
 
 import { TrackSalesPage } from './track-sales.page';
-import {StoreSalesComponent} from "../../shared/components/modal/store-sales/store-sales.component";
+import {StoreSalesComponent} from '../../shared/components/modal';
 
 @NgModule({
   imports: [

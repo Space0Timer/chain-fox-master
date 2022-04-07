@@ -9,7 +9,7 @@ import {IFavCard} from "../../shared/components/cards/fav-card/fav-card.componen
   templateUrl: './favourite.page.html',
   styleUrls: ['./favourite.page.scss'],
 })
-export class FavouritePage implements OnInit {
+export class FavouritePage {
 
   fav: IFavCard [] = [
   ];
@@ -24,8 +24,8 @@ export class FavouritePage implements OnInit {
   ) {
   }
 
-  ngOnInit() {
-    this.loadFav();
+  async ionViewWillEnter() {
+    await this.loadFav();
   }
 
   async loadFav() {

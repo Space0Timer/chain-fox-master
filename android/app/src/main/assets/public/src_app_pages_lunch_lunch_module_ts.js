@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header translucent=\"true\">\n  <ion-toolbar color=\"light\">\n    <ion-buttons slot=\"start\">\n      <ion-button color=\"primary\" (click)=\"back()\" routerDirection=\"forward\">\n        <ion-icon name=\"chevron-back-outline\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title color =\"primary\">{{this.storeName}}</ion-title>\n  <ion-buttons slot=\"end\">\n    <ion-button (click)=\"chat()\">\n      <ion-icon name=\"chatbox-ellipses-outline\"></ion-icon>\n    </ion-button>\n  </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n<ion-content>\n\n  <div class=\"grid grid-rows-1 grid-cols-1\">\n    <div class=\"row-start-1 row-span-1 col-start-1 col-span-1 p-1 mt-12 \">\n      <ng-container *ngFor=\"let food of foodOptions\" >\n        <div class=\"ion-text-left\">\n          <app-food-card (click)=\"itemDetails(food.id, food.name, food.price, food.description, food.owner, food.image, food.status)\" [food]=\"food\"></app-food-card>\n        </div>\n      </ng-container>\n    </div>\n    <div class=\"fixed w-full row-start-1 row-span-1 col-start-1 col-span-1 z-40\">\n      <ion-accordion-group>\n        <ion-accordion value=\"starter\">\n          <ion-item slot=\"header\">\n            <ion-label class=\"text-center pl-10\" color=\"primary\">\n                      {{this.category}}\n            </ion-label>\n          </ion-item>\n          <ion-list slot=\"content\" lines=\"none\">\n            <ng-container *ngFor=\"let option of drawerOptions\">\n              <ion-item class=\"h-10\" (click)=\"selectCategory(option.name)\">\n                <ion-label class=\"text-center\" color=\"primary\">\n                    <span\n                      [class.font-medium]=\"option.type === 'sectionHeader'\"\n                      [class.text-brand-gray-dark]=\"option.type === 'sectionHeader'\"\n                      [class.text-xl]=\"option.type === 'sectionHeader'\">\n                    {{ option.name }}\n                    </span>\n                </ion-label>\n              </ion-item>\n            </ng-container>\n          </ion-list>\n        </ion-accordion>\n      </ion-accordion-group>\n    </div>\n  </div>\n</ion-content>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header translucent=\"true\">\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-button color=\"primary\" (click)=\"back()\" routerDirection=\"forward\">\n        <ion-icon name=\"chevron-back-outline\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title color =\"primary\">{{this.storeName}}</ion-title>\n  <ion-buttons slot=\"end\">\n    <ion-button (click)=\"chat()\">\n      <ion-icon name=\"chatbox-ellipses-outline\"></ion-icon>\n    </ion-button>\n  </ion-buttons>\n  </ion-toolbar>\n  <ion-toolbar>\n    <ion-searchbar animated=\"true\" debounce=\"800\" placeholder=\"Enter store name\" show-cancel-button=\"focus\" (ionChange)=\"_ionChange($event)\"></ion-searchbar>\n  </ion-toolbar>\n</ion-header>\n<ion-content>\n  <div class=\"fixed w-full row-start-1 row-span-1 col-start-1 col-span-1 z-40\">\n    <ion-accordion-group>\n      <ion-accordion value=\"starter\">\n        <ion-item slot=\"header\">\n          <ion-label class=\"text-center pl-10\" color=\"primary\">\n            {{this.category}}\n          </ion-label>\n        </ion-item>\n        <ion-list slot=\"content\" lines=\"none\">\n          <ng-container *ngFor=\"let option of drawerOptions\">\n            <ion-item class=\"h-10\" (click)=\"selectCategory(option.name)\">\n              <ion-label class=\"text-center\" color=\"primary\">\n                    <span\n                      [class.font-medium]=\"option.type === 'sectionHeader'\"\n                      [class.text-brand-gray-dark]=\"option.type === 'sectionHeader'\"\n                      [class.text-xl]=\"option.type === 'sectionHeader'\">\n                    {{ option.name }}\n                    </span>\n              </ion-label>\n            </ion-item>\n          </ng-container>\n        </ion-list>\n      </ion-accordion>\n    </ion-accordion-group>\n  </div>\n  <div class=\"grid grid-rows-1 grid-cols-1\">\n    <div class=\"row-start-1 row-span-1 col-start-1 col-span-1 p-1 mt-12 \">\n      <ng-container *ngFor=\"let food of searchedItem\" >\n        <div class=\"ion-text-left\">\n          <app-food-card (click)=\"itemDetails(food.id, food.name, food.price, food.description, food.owner, food.image, food.status)\" [food]=\"food\"></app-food-card>\n        </div>\n      </ng-container>\n    </div>\n\n  </div>\n</ion-content>\n");
 
 /***/ }),
 
@@ -146,7 +146,16 @@ let LunchPage = class LunchPage {
             yield this.getStoreName();
             yield this.setCategory();
             yield this.addItemToStoreInit();
+            this.searchedItem = this.foodOptions;
         });
+    }
+    _ionChange(event) {
+        const val = event.target.value;
+        this.searchedItem = this.foodOptions;
+        if (val && val.trim() !== '') {
+            this.searchedItem = this.searchedItem.filter((item) => (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1));
+        }
+        // this.search.getInputElement().then(item => console.log(item))
     }
     back() {
         this.router.navigateByUrl('/tabs/cafe', { replaceUrl: true });
@@ -225,16 +234,6 @@ let LunchPage = class LunchPage {
             }
         });
     }
-    // search
-    _ionChange(event) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
-            const val = event.target.value;
-            if (val && val.trim() !== '') {
-                this.name = val;
-                console.log(val);
-            }
-        });
-    }
     ionViewWillEnter() {
         setTimeout(() => {
             var _a;
@@ -244,6 +243,7 @@ let LunchPage = class LunchPage {
     selectCategory(name) {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
             if (name === 'All') {
+                this.foodOptions = [];
                 this.category = 'All';
                 yield this.addItemToStoreInit();
             }
@@ -252,7 +252,7 @@ let LunchPage = class LunchPage {
                 let data;
                 const itemIdRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_4__.doc)(this._firestore, 'stores/' + this.product.store.name + '/categories/' + name);
                 yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_4__.getDoc)(itemIdRef)
-                    .then(snap => { data = snap.data(); delete data.name; });
+                    .then(snap => { data = snap.data(); console.log(data, this.product.store.name, name); delete data.name; });
                 for (const key in data) {
                     console.log(key);
                     this.foodList.push(key);

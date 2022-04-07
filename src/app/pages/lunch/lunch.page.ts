@@ -6,7 +6,7 @@ import { IFoodCard } from 'src/app/shared';
 import {collection, doc, Firestore, getDoc, getDocs, query} from '@angular/fire/firestore';
 import {AngularFirestore, DocumentData} from '@angular/fire/compat/firestore';
 import {ProductService} from '../../services/cafe/product.service';
-import {IonSearchbar} from "@ionic/angular";
+import {IonSearchbar} from '@ionic/angular';
 
 @Component({
   selector: 'app-lunch',
@@ -23,18 +23,30 @@ export class LunchPage implements OnInit {
   name = '';
   category = 'All';
   foodList = [];
-  private storeName = '';
+  storeName = '';
+  private searchedItem: any;
 
   constructor(
     private router: Router,
     private afs: AngularFirestore,
     private _firestore: Firestore,
-    private product: ProductService) {}
+    private product: ProductService) {
+  }
 
   async ngOnInit() {
     await this.getStoreName();
     await this.setCategory();
     await this.addItemToStoreInit();
+    this.searchedItem = this.foodOptions;
+  }
+
+  _ionChange(event) {
+    const val = event.target.value;
+    this.searchedItem = this.foodOptions;
+    if (val && val.trim() !== '') {
+      this.searchedItem = this.searchedItem.filter((item: any) => (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1));
+    }
+    // this.search.getInputElement().then(item => console.log(item))
   }
 
   back() {
@@ -119,14 +131,6 @@ export class LunchPage implements OnInit {
       });
     }
   }
-  // search
-  async _ionChange(event) {
-    const val = event.target.value;
-    if (val && val.trim() !== '') {
-      this.name = val;
-      console.log(val);
-    }
-  }
 
   ionViewWillEnter() {
     setTimeout(() => {
@@ -136,6 +140,7 @@ export class LunchPage implements OnInit {
 
   async selectCategory(name) {
     if (name === 'All') {
+      this.foodOptions = [];
       this.category = 'All';
       await this.addItemToStoreInit();
     }
@@ -144,7 +149,7 @@ export class LunchPage implements OnInit {
       let data: DocumentData;
       const itemIdRef = doc(this._firestore, 'stores/' + this.product.store.name + '/categories/' + name);
       await getDoc(itemIdRef)
-        .then(snap => {data = snap.data(); delete data.name;});
+        .then(snap => {data = snap.data(); console.log(data, this.product.store.name, name);delete data.name;});
       for (const key in data) {
         console.log(key);
         this.foodList.push(key);

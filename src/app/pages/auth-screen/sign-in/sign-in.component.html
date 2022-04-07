@@ -3,6 +3,7 @@
   <div class="ion-margin-vertical">
   <ion-item lines="full" color="light" >
     <ion-icon
+      *ngIf="this.authService.biometricLogin"
       name="finger-print-outline"
       slot="end"
       color="dark"

@@ -10,6 +10,14 @@
         ]
         },
       {
+          "id": "cordova-plugin-badge.Badge",
+          "file": "plugins/cordova-plugin-badge/www/badge.js",
+          "pluginId": "cordova-plugin-badge",
+        "clobbers": [
+          "cordova.plugins.notification.badge"
+        ]
+        },
+      {
           "id": "cordova-plugin-qrscanner.QRScanner",
           "file": "plugins/cordova-plugin-qrscanner/www/www.min.js",
           "pluginId": "cordova-plugin-qrscanner",
@@ -29,6 +37,7 @@
     module.exports.metadata =
     // TOP OF METADATA
     {
+      "cordova-plugin-badge": "0.8.8",
       "cordova-plugin-file-opener2": "3.0.5",
       "cordova-plugin-qrscanner": "3.0.1",
       "cordova-plugin-qrscanner-codaxy": "3.0.3"

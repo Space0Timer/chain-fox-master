@@ -9,6 +9,9 @@ import {Firestore} from '@angular/fire/firestore';
 import {StorageService} from './storage.service';
 import {AuthService} from './auth/auth.service';
 import {AngularFireAuth} from '@angular/fire/compat/auth';
+import * as _ from 'lodash';
+
+const moment = require('moment');
 
 const IROHA_ADDRESS = 'http://34.101.37.91:8081';
 
@@ -290,8 +293,8 @@ export class IrohaService {
               this.txs.push(tx);
             }
           });
-            this.txs.reverse();
         });
+          this.txs = _.orderBy(this.txs, [object => new moment(object.date)], ['desc']);
       })
       .catch(err => console.log(err));
   }

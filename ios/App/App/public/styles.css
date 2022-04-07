@@ -540,6 +540,9 @@ select{
 .grid{
   display: grid;
 }
+.hidden{
+  display: none;
+}
 .h-10{
   height: 2.5rem;
 }
@@ -606,9 +609,16 @@ select{
 .lowercase{
   text-transform: lowercase;
 }
+.italic{
+  font-style: italic;
+}
 .text-orange-400{
   --tw-text-opacity: 1;
   color: rgb(251 146 60 / var(--tw-text-opacity));
+}
+.text-white{
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 .subpixel-antialiased{
   -webkit-font-smoothing: auto;
@@ -623,6 +633,9 @@ select{
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+.filter{
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 .transition{
   transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
@@ -809,7 +822,7 @@ select{
     --ion-background-color-rgb: 18,18,18;
     --ion-text-color: #ffffff;
     --ion-text-color-rgb: 255,255,255;
-    --ion-border-color: #222222;
+    --ion-border-color: #ff7300;
     --ion-color-step-50: #1e1e1e;
     --ion-color-step-100: #2a2a2a;
     --ion-color-step-150: #363636;

@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-button color=\"primary\" (click)=\"back()\" routerDirection=\"forward\">\n        <ion-icon name=\"chevron-back-outline\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <h1 class=\"title\">My Orders</h1>\n\n  <div class=\"order-items\">\n    <ng-container *ngFor=\"let order of order\">\n      <div>\n        <app-order-card [order]=\"order\"></app-order-card>\n      </div>\n    </ng-container>\n  </div>\n</ion-content>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-button color=\"primary\" (click)=\"back()\" routerDirection=\"forward\">\n        <ion-icon name=\"chevron-back-outline\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n  <ion-toolbar>\n    <ion-searchbar animated=\"true\" debounce=\"800\" placeholder=\"Enter item name\" show-cancel-button=\"focus\" (ionChange)=\"_ionChange($event)\"></ion-searchbar>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <h1 class=\"title\">Order History</h1>\n\n  <div class=\"order-items\">\n    <ng-container *ngFor=\"let order of searchedItem\">\n      <div>\n        <app-order-card [order]=\"order\"></app-order-card>\n      </div>\n    </ng-container>\n  </div>\n</ion-content>\n");
 
 /***/ }),
 
@@ -136,10 +136,19 @@ let OrderHistoryPage = class OrderHistoryPage {
         this.owner = '';
         this.id = this.ionicAuthService.getUid();
     }
-    ngOnInit() {
+    ionViewWillEnter() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            this.order = [];
             yield this.addItemsToOrder();
         });
+    }
+    _ionChange(event) {
+        const val = event.target.value;
+        this.searchedItem = this.order;
+        if (val && val.trim() !== '') {
+            this.searchedItem = this.searchedItem.filter((item) => (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1));
+        }
+        // this.search.getInputElement().then(item => console.log(item))
     }
     addItemsToOrder() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {

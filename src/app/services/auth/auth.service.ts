@@ -15,6 +15,8 @@ import {Router} from "@angular/router";
 import {ControlContainer} from "@angular/forms";
 import {LoadingController} from "@ionic/angular";
 import {StorageService} from "../storage.service";
+import {NativeBiometric} from "capacitor-native-biometric";
+import {FCM} from "@capacitor-community/fcm";
 
 export interface AccData {
   mywallet: string;
@@ -40,7 +42,8 @@ export interface WalletDataTo {
 
 export class AuthService {
   uid = '';
-  currentUser:any;
+  currentUser: any;
+  biometricLogin = false;
   private id: string;
 
   constructor(
@@ -58,11 +61,11 @@ export class AuthService {
   async register(formValue) {
     try {
       const registeredUser = await createUserWithEmailAndPassword(this._fireAuth, formValue.email, formValue.password)
-        .then(result => {
-          this.uploadFirestore(formValue.username, formValue.email);
-          this.storage.set(formValue.username, formValue.password);
-          this.loading.dismiss();
-          this.sendVerificationMail();
+        .then(async result => {
+          await this.uploadFirestore(formValue.username, formValue.email);
+          await this.storage.set(formValue.username, formValue.password);
+          await this.loading.dismiss();
+          await this.sendVerificationMail();
         });
     } catch(e) {
       throw(e);
@@ -77,10 +80,15 @@ export class AuthService {
       });
   }
   async uploadFirestore(username, email) {
+    let token = '';
+    FCM.getToken()
+      .then((r) => token = r.token);
+    console.log(token);
     const dataRef = doc(this._firestore, `users/${this.currentUser.uid}`);
     await setDoc(dataRef, {
       username,
       email,
+      fcm: token,
       verify: false
     });
   }
@@ -159,7 +167,7 @@ export class AuthService {
       throw(e);
     }
   }
-  
+
   async resetPassword(email) {
     // eslint-disable-next-line no-underscore-dangle
     await sendPasswordResetEmail(this._fireAuth, email)
@@ -172,5 +180,17 @@ export class AuthService {
         const errorMessage = error.message;
         // ..
       });
+  }
+
+  async setBiometricLogin(email, password) {
+    try {
+      await NativeBiometric.setCredentials({
+        username: email,
+        password: password,
+        server: 'chainfox',
+      });
+    } catch (e) {
+      console.log(e);
+    }
   }
 }

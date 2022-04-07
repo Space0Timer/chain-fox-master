@@ -404,9 +404,9 @@ let ConfirmPage = class ConfirmPage {
                     });
                     // add to sales
                     const currentDate = new Date();
-                    const month = currentDate.getUTCMonth() + 1; //months from 1-12
-                    const day = currentDate.getUTCDate();
-                    const year = currentDate.getUTCFullYear();
+                    const month = currentDate.getMonth() + 1; //months from 1-12
+                    const day = currentDate.getDate();
+                    const year = currentDate.getFullYear();
                     const trackSales = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.doc)(this._firestore, `trackSales/${(this.owner)}/${(year)}/${(month)}/${(day)}/${(pushKey)}`);
                     yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.setDoc)(trackSales, {
                         itemName: dataSnap.name,

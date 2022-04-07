@@ -7,11 +7,17 @@
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar animated="true" debounce="800" placeholder="Enter customer name" show-cancel-button="focus" (ionChange)="_ionChange($event)"></ion-searchbar>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <div class="order-items">
-    <ng-container *ngFor="let trackOrder of trackOrder">
+    <ng-container *ngFor="let trackOrder of searchedItem">
       <div>
         <app-track-orders [trackOrder]="trackOrder"></app-track-orders>
       </div>

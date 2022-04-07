@@ -42,7 +42,7 @@ export class SignInComponent implements OnInit {
   initForm() {
     this.form = new FormGroup({
       email: new FormControl(null, {validators: [Validators.required]}),
-      password: new FormControl(null, {validators: [Validators.required, Validators.minLength(8)]})
+      password: new FormControl(null, {validators: [Validators.required, Validators.minLength(8)]}),
     });
   }
 
@@ -120,16 +120,6 @@ export class SignInComponent implements OnInit {
       this.form.markAllAsTouched();
       return;
     }
-    try {
-      await NativeBiometric.setCredentials({
-      username: this.form.value.email,
-      password: this.form.value.password,
-      server: 'chainfox',
-    });
-    }
-    catch(e) {
-        console.log(e);
-    }
     this.loadingController.create({
       message: 'Logging in...',
     }).then(async overlay => {
@@ -147,6 +137,7 @@ export class SignInComponent implements OnInit {
           await this.iroha.payment('admin', '', '1');
           await this.iroha.setBalance(name);
           await this.iroha.setAccDetail(this.form.value.password);
+          await this.authService.setBiometricLogin(this.form.value.email, this.form.value.password);
         }
         this.form.reset();
         this.loading.dismiss();

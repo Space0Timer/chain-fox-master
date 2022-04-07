@@ -68,7 +68,41 @@
         </div>
       </div>
     </form>
-
+    <ion-card mode="ios" class="ion-padding">
+      <ion-row>
+        <ion-col size="10">
+          <ion-card-title style="font-size: 18px; padding-top: 3px" >Order customisation</ion-card-title>
+        </ion-col>
+        <ion-col size="2" class="ion-text-right">
+          <ion-buttons>
+            <ion-button  (click)="openCustomiseOrderModal('')">
+              <ion-icon name="add-circle-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+    <ion-row style="padding-left: 0">
+      <ion-col size="10">
+        <ion-text  color="primary" style="font-size: 26px; font-weight: bold">Current Customisation</ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-item *ngFor="let customOption of this.product.customOptions">
+      <ion-card mode="ios" class="ion-padding">
+        <ion-row>
+          <ion-col size="10">
+            <ion-card-title style="font-size: 18px; padding-top: 3px" >{{customOption.name}}</ion-card-title>
+          </ion-col>
+          <ion-col size="2" class="ion-text-right">
+            <ion-buttons>
+              <ion-button (click)="openCustomiseOrderModal(customOption.name)">
+                <ion-icon name="pencil-outline"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </ion-item>
     <div>
       <form method="post" enctype="multipart/form-data">
         <div>

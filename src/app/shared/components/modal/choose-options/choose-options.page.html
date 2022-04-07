@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Customise Order</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-margin">
+    <ion-list  lines = 'none'>
+    <ion-radio-group ngModel="valueSelected">
+      <ion-item *ngFor="let entry of form" >
+        <ion-label>{{entry.name}}</ion-label>
+        <ion-radio slot = "end" [value]="entry.value"  mode = 'md'></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+    </ion-list>
+  </div>
+    <div class="ion-margin">
+  <ion-list>
+    <div class="qty-selector">
+      <p>Quantity: </p>
+      <ion-button fill="clear">-</ion-button>
+      <ion-label>1</ion-label>
+      <ion-button fill="clear">+</ion-button>
+    </div>
+  </ion-list>
+
+  </div>
+  <div class="ion-padding">
+    <ion-button
+      *ngIf="!isLoading"
+      size="large"
+      expand="block"
+      shape="round"
+      color="primary"
+      (click)="addToCart()">
+      <ion-text>Confirm</ion-text>
+    </ion-button>
+    <ion-button
+      *ngIf="isLoading"
+      size="large"
+      expand="block"
+      shape="round"
+      color="primary">
+      <ion-spinner></ion-spinner>
+    </ion-button>
+  </div>
+</ion-content>

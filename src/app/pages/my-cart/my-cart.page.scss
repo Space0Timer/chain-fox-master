@@ -17,7 +17,26 @@ ion-content {
     margin-top: 0;
     color: #434343;
 }
+.qty-selector {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f6f6f6;
+  border-radius: 5px;
+  margin-top: 10px;
 
+  ion-button {
+    --color: #565656;
+    font-size: 16px;
+    margin-left: 8px;
+    margin-right: 8px;
+  }
+
+  ion-label {
+    color: #565656 !important;
+    font-size: 16px;
+  }
+}
 .cart-items {
     ion-card {
         margin-left: 0;

@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {AlertController, AnimationController} from '@ionic/angular';
+import {AlertController, AnimationController, IonRouterOutlet, ModalController} from '@ionic/angular';
 import {Router} from '@angular/router';
 import {doc, Firestore} from "@angular/fire/firestore";
 import {ProductService} from "../../services/cafe/product.service";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
+import {StoreSalesPage} from "../store-sales/store-sales.page";
+import {ChooseOptionsPage} from "../../shared/components/modal/choose-options/choose-options.page";
 
 @Component({
   selector: 'app-item-details',
@@ -26,7 +28,9 @@ export class ItemDetailsPage implements OnInit {
     private afs: AngularFirestore,
     private _firestore: Firestore,
     private product: ProductService,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private modalController: ModalController,
+    private routerOutlet: IonRouterOutlet
   ) {
 
   }
@@ -40,10 +44,15 @@ export class ItemDetailsPage implements OnInit {
       this.cartIcon = 'Sold Out';
     }
   }
-
-  async addToCart(id, owner) {
-    await this.product.addToCart(id, owner);
-    await this.showAlert(this.product.item.name + ' (x1) is added to your cart!');
+  async openChooseOptionsModal(id, owner) {
+    this.product.itemId = id;
+    this.product.itemOwner = owner;
+    const modal = await this.modalController.create({
+      component: ChooseOptionsPage,
+      swipeToClose: true,
+      presentingElement: this.routerOutlet.nativeEl,
+    });
+    return await modal.present();
   }
 
   async addToFav(id, owner) {

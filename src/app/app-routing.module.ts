@@ -159,6 +159,22 @@ const routes: Routes = [
     path: 'verify-email-address',
     loadChildren: () => import('./pages/verify-email-address/verify-email-address.module').then( m => m.VerifyEmailAddressPageModule)
   },
+  {
+    path: 'biometric-login',
+    loadChildren: () => import('./pages/biometric-login/biometric-login.module').then( m => m.BiometricLoginPageModule)
+  },
+  {
+    path: 'change-password',
+    loadChildren: () => import('./pages/change-password/change-password.module').then( m => m.ChangePasswordPageModule)
+  },
+  {
+    path: 'customise-order',
+    loadChildren: () => import('./shared/components/modal/customise-order/customise-order.module').then(m => m.CustomiseOrderPageModule)
+  },
+  {
+    path: 'choose-options',
+    loadChildren: () => import('./shared/components/modal/choose-options/choose-options.module').then( m => m.ChooseOptionsPageModule)
+  },
 ];
 
 @NgModule({

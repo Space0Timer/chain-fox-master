@@ -582,7 +582,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic/angular */ 91346);
 /* harmony import */ var _track_sales_routing_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./track-sales-routing.module */ 68966);
 /* harmony import */ var _track_sales_page__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./track-sales.page */ 89206);
-/* harmony import */ var _shared_components_modal_store_sales_store_sales_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../shared/components/modal/store-sales/store-sales.component */ 39142);
+/* harmony import */ var _shared_components_modal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../shared/components/modal */ 57782);
 
 
 
@@ -602,9 +602,9 @@ TrackSalesPageModule = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
             _track_sales_routing_module__WEBPACK_IMPORTED_MODULE_0__.TrackSalesPageRoutingModule
         ],
         exports: [
-            _shared_components_modal_store_sales_store_sales_component__WEBPACK_IMPORTED_MODULE_2__.StoreSalesComponent
+            _shared_components_modal__WEBPACK_IMPORTED_MODULE_2__.StoreSalesComponent
         ],
-        declarations: [_track_sales_page__WEBPACK_IMPORTED_MODULE_1__.TrackSalesPage, _shared_components_modal_store_sales_store_sales_component__WEBPACK_IMPORTED_MODULE_2__.StoreSalesComponent]
+        declarations: [_track_sales_page__WEBPACK_IMPORTED_MODULE_1__.TrackSalesPage, _shared_components_modal__WEBPACK_IMPORTED_MODULE_2__.StoreSalesComponent]
     })
 ], TrackSalesPageModule);
 
@@ -680,7 +680,7 @@ let TrackSalesPage = class TrackSalesPage {
                     console.log(docs.id, ' => ', docs.data());
                     this.labels.push({
                         name: docs.data().itemName,
-                        price: docs.data().price,
+                        price: Number(docs.data().price),
                     });
                 });
                 console.log(this.labels);

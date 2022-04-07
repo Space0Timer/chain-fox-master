@@ -7,6 +7,9 @@ import {AuthService} from '../../../../services/auth/auth.service';
 import {AngularFirestore} from '@angular/fire/compat/firestore';
 import {AlertController, ModalController} from '@ionic/angular';
 import {IFoodCard} from '../../cards';
+import {CustomiseOrderPage} from '../customise-order/customise-order.page';
+import {ProductService} from "../../../../services/cafe/product.service";
+import {StorageService} from "../../../../services/storage.service";
 
 @Component({
   selector: 'app-add-item',
@@ -25,7 +28,9 @@ export class AddItemComponent implements OnInit {
   imageUrl = '';
   foodStore: IFoodCard[] = [
   ];
+  object = Object;
   private uid = this.ionicAuthService.getUid();
+
 
   constructor(private firebaseUploadService: FirebaseUploadService,
               private router: Router,
@@ -33,13 +38,31 @@ export class AddItemComponent implements OnInit {
               private ionicAuthService: AuthService,
               private afs: AngularFirestore,
               private modalController: ModalController,
-              private alertController: AlertController) {
+              private alertController: AlertController,
+              private product: ProductService,
+              private storage: StorageService) {
     this.initForm();
   }
 
   ngOnInit() {
   }
 
+  async openCustomiseOrderModal(nameInput) {
+    const name = nameInput;
+    for (const key in  this.product.customOptions) {
+      if (this.product.customOptions[key].name === name) {
+        this.product.customOption = this.product.customOptions[key].data;
+        console.log(this.product.customOption);
+        this.product.customNew = false;
+      }
+    }
+    const modal = await this.modalController.create({
+      component: CustomiseOrderPage,
+      swipeToClose: true,
+      presentingElement: await this.modalController.getTop()
+    });
+    return await modal.present();
+  }
 
   uploadPhoto(event) {
     this.barStatus = true;
@@ -97,7 +120,7 @@ export class AddItemComponent implements OnInit {
       name: formValue.name,
       price: formValue.price,
       category: formValue.category,
-      description:  formValue.description,
+      description: formValue.description,
       imageUrl: this.imageUrl,
       status: 'available',
       id: pushKey
@@ -109,7 +132,7 @@ export class AddItemComponent implements OnInit {
     // create categories
     dataRef = doc(this._firestore, `stores/${(this.uid)}/categories/${(formValue.category)}`);
     await setDoc(dataRef, {
-      name: formValue.name,
+      name: formValue.category,
     });
     // add items to categories
     await this.afs.collection(`stores/${(this.uid)}/categories/`).doc(formValue.category).update({
@@ -119,6 +142,12 @@ export class AddItemComponent implements OnInit {
     await setDoc(dataRef, {
       owner: this.uid,
     });
+    if (this.product.customOptions !== []) {
+      for (const key in this.product.customOptions) {
+        dataRef = doc(this._firestore, `stores/${(this.uid)}/items/${(pushKey)}/options/${(this.product.customOptions[key].name)}`);
+        await setDoc(dataRef, this.product.customOptions[key].data);
+      }
+    }
   }
 
   async back() {

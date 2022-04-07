@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Set Biometric Login</ion-title>
+    <ion-buttons slot="start">
+      <ion-icon (click)="back()" color="primary" slot="icon-only" name="chevron-back-outline"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class = 'ion-padding'>
+    <ion-row>
+      <ion-label style="margin-right: 30px;margin-top: 3px">
+        <h2 style="color: var(--ion-color-primary);font-size: 20px; font-weight: bold;">Biometric Login</h2>
+      </ion-label>
+      <ion-toggle mode="ios" [(ngModel)]="isToggled" (ionChange)="_ionChange($event) "></ion-toggle>
+    </ion-row>
+
+  </div>
+</ion-content>
+

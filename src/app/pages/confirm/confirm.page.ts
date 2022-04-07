@@ -258,9 +258,9 @@ export class ConfirmPage implements OnInit {
         });
         // add to sales
         const currentDate = new Date();
-        const month = currentDate.getUTCMonth() + 1; //months from 1-12
-        const day = currentDate.getUTCDate();
-        const year = currentDate.getUTCFullYear();
+        const month = currentDate.getMonth() + 1; //months from 1-12
+        const day = currentDate.getDate();
+        const year = currentDate.getFullYear();
         const trackSales = doc(this._firestore, `trackSales/${(this.owner)}/${(year)}/${(month)}/${(day)}/${(pushKey)}`);
         await setDoc(trackSales, {
           itemName: dataSnap.name,

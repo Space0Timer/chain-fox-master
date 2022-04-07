@@ -5,6 +5,7 @@
   <p style="margin-top: 5px">Item Name: {{ fav.name }}</p>
   <p>Merchant: {{ fav.owner }}</p>
   <p style="margin-bottom: 5px">Price: RM {{ fav.price }}</p>
+  <ion-icon name="trash-outline" (click) = "deleteItem()"></ion-icon>
   <ion-button expand="block" (click)="addToCart(fav.name, fav.itemId, fav.ownerId)">Add to Cart</ion-button>
 </ion-col>
   </ion-card-content>

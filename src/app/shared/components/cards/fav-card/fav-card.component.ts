@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ProductService} from "../../../../services/cafe/product.service";
 import {AlertController} from "@ionic/angular";
 
@@ -21,6 +21,7 @@ export interface IFavCard {
 
 export class FavCardComponent implements OnInit {
   @Input() fav: IFavCard;
+  @Output() childEvent: EventEmitter<any> = new EventEmitter();
   constructor(private product: ProductService,
               private alertController: AlertController) { }
 
@@ -29,6 +30,13 @@ export class FavCardComponent implements OnInit {
   async addToCart(name, id, ownerId) {
     this.product.addToCart(id, ownerId);
     await this.showAlert(name + ' (x1) is added to your cart!');
+  }
+
+  async deleteItem() {
+    await this.product.deleteItemFav(this.fav.id);
+    setTimeout(() => {
+      this.childEvent.emit();
+    }, 500);
   }
 
   async showAlert(message) {

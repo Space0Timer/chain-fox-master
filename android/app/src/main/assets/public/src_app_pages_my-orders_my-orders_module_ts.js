@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-button color=\"primary\" (click)=\"back()\" routerDirection=\"forward\">\n        <ion-icon name=\"chevron-back-outline\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>My Orders</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content [fullscreen]=\"true\">\n  <ng-container *ngIf=\"isEmpty\">\n    <app-error></app-error>\n  </ng-container>\n  <div class=\"order-items\" *ngIf=\"!isEmpty\">\n    <ng-container *ngFor=\"let order of order\">\n      <div>\n        <app-order-card [order]=\"order\"></app-order-card>\n      </div>\n    </ng-container>\n  </div>\n</ion-content>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-button color=\"primary\" (click)=\"back()\" routerDirection=\"forward\">\n        <ion-icon name=\"chevron-back-outline\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>My Orders</ion-title>\n  </ion-toolbar>\n  <ion-toolbar>\n    <ion-searchbar animated=\"true\" debounce=\"800\" placeholder=\"Enter item name\" show-cancel-button=\"focus\" (ionChange)=\"_ionChange($event)\"></ion-searchbar>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content [fullscreen]=\"true\">\n  <ng-container *ngIf=\"isEmpty\">\n    <app-error></app-error>\n  </ng-container>\n  <div class=\"order-items\" *ngIf=\"!isEmpty\">\n    <ng-container *ngFor=\"let order of searchedItem\">\n      <div>\n        <app-order-card [order]=\"order\"></app-order-card>\n      </div>\n    </ng-container>\n  </div>\n</ion-content>\n");
 
 /***/ }),
 
@@ -153,10 +153,20 @@ let MyOrdersPage = class MyOrdersPage {
         this.isEmpty = true;
         this.id = this.ionicAuthService.getUid();
     }
-    ngOnInit() {
+    ionViewWillEnter() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            this.order = [];
             yield this.addItemsToOrder();
+            this.searchedItem = this.order;
         });
+    }
+    _ionChange(event) {
+        const val = event.target.value;
+        this.searchedItem = this.order;
+        if (val && val.trim() !== '') {
+            this.searchedItem = this.searchedItem.filter((item) => (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1));
+        }
+        // this.search.getInputElement().then(item => console.log(item))
     }
     addItemsToOrder() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
@@ -184,6 +194,8 @@ let MyOrdersPage = class MyOrdersPage {
     }
     back() {
         this.router.navigateByUrl('tabs/account', { replaceUrl: true });
+    }
+    ngOnInit() {
     }
 };
 MyOrdersPage.ctorParameters = () => [

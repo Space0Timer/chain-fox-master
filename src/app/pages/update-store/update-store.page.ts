@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Optional} from '@angular/core';
 import {FirebaseUploadService} from '../../services/cafe/firebase-upload.service';
 import {Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
@@ -35,13 +35,19 @@ export class UpdateStorePage implements OnInit {
               private afs: AngularFirestore,
               private product: ProductService,
               private modalCtrl: ModalController,
-              private routerOutlet: IonRouterOutlet,
-              private alertController: AlertController) {
+              private routerOutlet?: IonRouterOutlet) {
     this.initForm();
   }
 
   async ngOnInit() {
     await this.addItemToStoreInit();
+  }
+
+  async doRefresh(event) {
+    await this.addItemToStoreInit();
+    setTimeout(() => {
+      event.target.complete();
+    }, 1000);
   }
 
   uploadPhoto(event) {
@@ -160,6 +166,7 @@ export class UpdateStorePage implements OnInit {
     });
     return await modal.present();
   }
+
   back() {
     this.router.navigateByUrl('tabs/account', {replaceUrl: true});
   }

@@ -130,7 +130,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let TopUpPage = class TopUpPage {
-    constructor(modalCtrl, toastCtrl, router, _firestore, ionicAuthService, iroha, alertController, loadingController, platform, afs) {
+    constructor(modalCtrl, toastCtrl, router, _firestore, ionicAuthService, iroha, alertController, loadingController, platform, afs, menu) {
         this.modalCtrl = modalCtrl;
         this.toastCtrl = toastCtrl;
         this.router = router;
@@ -141,11 +141,13 @@ let TopUpPage = class TopUpPage {
         this.loadingController = loadingController;
         this.platform = platform;
         this.afs = afs;
+        this.menu = menu;
         this.type = false;
         this.isLoading = false;
         this.uid = this.ionicAuthService.getUid();
         this.scanActive = false;
         this.initForm();
+        this.menu.enable(false);
     }
     ngOnInit() {
     }
@@ -156,6 +158,11 @@ let TopUpPage = class TopUpPage {
             yield this.platform.ready().then(() => {
                 document.body.classList.toggle('dark', false);
             });
+        });
+    }
+    ionViewDidLeave() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            yield this.menu.enable(true);
         });
     }
     ngOnDestroy() {
@@ -306,7 +313,8 @@ TopUpPage.ctorParameters = () => [
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.AlertController },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.LoadingController },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.Platform },
-    { type: _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_10__.AngularFirestore }
+    { type: _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_10__.AngularFirestore },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.MenuController }
 ];
 TopUpPage = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_11__.Component)({

@@ -9,6 +9,9 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <div class="ion-margin-horizontal">
     <ion-card mode="ios" class="ion-padding">
       <ion-row>
@@ -27,14 +30,6 @@
       <ion-row style="padding-left: 0">
       <ion-col size="10">
       <ion-text  color="primary" style="font-size: 26px; font-weight: bold">Current Items</ion-text>
-      </ion-col>
-      <ion-col size="2" class="ion-text-right">
-      <ion-buttons>
-      <ion-button>
-        <ion-icon slot="end" name="refresh-circle-outline"(click)="addItemToStoreInit()">
-        </ion-icon>
-      </ion-button>
-      </ion-buttons>
       </ion-col>
       </ion-row>
     <ng-container *ngFor="let food of foodStore">

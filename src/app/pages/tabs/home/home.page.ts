@@ -3,8 +3,10 @@ import {Router} from '@angular/router';
 import {AuthService} from 'src/app/services/auth/auth.service';
 import {doc, Firestore, getDoc} from '@angular/fire/firestore';
 import {IrohaService} from '../../../services/iroha.service';
-import {Network} from "@capacitor/network";
-import {AlertController} from "@ionic/angular";
+import {Network} from '@capacitor/network';
+import {AlertController, MenuController} from '@ionic/angular';
+import {FCM} from '@capacitor-community/fcm';
+import { PushNotifications } from '@capacitor/push-notifications';
 
 @Component({
   selector: 'app-home',
@@ -32,16 +34,42 @@ export class HomePage implements OnInit{
     private ionicAuthService: AuthService,
     private _firestore: Firestore,
     public iroha: IrohaService,
-    public alertController: AlertController
+    public alertController: AlertController,
+    private menu: MenuController,
   ) { }
 
+  async doRefresh(event) {
+    await this.getUserId();
+    setTimeout(() => {
+      event.target.complete();
+    }, 1000);
+  }
+
   async ngOnInit() {
-    Network.addListener('networkStatusChange', async status => {
-      if (status.connected === false) {
-        await this.showAlert('You must have an Internet Connection to use this app. You will be redirected to the login page.');
-        await this.router.navigate(['auth-screen']);
-      }
-    });
+    try {
+      await PushNotifications.requestPermissions();
+      await PushNotifications.register();
+      // Enable the auto initialization of the library
+      FCM.setAutoInit({ enabled: true }).then(() => alert(`Auto init enabled`));
+      FCM.getToken()
+        .then((r) => alert(`Token ${r.token}`))
+        .catch((err) => console.log(err));
+      FCM.subscribeTo({ topic: "test" })
+        .then((r) => alert(`subscribed to topic`))
+        .catch((err) => console.log(err));
+
+      Network.addListener('networkStatusChange', async status => {
+        if (status.connected === false) {
+          await this.showAlert('You must have an Internet Connection to use this app. You will be redirected to the login page.');
+          await this.router.navigate(['auth-screen']);
+        }
+      });
+    }
+    catch(e) {
+      console.log(e);
+    }
+  }
+  async ionViewDidEnter() {
     await this.getUserId();
   }
 

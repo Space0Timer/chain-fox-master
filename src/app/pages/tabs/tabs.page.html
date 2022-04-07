@@ -1,6 +1,6 @@
 <ion-tabs  #tabs (ionTabsDidChange)="setCurrentTab($event)">
 
-  <ion-fab vertical="bottom" horizontal="center" translucent="true">
+  <ion-fab [hidden]="hide" vertical="bottom" horizontal="center" translucent="true">
     <ion-fab-button routerLink="/pay" routerDirection="forward">
       <ion-icon name="scan-outline"></ion-icon>
     </ion-fab-button>

@@ -18,6 +18,7 @@ export class CafePage implements OnInit{
 
   options: IOption[] = [
   ];
+  private searchedItem: any;
 
   constructor(
     private ionicAuthService: AuthService,
@@ -28,8 +29,15 @@ export class CafePage implements OnInit{
 
   async ngOnInit() {
     await this.addStoreToCafe();
+    this.searchedItem = this.options;
   }
-
+  async doRefresh(event) {
+    await this.addStoreToCafe();
+    this.searchedItem = this.options;
+    setTimeout(() => {
+      event.target.complete();
+    }, 1000);
+  }
   chat() {
     this.router.navigate(['chat-list']);
   }
@@ -55,6 +63,14 @@ export class CafePage implements OnInit{
     });
   }
 
+  _ionChange(event) {
+    const val = event.target.value;
+    this.searchedItem = this.options;
+    if (val && val.trim() !== '') {
+      this.searchedItem = this.searchedItem.filter((item: any) => (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1));
+    }
+    // this.search.getInputElement().then(item => console.log(item))
+  }
 
   logOut() {
     this.ionicAuthService.logout()

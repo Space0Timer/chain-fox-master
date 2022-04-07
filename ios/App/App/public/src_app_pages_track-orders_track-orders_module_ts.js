@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\n  <ion-toolbar>\n    <ion-title color = \"primary\">Track Orders</ion-title>\n    <ion-buttons slot=\"start\">\n      <ion-button color=\"primary\" (click)=\"back()\" routerDirection=\"forward\">\n        <ion-icon name=\"chevron-back-outline\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div class=\"order-items\">\n    <ng-container *ngFor=\"let trackOrder of trackOrder\">\n      <div>\n        <app-track-orders [trackOrder]=\"trackOrder\"></app-track-orders>\n      </div>\n    </ng-container>\n  </div>\n</ion-content>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\n  <ion-toolbar>\n    <ion-title color = \"primary\">Track Orders</ion-title>\n    <ion-buttons slot=\"start\">\n      <ion-button color=\"primary\" (click)=\"back()\" routerDirection=\"forward\">\n        <ion-icon name=\"chevron-back-outline\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n  <ion-toolbar>\n    <ion-searchbar animated=\"true\" debounce=\"800\" placeholder=\"Enter customer name\" show-cancel-button=\"focus\" (ionChange)=\"_ionChange($event)\"></ion-searchbar>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-refresher slot=\"fixed\" (ionRefresh)=\"doRefresh($event)\">\n    <ion-refresher-content></ion-refresher-content>\n  </ion-refresher>\n  <div class=\"order-items\">\n    <ng-container *ngFor=\"let trackOrder of searchedItem\">\n      <div>\n        <app-track-orders [trackOrder]=\"trackOrder\"></app-track-orders>\n      </div>\n    </ng-container>\n  </div>\n</ion-content>\n");
 
 /***/ }),
 
@@ -136,11 +136,32 @@ let TrackOrdersPage = class TrackOrdersPage {
         this.user = '';
         this.id = this.ionicAuthService.getUid();
     }
-    ngOnInit() {
+    ionViewWillEnter() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            this.trackOrder = [];
             yield this.addItemsToOrder();
+            this.searchedItem = this.trackOrder;
             yield this.product.setOrderStatus('status');
         });
+    }
+    doRefresh(event) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            this.trackOrder = [];
+            yield this.addItemsToOrder();
+            this.searchedItem = this.trackOrder;
+            yield this.product.setOrderStatus('status');
+            setTimeout(() => {
+                event.target.complete();
+            }, 1000);
+        });
+    }
+    _ionChange(event) {
+        const val = event.target.value;
+        this.searchedItem = this.trackOrder;
+        if (val && val.trim() !== '') {
+            this.searchedItem = this.searchedItem.filter((item) => (item.user.toLowerCase().indexOf(val.toLowerCase()) > -1));
+        }
+        // this.search.getInputElement().then(item => console.log(item))
     }
     addItemsToOrder() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {

@@ -38,6 +38,10 @@ export class MyCartPage implements OnInit{
   ) { }
 
   async ngOnInit() {
+  }
+  async ionViewWillEnter() {
+    this.keys = [];
+    this.cart = [];
     await this.addItemsToCart();
   }
 
@@ -90,11 +94,12 @@ export class MyCartPage implements OnInit{
   async checkOut() {
     for (const key in this.keys) {
       const illegalTime = ['00', '01', '01', '02', '03', '04', '05', '06', '07', '22', '23'];
+      console.log(this.keys[key].id);
       if (this.product.orderTimePair.get(this.keys[key].id) === undefined) {
         await this.showAlert('Please choose a valid pickup date for your orders.');
         this.counter = 1;
       }
-      if(illegalTime.includes(this.product.orderTimePair.get(this.keys[key].id).substring(11, 13))) {
+      if(illegalTime.includes(this.product.orderTimePair.get(this.keys[key].id.substring(11, 13)))) {
         await this.showAlert('Please choose a valid pickup date for your orders.');
         this.counter = 1;
       }

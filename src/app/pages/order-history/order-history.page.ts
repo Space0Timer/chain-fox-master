@@ -12,11 +12,12 @@ import {timestamp} from "rxjs/operators";
   templateUrl: './order-history.page.html',
   styleUrls: ['./order-history.page.scss'],
 })
-export class OrderHistoryPage implements OnInit {
+export class OrderHistoryPage {
   order: IOrderCard [] = [
   ];
   owner = '';
   private id = this.ionicAuthService.getUid();
+  private searchedItem: any;
   constructor(
     private router: Router,
     private ionicAuthService: AuthService,
@@ -25,8 +26,17 @@ export class OrderHistoryPage implements OnInit {
     private _firestore: Firestore
   ) { }
 
-  async ngOnInit() {
+  async ionViewWillEnter() {
+    this.order = [];
     await this.addItemsToOrder();
+  }
+  _ionChange(event) {
+    const val = event.target.value;
+    this.searchedItem = this.order;
+    if (val && val.trim() !== '') {
+      this.searchedItem = this.searchedItem.filter((item: any) => (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1));
+    }
+    // this.search.getInputElement().then(item => console.log(item))
   }
 
   async addItemsToOrder() {

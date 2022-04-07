@@ -1,6 +1,13 @@
 import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {AlertController, LoadingController, ModalController, Platform, ToastController} from '@ionic/angular';
+import {
+  AlertController,
+  LoadingController,
+  MenuController,
+  ModalController,
+  Platform,
+  ToastController
+} from '@ionic/angular';
 import {AuthService} from 'src/app/services/auth/auth.service';
 import {doc, Firestore, getDoc} from '@angular/fire/firestore';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
@@ -37,9 +44,11 @@ export class TopUpPage implements OnInit, AfterViewInit, OnDestroy {
               private alertController: AlertController,
               private loadingController: LoadingController,
               private platform: Platform,
-              private afs: AngularFirestore)
+              private afs: AngularFirestore,
+              private menu: MenuController)
   {
     this.initForm();
+    this.menu.enable(false);
   }
 
   ngOnInit() {
@@ -50,6 +59,10 @@ export class TopUpPage implements OnInit, AfterViewInit, OnDestroy {
     await this.platform.ready().then(() => {
       document.body.classList.toggle('dark', false);
     });
+  }
+
+  async ionViewDidLeave() {
+    await this.menu.enable(true);
   }
 
   ngOnDestroy(){

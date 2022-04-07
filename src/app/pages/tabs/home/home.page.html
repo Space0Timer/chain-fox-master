@@ -1,9 +1,7 @@
 <ion-header translucent="true">
-  <ion-toolbar color="white">
+  <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button>
-        <ion-icon name="menu-outline"></ion-icon>
-      </ion-button>
+        <ion-menu-button autoHide="false"></ion-menu-button>
       <ion-button (click) = "qrCode()">
         <ion-icon name="qr-code" ></ion-icon>
       </ion-button>
@@ -25,12 +23,11 @@
 </ion-header>
 
 <ion-content>
-  <div class ="ion-padding-bottom">
-  </div>
-  <div class="titles" >
-    <ion-text  color="primary" style="font-size: 20px; font-weight: bold;">UNM Wallet</ion-text>
-  </div>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <div class="ion-padding">
+    <ion-text color="primary" style="font-size: 20px; font-weight: bold; padding-bottom: 15px">UNM Wallet</ion-text>
     <ion-card color="warning">
       <ion-card-content>
         <ion-col class="ion-no-padding">
@@ -57,10 +54,6 @@
         </ion-col>
       </ion-card-content>
     </ion-card>
-  </div>
-
-  <div class="titles">
-    <ion-text color="primary" style="font-size: 20px; font-weight: bold; ">Promotions</ion-text>
   </div>
 
   <div class="ion-padding">

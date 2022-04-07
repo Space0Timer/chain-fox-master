@@ -11,12 +11,13 @@ import {ITrackOrderCard} from "../../shared/components/cards/track-orders/track-
   templateUrl: './track-orders.page.html',
   styleUrls: ['./track-orders.page.scss'],
 })
-export class TrackOrdersPage implements OnInit {
+export class TrackOrdersPage {
 
   trackOrder: ITrackOrderCard [] = [
   ];
   user = '';
   private id = this.ionicAuthService.getUid();
+  private searchedItem: any;
   constructor(
     private router: Router,
     private ionicAuthService: AuthService,
@@ -25,9 +26,31 @@ export class TrackOrdersPage implements OnInit {
     private _firestore: Firestore
   ) { }
 
-  async ngOnInit() {
+
+  async ionViewWillEnter() {
+    this.trackOrder = [];
     await this.addItemsToOrder();
+    this.searchedItem = this.trackOrder;
     await this.product.setOrderStatus('status');
+  }
+
+  async doRefresh(event) {
+    this.trackOrder = [];
+    await this.addItemsToOrder();
+    this.searchedItem = this.trackOrder;
+    await this.product.setOrderStatus('status');
+    setTimeout(() => {
+      event.target.complete();
+    }, 1000);
+  }
+
+  _ionChange(event) {
+    const val = event.target.value;
+    this.searchedItem = this.trackOrder;
+    if (val && val.trim() !== '') {
+      this.searchedItem = this.searchedItem.filter((item: any) => (item.user.toLowerCase().indexOf(val.toLowerCase()) > -1));
+    }
+    // this.search.getInputElement().then(item => console.log(item))
   }
 
   async addItemsToOrder() {

@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header translucent=\"true\">\n  <ion-toolbar color=\"white\">\n    <ion-buttons slot=\"start\">\n      <ion-button>\n        <ion-icon name=\"menu-outline\"></ion-icon>\n      </ion-button>\n      <ion-button (click) = \"qrCode()\">\n        <ion-icon name=\"qr-code\" ></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>\n      <div class=\"title\">\n        <img style=\"height: 30px\" src='assets/header/chainfoxhome.png'>\n      </div>\n    </ion-title>\n    <ion-buttons slot=\"end\">\n      <ion-button (click)=\"chat()\">\n        <ion-icon name=\"chatbubbles-outline\"></ion-icon>\n      </ion-button>\n      <ion-button (click)=\"logOut()\">\n        <ion-icon name=\"lock-closed\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div class =\"ion-padding-bottom\">\n  </div>\n  <div class=\"titles\" >\n    <ion-text  color=\"primary\" style=\"font-size: 20px; font-weight: bold;\">UNM Wallet</ion-text>\n  </div>\n  <div class=\"ion-padding\">\n    <ion-card color=\"warning\">\n      <ion-card-content>\n        <ion-col class=\"ion-no-padding\">\n          <ion-note class=\"no\" color=\"black\">Hello, {{this.iroha.wallet.name}}!</ion-note>\n          <ion-chip color=\"warning\" style=\"margin-left:35px \" class=\"ion-no-padding\">\n            <ion-button shape=\"round\" size=\"small\" routerLink=\"/list\" routerDirection=\"forward\">\n              <ion-text>History</ion-text>\n              <ion-icon name=\"archive-outline\" slot=\"start\"></ion-icon>\n            </ion-button>\n          </ion-chip>\n          <ion-chip>\n            <ion-label color=\"light\">\n              Balance: RM {{this.iroha.wallet.balance}}\n            </ion-label>\n          </ion-chip>\n        </ion-col>\n        <ion-col class=\"ion-no-padding\">\n          <ion-chip color=\"warning\" style=\"margin-left:30px \" class=\"ion-no-padding\">\n          <ion-button shape=\"round\" size=\"small\" routerLink=\"/top-up\" routerDirection=\"forward\">\n            <ion-text>Top Up</ion-text>\n            <ion-icon name=\"add-circle-outline\" slot=\"start\"></ion-icon>\n          </ion-button>\n          </ion-chip>\n        </ion-col>\n      </ion-card-content>\n    </ion-card>\n  </div>\n\n  <div class=\"titles\">\n    <ion-text color=\"primary\" style=\"font-size: 20px; font-weight: bold; \">Promotions</ion-text>\n  </div>\n\n  <div class=\"ion-padding\">\n    <ion-col size=\"4\">\n      <ion-slides pager=“true” autoplay=“2000” loop=“true”>\n        <ion-slide>\n          <img  src=\"assets/imgs/screen1.png\" alt=\"\">\n        </ion-slide>\n        <ion-slide>\n          <img src=\"assets/imgs/screen2.png\" alt=\"\" width=\"640\" height=\"360\">\n        </ion-slide>\n        <ion-slide>\n          <img src=\"assets/imgs/screen3.png\" alt=\"\">\n        </ion-slide>\n      </ion-slides>\n    </ion-col>\n  </div>\n\n</ion-content>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header translucent=\"true\">\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n        <ion-menu-button autoHide=\"false\"></ion-menu-button>\n      <ion-button (click) = \"qrCode()\">\n        <ion-icon name=\"qr-code\" ></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>\n      <div class=\"title\">\n        <img style=\"height: 30px\" src='assets/header/chainfoxhome.png'>\n      </div>\n    </ion-title>\n    <ion-buttons slot=\"end\">\n      <ion-button (click)=\"chat()\">\n        <ion-icon name=\"chatbubbles-outline\"></ion-icon>\n      </ion-button>\n      <ion-button (click)=\"logOut()\">\n        <ion-icon name=\"lock-closed\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-refresher slot=\"fixed\" (ionRefresh)=\"doRefresh($event)\">\n    <ion-refresher-content></ion-refresher-content>\n  </ion-refresher>\n  <div class=\"ion-padding\">\n    <ion-text color=\"primary\" style=\"font-size: 20px; font-weight: bold; padding-bottom: 15px\">UNM Wallet</ion-text>\n    <ion-card color=\"warning\">\n      <ion-card-content>\n        <ion-col class=\"ion-no-padding\">\n          <ion-note class=\"no\" color=\"black\">Hello, {{this.iroha.wallet.name}}!</ion-note>\n          <ion-chip color=\"warning\" style=\"margin-left:35px \" class=\"ion-no-padding\">\n            <ion-button shape=\"round\" size=\"small\" routerLink=\"/list\" routerDirection=\"forward\">\n              <ion-text>History</ion-text>\n              <ion-icon name=\"archive-outline\" slot=\"start\"></ion-icon>\n            </ion-button>\n          </ion-chip>\n          <ion-chip>\n            <ion-label color=\"light\">\n              Balance: RM {{this.iroha.wallet.balance}}\n            </ion-label>\n          </ion-chip>\n        </ion-col>\n        <ion-col class=\"ion-no-padding\">\n          <ion-chip color=\"warning\" style=\"margin-left:30px \" class=\"ion-no-padding\">\n          <ion-button shape=\"round\" size=\"small\" routerLink=\"/top-up\" routerDirection=\"forward\">\n            <ion-text>Top Up</ion-text>\n            <ion-icon name=\"add-circle-outline\" slot=\"start\"></ion-icon>\n          </ion-button>\n          </ion-chip>\n        </ion-col>\n      </ion-card-content>\n    </ion-card>\n  </div>\n\n  <div class=\"ion-padding\">\n    <ion-col size=\"4\">\n      <ion-slides pager=“true” autoplay=“2000” loop=“true”>\n        <ion-slide>\n          <img  src=\"assets/imgs/screen1.png\" alt=\"\">\n        </ion-slide>\n        <ion-slide>\n          <img src=\"assets/imgs/screen2.png\" alt=\"\" width=\"640\" height=\"360\">\n        </ion-slide>\n        <ion-slide>\n          <img src=\"assets/imgs/screen3.png\" alt=\"\">\n        </ion-slide>\n      </ion-slides>\n    </ion-col>\n  </div>\n\n</ion-content>\n");
 
 /***/ }),
 
@@ -43,6 +43,39 @@ __webpack_require__.r(__webpack_exports__);
 const Network = (0,_capacitor_core__WEBPACK_IMPORTED_MODULE_0__.registerPlugin)('Network', {
     web: () => __webpack_require__.e(/*! import() */ "node_modules_capacitor_network_dist_esm_web_js").then(__webpack_require__.bind(__webpack_require__, /*! ./web */ 28424)).then(m => new m.NetworkWeb()),
 });
+
+
+
+
+/***/ }),
+
+/***/ 226:
+/*!****************************************************************************!*\
+  !*** ./node_modules/@capacitor/push-notifications/dist/esm/definitions.js ***!
+  \****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/// <reference types="@capacitor/cli" />
+
+
+
+/***/ }),
+
+/***/ 23164:
+/*!**********************************************************************!*\
+  !*** ./node_modules/@capacitor/push-notifications/dist/esm/index.js ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PushNotifications": () => (/* binding */ PushNotifications)
+/* harmony export */ });
+/* harmony import */ var _capacitor_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @capacitor/core */ 24249);
+/* harmony import */ var _definitions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./definitions */ 226);
+
+const PushNotifications = (0,_capacitor_core__WEBPACK_IMPORTED_MODULE_0__.registerPlugin)('PushNotifications', {});
 
 
 
@@ -141,16 +174,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "HomePage": () => (/* binding */ HomePage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 48111);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! tslib */ 48111);
 /* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_home_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./home.page.html */ 94103);
 /* harmony import */ var _home_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./home.page.scss */ 48781);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core */ 14001);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ 13252);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/core */ 14001);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/router */ 13252);
 /* harmony import */ var src_app_services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/auth/auth.service */ 68927);
-/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
+/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
 /* harmony import */ var _services_iroha_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../services/iroha.service */ 49187);
 /* harmony import */ var _capacitor_network__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @capacitor/network */ 62106);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic/angular */ 91346);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic/angular */ 91346);
+/* harmony import */ var _capacitor_community_fcm__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @capacitor-community/fcm */ 33506);
+/* harmony import */ var _capacitor_push_notifications__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @capacitor/push-notifications */ 23164);
+
+
 
 
 
@@ -162,12 +199,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let HomePage = class HomePage {
-    constructor(router, ionicAuthService, _firestore, iroha, alertController) {
+    constructor(router, ionicAuthService, _firestore, iroha, alertController, menu) {
         this.router = router;
         this.ionicAuthService = ionicAuthService;
         this._firestore = _firestore;
         this.iroha = iroha;
         this.alertController = alertController;
+        this.menu = menu;
         this.successMsg = '';
         this.errorMsg = '';
         this.name = '';
@@ -180,19 +218,46 @@ let HomePage = class HomePage {
         };
         this.uid = this.ionicAuthService.getUid();
     }
+    doRefresh(event) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(this, void 0, void 0, function* () {
+            yield this.getUserId();
+            setTimeout(() => {
+                event.target.complete();
+            }, 1000);
+        });
+    }
     ngOnInit() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
-            _capacitor_network__WEBPACK_IMPORTED_MODULE_4__.Network.addListener('networkStatusChange', (status) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
-                if (status.connected === false) {
-                    yield this.showAlert('You must have an Internet Connection to use this app. You will be redirected to the login page.');
-                    yield this.router.navigate(['auth-screen']);
-                }
-            }));
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(this, void 0, void 0, function* () {
+            try {
+                yield _capacitor_push_notifications__WEBPACK_IMPORTED_MODULE_6__.PushNotifications.requestPermissions();
+                yield _capacitor_push_notifications__WEBPACK_IMPORTED_MODULE_6__.PushNotifications.register();
+                // Enable the auto initialization of the library
+                _capacitor_community_fcm__WEBPACK_IMPORTED_MODULE_5__.FCM.setAutoInit({ enabled: true }).then(() => alert(`Auto init enabled`));
+                _capacitor_community_fcm__WEBPACK_IMPORTED_MODULE_5__.FCM.getToken()
+                    .then((r) => alert(`Token ${r.token}`))
+                    .catch((err) => console.log(err));
+                _capacitor_community_fcm__WEBPACK_IMPORTED_MODULE_5__.FCM.subscribeTo({ topic: "test" })
+                    .then((r) => alert(`subscribed to topic`))
+                    .catch((err) => console.log(err));
+                _capacitor_network__WEBPACK_IMPORTED_MODULE_4__.Network.addListener('networkStatusChange', (status) => (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(this, void 0, void 0, function* () {
+                    if (status.connected === false) {
+                        yield this.showAlert('You must have an Internet Connection to use this app. You will be redirected to the login page.');
+                        yield this.router.navigate(['auth-screen']);
+                    }
+                }));
+            }
+            catch (e) {
+                console.log(e);
+            }
+        });
+    }
+    ionViewDidEnter() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(this, void 0, void 0, function* () {
             yield this.getUserId();
         });
     }
     showAlert(message) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(this, void 0, void 0, function* () {
             const alert = yield this.alertController.create({
                 header: 'No Internet Connection',
                 message,
@@ -219,10 +284,10 @@ let HomePage = class HomePage {
         this.router.navigate(['chat-list']);
     }
     getUserId() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(this, void 0, void 0, function* () {
             // eslint-disable-next-line no-underscore-dangle
-            const docRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.doc)(this._firestore, 'users', this.uid);
-            const docSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.getDoc)(docRef);
+            const docRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_8__.doc)(this._firestore, 'users', this.uid);
+            const docSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_8__.getDoc)(docRef);
             if (docSnap.exists()) {
                 this.id = docSnap.data().username.concat('@test');
                 this.iroha.wallet.name = '';
@@ -241,14 +306,15 @@ let HomePage = class HomePage {
     }
 };
 HomePage.ctorParameters = () => [
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__.Router },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_9__.Router },
     { type: src_app_services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__.AuthService },
-    { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.Firestore },
+    { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_8__.Firestore },
     { type: _services_iroha_service__WEBPACK_IMPORTED_MODULE_3__.IrohaService },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.AlertController }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_10__.AlertController },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_10__.MenuController }
 ];
-HomePage = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.Component)({
+HomePage = (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_11__.Component)({
         selector: 'app-home',
         template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_home_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_home_page_scss__WEBPACK_IMPORTED_MODULE_1__]

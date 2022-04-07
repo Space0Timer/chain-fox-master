@@ -6,13 +6,16 @@
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar animated="true" debounce="800" placeholder="Enter item name" show-cancel-button="focus" (ionChange)="_ionChange($event)"></ion-searchbar>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <h1 class="title">My Orders</h1>
+  <h1 class="title">Order History</h1>
 
   <div class="order-items">
-    <ng-container *ngFor="let order of order">
+    <ng-container *ngFor="let order of searchedItem">
       <div>
         <app-order-card [order]="order"></app-order-card>
       </div>

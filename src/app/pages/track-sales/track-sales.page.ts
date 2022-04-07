@@ -51,7 +51,7 @@ export class TrackSalesPage implements OnInit {
         this.labels.push(
           {
             name: docs.data().itemName,
-            price: docs.data().price,
+            price: Number(docs.data().price),
           },
         );
       });

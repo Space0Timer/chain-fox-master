@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import firebase from 'firebase/compat/app';
-import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/compat/firestore';
+import {AngularFirestore, AngularFirestoreCollection, DocumentData} from '@angular/fire/compat/firestore';
 import {AuthService} from '../auth/auth.service';
 import {collection, doc, Firestore, getDoc, getDocs, query, setDoc} from '@angular/fire/firestore';
 import {BehaviorSubject} from 'rxjs';
@@ -38,6 +38,12 @@ export interface Status {
   name: string;
   status: string;
 }
+
+export interface CustomOptions {
+  name: string;
+  data: DocumentData;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -51,8 +57,7 @@ export class ProductService {
   orderTimePair = new Map<string, string>();
   orderStatus: Status [] = [];
   statusPair: Status [] = [];
-
-
+  customOptions: CustomOptions [] = [];
   public store: StoreData = {
     name: '',
   };
@@ -67,6 +72,7 @@ export class ProductService {
     status:''
   };
 
+  public customOption: DocumentData = [];
   public label = [];
   public data = [];
   public orderName = '';
@@ -88,10 +94,15 @@ export class ProductService {
   editItemPrice = '';
   editItemCategory = '';
   editItemDescription= '';
+  itemId: any;
+  itemOwner: any;
+  customNew = true;
   productsCollection: AngularFirestoreCollection;
 
   cart = new BehaviorSubject({});
   private id = this.ionicAuthService.getUid();
+
+
 
 
 
@@ -136,6 +147,13 @@ export class ProductService {
 
   deleteItem(id) {
     this.afs.collection('carts').doc(this.id).update({
+      [id]: firebase.firestore.FieldValue.delete(),
+      lastUpdate: firebase.firestore.FieldValue.serverTimestamp()
+    });
+  }
+
+  deleteItemFav(id) {
+    this.afs.collection('favourites').doc(this.id).update({
       [id]: firebase.firestore.FieldValue.delete(),
       lastUpdate: firebase.firestore.FieldValue.serverTimestamp()
     });

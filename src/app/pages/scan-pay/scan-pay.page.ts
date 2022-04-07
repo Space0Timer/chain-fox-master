@@ -98,6 +98,7 @@ export class ScanPayPage implements OnInit {
           // eslint-disable-next-line max-len
           await this.showAlert('Transfer Success', 'You have sent RM' + this.form.value.amount + ' to ' + this.iroha.result.split('@')[0] + '.');
           this.form.reset();
+          this.router.navigate(['tabs']);
         })
         .catch(e => {
           this.loading.dismiss();

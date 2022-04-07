@@ -10,6 +10,7 @@
 #endif
 #endif
 
+#import "APPBadge.h"
 #import "FileOpener2.h"
 
 FOUNDATION_EXPORT double CordovaPluginsVersionNumber;

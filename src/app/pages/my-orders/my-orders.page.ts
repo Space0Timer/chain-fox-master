@@ -11,12 +11,13 @@ import {format, parseISO} from 'date-fns';
   templateUrl: './my-orders.page.html',
   styleUrls: ['./my-orders.page.scss'],
 })
-export class MyOrdersPage implements OnInit {
+export class MyOrdersPage implements OnInit{
   order: IOrderCard [] = [
   ];
   owner = '';
   isEmpty = true;
   private id = this.ionicAuthService.getUid();
+  private searchedItem: any;
   constructor(
     private router: Router,
     private ionicAuthService: AuthService,
@@ -25,8 +26,19 @@ export class MyOrdersPage implements OnInit {
     private _firestore: Firestore
   ) { }
 
-  async ngOnInit() {
+  async ionViewWillEnter() {
+    this.order = [];
     await this.addItemsToOrder();
+    this.searchedItem = this.order;
+  }
+
+  _ionChange(event) {
+    const val = event.target.value;
+    this.searchedItem = this.order;
+    if (val && val.trim() !== '') {
+      this.searchedItem = this.searchedItem.filter((item: any) => (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1));
+    }
+    // this.search.getInputElement().then(item => console.log(item))
   }
 
   async addItemsToOrder() {
@@ -58,5 +70,8 @@ export class MyOrdersPage implements OnInit {
 
   back() {
     this.router.navigateByUrl('tabs/account', {replaceUrl: true});
+  }
+
+  ngOnInit(): void {
   }
 }
