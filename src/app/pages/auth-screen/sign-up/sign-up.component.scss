@@ -1,6 +1,13 @@
-ion-input, ion-text {
+ion-input {
     font-size: 0.9rem;
 }
+
+ion-text {
+  font-size: 18px;
+  color: white;
+}
+
+
 .error {
     font-size: 0.7rem !important;
 }

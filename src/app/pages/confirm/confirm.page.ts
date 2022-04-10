@@ -8,7 +8,7 @@ import {AuthService} from '../../services/auth/auth.service';
 import {AngularFirestore, DocumentData} from '@angular/fire/compat/firestore';
 import {ProductService} from '../../services/cafe/product.service';
 import firebase from 'firebase/compat/app';
-import {AlertController, IonRouterOutlet, LoadingController, ModalController} from "@ionic/angular";
+import {AlertController, IonRouterOutlet, LoadingController, MenuController, ModalController} from "@ionic/angular";
 import {AvailableResult, BiometryType, Credentials, NativeBiometric} from "capacitor-native-biometric";
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
@@ -46,7 +46,12 @@ export class ConfirmPage implements OnInit {
               private alertController: AlertController,
               private loadingController: LoadingController,
               private modalCtrl: ModalController,
-              private routerOutlet: IonRouterOutlet,) {
+              private routerOutlet: IonRouterOutlet,
+              private menu: MenuController) {
+    this.menu.enable(false);
+  }
+  async ionViewDidLeave() {
+    await this.menu.enable(true);
   }
 
   async ngOnInit() {

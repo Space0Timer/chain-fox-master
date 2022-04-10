@@ -128,7 +128,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let MyCartPage = class MyCartPage {
-    constructor(router, ionicAuthService, afs, product, _firestore, loadingController, alertController) {
+    constructor(router, ionicAuthService, afs, product, _firestore, loadingController, alertController, menu) {
         this.router = router;
         this.ionicAuthService = ionicAuthService;
         this.afs = afs;
@@ -136,11 +136,18 @@ let MyCartPage = class MyCartPage {
         this._firestore = _firestore;
         this.loadingController = loadingController;
         this.alertController = alertController;
+        this.menu = menu;
         this.cart = [];
         this.keys = [];
         this.counter = 0;
         this.total = 0;
         this.id = this.ionicAuthService.getUid();
+        this.menu.enable(false);
+    }
+    ionViewDidLeave() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            yield this.menu.enable(true);
+        });
     }
     ngOnInit() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
@@ -167,8 +174,9 @@ let MyCartPage = class MyCartPage {
             });
             for (const key in data) {
                 // get owner id from item id
-                this.keys.push({ id: key });
-                const idOwnerRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.doc)(this._firestore, `idOwner/${(key)}`);
+                const id = key.split('@')[0];
+                this.keys.push({ id: id });
+                const idOwnerRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.doc)(this._firestore, `idOwner/${(id)}`);
                 const idOwnerSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.getDoc)(idOwnerRef);
                 const idOwnerName = idOwnerSnap.data();
                 this.owner = idOwnerName.owner;
@@ -176,7 +184,7 @@ let MyCartPage = class MyCartPage {
                 const ownerSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.getDoc)(ownerRef);
                 const ownerName = ownerSnap.data();
                 // eslint-disable-next-line no-underscore-dangle
-                const dataRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.doc)(this._firestore, `stores/${(this.owner)}/items/${(key)}`);
+                const dataRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.doc)(this._firestore, `stores/${(this.owner)}/items/${(id)}`);
                 const docSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.getDoc)(dataRef);
                 const dataSnap = docSnap.data();
                 const value = data[key];
@@ -237,7 +245,8 @@ MyCartPage.ctorParameters = () => [
     { type: _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_3__.ProductService },
     { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.Firestore },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.LoadingController },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.AlertController }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.AlertController },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.MenuController }
 ];
 MyCartPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.Component)({

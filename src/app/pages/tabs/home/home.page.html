@@ -1,4 +1,4 @@
-<ion-header translucent="true">
+<ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
         <ion-menu-button autoHide="false"></ion-menu-button>
@@ -22,54 +22,51 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content [fullscreen]="true">
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <div class="ion-padding">
-    <ion-text color="primary" style="font-size: 20px; font-weight: bold; padding-bottom: 15px">UNM Wallet</ion-text>
-    <ion-card color="warning">
-      <ion-card-content>
-        <ion-col class="ion-no-padding">
-          <ion-note class="no" color="black">Hello, {{this.iroha.wallet.name}}!</ion-note>
-          <ion-chip color="warning" style="margin-left:35px " class="ion-no-padding">
-            <ion-button shape="round" size="small" routerLink="/list" routerDirection="forward">
-              <ion-text>History</ion-text>
-              <ion-icon name="archive-outline" slot="start"></ion-icon>
-            </ion-button>
-          </ion-chip>
-          <ion-chip>
-            <ion-label color="light">
-              Balance: RM {{this.iroha.wallet.balance}}
-            </ion-label>
-          </ion-chip>
-        </ion-col>
-        <ion-col class="ion-no-padding">
-          <ion-chip color="warning" style="margin-left:30px " class="ion-no-padding">
-          <ion-button shape="round" size="small" routerLink="/top-up" routerDirection="forward">
-            <ion-text>Top Up</ion-text>
-            <ion-icon name="add-circle-outline" slot="start"></ion-icon>
-          </ion-button>
-          </ion-chip>
-        </ion-col>
-      </ion-card-content>
-    </ion-card>
+  <div class="banner">
+    <img  src="assets/imgs/screen1.png" alt="">
   </div>
-
+  <div class="live-event">
+    <img src="../../assets/wallet.png" />
+    <div class="info">
+      <div class="content">
+        <ion-note color="white">Hello, {{this.iroha.wallet.name}}!</ion-note>
+        <ion-chip>
+          <ion-label color="light">
+            Balance: RM {{this.iroha.wallet.balance}}
+          </ion-label>
+        </ion-chip>
+        </div>
+      </div>
+  </div>
+  <div class="default-top-padding title">
+    <h2>Wallet Management</h2>
+  </div>
+  <ion-grid style="margin: 5px 10px 0px 10px" >
+    <ion-row class="ion-align-items-center ion-margin-top" >
+      <ion-col size="6" *ngFor="let feature of features" class="ion-text-center">
+        <ion-card color="light" (click)="getRoute(feature?.id)">
+          <ion-card-header>
+            <ion-icon name="{{feature?.icon}}"></ion-icon>
+            <ion-card-title >{{feature?.name}}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div class="default-top-padding title">
+    <h2>Promotions</h2>
+  </div>
   <div class="ion-padding">
     <ion-col size="4">
-      <ion-slides pager=“true” autoplay=“2000” loop=“true”>
-        <ion-slide>
-          <img  src="assets/imgs/screen1.png" alt="">
-        </ion-slide>
-        <ion-slide>
-          <img src="assets/imgs/screen2.png" alt="" width="640" height="360">
-        </ion-slide>
-        <ion-slide>
-          <img src="assets/imgs/screen3.png" alt="">
+      <ion-slides pager #mySlider class="slides" (ionSlidesDidLoad)="slidesDidLoad(mySlider)">
+        <ion-slide *ngFor="let number of [1,2,3]">
+          <img src="assets/imgs/screen{{number}}.png" alt="" width="640" height="360">
         </ion-slide>
       </ion-slides>
     </ion-col>
   </div>
-
 </ion-content>

@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from "@angular/router";
 import {Observable} from "rxjs";
-import { IonContent } from '@ionic/angular';
+import {IonContent, MenuController} from '@ionic/angular';
 import {ChatService, Message} from "../../services/chat.service";
 import {doc, Firestore, getDoc} from "@angular/fire/firestore";
 import {ProductService} from "../../services/cafe/product.service";
@@ -20,7 +20,13 @@ export class ChatPage implements OnInit {
   private storeName: string;
 
   constructor(private chatService: ChatService, private router: Router,
-              private _firestore: Firestore, private product: ProductService) { }
+              private _firestore: Firestore, private product: ProductService,
+              private menu: MenuController) {
+    this.menu.enable(false);
+  }
+  async ionViewDidLeave() {
+    await this.menu.enable(true);
+  }
 
   async ngOnInit() {
     await this.getStoreName();

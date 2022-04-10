@@ -5,7 +5,7 @@ import {AngularFirestore, DocumentData} from '@angular/fire/compat/firestore';
 import {doc, Firestore, getDoc, onSnapshot, query} from '@angular/fire/firestore';
 import {ICartCard} from '../../shared';
 import {ProductService} from '../../services/cafe/product.service';
-import {AlertController, LoadingController} from '@ionic/angular';
+import {AlertController, LoadingController, MenuController} from '@ionic/angular';
 
 export interface Keys {
   id: string;
@@ -34,8 +34,14 @@ export class MyCartPage implements OnInit{
     private product: ProductService,
     private _firestore: Firestore,
     private loadingController: LoadingController,
-    private alertController: AlertController
-  ) { }
+    private alertController: AlertController,
+    private menu: MenuController
+  ) {
+    this.menu.enable(false);
+  }
+  async ionViewDidLeave() {
+    await this.menu.enable(true);
+  }
 
   async ngOnInit() {
   }
@@ -58,8 +64,9 @@ export class MyCartPage implements OnInit{
         });
       for (const key in data) {
         // get owner id from item id
-        this.keys.push({id: key});
-        const idOwnerRef = doc(this._firestore, `idOwner/${(key)}`);
+        const id = key.split('@')[0];
+        this.keys.push({id: id});
+        const idOwnerRef = doc(this._firestore, `idOwner/${(id)}`);
         const idOwnerSnap = await getDoc(idOwnerRef);
         const idOwnerName = idOwnerSnap.data();
         this.owner = idOwnerName.owner;
@@ -67,7 +74,7 @@ export class MyCartPage implements OnInit{
         const ownerSnap = await getDoc(ownerRef);
         const ownerName = ownerSnap.data();
         // eslint-disable-next-line no-underscore-dangle
-        const dataRef = doc(this._firestore, `stores/${(this.owner)}/items/${(key)}`);
+        const dataRef = doc(this._firestore, `stores/${(this.owner)}/items/${(id)}`);
         const docSnap = await getDoc(dataRef);
         const dataSnap = docSnap.data();
         const value = data[key];

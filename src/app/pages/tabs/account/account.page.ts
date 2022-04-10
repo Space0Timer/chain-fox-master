@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import {Router} from '@angular/router';
 import {IrohaService} from "../../../services/iroha.service";
+import {ProductService} from "../../../services/cafe/product.service";
 
 @Component({
   selector: 'app-account',
@@ -18,11 +19,13 @@ export class AccountPage implements OnInit {
   allRestaurants: any[] = [];
   restaurants: any[] = [];
   isLoading: boolean;
+  category: any[] = [];
+
 
   constructor(
     private router: Router,
     private ionicAuthService: AuthService,
-    private iroha: IrohaService
+    private product: ProductService
   ) { }
 
   chat() {
@@ -58,6 +61,13 @@ export class AccountPage implements OnInit {
       {id: 'update-store', name: 'Update Store', icon: 'construct-outline'},
       {id: 'track-sales', name: 'Track Sales', icon: 'cash-outline'},
       {id: 'track-orders', name: 'Track Orders', icon: 'file-tray-full-outline'},
+    ];
+    this.category = [
+      {id: 'my-cart', name: 'My Cart', icon: 'cart-outline'},
+      {id: 'my-orders', name: 'My Orders', icon: 'bag-handle-outline'},
+      {id: 'favourites', name: 'Favourites', icon: 'heart-outline'},
+      {id: 'order-history', name: 'Order History', icon: 'receipt-outline'},
+      {id: 'start-selling', name: 'Setup Store', icon: 'storefront-outline'},
     ];
   }
     getRoute(route) {

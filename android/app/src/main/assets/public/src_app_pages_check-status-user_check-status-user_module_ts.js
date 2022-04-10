@@ -9595,18 +9595,25 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let CheckStatusUserPage = class CheckStatusUserPage {
-    constructor(router, product, _firestore, ionicAuthService, afs, alertController) {
+    constructor(router, product, _firestore, ionicAuthService, afs, alertController, menu) {
         this.router = router;
         this.product = product;
         this._firestore = _firestore;
         this.ionicAuthService = ionicAuthService;
         this.afs = afs;
         this.alertController = alertController;
+        this.menu = menu;
         this.strokeDashOffsetValue = 100 - (this.product.percentage);
         this.progressBar = jquery__WEBPACK_IMPORTED_MODULE_4__('.js-circle25');
         this.status = '';
         this.isLoading = false;
         this.id = this.ionicAuthService.getUid();
+        this.menu.enable(false);
+    }
+    ionViewDidLeave() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            yield this.menu.enable(true);
+        });
     }
     doRefresh(event) {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
@@ -9686,7 +9693,8 @@ CheckStatusUserPage.ctorParameters = () => [
     { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.Firestore },
     { type: _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_3__.AuthService },
     { type: _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_8__.AngularFirestore },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_9__.AlertController }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_9__.AlertController },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_9__.MenuController }
 ];
 CheckStatusUserPage = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_10__.Component)({

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import {AlertController, LoadingController} from '@ionic/angular';
+import {AlertController, LoadingController, MenuController} from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { IrohaService } from 'src/app/services/iroha.service';
 import {AngularFirestore} from '@angular/fire/compat/firestore';
@@ -32,14 +32,18 @@ export class SignUpComponent implements OnInit {
     private afs: AngularFirestore,
     private _firestore: Firestore,
     private loadingController: LoadingController,
-    private afAuth: AngularFireAuth
+    private afAuth: AngularFireAuth,
+    private menu: MenuController
     ) {
     this.initForm();
     this.afAuth.onAuthStateChanged(user => {
       this.currentUser = user;
     });
+    this.menu.enable(false);
   }
-
+  async ionViewDidLeave() {
+    await this.menu.enable(true);
+  }
   ngOnInit(
   ) {}
 

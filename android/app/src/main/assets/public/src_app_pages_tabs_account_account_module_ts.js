@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header translucent=\"true\">\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-button>\n        <ion-icon name=\"menu-outline\"></ion-icon>\n      </ion-button>\n      <ion-button (click) = \"qrCode()\">\n        <ion-icon name=\"qr-code\" ></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>\n      <div class=\"title\">\n        <img style=\"height: 30px\" src='assets/header/chainfoxaccount.png'>\n      </div>\n    </ion-title>\n    <ion-buttons slot=\"end\">\n      <ion-button (click)=\"chat()\">\n        <ion-icon name=\"chatbubbles-outline\"></ion-icon>\n      </ion-button>\n      <ion-button (click)=\"logOut()\">\n        <ion-icon name=\"lock-closed\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n\n<ion-content>\n  <ion-grid class=\"ion-padding-horizontal\">\n    <ion-row class=\"ion-align-items-center ion-margin-top\">\n      <ion-col size=\"6\" *ngFor=\"let category of categories\" class=\"ion-text-center\">\n        <ion-card color=\"light\" (click)=\"getRoute(category?.id)\">\n          <ion-card-header>\n            <ion-icon name=\"{{category?.icon}}\"></ion-icon>\n            <ion-card-title >{{category?.name}}</ion-card-title>\n          </ion-card-header>\n        </ion-card>\n      </ion-col>\n    </ion-row>\n\n  </ion-grid>\n\n\n</ion-content>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header translucent=\"true\">\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button autoHide=\"false\"></ion-menu-button>\n      <ion-button (click) = \"qrCode()\">\n        <ion-icon name=\"qr-code\" ></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>\n      <div class=\"title\">\n        <img style=\"height: 30px\" src='assets/header/chainfoxaccount.png'>\n      </div>\n    </ion-title>\n    <ion-buttons slot=\"end\">\n      <ion-button (click)=\"chat()\">\n        <ion-icon name=\"chatbubbles-outline\"></ion-icon>\n      </ion-button>\n      <ion-button (click)=\"logOut()\">\n        <ion-icon name=\"lock-closed\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n\n<ion-content [fullscreen]=\"true\">\n  <ion-grid class=\"ion-padding-horizontal\">\n    <ion-row class=\"ion-align-items-center ion-margin-top\" *ngIf=\"this.product.role==='seller'\" >\n      <ion-col size=\"6\" *ngFor=\"let category of categories\" class=\"ion-text-center\">\n        <ion-card color=\"light\" (click)=\"getRoute(category?.id)\">\n          <ion-card-header>\n            <ion-icon name=\"{{category?.icon}}\"></ion-icon>\n            <ion-card-title >{{category?.name}}</ion-card-title>\n          </ion-card-header>\n        </ion-card>\n      </ion-col>\n    </ion-row>\n    <ion-row class=\"ion-align-items-center ion-margin-top\" *ngIf=\"this.product.role==='buyer'\" >\n      <ion-col size=\"6\" *ngFor=\"let category of category\" class=\"ion-text-center\">\n        <ion-card color=\"light\" (click)=\"getRoute(category?.id)\">\n          <ion-card-header>\n            <ion-icon name=\"{{category?.icon}}\"></ion-icon>\n            <ion-card-title >{{category?.name}}</ion-card-title>\n          </ion-card-header>\n        </ion-card>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n\n\n</ion-content>\n");
 
 /***/ }),
 
@@ -110,7 +110,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 14001);
 /* harmony import */ var src_app_services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/auth/auth.service */ 68927);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ 13252);
-/* harmony import */ var _services_iroha_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../services/iroha.service */ 49187);
+/* harmony import */ var _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../services/cafe/product.service */ 41575);
 
 
 
@@ -119,15 +119,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let AccountPage = class AccountPage {
-    constructor(router, ionicAuthService, iroha) {
+    constructor(router, ionicAuthService, product) {
         this.router = router;
         this.ionicAuthService = ionicAuthService;
-        this.iroha = iroha;
+        this.product = product;
         this.successMsg = '';
         this.errorMsg = '';
         this.categories = [];
         this.allRestaurants = [];
         this.restaurants = [];
+        this.category = [];
     }
     chat() {
         this.router.navigate(['chat-list']);
@@ -160,6 +161,13 @@ let AccountPage = class AccountPage {
             { id: 'track-sales', name: 'Track Sales', icon: 'cash-outline' },
             { id: 'track-orders', name: 'Track Orders', icon: 'file-tray-full-outline' },
         ];
+        this.category = [
+            { id: 'my-cart', name: 'My Cart', icon: 'cart-outline' },
+            { id: 'my-orders', name: 'My Orders', icon: 'bag-handle-outline' },
+            { id: 'favourites', name: 'Favourites', icon: 'heart-outline' },
+            { id: 'order-history', name: 'Order History', icon: 'receipt-outline' },
+            { id: 'start-selling', name: 'Setup Store', icon: 'storefront-outline' },
+        ];
     }
     getRoute(route) {
         this.router.navigate([route]);
@@ -168,7 +176,7 @@ let AccountPage = class AccountPage {
 AccountPage.ctorParameters = () => [
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__.Router },
     { type: src_app_services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__.AuthService },
-    { type: _services_iroha_service__WEBPACK_IMPORTED_MODULE_3__.IrohaService }
+    { type: _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_3__.ProductService }
 ];
 AccountPage = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.Component)({

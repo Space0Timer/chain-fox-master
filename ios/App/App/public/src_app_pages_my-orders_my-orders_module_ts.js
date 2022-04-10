@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-button color=\"primary\" (click)=\"back()\" routerDirection=\"forward\">\n        <ion-icon name=\"chevron-back-outline\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>My Orders</ion-title>\n  </ion-toolbar>\n  <ion-toolbar>\n    <ion-searchbar animated=\"true\" debounce=\"800\" placeholder=\"Enter item name\" show-cancel-button=\"focus\" (ionChange)=\"_ionChange($event)\"></ion-searchbar>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content [fullscreen]=\"true\">\n  <ng-container *ngIf=\"isEmpty\">\n    <app-error></app-error>\n  </ng-container>\n  <div class=\"order-items\" *ngIf=\"!isEmpty\">\n    <ng-container *ngFor=\"let order of searchedItem\">\n      <div>\n        <app-order-card [order]=\"order\"></app-order-card>\n      </div>\n    </ng-container>\n  </div>\n</ion-content>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-button color=\"primary\" (click)=\"back()\" routerDirection=\"forward\">\n        <ion-icon name=\"chevron-back-outline\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>My Orders</ion-title>\n  </ion-toolbar>\n  <ion-toolbar *ngIf=\"!isEmpty\">\n    <ion-searchbar animated=\"true\" debounce=\"800\" placeholder=\"Enter item name\" show-cancel-button=\"focus\" (ionChange)=\"_ionChange($event)\"></ion-searchbar>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content [fullscreen]=\"true\">\n  <ng-container *ngIf=\"isEmpty\">\n    <app-error></app-error>\n  </ng-container>\n  <div class=\"order-items\" *ngIf=\"!isEmpty\">\n    <ng-container *ngFor=\"let order of searchedItem\">\n      <div>\n        <app-order-card [order]=\"order\"></app-order-card>\n      </div>\n    </ng-container>\n  </div>\n</ion-content>\n");
 
 /***/ }),
 
@@ -25,7 +25,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<div [style.background-image]=\"'url(' + model?.background + ')'\">\n  <ion-grid [class]=\"model?.centerAlign ? 'ion-text-center' : ''\">\n    <ion-row>\n      <ion-col [offset]=\"!model?.centerAlign ? 1 : 0\">\n        <ion-label *ngIf=\"model?.title\" [color]=\"model?.titleColor ? model.titleColor : 'light'\">\n          {{model?.title}}\n        </ion-label>\n        <p class=\"subtitle\" *ngIf=\"model?.subtitle\">\n          <ion-text [color]=\"model?.color ? model.color : 'light'\">\n            {{model?.subtitle}}\n          </ion-text>\n        </p>\n        <p class=\"description\" *ngIf=\"model?.description\">\n          <ion-text [color]=\"model?.color ? model.color : 'light'\">\n            {{model?.description}}\n          </ion-text>\n        </p>\n      </ion-col>\n    </ion-row>\n\n    <ion-row *ngIf=\"model?.button\" class=\"ion-margin-top\">\n      <ion-col [offset]=\"!model?.centerAlign ? 1 : 0\">\n        <ion-button shape=\"round\" [color]=\"model?.buttonColor ? model.buttonColor : 'primary'\">\n          <ion-text\n            [class]=\"model?.centerAlign ? 'ion-margin-horizontal ion-padding-horizontal' : ''\">\n            {{model?.button}}\n          </ion-text>\n        </ion-button>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n</div>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<div [style.background-image]=\"'url(' + model?.background + ')'\">\n  <ion-grid [class]=\"model?.centerAlign ? 'ion-text-center' : ''\">\n    <ion-row>\n      <ion-col [offset]=\"!model?.centerAlign ? 1 : 0\">\n        <ion-label *ngIf=\"model?.title\" [color]=\"model?.titleColor ? model.titleColor : 'light'\">\n          {{model?.title}}\n        </ion-label>\n        <p class=\"subtitle\" *ngIf=\"model?.subtitle\">\n          <ion-text [color]=\"model?.color ? model.color : 'light'\">\n            {{model?.subtitle}}\n          </ion-text>\n        </p>\n        <p class=\"description\" *ngIf=\"model?.description\">\n          <ion-text [color]=\"model?.color ? model.color : 'light'\">\n            {{model?.description}}\n          </ion-text>\n        </p>\n      </ion-col>\n    </ion-row>\n    <ion-row *ngIf=\"model?.button\" class=\"ion-margin-top\">\n      <ion-col [offset]=\"!model?.centerAlign ? 1 : 0\">\n        <ion-button shape=\"round\" [color]=\"model?.buttonColor ? model.buttonColor : 'primary'\">\n          <ion-text\n            [class]=\"model?.centerAlign ? 'ion-margin-horizontal ion-padding-horizontal' : ''\">\n            {{model?.button}}\n          </ion-text>\n        </ion-button>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n</div>\n");
 
 /***/ }),
 
@@ -126,12 +126,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 48111);
 /* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_my_orders_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./my-orders.page.html */ 68738);
 /* harmony import */ var _my_orders_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./my-orders.page.scss */ 20759);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 14001);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core */ 14001);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ 13252);
 /* harmony import */ var _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/auth/auth.service */ 68927);
 /* harmony import */ var _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/fire/compat/firestore */ 27091);
 /* harmony import */ var _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/cafe/product.service */ 41575);
 /* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic/angular */ 91346);
+
 
 
 
@@ -142,16 +144,23 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let MyOrdersPage = class MyOrdersPage {
-    constructor(router, ionicAuthService, afs, product, _firestore) {
+    constructor(router, ionicAuthService, afs, product, _firestore, menu) {
         this.router = router;
         this.ionicAuthService = ionicAuthService;
         this.afs = afs;
         this.product = product;
         this._firestore = _firestore;
+        this.menu = menu;
         this.order = [];
         this.owner = '';
         this.isEmpty = true;
         this.id = this.ionicAuthService.getUid();
+        this.menu.enable(false);
+    }
+    ionViewDidLeave() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            yield this.menu.enable(true);
+        });
     }
     ionViewWillEnter() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
@@ -203,10 +212,11 @@ MyOrdersPage.ctorParameters = () => [
     { type: _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__.AuthService },
     { type: _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_7__.AngularFirestore },
     { type: _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_3__.ProductService },
-    { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.Firestore }
+    { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.Firestore },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.MenuController }
 ];
 MyOrdersPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.Component)({
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.Component)({
         selector: 'app-my-orders',
         template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_my_orders_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_my_orders_page_scss__WEBPACK_IMPORTED_MODULE_1__]
@@ -243,18 +253,7 @@ let ErrorComponent = class ErrorComponent {
     }
     ngOnInit() {
         this.screens = [
-            { background: 'assets/imgs/1.png', title: 'Oops!..', subtitle: 'Something wrong with your', description: "connection, Please try again.", titleColor: 'light', color: 'medium', button: 'RETRY', buttonColor: 'light' },
-            { background: 'assets/imgs/2.png', title: 'Oops!..', subtitle: 'Looks like the file that you are looking for is', description: "missing...", titleColor: 'light', color: 'medium', button: 'RETRY', buttonColor: 'light' },
-            { background: 'assets/imgs/3.png', title: 'Hmmm...', subtitle: 'Something is wrong here...', description: "We'll fix it soon!", titleColor: 'light', color: 'light', button: 'HOME', buttonColor: 'light' },
-            { background: 'assets/imgs/4.png', title: 'Error!', subtitle: 'Something went wrong,', description: "Please try again later", titleColor: 'dark', color: 'medium', centerAlign: true, button: 'RETRY', buttonColor: 'light' },
-            { background: 'assets/imgs/5.png', title: 'Camera Access', subtitle: 'Please allow access to your', description: "camera to take photos", titleColor: 'dark', color: 'medium', centerAlign: true, button: 'ALLOW', buttonColor: 'danger' },
-            { background: 'assets/imgs/6.png', title: 'Connection Failed', subtitle: 'Could not connect to the network', description: "Please check & try again.", titleColor: 'dark', color: 'medium', centerAlign: true, button: 'RETRY', buttonColor: 'success' },
-            { background: 'assets/imgs/7.png', title: 'No Results', subtitle: 'Sorry, there are no results for', description: "this search, Please try another phrase", titleColor: 'light', color: 'light', centerAlign: true, button: 'SEARCH', buttonColor: 'light' },
-            { background: 'assets/imgs/8.png', title: 'Location Access', subtitle: 'Please enable location access', description: "to use this feature", titleColor: 'dark', color: 'medium', centerAlign: true, button: 'ENABLE', buttonColor: 'danger' },
-            { background: 'assets/imgs/9.png', title: 'Dead End', subtitle: 'Oops! The page you are looking', description: "for doesn't exist...", titleColor: 'light', color: 'light', button: 'HOME', buttonColor: 'light' },
-            { background: 'assets/imgs/10.png', title: 'You\'re Offline', subtitle: 'No internet connection, please try', description: "restarting your router...", titleColor: 'dark', color: 'dark', centerAlign: true, button: 'RETRY', buttonColor: 'light' },
-            { background: 'assets/imgs/11.png', title: 'Payment Failed', subtitle: 'Your card was rejected by the vendor', description: "Please try again.", titleColor: 'dark', color: 'medium', centerAlign: true, button: 'RETRY', buttonColor: 'danger' },
-            { background: 'assets/imgs/12.png', title: 'No Connection', subtitle: 'Your internet connection was', description: "interrupted, Please retry.", titleColor: 'dark', color: 'medium', button: 'RETRY', buttonColor: 'dark' },
+            { background: 'assets/imgs/12.png', title: 'No orders available!', subtitle: 'You don\'t have any active orders', description: 'Why not order your favourite food at the online cafe?', titleColor: 'primary', color: 'medium', button: 'ORDER NOW', buttonColor: 'primary' },
         ];
         this.model = this.screens[this.index];
         this.index++;

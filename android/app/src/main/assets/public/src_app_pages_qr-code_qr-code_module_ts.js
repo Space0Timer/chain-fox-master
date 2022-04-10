@@ -2645,14 +2645,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "QrCodePage": () => (/* binding */ QrCodePage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tslib */ 48111);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 48111);
 /* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_qr_code_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./qr-code.page.html */ 17216);
 /* harmony import */ var _qr_code_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./qr-code.page.scss */ 19815);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 14001);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ 13252);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 14001);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ 13252);
 /* harmony import */ var _services_iroha_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/iroha.service */ 49187);
-/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
+/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
 /* harmony import */ var _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/auth/auth.service */ 68927);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic/angular */ 91346);
+
 
 
 
@@ -2662,13 +2664,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let QrCodePage = class QrCodePage {
-    constructor(router, iroha, _firestore, ionicAuthService) {
+    constructor(router, iroha, _firestore, ionicAuthService, menu) {
         this.router = router;
         this.iroha = iroha;
         this._firestore = _firestore;
         this.ionicAuthService = ionicAuthService;
+        this.menu = menu;
         this.uid = this.ionicAuthService.getUid();
         this.id = this.iroha.wallet.name;
+        this.menu.enable(false);
+    }
+    ionViewDidLeave() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            yield this.menu.enable(true);
+        });
     }
     ngOnInit() {
     }
@@ -2677,13 +2686,14 @@ let QrCodePage = class QrCodePage {
     }
 };
 QrCodePage.ctorParameters = () => [
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__.Router },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__.Router },
     { type: _services_iroha_service__WEBPACK_IMPORTED_MODULE_2__.IrohaService },
-    { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.Firestore },
-    { type: _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_3__.AuthService }
+    { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.Firestore },
+    { type: _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_3__.AuthService },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.MenuController }
 ];
-QrCodePage = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.Component)({
+QrCodePage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.Component)({
         selector: 'app-qr-code',
         template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_qr_code_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_qr_code_page_scss__WEBPACK_IMPORTED_MODULE_1__]

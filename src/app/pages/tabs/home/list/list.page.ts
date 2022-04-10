@@ -6,6 +6,7 @@ import {IrohaService} from '../../../../services/iroha.service';
 import {ICartCard} from '../../../../shared';
 import {Transactions} from "../../../../shared/components/cards/transactions/transactions.component";
 import {format, parseISO} from "date-fns";
+import {MenuController} from "@ionic/angular";
 
 @Component({
   selector: 'app-list',
@@ -21,13 +22,19 @@ export class ListPage implements OnInit {
     private router: Router,
     private ionicAuthService: AuthService,
     private _firestore: Firestore,
-    private iroha: IrohaService) {
+    private iroha: IrohaService,
+    private menu: MenuController) {
+    this.menu.enable(false);
     }
-
+  async ionViewDidLeave() {
+    await this.menu.enable(true);
+  }
   async ngOnInit() {
     await this.iroha.getTransactions();
     await this.getList();
   }
+
+
 
   async getList() {
     this.iroha.txs.forEach(c => {

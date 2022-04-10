@@ -573,6 +573,10 @@ select{
 .justify-self-center{
   justify-self: center;
 }
+.border-orange-400{
+  --tw-border-opacity: 1;
+  border-color: rgb(251 146 60 / var(--tw-border-opacity));
+}
 .bg-white{
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));

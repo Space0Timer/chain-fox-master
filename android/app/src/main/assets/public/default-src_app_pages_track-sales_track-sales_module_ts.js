@@ -499,9 +499,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let StoreSalesPage = class StoreSalesPage {
-    constructor(modalCtrl) {
+    constructor(modalCtrl, menu) {
         this.modalCtrl = modalCtrl;
+        this.menu = menu;
         this.childEvent = new _angular_core__WEBPACK_IMPORTED_MODULE_2__.EventEmitter();
+        this.menu.enable(false);
+    }
+    ionViewDidLeave() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
+            yield this.menu.enable(true);
+        });
     }
     ngOnInit() { }
     closeModal() {
@@ -511,7 +518,8 @@ let StoreSalesPage = class StoreSalesPage {
     }
 };
 StoreSalesPage.ctorParameters = () => [
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__.ModalController }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__.ModalController },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__.MenuController }
 ];
 StoreSalesPage.propDecorators = {
     childEvent: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__.Output }]
@@ -649,7 +657,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let TrackSalesPage = class TrackSalesPage {
-    constructor(router, ionicAuthService, afs, product, _firestore, modalCtrl, routerOutlet, alertController) {
+    constructor(router, ionicAuthService, afs, product, _firestore, modalCtrl, routerOutlet, alertController, menu) {
         this.router = router;
         this.ionicAuthService = ionicAuthService;
         this.afs = afs;
@@ -658,12 +666,19 @@ let TrackSalesPage = class TrackSalesPage {
         this.modalCtrl = modalCtrl;
         this.routerOutlet = routerOutlet;
         this.alertController = alertController;
+        this.menu = menu;
         this.labels = [];
         this.dayValue = '';
         this.monthValue = '';
         this.yearValue = '';
         this.date = 'Not selected.';
         this.id = this.ionicAuthService.getUid();
+        this.menu.enable(false);
+    }
+    ionViewDidLeave() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            yield this.menu.enable(true);
+        });
     }
     ngOnInit() {
     }
@@ -752,7 +767,8 @@ TrackSalesPage.ctorParameters = () => [
     { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.Firestore },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_11__.ModalController },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_11__.IonRouterOutlet },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_11__.AlertController }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_11__.AlertController },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_11__.MenuController }
 ];
 TrackSalesPage = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_12__.Component)({

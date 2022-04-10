@@ -9,7 +9,12 @@
         <p>Item Name: {{ cart.name }}</p>
         <p>Merchant: {{ cart.owner }}</p>
         <p>Price: RM {{ cart.price }}</p>
-
+        <ion-chip (click)="openChooseOptionsModal(cart.id, cart.quantity)" mode="md" >
+          <ion-label color="dark" *ngFor="let entry of options" class="ion-text-wrap">
+              {{entry.name}}: {{entry.val}}&nbsp;
+          </ion-label>
+          <ion-icon name="caret-down-outline"></ion-icon>
+        </ion-chip>
         <div class="qty-selector">
           <p>Quantity: </p>
           <ion-button fill="clear" [disabled]="cart.quantity===1" (click)="removeFromCart(cart.quantity)">-</ion-button>

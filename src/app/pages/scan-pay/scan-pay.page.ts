@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {IrohaService} from "../../services/iroha.service";
-import {AlertController, LoadingController} from "@ionic/angular";
+import {AlertController, LoadingController, MenuController} from "@ionic/angular";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AvailableResult, BiometryType, Credentials, NativeBiometric} from "capacitor-native-biometric";
 import {Router} from "@angular/router";
@@ -25,10 +25,15 @@ export class ScanPayPage implements OnInit {
               private loadingController: LoadingController,
               private router: Router,
               private _firestore: Firestore,
-              private afAuth: AngularFireAuth) {
+              private afAuth: AngularFireAuth,
+              private menu: MenuController) {
     this.afAuth.onAuthStateChanged(user => {
       this.currentUser = user;
     });
+    this.menu.enable(false);
+  }
+  async ionViewDidLeave() {
+    await this.menu.enable(true);
   }
 
   ngOnInit() {

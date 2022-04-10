@@ -123,7 +123,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tslib */ 48111);
 /* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_chat_list_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./chat-list.page.html */ 41814);
 /* harmony import */ var _chat_list_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chat-list.page.scss */ 15544);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/core */ 14001);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/core */ 14001);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/router */ 13252);
 /* harmony import */ var _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/fire/compat/firestore */ 27091);
 /* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
@@ -132,6 +132,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var firebase_compat_app__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! firebase/compat/app */ 50947);
 /* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! date-fns */ 26039);
 /* harmony import */ var _services_chat_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../services/chat.service */ 52160);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @ionic/angular */ 91346);
+
 
 
 
@@ -145,18 +147,26 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let ChatListPage = class ChatListPage {
-    constructor(router, ionicAuthService, afs, product, _firestore, chatService) {
+    constructor(router, ionicAuthService, afs, product, _firestore, chatService, menu) {
         this.router = router;
         this.ionicAuthService = ionicAuthService;
         this.afs = afs;
         this.product = product;
         this._firestore = _firestore;
         this.chatService = chatService;
+        this.menu = menu;
         this.chat = [];
         this.id = this.ionicAuthService.getUid();
+        this.menu.enable(false);
     }
-    ngOnInit() {
+    ionViewDidLeave() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+            yield this.menu.enable(true);
+        });
+    }
+    ionViewWillEnter() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+            this.chat = [];
             yield this.addChatToChatList();
         });
     }
@@ -178,30 +188,33 @@ let ChatListPage = class ChatListPage {
                     data = snap.data();
                 });
                 // get time
+                let username = '';
+                const dataSource = [];
                 this.subscribe = firebase_compat_app__WEBPACK_IMPORTED_MODULE_4__["default"].firestore()
                     .collection(`messages/${(this.id)}/${(key)}`)
                     .orderBy('createdAt', 'desc')
                     .onSnapshot((docSnapshot) => {
-                    const dataSource = [];
                     docSnapshot.forEach((docu) => {
-                        dataSource.push((docu.data().createdAt.toDate()));
-                        this.chat.push({
-                            name: data.username,
-                            time: (0,date_fns__WEBPACK_IMPORTED_MODULE_8__["default"])(docu.data().createdAt.toDate(), 'HH:MM'),
-                            message: docu.data().msg,
-                            date: (0,date_fns__WEBPACK_IMPORTED_MODULE_8__["default"])(docu.data().createdAt.toDate(), 'yyyy-MM-dd'),
-                            id: key
-                        });
+                        if (data.username !== username) {
+                            console.log(docu.data().createdAt.toDate());
+                            dataSource.push((docu.data().createdAt.toDate()));
+                            this.chat.push({
+                                name: data.username,
+                                time: (0,date_fns__WEBPACK_IMPORTED_MODULE_8__["default"])(docu.data().createdAt.toDate(), 'HH:mm'),
+                                message: docu.data().msg,
+                                date: (0,date_fns__WEBPACK_IMPORTED_MODULE_8__["default"])(docu.data().createdAt.toDate(), 'yyyy-MM-dd'),
+                                id: key
+                            });
+                            username = data.username;
+                        }
+                        this.chatService.getDate(dataSource[0]);
                     });
-                    this.chat.length = 1;
-                    dataSource.length = 1;
-                    this.chatService.getDate(dataSource[0]);
                 });
             }
         });
     }
     back() {
-        this.router.navigateByUrl('/tabs/home', { replaceUrl: true });
+        this.router.navigate(['tabs']);
     }
 };
 ChatListPage.ctorParameters = () => [
@@ -210,10 +223,11 @@ ChatListPage.ctorParameters = () => [
     { type: _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_10__.AngularFirestore },
     { type: _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_3__.ProductService },
     { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_7__.Firestore },
-    { type: _services_chat_service__WEBPACK_IMPORTED_MODULE_5__.ChatService }
+    { type: _services_chat_service__WEBPACK_IMPORTED_MODULE_5__.ChatService },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_11__.MenuController }
 ];
 ChatListPage = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_11__.Component)({
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_12__.Component)({
         selector: 'app-chat-list',
         template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_chat_list_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_chat_list_page_scss__WEBPACK_IMPORTED_MODULE_1__]

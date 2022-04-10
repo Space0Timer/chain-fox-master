@@ -105,13 +105,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "ScanPayPage": () => (/* binding */ ScanPayPage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 48111);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 48111);
 /* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_scan_pay_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./scan-pay.page.html */ 54930);
 /* harmony import */ var _scan_pay_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./scan-pay.page.scss */ 22979);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/core */ 14001);
 /* harmony import */ var _services_iroha_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/iroha.service */ 49187);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 91346);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ 18346);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ 18346);
 /* harmony import */ var capacitor_native_biometric__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! capacitor-native-biometric */ 41380);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ 13252);
 /* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
@@ -128,29 +128,36 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let ScanPayPage = class ScanPayPage {
-    constructor(iroha, alertController, loadingController, router, _firestore, afAuth) {
+    constructor(iroha, alertController, loadingController, router, _firestore, afAuth, menu) {
         this.iroha = iroha;
         this.alertController = alertController;
         this.loadingController = loadingController;
         this.router = router;
         this._firestore = _firestore;
         this.afAuth = afAuth;
+        this.menu = menu;
         this.type = true;
         this.afAuth.onAuthStateChanged(user => {
             this.currentUser = user;
+        });
+        this.menu.enable(false);
+    }
+    ionViewDidLeave() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            yield this.menu.enable(true);
         });
     }
     ngOnInit() {
         this.initForm();
     }
     initForm() {
-        this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_4__.FormGroup({
-            amount: new _angular_forms__WEBPACK_IMPORTED_MODULE_4__.FormControl(null, { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_4__.Validators.required, _angular_forms__WEBPACK_IMPORTED_MODULE_4__.Validators.pattern('^[0-9]*$')] }),
-            reference: new _angular_forms__WEBPACK_IMPORTED_MODULE_4__.FormControl(null, { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_4__.Validators.required] }), // added email validator also
+        this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormGroup({
+            amount: new _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormControl(null, { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.pattern('^[0-9]*$')] }),
+            reference: new _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormControl(null, { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.required] }), // added email validator also
         });
     }
     biometricAuth() {
-        capacitor_native_biometric__WEBPACK_IMPORTED_MODULE_3__.NativeBiometric.isAvailable().then((result) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+        capacitor_native_biometric__WEBPACK_IMPORTED_MODULE_3__.NativeBiometric.isAvailable().then((result) => (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             const isAvailable = result.isAvailable;
             const isFaceId = result.biometryType === capacitor_native_biometric__WEBPACK_IMPORTED_MODULE_3__.BiometryType.FACE_ID;
             if (isAvailable) {
@@ -175,25 +182,25 @@ let ScanPayPage = class ScanPayPage {
             else {
                 yield this.presentPrompt();
             }
-        }), (error) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+        }), (error) => (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             // Couldn't check availability
             yield this.presentPrompt();
         }));
     }
     onSubmit() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             if (!this.form.valid) {
                 this.form.markAllAsTouched();
                 return;
             }
             this.loadingController.create({
                 message: 'Sending coins...',
-            }).then((overlay) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            }).then((overlay) => (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
                 this.loading = overlay;
                 this.loading.present();
                 // eslint-disable-next-line no-underscore-dangle
                 yield this.pay(this.form.value.reference, this.form.value.amount)
-                    .then((d) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+                    .then((d) => (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
                     this.iroha.wallet.balance = '0';
                     yield this.iroha.setBalance(this.iroha.wallet.name + '@test');
                     this.loading.dismiss();
@@ -210,12 +217,12 @@ let ScanPayPage = class ScanPayPage {
         });
     }
     pay(message, amount) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             yield this.iroha.payment(this.iroha.result, message, amount);
         });
     }
     presentPrompt() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             const alert = yield this.alertController.create({
                 header: 'User verification',
                 inputs: [
@@ -235,10 +242,10 @@ let ScanPayPage = class ScanPayPage {
                     },
                     {
                         text: 'Confirm',
-                        handler: (data) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+                        handler: (data) => (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
                             this.loadingController.create({
                                 message: 'Verifying...',
-                            }).then((overlay) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+                            }).then((overlay) => (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
                                 this.loading = overlay;
                                 this.loading.present();
                                 yield this.iroha.getAccDetail('sec');
@@ -263,7 +270,7 @@ let ScanPayPage = class ScanPayPage {
         this.router.navigate(['tabs']);
     }
     showAlert(header, message) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             const alert = yield this.alertController.create({
                 header,
                 message,
@@ -279,9 +286,10 @@ ScanPayPage.ctorParameters = () => [
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.LoadingController },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__.Router },
     { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_8__.Firestore },
-    { type: _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_9__.AngularFireAuth }
+    { type: _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_9__.AngularFireAuth },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.MenuController }
 ];
-ScanPayPage = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
+ScanPayPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_10__.Component)({
         selector: 'app-scan-pay',
         template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_scan_pay_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],

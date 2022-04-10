@@ -148,7 +148,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let UpdateStorePage = class UpdateStorePage {
-    constructor(firebaseUploadService, router, _firestore, ionicAuthService, afs, product, modalCtrl, routerOutlet) {
+    constructor(firebaseUploadService, router, _firestore, ionicAuthService, afs, product, modalCtrl, routerOutlet, menu) {
         this.firebaseUploadService = firebaseUploadService;
         this.router = router;
         this._firestore = _firestore;
@@ -157,6 +157,7 @@ let UpdateStorePage = class UpdateStorePage {
         this.product = product;
         this.modalCtrl = modalCtrl;
         this.routerOutlet = routerOutlet;
+        this.menu = menu;
         this.foodStore = [];
         this.barStatus = false;
         this.errorMessage = '';
@@ -166,6 +167,12 @@ let UpdateStorePage = class UpdateStorePage {
         this.imageUrl = '';
         this.uid = this.ionicAuthService.getUid();
         this.initForm();
+        this.menu.enable(false);
+    }
+    ionViewDidLeave() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+            yield this.menu.enable(true);
+        });
     }
     ngOnInit() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
@@ -305,7 +312,8 @@ UpdateStorePage.ctorParameters = () => [
     { type: _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_10__.AngularFirestore },
     { type: _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_4__.ProductService },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_11__.ModalController },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_11__.IonRouterOutlet }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_11__.IonRouterOutlet },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_11__.MenuController }
 ];
 UpdateStorePage = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_12__.Component)({

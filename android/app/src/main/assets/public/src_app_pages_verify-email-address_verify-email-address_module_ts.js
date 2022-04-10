@@ -123,13 +123,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let VerifyEmailAddressPage = class VerifyEmailAddressPage {
-    constructor(router, ionicAuthService, alertController, _firestore, storage) {
+    constructor(router, ionicAuthService, alertController, _firestore, storage, menu) {
         this.router = router;
         this.ionicAuthService = ionicAuthService;
         this.alertController = alertController;
         this._firestore = _firestore;
         this.storage = storage;
+        this.menu = menu;
         this.isLoading = false;
+        this.menu.enable(false);
+    }
+    ionViewDidLeave() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            yield this.menu.enable(true);
+        });
     }
     ngOnInit() {
     }
@@ -170,7 +177,8 @@ VerifyEmailAddressPage.ctorParameters = () => [
     { type: _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__.AuthService },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.AlertController },
     { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.Firestore },
-    { type: _services_storage_service__WEBPACK_IMPORTED_MODULE_3__.StorageService }
+    { type: _services_storage_service__WEBPACK_IMPORTED_MODULE_3__.StorageService },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.MenuController }
 ];
 VerifyEmailAddressPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.Component)({

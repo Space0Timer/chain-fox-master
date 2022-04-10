@@ -110,12 +110,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 48111);
 /* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_track_orders_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./track-orders.page.html */ 1437);
 /* harmony import */ var _track_orders_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./track-orders.page.scss */ 84459);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 14001);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core */ 14001);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ 13252);
 /* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
 /* harmony import */ var _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/auth/auth.service */ 68927);
 /* harmony import */ var _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/fire/compat/firestore */ 27091);
 /* harmony import */ var _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/cafe/product.service */ 41575);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic/angular */ 91346);
+
 
 
 
@@ -126,15 +128,22 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let TrackOrdersPage = class TrackOrdersPage {
-    constructor(router, ionicAuthService, afs, product, _firestore) {
+    constructor(router, ionicAuthService, afs, product, _firestore, menu) {
         this.router = router;
         this.ionicAuthService = ionicAuthService;
         this.afs = afs;
         this.product = product;
         this._firestore = _firestore;
+        this.menu = menu;
         this.trackOrder = [];
         this.user = '';
         this.id = this.ionicAuthService.getUid();
+        this.menu.enable(false);
+    }
+    ionViewDidLeave() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            yield this.menu.enable(true);
+        });
     }
     ionViewWillEnter() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
@@ -192,10 +201,11 @@ TrackOrdersPage.ctorParameters = () => [
     { type: _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__.AuthService },
     { type: _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_7__.AngularFirestore },
     { type: _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_3__.ProductService },
-    { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.Firestore }
+    { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.Firestore },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.MenuController }
 ];
 TrackOrdersPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.Component)({
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.Component)({
         selector: 'app-track-orders-page',
         template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_track_orders_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_track_orders_page_scss__WEBPACK_IMPORTED_MODULE_1__]

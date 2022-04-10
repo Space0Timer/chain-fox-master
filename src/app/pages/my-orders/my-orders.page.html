@@ -7,7 +7,7 @@
     </ion-buttons>
     <ion-title>My Orders</ion-title>
   </ion-toolbar>
-  <ion-toolbar>
+  <ion-toolbar *ngIf="!isEmpty">
     <ion-searchbar animated="true" debounce="800" placeholder="Enter item name" show-cancel-button="focus" (ionChange)="_ionChange($event)"></ion-searchbar>
   </ion-toolbar>
 </ion-header>

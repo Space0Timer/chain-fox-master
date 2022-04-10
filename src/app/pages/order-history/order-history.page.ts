@@ -7,6 +7,7 @@ import {ProductService} from '../../services/cafe/product.service';
 import {collection, Firestore, getDocs} from '@angular/fire/firestore';
 import {format, parseISO} from 'date-fns';
 import {timestamp} from "rxjs/operators";
+import {MenuController} from "@ionic/angular";
 @Component({
   selector: 'app-my-orders',
   templateUrl: './order-history.page.html',
@@ -23,8 +24,14 @@ export class OrderHistoryPage {
     private ionicAuthService: AuthService,
     private afs: AngularFirestore,
     private product: ProductService,
-    private _firestore: Firestore
-  ) { }
+    private _firestore: Firestore,
+    private menu: MenuController
+  ) {
+    this.menu.enable(false);
+  }
+  async ionViewDidLeave() {
+    await this.menu.enable(true);
+  }
 
   async ionViewWillEnter() {
     this.order = [];

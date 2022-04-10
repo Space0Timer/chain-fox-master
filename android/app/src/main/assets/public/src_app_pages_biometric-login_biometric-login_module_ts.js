@@ -105,11 +105,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "BiometricLoginPage": () => (/* binding */ BiometricLoginPage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 48111);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 48111);
 /* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_biometric_login_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./biometric-login.page.html */ 85911);
 /* harmony import */ var _biometric_login_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./biometric-login.page.scss */ 53581);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/core */ 14001);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ 18346);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ 18346);
 /* harmony import */ var _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/auth/auth.service */ 68927);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ 13252);
 /* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
@@ -128,7 +128,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let BiometricLoginPage = class BiometricLoginPage {
-    constructor(authService, router, _firestore, ionicAuthService, iroha, loadingController, afAuth, alertController) {
+    constructor(authService, router, _firestore, ionicAuthService, iroha, loadingController, afAuth, alertController, menu) {
         this.authService = authService;
         this.router = router;
         this._firestore = _firestore;
@@ -137,24 +137,30 @@ let BiometricLoginPage = class BiometricLoginPage {
         this.loadingController = loadingController;
         this.afAuth = afAuth;
         this.alertController = alertController;
+        this.menu = menu;
         this.type = false;
         this.id = this.ionicAuthService.getUid();
         this.initForm();
         this.afAuth.onAuthStateChanged(user => {
             this.currentUser = user;
         });
+        this.menu.enable(false);
     }
-    ;
+    ionViewDidLeave() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            yield this.menu.enable(true);
+        });
+    }
     ngOnInit() {
     }
     initForm() {
-        this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_4__.FormGroup({
-            email: new _angular_forms__WEBPACK_IMPORTED_MODULE_4__.FormControl(null, { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_4__.Validators.required] }),
-            password: new _angular_forms__WEBPACK_IMPORTED_MODULE_4__.FormControl(null, { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_4__.Validators.required, _angular_forms__WEBPACK_IMPORTED_MODULE_4__.Validators.minLength(8)] })
+        this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormGroup({
+            email: new _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormControl(null, { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.required] }),
+            password: new _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormControl(null, { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.minLength(8)] })
         });
     }
     _ionChange(event) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             if (this.isToggled) {
                 yield this.presentPrompt();
             }
@@ -167,21 +173,21 @@ let BiometricLoginPage = class BiometricLoginPage {
         this.type = !this.type;
     }
     setBiometricLogin() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
-            this.authService.reAuth(this.form.value.email, this.form.value.password).then((r) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            this.authService.reAuth(this.form.value.email, this.form.value.password).then((r) => (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
                 yield this.authService.resetPassword(this.form.value.email)
-                    .then((d) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+                    .then((d) => (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
                     yield this.showAlert('Authentication Success', 'You ca.');
                 }))
-                    .catch((e) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+                    .catch((e) => (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
                     yield this.showAlert('Authentication Failed', e);
                 }));
             }))
-                .catch((e) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () { return yield this.showAlert('Authentication Failed', e); }));
+                .catch((e) => (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () { return yield this.showAlert('Authentication Failed', e); }));
         });
     }
     showAlert(header, message) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             const alert = yield this.alertController.create({
                 header,
                 message,
@@ -195,7 +201,7 @@ let BiometricLoginPage = class BiometricLoginPage {
                     },
                     {
                         text: 'Yes',
-                        handler: (data) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+                        handler: (data) => (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
                             this.authService.biometricLogin = false;
                         })
                     }
@@ -205,7 +211,7 @@ let BiometricLoginPage = class BiometricLoginPage {
         });
     }
     presentPrompt() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             const alert = yield this.alertController.create({
                 header: 'User verification',
                 inputs: [
@@ -225,7 +231,7 @@ let BiometricLoginPage = class BiometricLoginPage {
                     },
                     {
                         text: 'Confirm',
-                        handler: (data) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+                        handler: (data) => (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
                             yield this.iroha.getAccDetail('sec');
                             if (data.password === this.iroha.pw) {
                                 this.authService.biometricLogin = true;
@@ -252,9 +258,10 @@ BiometricLoginPage.ctorParameters = () => [
     { type: _services_iroha_service__WEBPACK_IMPORTED_MODULE_3__.IrohaService },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.LoadingController },
     { type: _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_9__.AngularFireAuth },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.AlertController }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.AlertController },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.MenuController }
 ];
-BiometricLoginPage = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
+BiometricLoginPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_10__.Component)({
         selector: 'app-biometric-login',
         template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_biometric_login_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],

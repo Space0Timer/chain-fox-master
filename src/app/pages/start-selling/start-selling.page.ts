@@ -5,7 +5,7 @@ import {Router} from "@angular/router";
 import {doc, Firestore, setDoc} from "@angular/fire/firestore";
 import {AuthService} from "../../services/auth/auth.service";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
-import {AlertController} from "@ionic/angular";
+import {AlertController, MenuController} from "@ionic/angular";
 
 @Component({
   selector: 'app-start-selling',
@@ -33,8 +33,13 @@ export class StartSellingPage implements OnInit {
               private router: Router,
               private _firestore: Firestore,
               private ionicAuthService: AuthService,
-              private alertController: AlertController) {
+              private alertController: AlertController,
+              private menu: MenuController) {
     this.initForm();
+    this.menu.enable(false);
+  }
+  async ionViewDidLeave() {
+    await this.menu.enable(true);
   }
 
   ngOnInit() {

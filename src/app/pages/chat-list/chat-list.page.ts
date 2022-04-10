@@ -9,12 +9,13 @@ import {ProductService} from "../../services/cafe/product.service";
 import firebase from "firebase/compat/app";
 import {format, formatISO, getDate, parseISO, toDate} from "date-fns";
 import {ChatService} from "../../services/chat.service";
+import {MenuController} from "@ionic/angular";
 @Component({
   selector: 'app-chat-list',
   templateUrl: './chat-list.page.html',
   styleUrls: ['./chat-list.page.scss'],
 })
-export class ChatListPage implements OnInit {
+export class ChatListPage{
   chat: Chat [] = [
   ];
   private id = this.ionicAuthService.getUid();
@@ -24,9 +25,16 @@ export class ChatListPage implements OnInit {
               private afs: AngularFirestore,
               private product: ProductService,
               private _firestore: Firestore,
-              private chatService: ChatService) { }
+              private chatService: ChatService,
+              private menu: MenuController) {
+    this.menu.enable(false);
+  }
+  async ionViewDidLeave() {
+    await this.menu.enable(true);
+  }
 
-  async ngOnInit() {
+  async ionViewWillEnter() {
+    this.chat = [];
     await this.addChatToChatList();
   }
 
@@ -47,31 +55,34 @@ export class ChatListPage implements OnInit {
           data = snap.data();
         });
       // get time
+      let username = '';
+      const dataSource = [];
       this.subscribe = firebase
         .firestore()
         .collection(`messages/${(this.id)}/${(key)}`)
         .orderBy('createdAt', 'desc')
         .onSnapshot((docSnapshot) => {
-          const dataSource = [];
           docSnapshot.forEach((docu) => {
-            dataSource.push((docu.data().createdAt.toDate()));
-            this.chat.push({
-              name: data.username,
-              time: format(docu.data().createdAt.toDate(), 'HH:MM'),
-              message: docu.data().msg,
-              date: format(docu.data().createdAt.toDate(), 'yyyy-MM-dd'),
-              id: key
-            });
+            if (data.username !== username) {
+              console.log(docu.data().createdAt.toDate());
+              dataSource.push((docu.data().createdAt.toDate()));
+              this.chat.push({
+                name: data.username,
+                time: format(docu.data().createdAt.toDate(), 'HH:mm'),
+                message: docu.data().msg,
+                date: format(docu.data().createdAt.toDate(), 'yyyy-MM-dd'),
+                id: key
+              });
+              username = data.username;
+            }
+            this.chatService.getDate(dataSource[0]);
           });
-          this.chat.length = 1;
-          dataSource.length = 1;
-          this.chatService.getDate(dataSource[0]);
         });
     }
   }
 
   back() {
-    this.router.navigateByUrl('/tabs/home', {replaceUrl: true});
+    this.router.navigate(['tabs']);
   }
 
 

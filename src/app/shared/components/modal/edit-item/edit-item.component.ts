@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnChanges, OnDestroy, OnInit} from '@angular/core';
 import firebase from 'firebase/compat/app';
 import {AuthService} from '../../../../services/auth/auth.service';
 import {AngularFirestore} from '@angular/fire/compat/firestore';
@@ -15,7 +15,7 @@ import {CustomiseOrderPage} from '../customise-order/customise-order.page';
   templateUrl: './edit-item.component.html',
   styleUrls: ['./edit-item.component.scss'],
 })
-export class EditItemComponent  {
+export class EditItemComponent{
   barStatus = false;
   errorMessage = '';
   imageUploads = [];
@@ -26,6 +26,7 @@ export class EditItemComponent  {
   imageUrl = '';
   object = Object;
   private uid = this.ionicAuthService.getUid();
+
   constructor(private firebaseUploadService: FirebaseUploadService,
               private router: Router,
               private _firestore: Firestore,
@@ -37,7 +38,7 @@ export class EditItemComponent  {
     this.initForm();
   }
 
-  async ionViewDidEnter() {
+  async ionViewWillEnter() {
     await this.getOptionFromFirebase();
   }
 
@@ -74,7 +75,8 @@ export class EditItemComponent  {
       if (this.product.customOptions.length === 0) {
         this.product.customOptions.push({
           name: this.product.customOption.name,
-          data: this.product.customOption
+          data: this.product.customOption,
+          checked: false
         });
       }
       else {
@@ -82,7 +84,8 @@ export class EditItemComponent  {
           if (this.product.customOptions[key].name !== this.product.customOption.name) {
             this.product.customOptions.push({
               name: this.product.customOption.name,
-              data: this.product.customOption
+              data: this.product.customOption,
+              checked: false
             });
           }
           else {
@@ -139,6 +142,9 @@ export class EditItemComponent  {
       swipeToClose: true,
       presentingElement: await this.modalController.getTop()
     });
-    return await modal.present();
+    await modal.present();
+    await modal.onDidDismiss().then(r=> {
+      this.ionViewWillEnter();
+    });
   }
 }

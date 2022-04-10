@@ -7,6 +7,7 @@ import {AngularFireAuth} from '@angular/fire/compat/auth';
 import {ProductService} from './cafe/product.service';
 import {collection, doc, Firestore, getDoc, getDocs, query, setDoc, where} from '@angular/fire/firestore';
 import {getDate, getMonth, getYear} from 'date-fns';
+import {update} from "@angular/fire/database";
 
 export interface User {
   uid: string;
@@ -44,8 +45,7 @@ export class ChatService {
   }
 
   async addChatMessage(msg, id) {
-    const dataRef = doc(this._firestore, `messages/${(this.currentUser.uid)}`);
-    await setDoc(dataRef, {
+    await this.afs.collection('messages').doc(this.currentUser.uid).update({
       [id]: 1,
     });
     await this.afs.collection('messages/' + this.currentUser.uid + '/' + id).add({
@@ -57,8 +57,7 @@ export class ChatService {
   }
 
   async returnChatMessage(msg, id) {
-    const dataRef = doc(this._firestore, `messages/${(id)}`);
-    await setDoc(dataRef, {
+    await this.afs.collection('messages').doc(id).update({
       [this.currentUser.uid]: 1,
     });
     await this.afs.collection('messages/' + id + '/' + this.currentUser.uid).add({
@@ -69,8 +68,7 @@ export class ChatService {
     });
   }
   async addChatMessageCafe(msg) {
-    const dataRef = doc(this._firestore, `messages/${(this.product.store.name)}`);
-    await setDoc(dataRef, {
+    await this.afs.collection('messages').doc(this.product.store.name).update({
       [this.currentUser.uid]: 1,
     });
     return this.afs.collection('messages/' + this.product.store.name + '/' + this.currentUser.uid).add({
@@ -82,8 +80,7 @@ export class ChatService {
   }
 
   async returnChatMessageCafe(msg) {
-    const dataRef = doc(this._firestore, `messages/${(this.currentUser.uid)}`);
-    await setDoc(dataRef, {
+    await this.afs.collection('messages').doc(this.currentUser.uid).update({
       [this.product.store.name]: 1,
     });
     await this.afs.collection('messages/' + this.currentUser.uid + '/' + this.product.store.name).add({

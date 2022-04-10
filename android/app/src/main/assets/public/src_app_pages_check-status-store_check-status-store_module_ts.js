@@ -107,13 +107,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 48111);
 /* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_check_status_store_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./check-status-store.page.html */ 35329);
 /* harmony import */ var _check_status_store_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./check-status-store.page.scss */ 30846);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core */ 14001);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/core */ 14001);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ 13252);
 /* harmony import */ var _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/cafe/product.service */ 41575);
 /* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
 /* harmony import */ var firebase_compat_app__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! firebase/compat/app */ 50947);
 /* harmony import */ var _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/auth/auth.service */ 68927);
 /* harmony import */ var _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/fire/compat/firestore */ 27091);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic/angular */ 91346);
+
 
 
 
@@ -125,16 +127,23 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let CheckStatusStorePage = class CheckStatusStorePage {
-    constructor(router, product, _firestore, ionicAuthService, afs) {
+    constructor(router, product, _firestore, ionicAuthService, afs, menu) {
         this.router = router;
         this.product = product;
         this._firestore = _firestore;
         this.ionicAuthService = ionicAuthService;
         this.afs = afs;
+        this.menu = menu;
         this.percentage = 0;
         this.orderStatus = '';
         this.icon = '';
         this.id = this.ionicAuthService.getUid();
+        this.menu.enable(false);
+    }
+    ionViewDidLeave() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            yield this.menu.enable(true);
+        });
     }
     ngOnInit() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
@@ -221,10 +230,11 @@ CheckStatusStorePage.ctorParameters = () => [
     { type: _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_2__.ProductService },
     { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.Firestore },
     { type: _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_4__.AuthService },
-    { type: _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_8__.AngularFirestore }
+    { type: _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_8__.AngularFirestore },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_9__.MenuController }
 ];
 CheckStatusStorePage = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.Component)({
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_10__.Component)({
         selector: 'app-check-status-store',
         template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_check_status_store_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_check_status_store_page_scss__WEBPACK_IMPORTED_MODULE_1__]

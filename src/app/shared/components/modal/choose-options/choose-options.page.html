@@ -6,11 +6,14 @@
 
 <ion-content>
   <div class="ion-margin">
-    <ion-list  lines = 'none'>
-    <ion-radio-group ngModel="valueSelected">
-      <ion-item *ngFor="let entry of form" >
-        <ion-label>{{entry.name}}</ion-label>
-        <ion-radio slot = "end" [value]="entry.value"  mode = 'md'></ion-radio>
+    <ion-list lines = 'none'>
+    <ion-radio-group allow-empty-selection="'true" (ionChange)="_ionChange(entry.title, $event)" *ngFor="let entry of form" >
+      <ion-list-header>
+        <ion-label>{{entry.title}}</ion-label>
+      </ion-list-header>
+      <ion-item *ngFor="let option of entry.data">
+        <ion-label>{{option.name}}</ion-label>
+        <ion-radio slot = "end" [value]="option.val"  mode = 'md'></ion-radio>
       </ion-item>
     </ion-radio-group>
     </ion-list>
@@ -19,9 +22,9 @@
   <ion-list>
     <div class="qty-selector">
       <p>Quantity: </p>
-      <ion-button fill="clear">-</ion-button>
-      <ion-label>1</ion-label>
-      <ion-button fill="clear">+</ion-button>
+      <ion-button fill="clear" [disabled]="this.quantity===1" (click)="reduceQuantity()">-</ion-button>
+      <ion-label>{{this.quantity}}</ion-label>
+      <ion-button fill="clear" (click)="addQuantity()">+</ion-button>
     </div>
   </ion-list>
 

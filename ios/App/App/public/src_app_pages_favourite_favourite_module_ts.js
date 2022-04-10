@@ -110,11 +110,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 48111);
 /* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_favourite_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./favourite.page.html */ 29701);
 /* harmony import */ var _favourite_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./favourite.page.scss */ 30187);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 14001);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 14001);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ 13252);
 /* harmony import */ var _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/fire/compat/firestore */ 27091);
 /* harmony import */ var _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/auth/auth.service */ 68927);
 /* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic/angular */ 91346);
+
 
 
 
@@ -124,14 +126,21 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let FavouritePage = class FavouritePage {
-    constructor(router, afs, ionicAuthService, _firestore) {
+    constructor(router, afs, ionicAuthService, _firestore, menu) {
         this.router = router;
         this.afs = afs;
         this.ionicAuthService = ionicAuthService;
         this._firestore = _firestore;
+        this.menu = menu;
         this.fav = [];
         this.owner = '';
         this.id = this.ionicAuthService.getUid();
+        this.menu.enable(false);
+    }
+    ionViewDidLeave() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
+            yield this.menu.enable(true);
+        });
     }
     ionViewWillEnter() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
@@ -181,10 +190,11 @@ FavouritePage.ctorParameters = () => [
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__.Router },
     { type: _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_6__.AngularFirestore },
     { type: _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__.AuthService },
-    { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_4__.Firestore }
+    { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_4__.Firestore },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.MenuController }
 ];
 FavouritePage = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.Component)({
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.Component)({
         selector: 'app-favorite',
         template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_favourite_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_favourite_page_scss__WEBPACK_IMPORTED_MODULE_1__]

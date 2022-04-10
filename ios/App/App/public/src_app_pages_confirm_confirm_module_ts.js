@@ -180,7 +180,7 @@ __webpack_require__.r(__webpack_exports__);
 
 (pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_8___default().vfs) = pdfmake_build_vfs_fonts__WEBPACK_IMPORTED_MODULE_9__.pdfMake.vfs;
 let ConfirmPage = class ConfirmPage {
-    constructor(access, router, iroha, ionicAuthService, _firestore, product, afs, alertController, loadingController, modalCtrl, routerOutlet) {
+    constructor(access, router, iroha, ionicAuthService, _firestore, product, afs, alertController, loadingController, modalCtrl, routerOutlet, menu) {
         this.access = access;
         this.router = router;
         this.iroha = iroha;
@@ -192,6 +192,7 @@ let ConfirmPage = class ConfirmPage {
         this.loadingController = loadingController;
         this.modalCtrl = modalCtrl;
         this.routerOutlet = routerOutlet;
+        this.menu = menu;
         this.logoutTimer = this.access.logoutTimer.asObservable();
         this.owner = '';
         this.total = 0;
@@ -202,6 +203,12 @@ let ConfirmPage = class ConfirmPage {
         this.showFallback = true;
         this.checkout = [];
         this.id = this.ionicAuthService.getUid();
+        this.menu.enable(false);
+    }
+    ionViewDidLeave() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_10__.__awaiter)(this, void 0, void 0, function* () {
+            yield this.menu.enable(true);
+        });
     }
     ngOnInit() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_10__.__awaiter)(this, void 0, void 0, function* () {
@@ -503,7 +510,8 @@ ConfirmPage.ctorParameters = () => [
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_14__.AlertController },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_14__.LoadingController },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_14__.ModalController },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_14__.IonRouterOutlet }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_14__.IonRouterOutlet },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_14__.MenuController }
 ];
 ConfirmPage = (0,tslib__WEBPACK_IMPORTED_MODULE_10__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_15__.Component)({

@@ -7,6 +7,7 @@ import { IrohaService } from '../../../../services/iroha.service';
 import {AlertController, LoadingController} from '@ionic/angular';
 import {AngularFireAuth} from '@angular/fire/compat/auth';
 import {AvailableResult, BiometryType, Credentials, NativeBiometric} from 'capacitor-native-biometric';
+import {StorageService} from "../../../../services/storage.service";
 
 @Component({
   selector: 'app-user-details',
@@ -31,7 +32,8 @@ export class UserDetailsPage implements OnInit {
     private iroha: IrohaService,
     private loadingController: LoadingController,
     private afAuth: AngularFireAuth,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private storage: StorageService
 ) {
     this.initForm();
     this.afAuth.onAuthStateChanged(user => {
@@ -121,6 +123,10 @@ export class UserDetailsPage implements OnInit {
           // eslint-disable-next-line max-len
           await this.showAlert('Transfer Success', 'You have sent RM' + this.form.value.amount + ' to ' + this.iroha.otherWallet.name + '.');
           this.form.reset();
+          let fav = [await this.storage.get('favperson')];
+          fav.push(this.iroha.otherWallet.name);
+          fav = [...new Set(fav)];
+          await this.storage.set('favperson', fav);
           this.iroha.otherWallet.name = '';
         })
         .catch(e => {

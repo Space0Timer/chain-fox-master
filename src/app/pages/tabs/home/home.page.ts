@@ -26,6 +26,11 @@ export class HomePage implements OnInit{
     centeredSlides: true,
     loop: true
   };
+  features: any[] = [
+    {id: 'top-up', name: 'Top Up', icon: 'add-circle-outline', background: 'rgba(27,150,181, 0.1)', page: ''},
+    {id: 'list', name: 'View History', icon: 'archive-outline', background: 'rgba(106,100,255, 0.1)', page: ''},
+  ];
+
   private uid = this.ionicAuthService.getUid();
   private id: any;
 
@@ -38,6 +43,12 @@ export class HomePage implements OnInit{
     private menu: MenuController,
   ) { }
 
+  getRoute(route) {
+    this.router.navigate([route]);
+  }
+  slidesDidLoad(slides) {
+    slides.startAutoplay();
+  }
   async doRefresh(event) {
     await this.getUserId();
     setTimeout(() => {
@@ -50,14 +61,9 @@ export class HomePage implements OnInit{
       await PushNotifications.requestPermissions();
       await PushNotifications.register();
       // Enable the auto initialization of the library
-      FCM.setAutoInit({ enabled: true }).then(() => alert(`Auto init enabled`));
       FCM.getToken()
-        .then((r) => alert(`Token ${r.token}`))
+        .then((r) => console.log(` ${r.token}`))
         .catch((err) => console.log(err));
-      FCM.subscribeTo({ topic: "test" })
-        .then((r) => alert(`subscribed to topic`))
-        .catch((err) => console.log(err));
-
       Network.addListener('networkStatusChange', async status => {
         if (status.connected === false) {
           await this.showAlert('You must have an Internet Connection to use this app. You will be redirected to the login page.');

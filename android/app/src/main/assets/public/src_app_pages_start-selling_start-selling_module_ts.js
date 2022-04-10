@@ -105,11 +105,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "StartSellingPage": () => (/* binding */ StartSellingPage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 48111);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 48111);
 /* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_start_selling_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./start-selling.page.html */ 27468);
 /* harmony import */ var _start_selling_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./start-selling.page.scss */ 35491);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core */ 14001);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ 18346);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ 18346);
 /* harmony import */ var _services_cafe_firebase_upload_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/cafe/firebase-upload.service */ 53727);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ 13252);
 /* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
@@ -126,12 +126,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let StartSellingPage = class StartSellingPage {
-    constructor(firebaseUploadService, router, _firestore, ionicAuthService, alertController) {
+    constructor(firebaseUploadService, router, _firestore, ionicAuthService, alertController, menu) {
         this.firebaseUploadService = firebaseUploadService;
         this.router = router;
         this._firestore = _firestore;
         this.ionicAuthService = ionicAuthService;
         this.alertController = alertController;
+        this.menu = menu;
         this.barStatus = false;
         this.errorMessage = '';
         this.imageUploads = [];
@@ -141,6 +142,12 @@ let StartSellingPage = class StartSellingPage {
         this.id = this.ionicAuthService.getUid();
         this.uid = this.ionicAuthService.getUid();
         this.initForm();
+        this.menu.enable(false);
+    }
+    ionViewDidLeave() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            yield this.menu.enable(true);
+        });
     }
     ngOnInit() {
     }
@@ -161,15 +168,15 @@ let StartSellingPage = class StartSellingPage {
         });
     }
     initForm() {
-        this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_4__.FormGroup({
-            name: new _angular_forms__WEBPACK_IMPORTED_MODULE_4__.FormControl(null, { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_4__.Validators.required] }),
+        this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormGroup({
+            name: new _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormControl(null, { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.required] }),
         });
     }
     changeType() {
         this.type = !this.type;
     }
     onSubmit() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             if (!this.form.valid) {
                 this.form.markAllAsTouched();
                 return;
@@ -188,7 +195,7 @@ let StartSellingPage = class StartSellingPage {
         });
     }
     uploadStoreDetails(formValue) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             // eslint-disable-next-line no-underscore-dangle
             const dataRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.doc)(this._firestore, `stores/${(this.uid)}`);
             yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.setDoc)(dataRef, {
@@ -199,7 +206,7 @@ let StartSellingPage = class StartSellingPage {
         });
     }
     createTrackSales() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             const dataRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.doc)(this._firestore, `trackSales/${(this.uid)}`);
             yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.setDoc)(dataRef, {
                 id: this.uid,
@@ -207,7 +214,7 @@ let StartSellingPage = class StartSellingPage {
         });
     }
     createTrackOrders() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             const dataRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.doc)(this._firestore, `trackOrders/${(this.uid)}`);
             yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.setDoc)(dataRef, {
                 id: this.uid,
@@ -218,7 +225,7 @@ let StartSellingPage = class StartSellingPage {
         this.router.navigateByUrl('tabs/account', { replaceUrl: true });
     }
     showAlert(header, message) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             const alert = yield this.alertController.create({
                 header,
                 message,
@@ -233,9 +240,10 @@ StartSellingPage.ctorParameters = () => [
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__.Router },
     { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.Firestore },
     { type: _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_3__.AuthService },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.AlertController }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.AlertController },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.MenuController }
 ];
-StartSellingPage = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
+StartSellingPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.Component)({
         selector: 'app-start-selling',
         template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_start_selling_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],

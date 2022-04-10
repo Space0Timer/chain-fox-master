@@ -2243,12 +2243,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AuthScreenPage": () => (/* binding */ AuthScreenPage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 48111);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 48111);
 /* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_auth_screen_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./auth-screen.page.html */ 58969);
 /* harmony import */ var _auth_screen_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./auth-screen.page.scss */ 92655);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 14001);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 14001);
 /* harmony import */ var src_app_services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/auth/auth.service */ 68927);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ 13252);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ 13252);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ 91346);
+
 
 
 
@@ -2256,9 +2258,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let AuthScreenPage = class AuthScreenPage {
-    constructor(auth, router) {
+    constructor(auth, router, menu) {
         this.auth = auth;
         this.router = router;
+        this.menu = menu;
         this.segmentValue = '1';
         this.config = {
             slidesPerView: 3,
@@ -2267,6 +2270,12 @@ let AuthScreenPage = class AuthScreenPage {
             pagination: { clickable: true },
             scrollbar: { draggable: true },
         };
+        this.menu.enable(false);
+    }
+    ionViewDidLeave() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
+            yield this.menu.enable(true);
+        });
     }
     ngOnInit() { }
     segmentChanged(event) {
@@ -2299,10 +2308,11 @@ let AuthScreenPage = class AuthScreenPage {
 };
 AuthScreenPage.ctorParameters = () => [
     { type: src_app_services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__.AuthService },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__.Router }
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__.Router },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.MenuController }
 ];
-AuthScreenPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Component)({
+AuthScreenPage = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.Component)({
         selector: 'app-auth-screen',
         template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_auth_screen_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_auth_screen_page_scss__WEBPACK_IMPORTED_MODULE_1__]
@@ -2323,11 +2333,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "SignInComponent": () => (/* binding */ SignInComponent)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tslib */ 48111);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 48111);
 /* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_sign_in_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./sign-in.component.html */ 86103);
 /* harmony import */ var _sign_in_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./sign-in.component.scss */ 36862);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/core */ 14001);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ 18346);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/forms */ 18346);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/router */ 13252);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic/angular */ 91346);
 /* harmony import */ var src_app_services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/auth/auth.service */ 68927);
@@ -2348,7 +2358,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let SignInComponent = class SignInComponent {
-    constructor(authService, router, alertController, loadingController, iroha, afAuth, _firestore) {
+    constructor(authService, router, alertController, loadingController, iroha, afAuth, _firestore, menu) {
         this.authService = authService;
         this.router = router;
         this.alertController = alertController;
@@ -2356,17 +2366,24 @@ let SignInComponent = class SignInComponent {
         this.iroha = iroha;
         this.afAuth = afAuth;
         this._firestore = _firestore;
+        this.menu = menu;
         this.type = true;
         this.initForm();
         this.afAuth.onAuthStateChanged(user => {
             this.currentUser = user;
         });
+        this.menu.enable(false);
+    }
+    ionViewDidLeave() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            yield this.menu.enable(true);
+        });
     }
     ngOnInit() { }
     initForm() {
-        this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormGroup({
-            email: new _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormControl(null, { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.required] }),
-            password: new _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormControl(null, { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.minLength(8)] }),
+        this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormGroup({
+            email: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormControl(null, { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_6__.Validators.required] }),
+            password: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormControl(null, { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_6__.Validators.required, _angular_forms__WEBPACK_IMPORTED_MODULE_6__.Validators.minLength(8)] }),
         });
     }
     changeType() {
@@ -2392,10 +2409,10 @@ let SignInComponent = class SignInComponent {
                         // Authentication successful
                         this.loadingController.create({
                             message: 'Logging in...',
-                        }).then((overlay) => (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+                        }).then((overlay) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
                             this.loading = overlay;
                             this.loading.present();
-                            this.authService.login(form).then((data) => (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+                            this.authService.login(form).then((data) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
                                 const docRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_7__.doc)(this._firestore, 'users', this.currentUser.uid);
                                 const docSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_7__.getDoc)(docRef);
                                 if (docSnap.exists()) {
@@ -2432,17 +2449,17 @@ let SignInComponent = class SignInComponent {
         });
     }
     onSubmit() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
             if (!this.form.valid) {
                 this.form.markAllAsTouched();
                 return;
             }
             this.loadingController.create({
                 message: 'Logging in...',
-            }).then((overlay) => (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+            }).then((overlay) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
                 this.loading = overlay;
                 this.loading.present();
-                this.authService.login(this.form.value).then((data) => (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+                this.authService.login(this.form.value).then((data) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
                     const docRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_7__.doc)(this._firestore, 'users', this.currentUser.uid);
                     const docSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_7__.getDoc)(docRef);
                     if (docSnap.exists()) {
@@ -2476,7 +2493,7 @@ let SignInComponent = class SignInComponent {
         });
     }
     forgotPassword() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
             const alert = yield this.alertController.create({
                 header: 'Enter your email',
                 inputs: [
@@ -2496,19 +2513,19 @@ let SignInComponent = class SignInComponent {
                     },
                     {
                         text: 'Confirm',
-                        handler: (data) => (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+                        handler: (data) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
                             console.log(data.email);
                             this.loadingController.create({
                                 message: 'Verifying...',
-                            }).then((overlay) => (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+                            }).then((overlay) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
                                 this.loading = overlay;
                                 this.loading.present();
                                 yield this.authService.resetPassword(data.email)
-                                    .then((d) => (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+                                    .then((d) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
                                     this.loading.dismiss();
                                     yield this.showAlert('Authentication Success', 'Check your email to reset your password.');
                                 }))
-                                    .catch((e) => (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+                                    .catch((e) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
                                     this.loading.dismiss();
                                     yield this.showAlert('Authentication Failed', e);
                                 }));
@@ -2521,7 +2538,7 @@ let SignInComponent = class SignInComponent {
         });
     }
     showAlert(header, message) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
             const alert = yield this.alertController.create({
                 header,
                 message,
@@ -2538,9 +2555,10 @@ SignInComponent.ctorParameters = () => [
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_9__.LoadingController },
     { type: _services_iroha_service__WEBPACK_IMPORTED_MODULE_3__.IrohaService },
     { type: _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_10__.AngularFireAuth },
-    { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_7__.Firestore }
+    { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_7__.Firestore },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_9__.MenuController }
 ];
-SignInComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([
+SignInComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_11__.Component)({
         selector: 'app-sign-in',
         template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_sign_in_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
@@ -2562,11 +2580,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "SignUpComponent": () => (/* binding */ SignUpComponent)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 48111);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 48111);
 /* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_sign_up_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./sign-up.component.html */ 27174);
 /* harmony import */ var _sign_up_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./sign-up.component.scss */ 376);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/core */ 14001);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ 18346);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ 18346);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ 13252);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic/angular */ 91346);
 /* harmony import */ var src_app_services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/auth/auth.service */ 68927);
@@ -2587,7 +2605,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let SignUpComponent = class SignUpComponent {
-    constructor(authService, router, alertController, iroha, ionicAuthService, afs, _firestore, loadingController, afAuth) {
+    constructor(authService, router, alertController, iroha, ionicAuthService, afs, _firestore, loadingController, afAuth, menu) {
         this.authService = authService;
         this.router = router;
         this.alertController = alertController;
@@ -2597,27 +2615,34 @@ let SignUpComponent = class SignUpComponent {
         this._firestore = _firestore;
         this.loadingController = loadingController;
         this.afAuth = afAuth;
+        this.menu = menu;
         this.type = false;
         this.username = '';
         this.initForm();
         this.afAuth.onAuthStateChanged(user => {
             this.currentUser = user;
         });
+        this.menu.enable(false);
+    }
+    ionViewDidLeave() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            yield this.menu.enable(true);
+        });
     }
     ngOnInit() { }
     initForm() {
-        this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_4__.FormGroup({
-            username: new _angular_forms__WEBPACK_IMPORTED_MODULE_4__.FormControl(null, { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_4__.Validators.required, _angular_forms__WEBPACK_IMPORTED_MODULE_4__.Validators.pattern('^[a-zA-Z]+$'), _angular_forms__WEBPACK_IMPORTED_MODULE_4__.Validators.maxLength(10), _angular_forms__WEBPACK_IMPORTED_MODULE_4__.Validators.minLength(6)] }),
-            email: new _angular_forms__WEBPACK_IMPORTED_MODULE_4__.FormControl(null, { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_4__.Validators.required, _angular_forms__WEBPACK_IMPORTED_MODULE_4__.Validators.email] }),
+        this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormGroup({
+            username: new _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormControl(null, { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.pattern('^[a-zA-Z]+$'), _angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.maxLength(10), _angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.minLength(6)] }),
+            email: new _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormControl(null, { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.email] }),
             // eslint-disable-next-line max-len
-            password: new _angular_forms__WEBPACK_IMPORTED_MODULE_4__.FormControl(null, { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_4__.Validators.required, _angular_forms__WEBPACK_IMPORTED_MODULE_4__.Validators.minLength(8), _angular_forms__WEBPACK_IMPORTED_MODULE_4__.Validators.maxLength(15), _angular_forms__WEBPACK_IMPORTED_MODULE_4__.Validators.pattern('^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\\s).{8,}$'),] })
+            password: new _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormControl(null, { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.minLength(8), _angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.maxLength(15), _angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.pattern('^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\\s).{8,}$'),] })
         });
     }
     changeType() {
         this.type = !this.type;
     }
     createCart() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             // eslint-disable-next-line no-underscore-dangle
             const dataRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.doc)(this._firestore, `carts/${(this.ionicAuthService.getUid())}`);
             yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.setDoc)(dataRef, {
@@ -2626,7 +2651,7 @@ let SignUpComponent = class SignUpComponent {
         });
     }
     createFav() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             // eslint-disable-next-line no-underscore-dangle
             const dataRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.doc)(this._firestore, `favourites/${(this.ionicAuthService.getUid())}`);
             yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.setDoc)(dataRef, {
@@ -2635,7 +2660,7 @@ let SignUpComponent = class SignUpComponent {
         });
     }
     checkUsernameExists(username) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             // eslint-disable-next-line no-underscore-dangle
             const usernameRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.collection)(this._firestore, 'users');
             const q = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.query)(usernameRef, (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.where)('username', '==', username));
@@ -2656,7 +2681,7 @@ let SignUpComponent = class SignUpComponent {
         });
     }
     onSubmit() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             console.log('tes');
             if (!this.form.valid) {
                 this.form.markAllAsTouched();
@@ -2673,10 +2698,10 @@ let SignUpComponent = class SignUpComponent {
             if (auth) {
                 this.loadingController.create({
                     message: 'Signing up...',
-                }).then((overlay) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+                }).then((overlay) => (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
                     this.loading = overlay;
                     this.loading.present();
-                    this.authService.register(this.form.value).then((data) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+                    this.authService.register(this.form.value).then((data) => (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
                     }))
                         .catch(e => {
                         console.log(e);
@@ -2693,7 +2718,7 @@ let SignUpComponent = class SignUpComponent {
         });
     }
     showAlert(message) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             const alert = yield this.alertController.create({
                 header: 'Authentication Failed',
                 message,
@@ -2712,9 +2737,10 @@ SignUpComponent.ctorParameters = () => [
     { type: _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_9__.AngularFirestore },
     { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.Firestore },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.LoadingController },
-    { type: _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_10__.AngularFireAuth }
+    { type: _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_10__.AngularFireAuth },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.MenuController }
 ];
-SignUpComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
+SignUpComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_11__.Component)({
         selector: 'app-sign-up',
         template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_sign_up_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],

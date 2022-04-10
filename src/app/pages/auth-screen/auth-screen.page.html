@@ -1,5 +1,5 @@
 <ion-header translucent="true">
-  <ion-toolbar color="white" >
+  <ion-toolbar>
     <ion-title>
       <div class="title">
         <img style="height: 30px" src='assets/header/chainfox.png'>
@@ -9,20 +9,14 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div class = ion-padding >
-      <ion-slides pager=“true” autoplay=“1000” loop=“true”>
-        <ion-slide>
-          <img src="assets/imgs/screen1.png" alt="">
-        </ion-slide>
-        <ion-slide>
-          <img src="assets/imgs/screen2.png" alt="" width="640" height="360">
-        </ion-slide>
-        <ion-slide>
-          <img src="assets/imgs/screen3.png" alt="">
+    <div class="banner">
+      <ion-slides pager #mySlider class="slides" (ionSlidesDidLoad)="slidesDidLoad(mySlider)">
+        <ion-slide *ngFor="let number of [1,2,3]">
+          <img src="assets/imgs/screen{{number}}.png" alt="" width="640" height="360">
         </ion-slide>
       </ion-slides>
-  </div>
-  <ion-card>
+    </div>
+  <ion-card style="">
     <div class="ion-margin" (ionChange)="segmentChanged($event)">
       <ion-segment mode="ios" class="custom-icon" [value]="segmentValue">
         <ion-segment-button value="1">

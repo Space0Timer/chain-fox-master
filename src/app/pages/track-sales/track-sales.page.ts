@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
-import {AlertController, IonRouterOutlet} from '@ionic/angular';
+import {AlertController, IonRouterOutlet, MenuController} from '@ionic/angular';
 import {format, parseISO} from 'date-fns';
 import {collection, Firestore, getDocs} from '@angular/fire/firestore';
 import {AuthService} from '../../services/auth/auth.service';
@@ -31,9 +31,14 @@ export class TrackSalesPage implements OnInit {
     private _firestore: Firestore,
     private modalCtrl: ModalController,
     private routerOutlet: IonRouterOutlet,
-    private alertController: AlertController
-
-  ) { }
+    private alertController: AlertController,
+    private menu: MenuController
+  ) {
+    this.menu.enable(false);
+  }
+  async ionViewDidLeave() {
+    await this.menu.enable(true);
+  }
 
   ngOnInit(){
   }

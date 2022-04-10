@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import {AuthService} from "../../services/auth/auth.service";
-import {AlertController, LoadingController} from "@ionic/angular";
+import {AlertController, LoadingController, MenuController} from "@ionic/angular";
 import {doc, Firestore, getDoc} from "@angular/fire/firestore";
 import {StorageService} from "../../services/storage.service";
 
@@ -16,7 +16,14 @@ export class VerifyEmailAddressPage implements OnInit {
               private ionicAuthService: AuthService,
               private alertController: AlertController,
               private _firestore: Firestore,
-              private storage: StorageService) { }
+              private storage: StorageService,
+              private menu: MenuController) {
+    this.menu.enable(false);
+  }
+  async ionViewDidLeave() {
+    await this.menu.enable(true);
+  }
+
 
   ngOnInit() {
   }

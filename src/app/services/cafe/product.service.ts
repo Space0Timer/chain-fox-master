@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import firebase from 'firebase/compat/app';
 import {AngularFirestore, AngularFirestoreCollection, DocumentData} from '@angular/fire/compat/firestore';
 import {AuthService} from '../auth/auth.service';
-import {collection, doc, Firestore, getDoc, getDocs, query, setDoc} from '@angular/fire/firestore';
+import {collection, deleteField, doc, Firestore, getDoc, getDocs, query, setDoc, updateDoc} from '@angular/fire/firestore';
 import {BehaviorSubject} from 'rxjs';
 
 export interface StoreData {
@@ -42,6 +42,7 @@ export interface Status {
 export interface CustomOptions {
   name: string;
   data: DocumentData;
+  checked: boolean
 }
 
 @Injectable({
@@ -55,9 +56,10 @@ export class ProductService {
   idOwnerPair = new Map<string, string>();
   orderNotePair = new Map<string, string>();
   orderTimePair = new Map<string, string>();
+  selectedOption = new Map<string, string>();
+  currentOption: string;
   orderStatus: Status [] = [];
   statusPair: Status [] = [];
-  customOptions: CustomOptions [] = [];
   public store: StoreData = {
     name: '',
   };
@@ -71,7 +73,7 @@ export class ProductService {
     image: '',
     status:''
   };
-
+  customOptions: CustomOptions [] = [];
   public customOption: DocumentData = [];
   public label = [];
   public data = [];
@@ -94,16 +96,15 @@ export class ProductService {
   editItemPrice = '';
   editItemCategory = '';
   editItemDescription= '';
+  role = 'seller';
   itemId: any;
   itemOwner: any;
   customNew = true;
+  editOption = false;
   productsCollection: AngularFirestoreCollection;
-
+  editQuantity = 0;
   cart = new BehaviorSubject({});
   private id = this.ionicAuthService.getUid();
-
-
-
 
 
   constructor(
@@ -118,6 +119,34 @@ export class ProductService {
     this.afs.collection('carts').doc(this.id).update({
       [id]: INCREMENT,
       lastUpdate: firebase.firestore.FieldValue.serverTimestamp()
+    });
+
+    this.idOwnerPair.set(id, owner);
+  }
+
+  async addToCartModal(id, owner, quantity, selectedOption) {
+    let custom = '';
+    selectedOption.forEach((value, key) => {
+      custom = custom + key + value;
+    });
+    const docRef = doc(this._firestore, `carts/${(this.id)}`);
+    await updateDoc(docRef, {
+      [id + '@' + this.currentOption]: firebase.firestore.FieldValue.delete()
+    });
+    if (id.includes('@')) {
+      id = id.split('@')[0];
+    }
+    this.afs.collection('carts').doc(this.id).update({
+      [id + '@' + custom]: firebase.firestore.FieldValue.increment(quantity),
+      lastUpdate: firebase.firestore.FieldValue.serverTimestamp()
+    }).then(r => {
+      this.afs.collection('carts/' + this.id + '/option/' + id + '/grouping/').doc(custom).set({});
+      selectedOption.forEach((value, key) => {
+        this.afs.collection('carts/' + this.id + '/option/' + id + '/grouping/').doc(custom).update({
+          [key]: value,
+          id: custom
+        });
+      });
     });
     this.idOwnerPair.set(id, owner);
   }

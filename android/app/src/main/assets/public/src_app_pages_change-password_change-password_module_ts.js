@@ -105,12 +105,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "ChangePasswordPage": () => (/* binding */ ChangePasswordPage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 48111);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 48111);
 /* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_change_password_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./change-password.page.html */ 30506);
 /* harmony import */ var _change_password_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./change-password.page.scss */ 27069);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/core */ 14001);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ 13252);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ 18346);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ 18346);
 /* harmony import */ var _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/auth/auth.service */ 68927);
 /* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
 /* harmony import */ var _services_iroha_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/iroha.service */ 49187);
@@ -128,7 +128,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let ChangePasswordPage = class ChangePasswordPage {
-    constructor(authService, router, _firestore, ionicAuthService, iroha, loadingController, afAuth, alertController) {
+    constructor(authService, router, _firestore, ionicAuthService, iroha, loadingController, afAuth, alertController, menu) {
         this.authService = authService;
         this.router = router;
         this._firestore = _firestore;
@@ -137,44 +137,50 @@ let ChangePasswordPage = class ChangePasswordPage {
         this.loadingController = loadingController;
         this.afAuth = afAuth;
         this.alertController = alertController;
+        this.menu = menu;
         this.type = false;
         this.id = this.ionicAuthService.getUid();
         this.initForm();
         this.afAuth.onAuthStateChanged(user => {
             this.currentUser = user;
         });
+        this.menu.enable(false);
     }
-    ;
+    ionViewDidLeave() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            yield this.menu.enable(true);
+        });
+    }
     ngOnInit() {
     }
     initForm() {
-        this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_4__.FormGroup({
-            email: new _angular_forms__WEBPACK_IMPORTED_MODULE_4__.FormControl(null, { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_4__.Validators.required] }),
-            password: new _angular_forms__WEBPACK_IMPORTED_MODULE_4__.FormControl(null, { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_4__.Validators.required, _angular_forms__WEBPACK_IMPORTED_MODULE_4__.Validators.minLength(8)] })
+        this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormGroup({
+            email: new _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormControl(null, { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.required] }),
+            password: new _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormControl(null, { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.minLength(8)] })
         });
     }
     changeType() {
         this.type = !this.type;
     }
     changePassword() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             this.isLoading = true;
-            this.authService.reAuth(this.form.value.email, this.form.value.password).then((r) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            this.authService.reAuth(this.form.value.email, this.form.value.password).then((r) => (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
                 yield this.authService.resetPassword(this.form.value.email)
-                    .then((d) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+                    .then((d) => (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
                     yield this.showAlert('Authentication Success', 'Check your email to reset your password.');
                     this.isLoading = false;
                 }))
-                    .catch((e) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+                    .catch((e) => (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
                     yield this.showAlert('Authentication Failed', e);
                     this.isLoading = false;
                 }));
             }))
-                .catch((e) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () { yield this.showAlert('Authentication Failed', e); this.isLoading = false; }));
+                .catch((e) => (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () { yield this.showAlert('Authentication Failed', e); this.isLoading = false; }));
         });
     }
     showAlert(header, message) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             const alert = yield this.alertController.create({
                 header,
                 message,
@@ -195,9 +201,10 @@ ChangePasswordPage.ctorParameters = () => [
     { type: _services_iroha_service__WEBPACK_IMPORTED_MODULE_3__.IrohaService },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.LoadingController },
     { type: _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_9__.AngularFireAuth },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.AlertController }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.AlertController },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.MenuController }
 ];
-ChangePasswordPage = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
+ChangePasswordPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_10__.Component)({
         selector: 'app-change-password',
         template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_change_password_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],

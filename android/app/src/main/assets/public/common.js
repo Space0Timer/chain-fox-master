@@ -15,34 +15,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 57930:
-/*!*******************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./src/app/shared/components/modal/choose-options/choose-options.page.html ***!
-  \*******************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\n  <ion-toolbar>\n    <ion-title>choose-options</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div class=\"ion-margin-horizontal\">\n    <ion-list  lines = 'none'>\n    <ion-radio-group ngModel=\"valueSelected\">\n      <ion-item *ngFor=\"let entry of form\" >\n        <ion-label>{{entry.name}}</ion-label>\n        <ion-radio slot = \"end\" [value]=\"entry.value\"></ion-radio>\n      </ion-item>\n    </ion-radio-group>\n    </ion-list>\n  </div>\n    <div class=\"ion-margin\">\n  <ion-list>\n    <div class=\"qty-selector\">\n      <p>Quantity: </p>\n      <ion-button fill=\"clear\">-</ion-button>\n      <ion-label>1</ion-label>\n      <ion-button fill=\"clear\">+</ion-button>\n    </div>\n  </ion-list>\n\n  </div>\n  <div class=\"ion-padding\">\n    <ion-button\n      *ngIf=\"!isLoading\"\n      size=\"large\"\n      expand=\"block\"\n      shape=\"round\"\n      color=\"primary\"\n      (click)=\"addToCart()\">\n      <ion-text>Confirm</ion-text>\n    </ion-button>\n    <ion-button\n      *ngIf=\"isLoading\"\n      size=\"large\"\n      expand=\"block\"\n      shape=\"round\"\n      color=\"primary\">\n      <ion-spinner></ion-spinner>\n    </ion-button>\n  </div>\n</ion-content>\n");
-
-/***/ }),
-
-/***/ 51300:
-/*!**************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./src/app/shared/components/modal/edit-item/edit-item.component.html ***!
-  \**************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"end\">\n      <ion-button color=\"primary\" (click)=\"back()\" routerDirection=\"forward\">\n        <ion-icon name=\"close-outline\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>Your Sales</ion-title>\n  </ion-toolbar>\n</ion-header>\n<ion-content fullscreen=\"true\">\n  <div class=\"ion-margin-horizontal\">\n    <form [formGroup]=\"form\" class=\"ion-margin\">\n      <div class=\"ion-margin-vertical\">\n        <ion-item lines=\"full\">\n          <ion-input formControlName=\"name\" [type]=\"type ? 'text' : 'text'\" placeholder=\"Enter item name\" ngModel=\"{{this.product.editItemName}}\"></ion-input>\n        </ion-item>\n        <ion-text\n          color=\"danger\"\n          *ngIf=\"!form.get('name').valid && form.get('name').touched\">\n          <ion-text\n            class=\"error\"\n            *ngIf=\"form.get('name').hasError('required')\">\n            * Please enter the store name\n          </ion-text>\n        </ion-text>\n      </div>\n      <div class=\"ion-margin-vertical\">\n        <ion-item lines=\"full\">\n          <ion-input formControlName=\"price\" [type]=\"type ? 'number' : 'number'\" ngModel=\"{{this.product.editItemPrice}}\" placeholder=\"Enter price\"></ion-input>\n        </ion-item>\n        <ion-text\n          color=\"danger\"\n          *ngIf=\"!form.get('price').valid && form.get('price').touched\">\n          <ion-text\n            class=\"error\"\n            *ngIf=\"form.get('price').hasError('required')\">\n            * Please enter the price\n          </ion-text>\n        </ion-text>\n      </div>\n        <div class=\"ion-margin-vertical\">\n          <ion-item lines=\"full\">\n            <ion-input formControlName=\"description\" [type]=\"type ? 'text' : 'text'\" ngModel=\"{{this.product.editItemDescription}}\" placeholder=\"Enter description\"></ion-input>\n          </ion-item>\n          <ion-text\n            color=\"danger\"\n            *ngIf=\"!form.get('description').valid && form.get('description').touched\">\n            <ion-text\n              class=\"error\"\n              *ngIf=\"form.get('description').hasError('required')\">\n              * Please enter the description\n            </ion-text>\n          </ion-text>\n        </div>\n    </form>\n    <ion-card mode=\"ios\" class=\"ion-padding\">\n      <ion-row>\n        <ion-col size=\"10\">\n          <ion-card-title style=\"font-size: 18px; padding-top: 3px\" >Order customisation</ion-card-title>\n        </ion-col>\n        <ion-col size=\"2\" class=\"ion-text-right\">\n          <ion-buttons>\n            <ion-button  (click)=\"openCustomiseOrderModal()\">\n              <ion-icon name=\"add-circle-outline\"></ion-icon>\n            </ion-button>\n          </ion-buttons>\n        </ion-col>\n      </ion-row>\n    </ion-card>\n      </div>\n  <div class=\"ion-padding\">\n    <ion-button\n      *ngIf=\"!isLoading\"\n      size=\"large\"\n      expand=\"block\"\n      shape=\"round\"\n      color=\"primary\"\n      (click)=\"onSubmit()\">\n      <ion-text>Confirm</ion-text>\n    </ion-button>\n    <ion-button\n      *ngIf=\"isLoading\"\n      size=\"large\"\n      expand=\"block\"\n      shape=\"round\"\n      color=\"primary\">\n      <ion-spinner></ion-spinner>\n    </ion-button>\n  </div>\n</ion-content>\n");
-
-/***/ }),
-
 /***/ 21178:
 /*!***********************************************************************************!*\
   !*** ./node_modules/@capacitor-community/barcode-scanner/dist/esm/definitions.js ***!
@@ -1416,15 +1388,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 48111);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/core */ 14001);
 /* harmony import */ var firebase_compat_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/compat/app */ 50947);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rxjs/operators */ 62257);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! rxjs/operators */ 8343);
-/* harmony import */ var _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/fire/compat/firestore */ 27091);
-/* harmony import */ var _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/fire/compat/auth */ 60111);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs/operators */ 62257);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rxjs/operators */ 8343);
+/* harmony import */ var _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/fire/compat/firestore */ 27091);
+/* harmony import */ var _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/fire/compat/auth */ 60111);
 /* harmony import */ var _cafe_product_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./cafe/product.service */ 41575);
-/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! date-fns */ 83946);
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! date-fns */ 686);
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! date-fns */ 35925);
+/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! date-fns */ 83946);
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! date-fns */ 686);
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! date-fns */ 35925);
 
 
 
@@ -1450,8 +1422,7 @@ let ChatService = class ChatService {
     }
     addChatMessage(msg, id) {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
-            const dataRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_3__.doc)(this._firestore, `messages/${(this.currentUser.uid)}`);
-            yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_3__.setDoc)(dataRef, {
+            yield this.afs.collection('messages').doc(this.currentUser.uid).update({
                 [id]: 1,
             });
             yield this.afs.collection('messages/' + this.currentUser.uid + '/' + id).add({
@@ -1464,8 +1435,7 @@ let ChatService = class ChatService {
     }
     returnChatMessage(msg, id) {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
-            const dataRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_3__.doc)(this._firestore, `messages/${(id)}`);
-            yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_3__.setDoc)(dataRef, {
+            yield this.afs.collection('messages').doc(id).update({
                 [this.currentUser.uid]: 1,
             });
             yield this.afs.collection('messages/' + id + '/' + this.currentUser.uid).add({
@@ -1478,8 +1448,7 @@ let ChatService = class ChatService {
     }
     addChatMessageCafe(msg) {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
-            const dataRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_3__.doc)(this._firestore, `messages/${(this.product.store.name)}`);
-            yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_3__.setDoc)(dataRef, {
+            yield this.afs.collection('messages').doc(this.product.store.name).update({
                 [this.currentUser.uid]: 1,
             });
             return this.afs.collection('messages/' + this.product.store.name + '/' + this.currentUser.uid).add({
@@ -1492,8 +1461,7 @@ let ChatService = class ChatService {
     }
     returnChatMessageCafe(msg) {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
-            const dataRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_3__.doc)(this._firestore, `messages/${(this.currentUser.uid)}`);
-            yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_3__.setDoc)(dataRef, {
+            yield this.afs.collection('messages').doc(this.currentUser.uid).update({
                 [this.product.store.name]: 1,
             });
             yield this.afs.collection('messages/' + this.currentUser.uid + '/' + this.product.store.name).add({
@@ -1506,18 +1474,18 @@ let ChatService = class ChatService {
     }
     getDate(date) {
         const curDate = new Date();
-        this.today = ((0,date_fns__WEBPACK_IMPORTED_MODULE_4__["default"])(date) === (0,date_fns__WEBPACK_IMPORTED_MODULE_4__["default"])(curDate) &&
-            (0,date_fns__WEBPACK_IMPORTED_MODULE_5__["default"])(date) === (0,date_fns__WEBPACK_IMPORTED_MODULE_5__["default"])(curDate) &&
-            (0,date_fns__WEBPACK_IMPORTED_MODULE_6__["default"])(date) === (0,date_fns__WEBPACK_IMPORTED_MODULE_6__["default"])(curDate));
+        this.today = ((0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])(date) === (0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])(curDate) &&
+            (0,date_fns__WEBPACK_IMPORTED_MODULE_4__["default"])(date) === (0,date_fns__WEBPACK_IMPORTED_MODULE_4__["default"])(curDate) &&
+            (0,date_fns__WEBPACK_IMPORTED_MODULE_5__["default"])(date) === (0,date_fns__WEBPACK_IMPORTED_MODULE_5__["default"])(curDate));
     }
     // user chat
     getChatMessages(id) {
         let users = [];
-        return this.getUsers().pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_7__.switchMap)(res => {
+        return this.getUsers().pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_6__.switchMap)(res => {
             users = res;
             // eslint-disable-next-line max-len
             return this.afs.collection('messages/' + this.currentUser.uid + '/' + id, ref => ref.orderBy('createdAt')).valueChanges({ idField: 'id' });
-        }), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_8__.map)(messages => {
+        }), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_7__.map)(messages => {
             for (const m of messages) {
                 m.fromName = this.getUserForMsg(m.from, users);
                 m.myMsg = this.currentUser.uid === m.from;
@@ -1529,11 +1497,11 @@ let ChatService = class ChatService {
     // user in cafe
     getChatMessagesCafe() {
         let users = [];
-        return this.getUsers().pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_7__.switchMap)(res => {
+        return this.getUsers().pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_6__.switchMap)(res => {
             users = res;
             // eslint-disable-next-line max-len
             return this.afs.collection('messages/' + this.product.store.name + '/' + this.currentUser.uid, ref => ref.orderBy('createdAt')).valueChanges({ idField: 'id' });
-        }), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_8__.map)(messages => {
+        }), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_7__.map)(messages => {
             for (const m of messages) {
                 m.fromName = this.getUserForMsg(m.from, users);
                 m.myMsg = this.currentUser.uid === m.from;
@@ -1554,241 +1522,16 @@ let ChatService = class ChatService {
     }
 };
 ChatService.ctorParameters = () => [
-    { type: _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_9__.AngularFireAuth },
-    { type: _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_10__.AngularFirestore },
+    { type: _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_8__.AngularFireAuth },
+    { type: _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_9__.AngularFirestore },
     { type: _cafe_product_service__WEBPACK_IMPORTED_MODULE_1__.ProductService },
-    { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_3__.Firestore }
+    { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_10__.Firestore }
 ];
 ChatService = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_11__.Injectable)({
         providedIn: 'root'
     })
 ], ChatService);
-
-
-
-/***/ }),
-
-/***/ 17542:
-/*!*******************************************************************************!*\
-  !*** ./src/app/shared/components/modal/choose-options/choose-options.page.ts ***!
-  \*******************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ChooseOptionsPage": () => (/* binding */ ChooseOptionsPage)
-/* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 48111);
-/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_choose_options_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./choose-options.page.html */ 57930);
-/* harmony import */ var _choose_options_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./choose-options.page.scss */ 33230);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 14001);
-/* harmony import */ var _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../services/cafe/product.service */ 41575);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ 91346);
-
-
-
-
-
-
-let ChooseOptionsPage = class ChooseOptionsPage {
-    constructor(product, alertController) {
-        this.product = product;
-        this.alertController = alertController;
-        this.form = [
-            { val: 'Pepperoni', name: 'Pepperoni' },
-            { val: 'Sausage', name: 'Sausage' },
-            { val: 'Mushroom', name: 'Mushroom' }
-        ];
-        this.isLoading = false;
-        this.valueSelected = '';
-    }
-    ngOnInit() {
-        this.getOptions();
-    }
-    getOptions() {
-    }
-    addToCart() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
-            yield this.product.addToCart(this.product.itemId, this.product.itemOwner);
-            yield this.showAlert(this.product.item.name + ' (x1) is added to your cart!');
-        });
-    }
-    showAlert(message) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
-            const alert = yield this.alertController.create({
-                message,
-                buttons: ['OK'],
-            });
-            yield alert.present();
-        });
-    }
-};
-ChooseOptionsPage.ctorParameters = () => [
-    { type: _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_2__.ProductService },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__.AlertController }
-];
-ChooseOptionsPage = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Component)({
-        selector: 'app-choose-options',
-        template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_choose_options_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
-        styles: [_choose_options_page_scss__WEBPACK_IMPORTED_MODULE_1__]
-    })
-], ChooseOptionsPage);
-
-
-
-/***/ }),
-
-/***/ 36122:
-/*!**************************************************************************!*\
-  !*** ./src/app/shared/components/modal/edit-item/edit-item.component.ts ***!
-  \**************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "EditItemComponent": () => (/* binding */ EditItemComponent)
-/* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! tslib */ 48111);
-/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_edit_item_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./edit-item.component.html */ 51300);
-/* harmony import */ var _edit_item_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./edit-item.component.scss */ 87246);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/core */ 14001);
-/* harmony import */ var firebase_compat_app__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! firebase/compat/app */ 50947);
-/* harmony import */ var _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../services/auth/auth.service */ 68927);
-/* harmony import */ var _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/fire/compat/firestore */ 27091);
-/* harmony import */ var _services_cafe_firebase_upload_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../services/cafe/firebase-upload.service */ 53727);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/router */ 13252);
-/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
-/* harmony import */ var _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../services/cafe/product.service */ 41575);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/forms */ 18346);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @ionic/angular */ 91346);
-/* harmony import */ var _customise_order_customise_order_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../customise-order/customise-order.page */ 87016);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-let EditItemComponent = class EditItemComponent {
-    constructor(firebaseUploadService, router, _firestore, ionicAuthService, afs, product, modalController, alertController) {
-        this.firebaseUploadService = firebaseUploadService;
-        this.router = router;
-        this._firestore = _firestore;
-        this.ionicAuthService = ionicAuthService;
-        this.afs = afs;
-        this.product = product;
-        this.modalController = modalController;
-        this.alertController = alertController;
-        this.barStatus = false;
-        this.errorMessage = '';
-        this.imageUploads = [];
-        this.name = '';
-        this.type = false;
-        this.imageUrl = '';
-        this.uid = this.ionicAuthService.getUid();
-        this.initForm();
-    }
-    ngOnInit() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(this, void 0, void 0, function* () {
-            console.log(this.product.editItemDescription);
-        });
-    }
-    showAlert(header, message) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(this, void 0, void 0, function* () {
-            const alert = yield this.alertController.create({
-                header,
-                message,
-                buttons: ['OK'],
-            });
-            yield alert.present();
-        });
-    }
-    initForm() {
-        this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_8__.FormGroup({
-            name: new _angular_forms__WEBPACK_IMPORTED_MODULE_8__.FormControl(null, { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_8__.Validators.required] }),
-            price: new _angular_forms__WEBPACK_IMPORTED_MODULE_8__.FormControl(null, { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_8__.Validators.required] }),
-            category: new _angular_forms__WEBPACK_IMPORTED_MODULE_8__.FormControl(null, { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_8__.Validators.required] }),
-            description: new _angular_forms__WEBPACK_IMPORTED_MODULE_8__.FormControl(null, { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_8__.Validators.required] }), // added email validator also
-        });
-    }
-    changeType() {
-        this.type = !this.type;
-    }
-    onSubmit() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(this, void 0, void 0, function* () {
-            this.errorMessage = '';
-            if (!this.form.valid) {
-                this.form.markAllAsTouched();
-                return;
-            }
-            this.isLoading = true;
-            console.log(this.form.value);
-            yield this.edit(this.product.editItemId);
-            yield this.showAlert('Editing Item', 'Item successfully edited.');
-            this.isLoading = false;
-        });
-    }
-    edit(id) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(this, void 0, void 0, function* () {
-            yield this.afs.collection(`stores/${(this.uid)}/items`).doc(id).update({
-                name: this.form.value.name,
-                price: this.form.value.price,
-                category: this.form.value.category,
-                description: this.form.value.description,
-                lastUpdate: firebase_compat_app__WEBPACK_IMPORTED_MODULE_2__["default"].firestore.FieldValue.serverTimestamp()
-            });
-        });
-    }
-    back() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(this, void 0, void 0, function* () {
-            yield this.modalController.dismiss();
-        });
-    }
-    openCustomiseOrderModal() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(this, void 0, void 0, function* () {
-            const dataRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_9__.collection)(this._firestore, 'stores/' + this.product.store.name + '/items');
-            const q = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_9__.query)(dataRef);
-            const querySnapshot = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_9__.getDocs)(q);
-            querySnapshot.forEach((docu) => {
-                const data = docu.data();
-                console.log(data);
-                this.product.customOptions = data;
-            });
-            const modal = yield this.modalController.create({
-                component: _customise_order_customise_order_page__WEBPACK_IMPORTED_MODULE_6__.CustomiseOrderPage,
-                swipeToClose: true,
-                presentingElement: yield this.modalController.getTop()
-            });
-            return yield modal.present();
-        });
-    }
-};
-EditItemComponent.ctorParameters = () => [
-    { type: _services_cafe_firebase_upload_service__WEBPACK_IMPORTED_MODULE_4__.FirebaseUploadService },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_10__.Router },
-    { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_9__.Firestore },
-    { type: _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_3__.AuthService },
-    { type: _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_11__.AngularFirestore },
-    { type: _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_5__.ProductService },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_12__.ModalController },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_12__.AlertController }
-];
-EditItemComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_13__.Component)({
-        selector: 'app-edit-item',
-        template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_edit_item_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
-        styles: [_edit_item_component_scss__WEBPACK_IMPORTED_MODULE_1__]
-    })
-], EditItemComponent);
 
 
 
@@ -1801,26 +1544,6 @@ EditItemComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__decorate)([
 /***/ ((module) => {
 
 module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJwaW4tY29kZS5wYWdlLnNjc3MifQ== */";
-
-/***/ }),
-
-/***/ 33230:
-/*!*********************************************************************************!*\
-  !*** ./src/app/shared/components/modal/choose-options/choose-options.page.scss ***!
-  \*********************************************************************************/
-/***/ ((module) => {
-
-module.exports = ".qty-selector {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background: #f6f6f6;\n  border-radius: 5px;\n  margin-top: 10px;\n}\n.qty-selector ion-button {\n  --color: #565656;\n  font-size: 16px;\n  margin-left: 8px;\n  margin-right: 8px;\n}\n.qty-selector ion-label {\n  color: #565656 !important;\n  font-size: 16px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNob29zZS1vcHRpb25zLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGFBQUE7RUFDQSx1QkFBQTtFQUNBLG1CQUFBO0VBQ0EsbUJBQUE7RUFDQSxrQkFBQTtFQUNBLGdCQUFBO0FBQ0Y7QUFDRTtFQUNFLGdCQUFBO0VBQ0EsZUFBQTtFQUNBLGdCQUFBO0VBQ0EsaUJBQUE7QUFDSjtBQUVFO0VBQ0UseUJBQUE7RUFDQSxlQUFBO0FBQUoiLCJmaWxlIjoiY2hvb3NlLW9wdGlvbnMucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnF0eS1zZWxlY3RvciB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBiYWNrZ3JvdW5kOiAjZjZmNmY2O1xuICBib3JkZXItcmFkaXVzOiA1cHg7XG4gIG1hcmdpbi10b3A6IDEwcHg7XG5cbiAgaW9uLWJ1dHRvbiB7XG4gICAgLS1jb2xvcjogIzU2NTY1NjtcbiAgICBmb250LXNpemU6IDE2cHg7XG4gICAgbWFyZ2luLWxlZnQ6IDhweDtcbiAgICBtYXJnaW4tcmlnaHQ6IDhweDtcbiAgfVxuXG4gIGlvbi1sYWJlbCB7XG4gICAgY29sb3I6ICM1NjU2NTYgIWltcG9ydGFudDtcbiAgICBmb250LXNpemU6IDE2cHg7XG4gIH1cbn1cbiJdfQ== */";
-
-/***/ }),
-
-/***/ 87246:
-/*!****************************************************************************!*\
-  !*** ./src/app/shared/components/modal/edit-item/edit-item.component.scss ***!
-  \****************************************************************************/
-/***/ ((module) => {
-
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJlZGl0LWl0ZW0uY29tcG9uZW50LnNjc3MifQ== */";
 
 /***/ })
 

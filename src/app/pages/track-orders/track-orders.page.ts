@@ -5,6 +5,7 @@ import {AuthService} from "../../services/auth/auth.service";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {ProductService} from "../../services/cafe/product.service";
 import {ITrackOrderCard} from "../../shared/components/cards/track-orders/track-orders.component";
+import {MenuController} from "@ionic/angular";
 
 @Component({
   selector: 'app-track-orders-page',
@@ -23,8 +24,14 @@ export class TrackOrdersPage {
     private ionicAuthService: AuthService,
     private afs: AngularFirestore,
     private product: ProductService,
-    private _firestore: Firestore
-  ) { }
+    private _firestore: Firestore,
+    private menu: MenuController
+  ) {
+    this.menu.enable(false);
+  }
+  async ionViewDidLeave() {
+    await this.menu.enable(true);
+  }
 
 
   async ionViewWillEnter() {

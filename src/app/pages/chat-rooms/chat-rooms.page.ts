@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {IonContent} from "@ionic/angular";
+import {IonContent, MenuController} from "@ionic/angular";
 import {Observable} from "rxjs";
 import {ChatService, Message} from "../../services/chat.service";
 import {Router} from "@angular/router";
@@ -17,7 +17,12 @@ export class ChatRoomsPage implements OnInit {
   newMsg = '';
   text = true;
 
-  constructor(private chatService: ChatService, private router: Router) { }
+  constructor(private chatService: ChatService, private router: Router, private menu: MenuController) {
+    this.menu.enable(false);
+  }
+  async ionViewDidLeave() {
+    await this.menu.enable(true);
+  }
 
   async ngOnInit() {
     this.messages = this.chatService.getChatMessages(this.chatService.chatId);
@@ -32,6 +37,6 @@ export class ChatRoomsPage implements OnInit {
   }
 
   back() {
-    this.router.navigateByUrl('tabs/home', {replaceUrl: true});
+    this.router.navigate(['chat-list']);
   }
 }

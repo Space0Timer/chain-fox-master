@@ -4,6 +4,7 @@ import {AngularFirestore, DocumentData} from "@angular/fire/compat/firestore";
 import {AuthService} from "../../services/auth/auth.service";
 import {doc, Firestore, getDoc} from "@angular/fire/firestore";
 import {IFavCard} from "../../shared/components/cards/fav-card/fav-card.component";
+import {MenuController} from "@ionic/angular";
 @Component({
   selector: 'app-favorite',
   templateUrl: './favourite.page.html',
@@ -20,8 +21,13 @@ export class FavouritePage {
     private router: Router,
     private afs: AngularFirestore,
     private ionicAuthService: AuthService,
-    private _firestore: Firestore
+    private _firestore: Firestore,
+    private menu: MenuController
   ) {
+    this.menu.enable(false);
+  }
+  async ionViewDidLeave() {
+    await this.menu.enable(true);
   }
 
   async ionViewWillEnter() {

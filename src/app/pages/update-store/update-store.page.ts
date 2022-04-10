@@ -7,7 +7,7 @@ import {AuthService} from '../../services/auth/auth.service';
 import {AngularFirestore} from '@angular/fire/compat/firestore';
 import {ProductService} from '../../services/cafe/product.service';
 import {IFoodCard} from '../../shared';
-import {AlertController, IonRouterOutlet, ModalController} from '@ionic/angular';
+import {AlertController, IonRouterOutlet, MenuController, ModalController} from '@ionic/angular';
 import {AddItemComponent} from '../../shared/components/modal/add-item/add-item.component';
 
 @Component({
@@ -35,8 +35,13 @@ export class UpdateStorePage implements OnInit {
               private afs: AngularFirestore,
               private product: ProductService,
               private modalCtrl: ModalController,
-              private routerOutlet?: IonRouterOutlet) {
+              private routerOutlet: IonRouterOutlet,
+              private menu: MenuController) {
     this.initForm();
+    this.menu.enable(false);
+  }
+  async ionViewDidLeave() {
+    await this.menu.enable(true);
   }
 
   async ngOnInit() {

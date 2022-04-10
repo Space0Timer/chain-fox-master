@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import {Router} from '@angular/router';
 import SwiperCore, { SwiperOptions } from 'swiper';
+import {MenuController} from "@ionic/angular";
 
 @Component({
   selector: 'app-auth-screen',
@@ -19,7 +20,16 @@ export class AuthScreenPage implements OnInit {
     pagination: { clickable: true },
     scrollbar: { draggable: true },
   };
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor(private auth: AuthService, private router: Router, private menu: MenuController) {
+
+    this.menu.enable(false);
+  }
+  slidesDidLoad(slides) {
+    slides.startAutoplay();
+  }
+  async ionViewDidLeave() {
+    await this.menu.enable(true);
+  }
 
   ngOnInit() {}
 

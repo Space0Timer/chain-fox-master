@@ -4,7 +4,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../services/auth/auth.service";
 import {Firestore} from "@angular/fire/firestore";
 import {IrohaService} from "../../services/iroha.service";
-import {AlertController, LoadingController} from "@ionic/angular";
+import {AlertController, LoadingController, MenuController} from "@ionic/angular";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 
 @Component({
@@ -28,13 +28,18 @@ export class ChangePasswordPage implements OnInit {
     private iroha: IrohaService,
     private loadingController: LoadingController,
     private afAuth: AngularFireAuth,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private menu: MenuController
   ) {
     this.initForm();
     this.afAuth.onAuthStateChanged(user => {
       this.currentUser = user;
     });
-  };
+    this.menu.enable(false);
+  }
+  async ionViewDidLeave() {
+    await this.menu.enable(true);
+  }
 
   ngOnInit() {
   }

@@ -6,7 +6,7 @@ import { IFoodCard } from 'src/app/shared';
 import {collection, doc, Firestore, getDoc, getDocs, query} from '@angular/fire/firestore';
 import {AngularFirestore, DocumentData} from '@angular/fire/compat/firestore';
 import {ProductService} from '../../services/cafe/product.service';
-import {IonSearchbar} from '@ionic/angular';
+import {IonSearchbar, MenuController} from '@ionic/angular';
 
 @Component({
   selector: 'app-lunch',
@@ -30,7 +30,12 @@ export class LunchPage implements OnInit {
     private router: Router,
     private afs: AngularFirestore,
     private _firestore: Firestore,
-    private product: ProductService) {
+    private product: ProductService,
+    private menu: MenuController) {
+    this.menu.enable(false);
+  }
+  async ionViewDidLeave() {
+    await this.menu.enable(true);
   }
 
   async ngOnInit() {

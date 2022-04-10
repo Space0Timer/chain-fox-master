@@ -6,6 +6,7 @@ import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {ProductService} from "../../services/cafe/product.service";
 import {collection, Firestore, getDocs, orderBy, query} from "@angular/fire/firestore";
 import {format, parseISO} from 'date-fns';
+import {MenuController} from "@ionic/angular";
 @Component({
   selector: 'app-my-orders',
   templateUrl: './my-orders.page.html',
@@ -23,8 +24,14 @@ export class MyOrdersPage implements OnInit{
     private ionicAuthService: AuthService,
     private afs: AngularFirestore,
     private product: ProductService,
-    private _firestore: Firestore
-  ) { }
+    private _firestore: Firestore,
+    private menu: MenuController
+  ) {
+    this.menu.enable(false);
+  }
+  async ionViewDidLeave() {
+    await this.menu.enable(true);
+  }
 
   async ionViewWillEnter() {
     this.order = [];

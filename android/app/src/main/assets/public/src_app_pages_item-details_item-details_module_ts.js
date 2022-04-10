@@ -125,7 +125,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let ItemDetailsPage = class ItemDetailsPage {
-    constructor(animatioCntrl, router, afs, _firestore, product, alertController, modalController, routerOutlet) {
+    constructor(animatioCntrl, router, afs, _firestore, product, alertController, modalController, routerOutlet, menu) {
         this.animatioCntrl = animatioCntrl;
         this.router = router;
         this.afs = afs;
@@ -134,7 +134,14 @@ let ItemDetailsPage = class ItemDetailsPage {
         this.alertController = alertController;
         this.modalController = modalController;
         this.routerOutlet = routerOutlet;
+        this.menu = menu;
         this.cartIcon = 'Add to Cart';
+        this.menu.enable(false);
+    }
+    ionViewDidLeave() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            yield this.menu.enable(true);
+        });
     }
     ngOnInit() {
         this.getItemDetails();
@@ -147,6 +154,7 @@ let ItemDetailsPage = class ItemDetailsPage {
     }
     openChooseOptionsModal(id, owner) {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            this.product.editOption = true;
             this.product.itemId = id;
             this.product.itemOwner = owner;
             const modal = yield this.modalController.create({
@@ -195,7 +203,8 @@ ItemDetailsPage.ctorParameters = () => [
     { type: _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_2__.ProductService },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.AlertController },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.ModalController },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.IonRouterOutlet }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.IonRouterOutlet },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.MenuController }
 ];
 ItemDetailsPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.Component)({

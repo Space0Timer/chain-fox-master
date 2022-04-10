@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {AlertController, AnimationController, IonRouterOutlet, ModalController} from '@ionic/angular';
+import {AlertController, AnimationController, IonRouterOutlet, MenuController, ModalController} from '@ionic/angular';
 import {Router} from '@angular/router';
-import {doc, Firestore} from "@angular/fire/firestore";
+import {Firestore} from "@angular/fire/firestore";
 import {ProductService} from "../../services/cafe/product.service";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
-import {StoreSalesPage} from "../store-sales/store-sales.page";
 import {ChooseOptionsPage} from "../../shared/components/modal/choose-options/choose-options.page";
 
 @Component({
@@ -30,9 +29,14 @@ export class ItemDetailsPage implements OnInit {
     private product: ProductService,
     private alertController: AlertController,
     private modalController: ModalController,
-    private routerOutlet: IonRouterOutlet
+    private routerOutlet: IonRouterOutlet,
+    private menu: MenuController
   ) {
 
+    this.menu.enable(false);
+  }
+  async ionViewDidLeave() {
+    await this.menu.enable(true);
   }
 
   ngOnInit() {
@@ -45,6 +49,7 @@ export class ItemDetailsPage implements OnInit {
     }
   }
   async openChooseOptionsModal(id, owner) {
+    this.product.editOption = true;
     this.product.itemId = id;
     this.product.itemOwner = owner;
     const modal = await this.modalController.create({

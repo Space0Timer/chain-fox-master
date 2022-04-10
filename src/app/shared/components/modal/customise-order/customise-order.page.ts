@@ -11,7 +11,7 @@ import {CustomOptions, ProductService} from "../../../../services/cafe/product.s
   templateUrl: './customise-order.page.html',
   styleUrls: ['./customise-order.page.scss'],
 })
-export class CustomiseOrderPage implements OnInit {
+export class CustomiseOrderPage{
   customOptions: CustomOptions [] = [];
   isLoading = false;
   type = false;
@@ -24,9 +24,16 @@ export class CustomiseOrderPage implements OnInit {
               private modalController: ModalController,
               private product: ProductService,
               private alertController: AlertController){
-    let keyLength;
+
+   }
+
+  ionViewWillEnter() {
+    this.init();
+  }
+
+  init() {
     if (this.product.customOption.length === 0) {
-      this.form = formBuilder.group({
+      this.form = this.formBuilder.group({
         1: ['', Validators.required]
       });
     } else {
@@ -45,15 +52,10 @@ export class CustomiseOrderPage implements OnInit {
       }
       this.optionCount = keys.length + 1;
       group[`${this.optionCount}`] = ['', Validators.required];
-      console.log(group);
-      this.form = formBuilder.group(group);
+      this.form = this.formBuilder.group(group);
       this.product.customOption = [];
       this.product.customOptions = [];
     }
-   }
-
-
-  ngOnInit(){
   }
 
   async addName() {
@@ -93,7 +95,7 @@ export class CustomiseOrderPage implements OnInit {
     this.form.removeControl(control.key);
   }
 
-  submitRequest() {
+  async submitRequest() {
     this.product.customOptions = [];
     this.product.customOption = [];
     if (this.name !== 'Not set') {
@@ -102,23 +104,34 @@ export class CustomiseOrderPage implements OnInit {
       delete this.form.value[optionCount];
       this.form.value.name = this.name;
       this.product.customOption = this.form.value;
-      console.log(this.product.customOption);
+      const temp = [];
+      for (const key in this.product.customOption) {
+        if (key !== 'name') {
+          console.log(key);
+          temp.push(this.product.customOption[key]);
+        }
+      }
+      if (new Set(temp).size !== temp.length) {
+        await this.showAlert('Invalid customisation', 'Duplication options are not permitted.');
+        this.isLoading = false;
+        return;
+      }
       // delete duplicates
       if (this.product.customOptions.length === 0) {
         this.product.customOptions.push({
           name: this.product.customOption.name,
-          data: this.product.customOption
+          data: this.product.customOption,
+          checked: false
         });
-      }
-      else {
+      } else {
         for (const key in this.product.customOptions) {
           if (this.product.customOptions[key].name !== this.product.customOption.name) {
             this.product.customOptions.push({
               name: this.product.customOption.name,
-              data: this.product.customOption
+              data: this.product.customOption,
+              checked: false
             });
-          }
-          else {
+          } else {
             this.product.customOptions[key].data = this.product.customOption;
           }
         }
@@ -126,7 +139,7 @@ export class CustomiseOrderPage implements OnInit {
       this.isLoading = false;
     }
     else {
-      this.showAlert('Invalid name', 'Please set the name of your customisation.');
+      await this.showAlert('Invalid name', 'Please set the name of your customisation.');
     }
   }
 
@@ -134,6 +147,7 @@ export class CustomiseOrderPage implements OnInit {
     this.product.customNew = true;
     await this.modalController.dismiss();
   }
+
   async showAlert(header,message) {
     const alert = await this.alertController.create({
       header,

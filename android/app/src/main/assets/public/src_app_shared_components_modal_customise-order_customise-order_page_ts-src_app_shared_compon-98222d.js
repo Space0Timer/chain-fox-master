@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\n  <ion-toolbar>\n    <ion-title>\n      Add Customisation Options\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content padding>\n\n  <ion-list lines=\"none\">\n    <form [formGroup]=\"form\">\n      <ion-item *ngFor=\"let control of form.controls | keyvalue\">\n        <ion-input requiredtype=\"text\" [formControlName]=\"control.key\" placeHolder=\"option names...\"></ion-input>\n        <ion-icon (click)=\"removeControl(control)\" name=\"close-circle\"></ion-icon>\n      </ion-item>\n    </form>\n  </ion-list>\n\n  <ion-button expand=\"full\" color=\"light\" (click)=\"addControl()\">Add Option</ion-button>\n  <div class=\"ion-margin-horizontal\">\n    <ion-button\n      *ngIf=\"!isLoading\"\n      size=\"large\"\n      expand=\"block\"\n      shape=\"round\"\n      color=\"primary\" (click)=\"submitRequest()\">\n      Confirm\n    </ion-button>\n    <ion-button\n      *ngIf=\"isLoading\"\n      size=\"large\"\n      expand=\"block\"\n      shape=\"round\"\n      color=\"primary\">\n      <ion-spinner></ion-spinner>\n    </ion-button>\n  </div>\n</ion-content>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"end\">\n      <ion-button color=\"primary\" (click)=\"back()\" routerDirection=\"forward\">\n        <ion-icon name=\"close-outline\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>\n      Name: {{this.name}}\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-card mode=\"ios\" class=\"ion-padding\" *ngIf=\"this.product.customNew\">\n    <ion-row>\n      <ion-col size=\"10\">\n        <ion-card-title style=\"font-size: 18px; padding-top: 3px\" >Edit Customisation Name</ion-card-title>\n      </ion-col>\n      <ion-col size=\"2\" class=\"ion-text-right\">\n        <ion-buttons>\n          <ion-button  (click)=\"addName()\">\n            <ion-icon name=\"add-circle-outline\"></ion-icon>\n          </ion-button>\n        </ion-buttons>\n      </ion-col>\n    </ion-row>\n  </ion-card>\n  <ion-list lines=\"none\">\n    <form [formGroup]=\"form\">\n      <ion-item *ngFor=\"let control of form.controls | keyvalue\">\n        <ion-input requiredtype=\"text\" [formControlName]=\"control.key\" placeHolder=\"option names...\"></ion-input>\n        <ion-icon (click)=\"removeControl(control)\" name=\"close-circle\"></ion-icon>\n      </ion-item>\n    </form>\n  </ion-list>\n\n  <ion-button expand=\"full\" color=\"light\" (click)=\"addControl()\">Add Option</ion-button>\n  <div class=\"ion-margin-horizontal\">\n    <ion-button\n      *ngIf=\"!isLoading\"\n      size=\"large\"\n      expand=\"block\"\n      shape=\"round\"\n      color=\"primary\" (click)=\"submitRequest()\">\n      Confirm\n    </ion-button>\n    <ion-button\n      *ngIf=\"isLoading\"\n      size=\"large\"\n      expand=\"block\"\n      shape=\"round\"\n      color=\"primary\">\n      <ion-spinner></ion-spinner>\n    </ion-button>\n  </div>\n</ion-content>\n");
 
 /***/ }),
 
@@ -40,18 +40,75 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let CustomiseOrderPage = class CustomiseOrderPage {
-    constructor(formBuilder, modalController, product) {
+    constructor(formBuilder, modalController, product, alertController) {
         this.formBuilder = formBuilder;
         this.modalController = modalController;
         this.product = product;
+        this.alertController = alertController;
         this.customOptions = [];
         this.isLoading = false;
+        this.type = false;
+        this.name = 'Not set';
         this.optionCount = 1;
-        this.form = formBuilder.group({
-            1: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.required]
-        });
     }
-    ngOnInit() {
+    ionViewWillEnter() {
+        this.init();
+    }
+    init() {
+        if (this.product.customOption.length === 0) {
+            this.form = this.formBuilder.group({
+                1: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.required]
+            });
+        }
+        else {
+            const temp = new Map();
+            this.name = this.product.customOption.name;
+            for (const key in this.product.customOption) {
+                if (key !== 'name') {
+                    temp.set(key, this.product.customOption[key]);
+                }
+            }
+            const keys = [...temp.keys()];
+            const group = {};
+            for (let i = 0; i < keys.length; i++) {
+                group[`${keys[i]}`] = [temp.get(`${keys[i]}`), _angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.required];
+            }
+            this.optionCount = keys.length + 1;
+            group[`${this.optionCount}`] = ['', _angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.required];
+            this.form = this.formBuilder.group(group);
+            this.product.customOption = [];
+            this.product.customOptions = [];
+        }
+    }
+    addName() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            const alert = yield this.alertController.create({
+                header: 'Customisation name',
+                inputs: [
+                    {
+                        name: 'name',
+                        placeholder: 'Enter name',
+                        type: 'text'
+                    }
+                ],
+                buttons: [
+                    {
+                        text: 'Cancel',
+                        role: 'cancel',
+                        handler: data => {
+                            console.log('Cancel clicked');
+                        }
+                    },
+                    {
+                        text: 'Confirm',
+                        handler: (data) => (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+                            this.name = data.name;
+                        })
+                    }
+                ]
+            });
+            yield alert.present();
+        });
     }
     addControl() {
         this.optionCount++;
@@ -61,22 +118,78 @@ let CustomiseOrderPage = class CustomiseOrderPage {
         this.form.removeControl(control.key);
     }
     submitRequest() {
-        const optionCount = this.optionCount;
-        this.isLoading = true;
-        delete this.form.value[optionCount];
-        this.product.customOptions = this.form.value;
-        this.isLoading = false;
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            this.product.customOptions = [];
+            this.product.customOption = [];
+            if (this.name !== 'Not set') {
+                const optionCount = this.optionCount;
+                this.isLoading = true;
+                delete this.form.value[optionCount];
+                this.form.value.name = this.name;
+                this.product.customOption = this.form.value;
+                const temp = [];
+                for (const key in this.product.customOption) {
+                    if (key !== 'name') {
+                        console.log(key);
+                        temp.push(this.product.customOption[key]);
+                    }
+                }
+                if (new Set(temp).size !== temp.length) {
+                    yield this.showAlert('Invalid customisation', 'Duplication options are not permitted.');
+                    this.isLoading = false;
+                    return;
+                }
+                // delete duplicates
+                if (this.product.customOptions.length === 0) {
+                    this.product.customOptions.push({
+                        name: this.product.customOption.name,
+                        data: this.product.customOption,
+                        checked: false
+                    });
+                }
+                else {
+                    for (const key in this.product.customOptions) {
+                        if (this.product.customOptions[key].name !== this.product.customOption.name) {
+                            this.product.customOptions.push({
+                                name: this.product.customOption.name,
+                                data: this.product.customOption,
+                                checked: false
+                            });
+                        }
+                        else {
+                            this.product.customOptions[key].data = this.product.customOption;
+                        }
+                    }
+                }
+                this.isLoading = false;
+            }
+            else {
+                yield this.showAlert('Invalid name', 'Please set the name of your customisation.');
+            }
+        });
     }
     back() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            this.product.customNew = true;
             yield this.modalController.dismiss();
+        });
+    }
+    showAlert(header, message) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            const alert = yield this.alertController.create({
+                header,
+                message,
+                buttons: ['OK'],
+            });
+            yield alert.present();
         });
     }
 };
 CustomiseOrderPage.ctorParameters = () => [
     { type: _angular_forms__WEBPACK_IMPORTED_MODULE_3__.FormBuilder },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.ModalController },
-    { type: _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_2__.ProductService }
+    { type: _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_2__.ProductService },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.AlertController }
 ];
 CustomiseOrderPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.Component)({
