@@ -105,18 +105,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "UserDetailsPage": () => (/* binding */ UserDetailsPage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tslib */ 48111);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! tslib */ 48111);
 /* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_user_details_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./user-details.page.html */ 34988);
 /* harmony import */ var _user_details_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./user-details.page.scss */ 80562);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/core */ 14001);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ 18346);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/router */ 13252);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/core */ 14001);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/forms */ 18346);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/router */ 13252);
 /* harmony import */ var src_app_services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/auth/auth.service */ 68927);
-/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
+/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
 /* harmony import */ var _services_iroha_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../services/iroha.service */ 49187);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic/angular */ 91346);
-/* harmony import */ var _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/fire/compat/auth */ 60111);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic/angular */ 91346);
+/* harmony import */ var _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/fire/compat/auth */ 60111);
 /* harmony import */ var capacitor_native_biometric__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! capacitor-native-biometric */ 41380);
+/* harmony import */ var _services_storage_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../services/storage.service */ 17208);
+
 
 
 
@@ -130,7 +132,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let UserDetailsPage = class UserDetailsPage {
-    constructor(authService, router, _firestore, ionicAuthService, iroha, loadingController, afAuth, alertController) {
+    constructor(authService, router, _firestore, ionicAuthService, iroha, loadingController, afAuth, alertController, storage) {
         this.authService = authService;
         this.router = router;
         this._firestore = _firestore;
@@ -139,6 +141,7 @@ let UserDetailsPage = class UserDetailsPage {
         this.loadingController = loadingController;
         this.afAuth = afAuth;
         this.alertController = alertController;
+        this.storage = storage;
         this.type = false;
         this.id = this.ionicAuthService.getUid();
         this.initForm();
@@ -150,16 +153,16 @@ let UserDetailsPage = class UserDetailsPage {
     ngOnInit() {
     }
     initForm() {
-        this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormGroup({
-            amount: new _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormControl(null, { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.required] }),
-            reference: new _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormControl(null, { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.required] }), // added email validator also
+        this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormGroup({
+            amount: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormControl(null, { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_6__.Validators.required] }),
+            reference: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormControl(null, { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_6__.Validators.required] }), // added email validator also
         });
     }
     changeType() {
         this.type = !this.type;
     }
     biometricAuth() {
-        capacitor_native_biometric__WEBPACK_IMPORTED_MODULE_4__.NativeBiometric.isAvailable().then((result) => (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+        capacitor_native_biometric__WEBPACK_IMPORTED_MODULE_4__.NativeBiometric.isAvailable().then((result) => (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(this, void 0, void 0, function* () {
             const isAvailable = result.isAvailable;
             const isFaceId = result.biometryType === capacitor_native_biometric__WEBPACK_IMPORTED_MODULE_4__.BiometryType.FACE_ID;
             if (isAvailable) {
@@ -184,25 +187,25 @@ let UserDetailsPage = class UserDetailsPage {
             else {
                 yield this.presentPrompt();
             }
-        }), (error) => (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+        }), (error) => (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(this, void 0, void 0, function* () {
             // Couldn't check availability
             yield this.presentPrompt();
         }));
     }
     onSubmit() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(this, void 0, void 0, function* () {
             if (!this.form.valid) {
                 this.form.markAllAsTouched();
                 return;
             }
             this.loadingController.create({
                 message: 'Sending coins...',
-            }).then((overlay) => (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+            }).then((overlay) => (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(this, void 0, void 0, function* () {
                 this.loading = overlay;
                 this.loading.present();
                 // eslint-disable-next-line no-underscore-dangle
-                const docRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_7__.doc)(this._firestore, 'users', this.currentUser.uid);
-                const docSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_7__.getDoc)(docRef);
+                const docRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_8__.doc)(this._firestore, 'users', this.currentUser.uid);
+                const docSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_8__.getDoc)(docRef);
                 if (docSnap.exists()) {
                     const name = docSnap.data().username.concat('@test');
                     this.iroha.wallet.name = '';
@@ -213,13 +216,17 @@ let UserDetailsPage = class UserDetailsPage {
                     yield this.iroha.setBalance(name);
                 }
                 yield this.iroha.sendMoney(this.form.value.reference, this.form.value.amount)
-                    .then((d) => (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+                    .then((d) => (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(this, void 0, void 0, function* () {
                     this.iroha.wallet.balance = '0';
                     yield this.iroha.setBalance(this.iroha.wallet.name + '@test');
                     this.loading.dismiss();
                     // eslint-disable-next-line max-len
                     yield this.showAlert('Transfer Success', 'You have sent RM' + this.form.value.amount + ' to ' + this.iroha.otherWallet.name + '.');
                     this.form.reset();
+                    let fav = [yield this.storage.get('favperson')];
+                    fav.push(this.iroha.otherWallet.name);
+                    fav = [...new Set(fav)];
+                    yield this.storage.set('favperson', fav);
                     this.iroha.otherWallet.name = '';
                 }))
                     .catch(e => {
@@ -233,7 +240,7 @@ let UserDetailsPage = class UserDetailsPage {
         this.router.navigateByUrl('/tabs/home', { replaceUrl: true });
     }
     showAlert(header, message) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(this, void 0, void 0, function* () {
             const alert = yield this.alertController.create({
                 header,
                 message,
@@ -243,7 +250,7 @@ let UserDetailsPage = class UserDetailsPage {
         });
     }
     presentPrompt() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(this, void 0, void 0, function* () {
             const alert = yield this.alertController.create({
                 header: 'User verification',
                 inputs: [
@@ -263,10 +270,10 @@ let UserDetailsPage = class UserDetailsPage {
                     },
                     {
                         text: 'Confirm',
-                        handler: (data) => (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+                        handler: (data) => (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(this, void 0, void 0, function* () {
                             this.loadingController.create({
                                 message: 'Verifying...',
-                            }).then((overlay) => (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+                            }).then((overlay) => (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(this, void 0, void 0, function* () {
                                 this.loading = overlay;
                                 this.loading.present();
                                 yield this.iroha.getAccDetail('sec');
@@ -290,16 +297,17 @@ let UserDetailsPage = class UserDetailsPage {
 };
 UserDetailsPage.ctorParameters = () => [
     { type: src_app_services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__.AuthService },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_8__.Router },
-    { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_7__.Firestore },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_9__.Router },
+    { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_8__.Firestore },
     { type: src_app_services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__.AuthService },
     { type: _services_iroha_service__WEBPACK_IMPORTED_MODULE_3__.IrohaService },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_9__.LoadingController },
-    { type: _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_10__.AngularFireAuth },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_9__.AlertController }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_10__.LoadingController },
+    { type: _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_11__.AngularFireAuth },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_10__.AlertController },
+    { type: _services_storage_service__WEBPACK_IMPORTED_MODULE_5__.StorageService }
 ];
-UserDetailsPage = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_11__.Component)({
+UserDetailsPage = (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_12__.Component)({
         selector: 'app-user-details',
         template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_user_details_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_user_details_page_scss__WEBPACK_IMPORTED_MODULE_1__]

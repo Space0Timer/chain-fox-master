@@ -4,6 +4,10 @@ import {AlertController, ModalController} from '@ionic/angular';
 import {AngularFirestore} from '@angular/fire/compat/firestore';
 import {AuthService} from '../../../../services/auth/auth.service';
 import {CustomOptions, ProductService} from "../../../../services/cafe/product.service";
+import {doc, Firestore, getDoc, setDoc} from "@angular/fire/firestore";
+import {Auth} from "@angular/fire/auth";
+import firebase from "firebase/compat";
+import {StorageService} from "../../../../services/storage.service";
 
 
 @Component({
@@ -16,25 +20,33 @@ export class CustomiseOrderPage{
   isLoading = false;
   type = false;
   name = 'Not set';
+  group = {};
   public form: FormGroup;
   private optionCount = 1;
-  private keys: any;
+  private addValue = false;
+  private uid = this.ionicAuthService.getUid();
+  private prices = new Map<string, number>();
 
   constructor(private formBuilder: FormBuilder,
               private modalController: ModalController,
               private product: ProductService,
-              private alertController: AlertController){
+              private alertController: AlertController,
+              private _firestore: Firestore,
+              private ionicAuthService: AuthService,
+              private storage: StorageService){
 
    }
 
   ionViewWillEnter() {
     this.init();
+    this.product.customOption = [];
+    this.product.customOptions = [];
   }
 
-  init() {
-    if (this.product.customOption.length === 0) {
+  async init() {
+    if (this.product.customNew === true) {
       this.form = this.formBuilder.group({
-        1: ['', Validators.required]
+        1: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$'), Validators.maxLength(10), Validators.minLength(6)]]
       });
     } else {
       const temp = new Map<string, string>();
@@ -45,20 +57,34 @@ export class CustomiseOrderPage{
         }
       }
       const keys = [...temp.keys()];
-      const group = {};
       for (let i = 0; i < keys.length; i++) {
-        group[`${keys[i]}`] = [temp.get(`${keys[i]}`), Validators.required];
-
+        // eslint-disable-next-line max-len
+        this.group[`${keys[i]}`] = [temp.get(`${keys[i]}`), [Validators.required, Validators.pattern('^[a-zA-Z]+$'), Validators.maxLength(10), Validators.minLength(6)]];
+        const key = Number(keys[i]);
+        this.optionCount = key + 1;
+        // eslint-disable-next-line max-len
       }
-      this.optionCount = keys.length + 1;
-      group[`${this.optionCount}`] = ['', Validators.required];
-      this.form = this.formBuilder.group(group);
-      this.product.customOption = [];
-      this.product.customOptions = [];
+      this.group[`${this.optionCount}`] = ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$'), Validators.maxLength(10), Validators.minLength(6)]];
+      this.form = this.formBuilder.group(this.group);
+      for (let i = 0; i < keys.length; i++) {
+        // eslint-disable-next-line max-len
+        const key = this.name + this.form.value[keys[i]];
+        console.log(`stores/${(this.product.ownerId)}/items/${(this.product.editItemId)}/optionPrice/${(key)}`);
+        const optionRef = doc(this._firestore, `stores/${(this.uid)}/items/${(this.product.editItemId)}/optionPrice/${(key)}`);
+        const optSnap = await getDoc(optionRef);
+        const optionSnap = optSnap.data().price;
+        console.log(this.form.value[keys[i]], optionSnap);
+        this.prices.set(this.form.value[keys[i]],optionSnap);
+        console.log(this.prices[this.form.value[keys[i]]]);
+      }
     }
   }
 
-  async addName() {
+  async refreshPrice(id, price) {
+    this.prices.set(id,price);
+  }
+
+async addName() {
     const alert = await this.alertController.create({
       header: 'Customisation name',
       inputs: [
@@ -79,25 +105,54 @@ export class CustomiseOrderPage{
         {
           text: 'Confirm',
           handler: async data => {
-            this.name = data.name;
+            if (!data.name.match('^[a-zA-Z]+$')) {
+              await this.showAlert('Invalid name.', 'Only characters a-z and A-Z are allowed.');
+            }
+            else if (!data.name.match('^.{6,}$')) {
+              await this.showAlert('Invalid name.', 'Your customisation name must have at least 6 characters.');
+            }
+            else if (!data.name.match('^.{6,15}$')) {
+              await this.showAlert('Invalid name.', 'Your customisation name must have at most 15 characters.');
+            }
+            else {
+              this.name = data.name;
+            }
+
           }
         }
       ]
     });
     await alert.present();
   }
-  addControl(){
-    this.optionCount++;
-    this.form.addControl(String(this.optionCount), new FormControl('', Validators.required));
-  }
+  async addControl() {
+    if (this.form.value[this.optionCount]!=='') {
+      if (!this.form.value[this.optionCount].match('^[a-zA-Z]+$')) {
+        await this.showAlert('Invalid option.', 'Only characters a-z and A-Z are allowed.');
+      }
+      else if (!this.form.value[this.optionCount].match('^.{6,}$')) {
+        await this.showAlert('Invalid option.', 'Your option must have at least 6 characters.');
+      }
+      else if (!this.form.value[this.optionCount].match('^.{6,15}$')) {
+        await this.showAlert('Invalid option.', 'Your option must have at most 15 characters.');
+      }
+      else {
+        await this.presentPrompt();
+      }
+    }
+    else  {
+      await this.showAlert('Invalid option.', 'Empty option not allowed!');
+    }
+   }
 
-  removeControl(control){
-    this.form.removeControl(control.key);
-  }
+  async removeControl(control) {
+    await this.cancelAlert('Remove option', 'Are you sure you want to remove this option?', control);
+    // eslint-disable-next-line max-len
+     }
 
   async submitRequest() {
     this.product.customOptions = [];
     this.product.customOption = [];
+    let dataRef;
     if (this.name !== 'Not set') {
       const optionCount = this.optionCount;
       this.isLoading = true;
@@ -136,11 +191,62 @@ export class CustomiseOrderPage{
           }
         }
       }
+      if (this.product.customOptions !== []) {
+        for (const key in this.product.customOptions) {
+          // eslint-disable-next-line max-len
+          dataRef = doc(this._firestore, `stores/${(this.uid)}/items/${(this.product.editItemId)}/options/${(this.product.customOptions[key].name)}`);
+          await setDoc(dataRef, this.product.customOptions[key].data);
+        }
+        await this.modalController.dismiss();
+      }
       this.isLoading = false;
-    }
-    else {
+    } else {
       await this.showAlert('Invalid name', 'Please set the name of your customisation.');
     }
+  }
+  async presentPrompt() {
+    console.log(this.optionCount);
+    const alert = await this.alertController.create({
+      header: 'Enter price',
+      inputs: [
+        {
+          name: 'price',
+          placeholder: 'Enter price',
+          type: 'number'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Confirm',
+          handler: async data => {
+            console.log(data.price);
+            const key = this.name+this.form.value[this.optionCount];
+            console.log(`stores/${(this.uid)}/items/${(this.product.editItemId)}/optionPrice/${(key)}`);
+            const trackOrderRef = doc(this._firestore, `stores/${(this.uid)}/items/${(this.product.editItemId)}/optionPrice/${(key)}`);
+            await setDoc(trackOrderRef, {
+                price: data.price
+            });
+            await this.refreshPrice(this.form.value[this.optionCount], data.price);
+            // eslint-disable-next-line max-len
+            this.optionCount++;
+            // eslint-disable-next-line max-len
+            while (this.form.value[this.optionCount]!==undefined) {
+              this.optionCount++;
+            }
+            // eslint-disable-next-line max-len
+            this.form.addControl(String(this.optionCount), new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z]+$'), Validators.maxLength(10), Validators.minLength(6)]));
+          }
+        }
+      ]
+    });
+    await alert.present();
   }
 
   async back() {
@@ -152,7 +258,41 @@ export class CustomiseOrderPage{
     const alert = await this.alertController.create({
       header,
       message,
-      buttons: ['OK'],
+      buttons: [{
+        text: 'Cancel',
+        role: 'cancel',
+        handler: data => {
+          console.log('Cancel clicked');
+        }
+      },
+        {
+          text: 'Confirm',
+          }],
+    });
+
+    await alert.present();
+  }
+
+  async cancelAlert(header,message, control) {
+    const alert = await this.alertController.create({
+      header,
+      message,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Confirm',
+          handler: data => {
+            this.form.removeControl(control.key);
+            // eslint-disable-next-line max-len
+            this.form.addControl(String(this.optionCount), new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z]+$'), Validators.maxLength(10), Validators.minLength(6)]));
+          }
+        }],
     });
 
     await alert.present();

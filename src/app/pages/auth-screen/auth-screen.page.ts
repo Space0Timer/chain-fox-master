@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import {Router} from '@angular/router';
 import SwiperCore, { SwiperOptions } from 'swiper';
 import {MenuController} from "@ionic/angular";
+import {SplashScreen} from "@capacitor/splash-screen";
 
 @Component({
   selector: 'app-auth-screen',
@@ -31,7 +32,9 @@ export class AuthScreenPage implements OnInit {
     await this.menu.enable(true);
   }
 
-  ngOnInit() {}
+  async ngOnInit() {
+    await SplashScreen.hide();
+  }
 
 
   segmentChanged(event) {

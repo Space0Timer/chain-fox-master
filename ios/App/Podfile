@@ -19,6 +19,7 @@ def capacitor_pods
   pod 'CapacitorSplashScreen', :path => '../../node_modules/@capacitor/splash-screen'
   pod 'CapacitorStatusBar', :path => '../../node_modules/@capacitor/status-bar'
   pod 'CapacitorStorage', :path => '../../node_modules/@capacitor/storage'
+  pod 'RobingenzCapacitorBadge', :path => '../../node_modules/@robingenz/capacitor-badge'
   pod 'CapacitorNativeBiometric', :path => '../../node_modules/capacitor-native-biometric'
   pod 'CordovaPlugins', :path => '../capacitor-cordova-ios-plugins'
 end

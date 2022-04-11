@@ -203,6 +203,7 @@ let ConfirmPage = class ConfirmPage {
         this.showFallback = true;
         this.checkout = [];
         this.id = this.ionicAuthService.getUid();
+        this.options = [];
         this.menu.enable(false);
     }
     ionViewDidLeave() {
@@ -259,7 +260,7 @@ let ConfirmPage = class ConfirmPage {
                 .then(snap => { data = snap.data(); delete data.lastUpdate; delete data.id; });
             for (const key in data) {
                 console.log(key);
-                const idOwnerRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.doc)(this._firestore, `idOwner/${(key)}`);
+                const idOwnerRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.doc)(this._firestore, `idOwner/${(key.split('@')[0])}`);
                 const idOwnerSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.getDoc)(idOwnerRef);
                 const idOwnerName = idOwnerSnap.data();
                 this.owner = idOwnerName.owner;
@@ -268,7 +269,7 @@ let ConfirmPage = class ConfirmPage {
                 const ownerSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.getDoc)(ownerRef);
                 const ownerName = ownerSnap.data();
                 // eslint-disable-next-line no-underscore-dangle
-                const dataRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.doc)(this._firestore, `stores/${(this.owner)}/items/${(key)}`);
+                const dataRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.doc)(this._firestore, `stores/${(this.owner)}/items/${(key.split('@')[0])}`);
                 const docSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.getDoc)(dataRef);
                 const dataSnap = docSnap.data();
                 const value = data[key];
@@ -278,9 +279,41 @@ let ConfirmPage = class ConfirmPage {
                     price: dataSnap.price,
                     image: dataSnap.imageUrl,
                     id: key,
+                    ownerId: this.owner,
                     quantity: value,
                 });
                 this.total += dataSnap.price * value;
+            }
+        });
+    }
+    getOptions(itemId) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_10__.__awaiter)(this, void 0, void 0, function* () {
+            this.product.customOptions = [];
+            this.product.customOption = [];
+            const key = itemId.split('@')[1];
+            itemId = itemId.split('@')[0];
+            const dataRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.doc)(this._firestore, 'carts/' + this.id + '/option/' + itemId + '/grouping/' + key);
+            const dataSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.getDoc)(dataRef);
+            const data = dataSnap.data();
+            delete data.id;
+            for (const keys in data) {
+                console.log(keys, data[keys]);
+                this.product.customOptions.push({
+                    name: keys,
+                    data: data[keys],
+                    checked: false
+                });
+            }
+            console.log(this.product.customOptions);
+            for (const i in this.product.customOptions) {
+                this.options.push({
+                    val: this.product.customOptions[i].data,
+                    name: this.product.customOptions[i].name,
+                });
+            }
+            this.product.currentOption = '';
+            for (const key in this.options) {
+                this.product.currentOption = this.product.currentOption + this.options[key].name + this.options[key].val + '-';
             }
         });
     }
@@ -305,7 +338,7 @@ let ConfirmPage = class ConfirmPage {
                     const value = data[key];
                     // get owner id from item id
                     // eslint-disable-next-line no-underscore-dangle
-                    const idOwnerRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.doc)(this._firestore, `idOwner/${(key)}`);
+                    const idOwnerRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.doc)(this._firestore, `idOwner/${(key.split('@')[0])}`);
                     const idOwnerSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.getDoc)(idOwnerRef);
                     const idOwnerName = idOwnerSnap.data();
                     this.owner = idOwnerName.owner;
@@ -315,7 +348,7 @@ let ConfirmPage = class ConfirmPage {
                     const ownerSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.getDoc)(ownerRef);
                     const ownerName = ownerSnap.data();
                     // find price times value
-                    const dataRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.doc)(this._firestore, `stores/${(this.owner)}/items/${(key)}`);
+                    const dataRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.doc)(this._firestore, `stores/${(this.owner)}/items/${(key.split('@')[0])}`);
                     const docSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.getDoc)(dataRef);
                     const dataSnap = docSnap.data();
                     const price = dataSnap.price;
@@ -358,6 +391,13 @@ let ConfirmPage = class ConfirmPage {
                         message: this.paymentDetails,
                         orderTime: firebase_compat_app__WEBPACK_IMPORTED_MODULE_6__["default"].firestore.FieldValue.serverTimestamp()
                     });
+                    yield this.getOptions(key);
+                    let optRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.doc)(this._firestore, `users/${(this.id)}/activeOrders/${(pushKey)}/options/${(this.product.currentOption)}`);
+                    yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.setDoc)(optRef, {});
+                    for (const key in this.options)
+                        yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.updateDoc)(optRef, {
+                            [this.options[key].name]: this.options[key].val
+                        });
                     // add to all orders for buyer
                     const allOrderRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.doc)(this._firestore, `users/${(this.id)}/allOrders/${(pushKey)}`);
                     yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.setDoc)(allOrderRef, {
@@ -372,8 +412,15 @@ let ConfirmPage = class ConfirmPage {
                         quantity: value,
                         amountPaid: payString,
                         deliverTime: this.deliverTime,
+                        message: this.paymentDetails,
                         orderTime: firebase_compat_app__WEBPACK_IMPORTED_MODULE_6__["default"].firestore.FieldValue.serverTimestamp()
                     });
+                    optRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.doc)(this._firestore, `users/${(this.id)}/allOrders/${(pushKey)}/options/${(this.product.currentOption)}`);
+                    yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.setDoc)(optRef, {});
+                    for (const key in this.options)
+                        yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.updateDoc)(optRef, {
+                            [this.options[key].name]: [this.options[key].val]
+                        });
                     // add orders for stall
                     const trackActiveOrderRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.doc)(this._firestore, `trackOrders/${(this.owner)}/activeOrders/${(pushKey)}`);
                     yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.setDoc)(trackActiveOrderRef, {
@@ -390,8 +437,15 @@ let ConfirmPage = class ConfirmPage {
                         quantity: value,
                         amountPaid: payString,
                         deliverTime: this.deliverTime,
+                        message: this.paymentDetails,
                         orderTime: firebase_compat_app__WEBPACK_IMPORTED_MODULE_6__["default"].firestore.FieldValue.serverTimestamp()
                     });
+                    optRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.doc)(this._firestore, `trackOrders/${(this.owner)}/activeOrders/${(pushKey)}/options/${(this.product.currentOption)}`);
+                    yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.setDoc)(optRef, {});
+                    for (const key in this.options)
+                        yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.updateDoc)(optRef, {
+                            [this.options[key].name]: [this.options[key].val]
+                        });
                     // add all orders for stall
                     const trackOrderRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.doc)(this._firestore, `trackOrders/${(this.owner)}/allOrders/${(pushKey)}`);
                     yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.setDoc)(trackOrderRef, {
@@ -407,8 +461,15 @@ let ConfirmPage = class ConfirmPage {
                         quantity: value,
                         amountPaid: payString,
                         deliverTime: this.deliverTime,
+                        message: this.paymentDetails,
                         orderTime: firebase_compat_app__WEBPACK_IMPORTED_MODULE_6__["default"].firestore.FieldValue.serverTimestamp()
                     });
+                    optRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.doc)(this._firestore, `trackOrders/${(this.owner)}/allOrders/${(pushKey)}/options/${(this.product.currentOption)}`);
+                    yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.setDoc)(optRef, {});
+                    for (const key in this.options)
+                        yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.updateDoc)(optRef, {
+                            [this.options[key].name]: [this.options[key].val]
+                        });
                     // add to sales
                     const currentDate = new Date();
                     const month = currentDate.getMonth() + 1; //months from 1-12

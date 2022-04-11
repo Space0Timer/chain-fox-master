@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import {AccessService} from '../../services/auth/access.service';
 import {Router} from '@angular/router';
 import {IrohaService} from '../../services/iroha.service';
-import {doc, Firestore, getDoc, setDoc} from '@angular/fire/firestore';
+import {doc, Firestore, getDoc, setDoc, updateDoc} from '@angular/fire/firestore';
 import {AuthService} from '../../services/auth/auth.service';
 import {AngularFirestore, DocumentData} from '@angular/fire/compat/firestore';
 import {ProductService} from '../../services/cafe/product.service';
@@ -13,6 +13,7 @@ import {AvailableResult, BiometryType, Credentials, NativeBiometric} from "capac
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import {ICartCard} from "../../shared";
+import {update} from "@angular/fire/database";
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -35,6 +36,7 @@ export class ConfirmPage implements OnInit {
   ];
   private id = this.ionicAuthService.getUid();
   private loading: any;
+  private options = [];
 
   constructor(private access: AccessService,
               private router: Router,
@@ -110,7 +112,7 @@ export class ConfirmPage implements OnInit {
       .then(snap =>   { data = snap.data(); delete data.lastUpdate; delete data.id;});
     for (const key in data) {
       console.log(key);
-      const idOwnerRef = doc(this._firestore, `idOwner/${(key)}`);
+      const idOwnerRef = doc(this._firestore, `idOwner/${(key.split('@')[0])}`);
       const idOwnerSnap = await getDoc(idOwnerRef);
       const idOwnerName = idOwnerSnap.data();
       this.owner = idOwnerName.owner;
@@ -119,21 +121,60 @@ export class ConfirmPage implements OnInit {
       const ownerSnap = await getDoc(ownerRef);
       const ownerName = ownerSnap.data();
       // eslint-disable-next-line no-underscore-dangle
-      const dataRef = doc(this._firestore, `stores/${(this.owner)}/items/${(key)}`);
+      const dataRef = doc(this._firestore, `stores/${(this.owner)}/items/${(key.split('@')[0])}`);
       const docSnap = await getDoc(dataRef);
       const dataSnap = docSnap.data();
       const value = data[key];
+      const keys = key.split('@')[1].split('-').slice(0, -1);
+      let optionSnap = 0;
+      for (const price of keys) {
+        // eslint-disable-next-line max-len
+        const optionRef = doc(this._firestore, `stores/${(this.owner)}/items/${(key.split('@')[0])}/optionPrice/${(price)}`);
+        const optSnap = await getDoc(optionRef);
+        optionSnap += Number(optSnap.data().price);
+      }
       this.checkout.push(
         {
           name: dataSnap.name,
           owner: ownerName.name,
-          price: dataSnap.price,
+          price: Number(dataSnap.price)+ optionSnap,
           image: dataSnap.imageUrl,
           id: key,
+          ownerId: this.owner,
           quantity: value,
         },
       );
-      this.total += dataSnap.price*value;
+      this.total += (Number(dataSnap.price)+optionSnap)*value;
+    }
+  }
+
+  async getOptions(itemId) {
+    this.product.customOptions = [];
+    this.product.customOption = [];
+    const key = itemId.split('@')[1];
+    itemId = itemId.split('@')[0];
+    const dataRef = doc(this._firestore, 'carts/' + this.id + '/option/' + itemId + '/grouping/' + key);
+    const dataSnap = await getDoc(dataRef);
+    const data = dataSnap.data();
+    delete data.id;
+    for (const keys in data) {
+      console.log(keys, data[keys]);
+      this.product.customOptions.push({
+        name: keys,
+        data: data[keys],
+        checked: false
+      });
+    }
+    console.log(this.product.customOptions);
+    for (const i in this.product.customOptions) {
+      this.options.push({
+        val: this.product.customOptions[i].data,
+        name: this.product.customOptions[i].name,
+      });
+    }
+    this.product.currentOption = '';
+    for (const key in this.options) {
+      this.product.currentOption = this.product.currentOption + this.options[key].name + this.options[key].val + '-';
     }
   }
 
@@ -157,7 +198,7 @@ export class ConfirmPage implements OnInit {
         const value = data[key];
         // get owner id from item id
         // eslint-disable-next-line no-underscore-dangle
-        const idOwnerRef = doc(this._firestore, `idOwner/${(key)}`);
+        const idOwnerRef = doc(this._firestore, `idOwner/${(key.split('@')[0])}`);
         const idOwnerSnap = await getDoc(idOwnerRef);
         const idOwnerName = idOwnerSnap.data();
         this.owner = idOwnerName.owner;
@@ -167,7 +208,7 @@ export class ConfirmPage implements OnInit {
         const ownerSnap = await getDoc(ownerRef);
         const ownerName = ownerSnap.data();
         // find price times value
-        const dataRef = doc(this._firestore, `stores/${(this.owner)}/items/${(key)}`);
+        const dataRef = doc(this._firestore, `stores/${(this.owner)}/items/${(key.split('@')[0])}`);
         const docSnap = await getDoc(dataRef);
         const dataSnap = docSnap.data();
         const price = dataSnap.price;
@@ -210,6 +251,14 @@ export class ConfirmPage implements OnInit {
           message: this.paymentDetails,
           orderTime: firebase.firestore.FieldValue.serverTimestamp()
         });
+        await this.getOptions(key);
+        let optRef = doc(this._firestore, `users/${(this.id)}/activeOrders/${(pushKey)}/options/${(this.product.currentOption)}`);
+        await setDoc(optRef, {
+        });
+        for (const key in this.options)
+        await updateDoc(optRef, {
+          [this.options[key].name]: this.options[key].val
+        })
         // add to all orders for buyer
         const allOrderRef = doc(this._firestore, `users/${(this.id)}/allOrders/${(pushKey)}`);
         await setDoc(allOrderRef, {
@@ -224,8 +273,16 @@ export class ConfirmPage implements OnInit {
           quantity: value,
           amountPaid: payString,
           deliverTime: this.deliverTime,
+          message: this.paymentDetails,
           orderTime: firebase.firestore.FieldValue.serverTimestamp()
         });
+        optRef = doc(this._firestore, `users/${(this.id)}/allOrders/${(pushKey)}/options/${(this.product.currentOption)}`);
+        await setDoc(optRef, {
+        });
+        for (const key in this.options)
+          await updateDoc(optRef, {
+            [this.options[key].name]: [this.options[key].val]
+          })
         // add orders for stall
         const trackActiveOrderRef = doc(this._firestore, `trackOrders/${(this.owner)}/activeOrders/${(pushKey)}`);
         await setDoc(trackActiveOrderRef, {
@@ -242,8 +299,16 @@ export class ConfirmPage implements OnInit {
           quantity: value,
           amountPaid: payString,
           deliverTime: this.deliverTime,
+          message: this.paymentDetails,
           orderTime: firebase.firestore.FieldValue.serverTimestamp()
         });
+        optRef = doc(this._firestore, `trackOrders/${(this.owner)}/activeOrders/${(pushKey)}/options/${(this.product.currentOption)}`);
+        await setDoc(optRef, {
+        });
+        for (const key in this.options)
+          await updateDoc(optRef, {
+            [this.options[key].name]: [this.options[key].val]
+          })
         // add all orders for stall
         const trackOrderRef = doc(this._firestore, `trackOrders/${(this.owner)}/allOrders/${(pushKey)}`);
         await setDoc(trackOrderRef, {
@@ -259,8 +324,16 @@ export class ConfirmPage implements OnInit {
           quantity: value,
           amountPaid: payString,
           deliverTime: this.deliverTime,
+          message: this.paymentDetails,
           orderTime: firebase.firestore.FieldValue.serverTimestamp()
         });
+        optRef = doc(this._firestore, `trackOrders/${(this.owner)}/allOrders/${(pushKey)}/options/${(this.product.currentOption)}`);
+        await setDoc(optRef, {
+        });
+        for (const key in this.options)
+          await updateDoc(optRef, {
+            [this.options[key].name]: [this.options[key].val]
+          })
         // add to sales
         const currentDate = new Date();
         const month = currentDate.getMonth() + 1; //months from 1-12

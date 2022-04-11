@@ -67,7 +67,6 @@ export class UpdateStorePage implements OnInit {
         }
       },
       (error: any) => {
-        this.errorMessage = 'File size exceeded. Maximum file size 1 MB';
         this.barStatus = false;
       }
     );

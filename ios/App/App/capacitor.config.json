@@ -10,6 +10,13 @@
 				"sound",
 				"alert"
 			]
+		},
+		"Badge": {
+			"persist": true,
+			"autoClear": false
+		},
+		"SplashScreen": {
+			"launchAutoHide": false
 		}
 	}
 }

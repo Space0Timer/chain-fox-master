@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import {Platform} from '@ionic/angular';
+import {SplashScreen} from "@capacitor/splash-screen";
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,8 @@ export class AppComponent {
   }
 
   async initializeApp() {
-    this.platform.ready().then(() => {
+    this.platform.ready().then(async () => {
+
     });
   }
 }

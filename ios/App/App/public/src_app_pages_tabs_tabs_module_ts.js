@@ -107,6 +107,41 @@ const Keyboard = (0,_capacitor_core__WEBPACK_IMPORTED_MODULE_0__.registerPlugin)
 
 /***/ }),
 
+/***/ 36912:
+/*!*************************************************************************!*\
+  !*** ./node_modules/@robingenz/capacitor-badge/dist/esm/definitions.js ***!
+  \*************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/// <reference types="@capacitor/cli" />
+
+
+
+/***/ }),
+
+/***/ 96841:
+/*!*******************************************************************!*\
+  !*** ./node_modules/@robingenz/capacitor-badge/dist/esm/index.js ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Badge": () => (/* binding */ Badge)
+/* harmony export */ });
+/* harmony import */ var _capacitor_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @capacitor/core */ 24249);
+/* harmony import */ var _definitions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./definitions */ 36912);
+
+const Badge = (0,_capacitor_core__WEBPACK_IMPORTED_MODULE_0__.registerPlugin)('Badge', {
+    web: () => __webpack_require__.e(/*! import() */ "node_modules_robingenz_capacitor-badge_dist_esm_web_js").then(__webpack_require__.bind(__webpack_require__, /*! ./web */ 5467)).then(m => new m.BadgeWeb()),
+});
+
+
+
+
+/***/ }),
+
 /***/ 42045:
 /*!***************************************************!*\
   !*** ./src/app/pages/tabs/tabs-routing.module.ts ***!
@@ -137,7 +172,7 @@ const routes = [
             },
             {
                 path: 'home',
-                loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_pages_tabs_home_home_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./home/home.module */ 77788)).then(m => m.HomePageModule)
+                loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_pages_tabs_home_home_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./home/home.module */ 77788)).then(m => m.HomePageModule)
             },
             {
                 path: 'search',
@@ -226,8 +261,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 48111);
 /* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_tabs_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./tabs.page.html */ 13869);
 /* harmony import */ var _tabs_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tabs.page.scss */ 73081);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 14001);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 14001);
 /* harmony import */ var _capacitor_keyboard__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @capacitor/keyboard */ 28126);
+/* harmony import */ var _robingenz_capacitor_badge__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @robingenz/capacitor-badge */ 96841);
+
 
 
 
@@ -238,11 +275,17 @@ let TabsPage = class TabsPage {
         this.hide = false;
     }
     ngOnInit() {
-        _capacitor_keyboard__WEBPACK_IMPORTED_MODULE_2__.Keyboard.addListener('keyboardDidShow', info => {
-            this.hide = true;
-        });
-        _capacitor_keyboard__WEBPACK_IMPORTED_MODULE_2__.Keyboard.addListener('keyboardDidHide', () => {
-            this.hide = false;
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
+            const clear = () => (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+                yield _robingenz_capacitor_badge__WEBPACK_IMPORTED_MODULE_3__.Badge.clear();
+            });
+            _capacitor_keyboard__WEBPACK_IMPORTED_MODULE_2__.Keyboard.addListener('keyboardDidShow', info => {
+                this.hide = true;
+            });
+            _capacitor_keyboard__WEBPACK_IMPORTED_MODULE_2__.Keyboard.addListener('keyboardDidHide', () => {
+                this.hide = false;
+            });
         });
     }
     setCurrentTab($event) {
@@ -251,10 +294,10 @@ let TabsPage = class TabsPage {
 };
 TabsPage.ctorParameters = () => [];
 TabsPage.propDecorators = {
-    tabs: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.ViewChild, args: ['tabs', { static: false },] }]
+    tabs: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_5__.ViewChild, args: ['tabs', { static: false },] }]
 };
 TabsPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_3__.Component)({
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Component)({
         selector: 'app-tabs',
         template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_tabs_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_tabs_page_scss__WEBPACK_IMPORTED_MODULE_1__]

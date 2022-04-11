@@ -42,7 +42,7 @@ export interface Status {
 export interface CustomOptions {
   name: string;
   data: DocumentData;
-  checked: boolean
+  checked: boolean;
 }
 
 @Injectable({
@@ -123,11 +123,24 @@ export class ProductService {
 
     this.idOwnerPair.set(id, owner);
   }
-
+  areEqual(_array1, _array2) {
+    if (_array1 == null || _array2 == null)
+      {return false;}
+    if (_array1.length !== _array2.length)
+      {return false;}
+    _array1.sort();
+    _array2.sort();
+    for (let i = 0; i < _array1.length; ++i)
+    {
+      if (_array1[i] !== _array2[i])
+        {return false;}
+    }
+    return true;
+  }
   async addToCartModal(id, owner, quantity, selectedOption) {
     let custom = '';
     selectedOption.forEach((value, key) => {
-      custom = custom + key + value;
+      custom = custom + key + value+'-';
     });
     const docRef = doc(this._firestore, `carts/${(this.id)}`);
     await updateDoc(docRef, {

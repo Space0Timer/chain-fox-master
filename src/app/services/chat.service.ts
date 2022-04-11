@@ -51,20 +51,24 @@ export class ChatService {
     await this.afs.collection('messages/' + this.currentUser.uid + '/' + id).add({
       msg,
       from: this.currentUser.uid,
-      status: 'unread',
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
     });
   }
 
   async returnChatMessage(msg, id) {
+    let msgId = '';
     await this.afs.collection('messages').doc(id).update({
       [this.currentUser.uid]: 1,
     });
     await this.afs.collection('messages/' + id + '/' + this.currentUser.uid).add({
       msg,
       from: this.currentUser.uid,
-      status: 'unread',
+      status: 'sent',
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    }).then(docRef => msgId=docRef.id);
+    console.log(msgId);
+    await this.afs.collection('messages/' + id + '/' + this.currentUser.uid).doc(msgId).update({
+      status: 'unread',
     });
   }
   async addChatMessageCafe(msg) {
@@ -74,20 +78,25 @@ export class ChatService {
     return this.afs.collection('messages/' + this.product.store.name + '/' + this.currentUser.uid).add({
       msg,
       from: this.currentUser.uid,
-      status: 'unread',
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
     });
   }
 
   async returnChatMessageCafe(msg) {
+    let msgId = '';
     await this.afs.collection('messages').doc(this.currentUser.uid).update({
       [this.product.store.name]: 1,
     });
     await this.afs.collection('messages/' + this.currentUser.uid + '/' + this.product.store.name).add({
       msg,
       from: this.currentUser.uid,
-      status: 'unread',
+      status: 'sent',
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    })
+      .then(docRef => msgId=docRef.id);
+    console.log(msgId);
+    await this.afs.collection('messages/' + this.currentUser.uid + '/' + this.product.store.name).doc(msgId).update({
+      status: 'unread',
     });
   }
 

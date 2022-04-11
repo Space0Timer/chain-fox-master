@@ -4,6 +4,7 @@ import {AuthService} from "../../services/auth/auth.service";
 import {AlertController, LoadingController, MenuController} from "@ionic/angular";
 import {doc, Firestore, getDoc} from "@angular/fire/firestore";
 import {StorageService} from "../../services/storage.service";
+import {SplashScreen} from "@capacitor/splash-screen";
 
 @Component({
   selector: 'app-verify-email-address',
@@ -25,7 +26,8 @@ export class VerifyEmailAddressPage implements OnInit {
   }
 
 
-  ngOnInit() {
+  async ngOnInit() {
+    await SplashScreen.hide();
   }
 
   async unlock() {

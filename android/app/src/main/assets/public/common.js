@@ -111,6 +111,41 @@ const BarcodeScanner = (0,_capacitor_core__WEBPACK_IMPORTED_MODULE_0__.registerP
 
 /***/ }),
 
+/***/ 92637:
+/*!***********************************************************************!*\
+  !*** ./node_modules/@capacitor/splash-screen/dist/esm/definitions.js ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/// <reference types="@capacitor/cli" />
+
+
+
+/***/ }),
+
+/***/ 26391:
+/*!*****************************************************************!*\
+  !*** ./node_modules/@capacitor/splash-screen/dist/esm/index.js ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "SplashScreen": () => (/* binding */ SplashScreen)
+/* harmony export */ });
+/* harmony import */ var _capacitor_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @capacitor/core */ 24249);
+/* harmony import */ var _definitions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./definitions */ 92637);
+
+const SplashScreen = (0,_capacitor_core__WEBPACK_IMPORTED_MODULE_0__.registerPlugin)('SplashScreen', {
+    web: () => __webpack_require__.e(/*! import() */ "node_modules_capacitor_splash-screen_dist_esm_web_js").then(__webpack_require__.bind(__webpack_require__, /*! ./web */ 1914)).then(m => new m.SplashScreenWeb()),
+});
+
+
+
+
+/***/ }),
+
 /***/ 72865:
 /*!*********************************************************************!*\
   !*** ./node_modules/@ionic/core/dist/esm/button-active-80cd2e37.js ***!
@@ -1428,21 +1463,25 @@ let ChatService = class ChatService {
             yield this.afs.collection('messages/' + this.currentUser.uid + '/' + id).add({
                 msg,
                 from: this.currentUser.uid,
-                status: 'unread',
                 createdAt: firebase_compat_app__WEBPACK_IMPORTED_MODULE_0__["default"].firestore.FieldValue.serverTimestamp()
             });
         });
     }
     returnChatMessage(msg, id) {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
+            let msgId = '';
             yield this.afs.collection('messages').doc(id).update({
                 [this.currentUser.uid]: 1,
             });
             yield this.afs.collection('messages/' + id + '/' + this.currentUser.uid).add({
                 msg,
                 from: this.currentUser.uid,
-                status: 'unread',
+                status: 'sent',
                 createdAt: firebase_compat_app__WEBPACK_IMPORTED_MODULE_0__["default"].firestore.FieldValue.serverTimestamp()
+            }).then(docRef => msgId = docRef.id);
+            console.log(msgId);
+            yield this.afs.collection('messages/' + id + '/' + this.currentUser.uid).doc(msgId).update({
+                status: 'unread',
             });
         });
     }
@@ -1454,21 +1493,26 @@ let ChatService = class ChatService {
             return this.afs.collection('messages/' + this.product.store.name + '/' + this.currentUser.uid).add({
                 msg,
                 from: this.currentUser.uid,
-                status: 'unread',
                 createdAt: firebase_compat_app__WEBPACK_IMPORTED_MODULE_0__["default"].firestore.FieldValue.serverTimestamp()
             });
         });
     }
     returnChatMessageCafe(msg) {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
+            let msgId = '';
             yield this.afs.collection('messages').doc(this.currentUser.uid).update({
                 [this.product.store.name]: 1,
             });
             yield this.afs.collection('messages/' + this.currentUser.uid + '/' + this.product.store.name).add({
                 msg,
                 from: this.currentUser.uid,
-                status: 'unread',
+                status: 'sent',
                 createdAt: firebase_compat_app__WEBPACK_IMPORTED_MODULE_0__["default"].firestore.FieldValue.serverTimestamp()
+            })
+                .then(docRef => msgId = docRef.id);
+            console.log(msgId);
+            yield this.afs.collection('messages/' + this.currentUser.uid + '/' + this.product.store.name).doc(msgId).update({
+                status: 'unread',
             });
         });
     }

@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ProductService} from '../../../../services/cafe/product.service';
-import {AlertController} from '@ionic/angular';
+import {AlertController, ModalController} from '@ionic/angular';
 import {collection, Firestore, getDocs, query} from '@angular/fire/firestore';
 import {AuthService} from '../../../../services/auth/auth.service';
-import {randomInt} from "crypto";
 
 export interface Form {
   title: string;
@@ -36,7 +35,8 @@ export class ChooseOptionsPage implements OnInit {
   constructor(private product: ProductService,
               private alertController: AlertController,
               private _firestore: Firestore,
-              private ionicAuthService: AuthService) { }
+              private ionicAuthService: AuthService,
+              private modalController: ModalController) { }
 
   async ngOnInit() {
     if (this.product.editQuantity !== 0) {
@@ -49,12 +49,13 @@ export class ChooseOptionsPage implements OnInit {
     // if option changed delete old
     this.product.customOptions = [];
     this.product.customOption = [];
-    const dataRef = collection(this._firestore, 'stores/' + this.uid + '/items/' + this.product.itemId.split('@')[0] + '/options');
+    // eslint-disable-next-line max-len
+    const dataRef = collection(this._firestore, 'stores/' + this.product.itemOwner + '/items/' + this.product.itemId.split('@')[0] + '/options');
     const q = query(dataRef);
     const querySnapshot = await getDocs(q);
+    console.log('stores/' + this.uid + '/items/' + this.product.itemId.split('@')[0] + '/options');
     querySnapshot.forEach((docu) => {
-      const data = docu.data();
-      this.product.customOption = data;
+      this.product.customOption = docu.data();
       this.product.customOptions.push({
         name: this.product.customOption.name,
         data: this.product.customOption,
@@ -96,6 +97,7 @@ export class ChooseOptionsPage implements OnInit {
     }
     else {
       await this.product.addToCartModal(this.product.itemId.split('@')[0], this.product.itemOwner, this.quantity, this.selectedOption);
+      await this.modalController.dismiss();
     }
   }
 

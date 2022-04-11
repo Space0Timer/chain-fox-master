@@ -7,6 +7,8 @@ import {Network} from '@capacitor/network';
 import {AlertController, MenuController} from '@ionic/angular';
 import {FCM} from '@capacitor-community/fcm';
 import { PushNotifications } from '@capacitor/push-notifications';
+import {SplashScreen} from "@capacitor/splash-screen";
+import {ProductService} from "../../../services/cafe/product.service";
 
 @Component({
   selector: 'app-home',
@@ -33,6 +35,7 @@ export class HomePage implements OnInit{
 
   private uid = this.ionicAuthService.getUid();
   private id: any;
+  private options = [];
 
   constructor(
     private router: Router,
@@ -40,7 +43,7 @@ export class HomePage implements OnInit{
     private _firestore: Firestore,
     public iroha: IrohaService,
     public alertController: AlertController,
-    private menu: MenuController,
+    private product: ProductService,
   ) { }
 
   getRoute(route) {
@@ -77,6 +80,7 @@ export class HomePage implements OnInit{
   }
   async ionViewDidEnter() {
     await this.getUserId();
+    await SplashScreen.hide();
   }
 
   async showAlert(message) {

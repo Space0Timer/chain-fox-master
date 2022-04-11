@@ -15,6 +15,7 @@ export interface ICartCard {
   price: number;
   image: string;
   id: string;
+  ownerId: string;
   quantity: string;
 }
 
@@ -53,13 +54,16 @@ export class CartCardComponent implements OnInit{
     this.myDateString = this.myDate.toISOString();
   }
 
-  async openChooseOptionsModal(id, quantity) {
+  async openChooseOptionsModal(id, quantity, ownerId) {
+    this.product.itemOwner = ownerId;
+    console.log(this.product.itemOwner);
     this.product.editOption = true;
     this.product.itemId = id;
     this.product.editQuantity = quantity;
+    this.product.currentOption = '';
     for (const key in this.options) {
-      this.product.currentOption = '';
-      this.product.currentOption = this.product.currentOption + this.options[key].name + this.options[key].val;
+      console.log(this.options[key],this.options[key].name,this.options[key].val);
+      this.product.currentOption = this.product.currentOption + this.options[key].name + this.options[key].val + '-';
     }
     const modal = await this.modalController.create({
       component: ChooseOptionsPage,
@@ -76,8 +80,10 @@ export class CartCardComponent implements OnInit{
   async getOptions(id) {
     this.product.customOptions = [];
     this.product.customOption = [];
+    console.log(id);
     const key = id.split('@')[1];
     id = id.split('@')[0];
+    console.log('carts/' + this.uid + '/option/' + id + '/grouping/' + key);
     const dataRef = doc(this._firestore, 'carts/' + this.uid + '/option/' + id + '/grouping/' + key);
     const dataSnap = await getDoc(dataRef);
     const data = dataSnap.data();
@@ -120,10 +126,10 @@ export class CartCardComponent implements OnInit{
       return await modal.present();
     }
 
-  async dateChanges(date, id) {
-    this.date = date.split('T')[0] + ' ' + date.split('T')[1].substring(0, 5);;
-    await this.product.addTime(id, this.date);
-    console.log(this.product.orderTimePair.get(id));
+  async dateChanges(date) {
+    this.date = date.split('T')[0] + ' ' + date.split('T')[1].substring(0, 5);
+    await this.product.addTime(this.cart.id, this.date);
+    console.log(this.product.orderTimePair.get(this.cart.id));
   }
 
     async deleteItem() {

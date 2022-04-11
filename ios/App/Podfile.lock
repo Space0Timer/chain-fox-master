@@ -84,6 +84,8 @@ PODS:
   - nanopb/encode (2.30908.0)
   - PromisesObjC (2.0.0)
   - ReachabilitySwift (5.0.0)
+  - RobingenzCapacitorBadge (1.2.1):
+    - Capacitor
 
 DEPENDENCIES:
   - "Capacitor (from `../../node_modules/@capacitor/ios`)"
@@ -100,6 +102,7 @@ DEPENDENCIES:
   - "CapacitorStatusBar (from `../../node_modules/@capacitor/status-bar`)"
   - "CapacitorStorage (from `../../node_modules/@capacitor/storage`)"
   - CordovaPlugins (from `../capacitor-cordova-ios-plugins`)
+  - "RobingenzCapacitorBadge (from `../../node_modules/@robingenz/capacitor-badge`)"
 
 SPEC REPOS:
   trunk:
@@ -143,6 +146,8 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor/storage"
   CordovaPlugins:
     :path: "../capacitor-cordova-ios-plugins"
+  RobingenzCapacitorBadge:
+    :path: "../../node_modules/@robingenz/capacitor-badge"
 
 SPEC CHECKSUMS:
   Capacitor: a8d7fa9fb3b50adc610247bb8d0310e83424f746
@@ -169,7 +174,8 @@ SPEC CHECKSUMS:
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
+  RobingenzCapacitorBadge: 47129795f2d9ed6bc504b43de593d91ee5db524c
 
-PODFILE CHECKSUM: 3a5fc0b0b1daab0003bdede273bb56a69b58fbe4
+PODFILE CHECKSUM: 66ca4ae9b0cd8e3ca42197f7f91b61a6b987e760
 
 COCOAPODS: 1.11.2

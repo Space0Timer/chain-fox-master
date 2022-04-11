@@ -110,6 +110,7 @@ export class AddItemComponent implements OnInit {
     await this.uploadStoreDetails(this.form.value);
     await this.showAlert('Adding Item', 'Item successfully added.');
     this.isLoading = false;
+    await this.modalController.dismiss();
   }
 
   async uploadStoreDetails(formValue) {

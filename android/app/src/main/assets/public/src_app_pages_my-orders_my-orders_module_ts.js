@@ -253,7 +253,7 @@ let ErrorComponent = class ErrorComponent {
     }
     ngOnInit() {
         this.screens = [
-            { background: 'assets/imgs/12.png', title: 'No orders available!', subtitle: 'You don\'t have any active orders', description: 'Why not order your favourite food at the online cafe?', titleColor: 'primary', color: 'medium', button: 'ORDER NOW', buttonColor: 'primary' },
+            { title: 'No orders available!', subtitle: 'You don\'t have any active orders', description: 'Why not order your favourite food at the online cafe?', titleColor: 'primary', color: 'medium', button: 'ORDER NOW', buttonColor: 'primary' },
         ];
         this.model = this.screens[this.index];
         this.index++;

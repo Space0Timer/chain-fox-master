@@ -9,8 +9,17 @@ const config: CapacitorConfig = {
     // eslint-disable-next-line @typescript-eslint/naming-convention
     PushNotifications: {
       presentationOptions: ['badge', 'sound', 'alert']
+    },
+    Badge: {
+      persist: true,
+      autoClear: false,
+    },
+    SplashScreen: {
+      launchAutoHide: false,
     }
   }
 };
+
+
 
 export default config;

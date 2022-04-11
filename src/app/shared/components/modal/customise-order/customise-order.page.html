@@ -30,7 +30,8 @@
     <form [formGroup]="form">
       <ion-item *ngFor="let control of form.controls | keyvalue">
         <ion-input requiredtype="text" [formControlName]="control.key" placeHolder="option names..."></ion-input>
-        <ion-icon (click)="removeControl(control)" name="close-circle"></ion-icon>
+        <p style="color: #9ca3af; margin-inline: 10px" *ngIf="this.prices.get(form.value[control.key])!==undefined">Add on price: RM {{this.prices.get(form.value[control.key])}} </p>
+        <ion-icon *ngIf="form.value[control.key]!==''" (click)="removeControl(control)" name="close-circle"></ion-icon>
       </ion-item>
     </form>
   </ion-list>

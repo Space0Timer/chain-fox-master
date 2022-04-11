@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-app>\n  <ion-menu side=\"start\" type = 'reveal' content-id=\"main-content\">\n    <ion-content>\n      <div class = \"menu-header-bg\">\n    </div>\n      <ion-menu-toggle auto-hide=\"true\">\n      <div class = \"header-content\" routerLink=\"/tabs\" routerDirection=\"root\">\n        <img src=\"assets/icon/favicon.png\" />\n        <ion-label>\n          <h2 style=\"color: white;font-size: 30px; font-weight: bold;\">ChainFox</h2>\n        </ion-label>\n      </div>\n      </ion-menu-toggle>\n      <ion-list class=\"menu-items\">\n        <ion-menu-toggle auto-hide=\"true\">\n          <ion-item routerLink=\"/change-password\" routerDirection=\"root\"><ion-icon name=\"id-card-outline\" slot=\"start\"></ion-icon>\n            <ion-label>\n              <h2 style=\"color: var(--ion-color-primary);font-size: 20px; font-weight: bold;\">Change Password</h2>\n            </ion-label>\n          </ion-item>\n        </ion-menu-toggle>\n        <ion-menu-toggle auto-hide=\"true\">\n          <ion-item routerLink=\"/biometric-login\" routerDirection=\"root\"><ion-icon name=\"finger-print-outline\" slot=\"start\"></ion-icon>\n            <ion-label>\n              <h2 style=\"color: var(--ion-color-primary);font-size: 20px; font-weight: bold;\">Biometric Login</h2>\n            </ion-label>\n          </ion-item>\n        </ion-menu-toggle>\n      </ion-list>\n    </ion-content>\n  </ion-menu>\n  <div class=\"grid grid-rows-1 grid-cols-1\">\n    <div>\n      <ion-router-outlet id=\"main-content\"></ion-router-outlet>\n    </div>\n  </div>\n</ion-app>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-app>\n  <ion-menu side=\"start\" type = 'reveal' content-id=\"main-content\" >\n    <ion-content scroll-y=\"false\">\n      <div class = \"menu-header-bg\">\n    </div>\n      <ion-menu-toggle auto-hide=\"true\">\n      <div class = \"header-content\">\n        <img src=\"assets/icon/favicon.png\" />\n        <ion-label>\n          <h2 style=\"color: white;font-size: 30px; font-weight: bold;\">ChainFox</h2>\n        </ion-label>\n      </div>\n      </ion-menu-toggle>\n      <ion-list class=\"menu-items\">\n        <ion-menu-toggle auto-hide=\"true\">\n          <ion-item routerLink=\"/change-password\" routerDirection=\"root\"><ion-icon name=\"id-card-outline\" slot=\"start\"></ion-icon>\n            <ion-label>\n              <h2 style=\"color: var(--ion-color-primary);font-size: 20px; font-weight: bold;\">Change Password</h2>\n            </ion-label>\n          </ion-item>\n        </ion-menu-toggle>\n        <ion-menu-toggle auto-hide=\"true\">\n          <ion-item routerLink=\"/biometric-login\" routerDirection=\"root\"><ion-icon name=\"finger-print-outline\" slot=\"start\"></ion-icon>\n            <ion-label>\n              <h2 style=\"color: var(--ion-color-primary);font-size: 20px; font-weight: bold;\">Biometric Login</h2>\n            </ion-label>\n          </ion-item>\n        </ion-menu-toggle>\n      </ion-list>\n    </ion-content>\n  </ion-menu>\n  <div class=\"grid grid-rows-1 grid-cols-1\">\n    <div>\n      <ion-router-outlet id=\"main-content\"></ion-router-outlet>\n    </div>\n  </div>\n</ion-app>\n");
 
 /***/ }),
 
@@ -26,7 +26,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ng-container *ngIf=\"cart\">\n  <ion-card mode=\"ios\">\n    <ion-card-content>\n      <div class=\"item-img\">\n        <img [src]=\"cart.image\" />\n      </div>\n\n      <div class=\"item-info\">\n        <p>Item Name: {{ cart.name }}</p>\n        <p>Merchant: {{ cart.owner }}</p>\n        <p>Price: RM {{ cart.price }}</p>\n        <ion-chip (click)=\"openChooseOptionsModal(cart.id)\" mode=\"md\" >\n          <ion-label color=\"dark\" *ngFor=\"let entry of options\" class=\"ion-text-wrap\">\n              {{entry.name}}: {{entry.val}}&nbsp;\n          </ion-label>\n          <ion-icon name=\"caret-down-outline\"></ion-icon>\n        </ion-chip>\n        <div class=\"qty-selector\">\n          <p>Quantity: </p>\n          <ion-button fill=\"clear\" [disabled]=\"cart.quantity===1\" (click)=\"removeFromCart(cart.quantity)\">-</ion-button>\n          <ion-label>{{ cart.quantity }}</ion-label>\n          <ion-button fill=\"clear\" (click)=\"addToCart()\">+</ion-button>\n          <ion-icon name=\"trash-outline\" (click) = \"deleteItem()\"></ion-icon>\n        </div>\n        <ion-button expand=\"block\" (click) = \"openNoteModal(cart.id)\">Add Note</ion-button>\n      </div>\n      <ion-row><ion-label>Pick Up Time:</ion-label></ion-row>\n      <ion-row><ion-label>{{this.date}}</ion-label></ion-row>\n        <ion-datetime\n          #datetime (ionChange)=\"dateChanges(datetime.value, cart.id)\"\n          presentation= 'date-time'\n          [min]=\"myDateString\"\n          [max]=\"nextWeek\"\n          [hourValues]=\"[8,9,10,11,12,13,14,15,16,17,18,19,20,21]\">\n        </ion-datetime>\n  </ion-card-content>\n  </ion-card>\n</ng-container>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ng-container *ngIf=\"cart\">\n  <ion-card mode=\"ios\">\n    <ion-card-content>\n      <div class=\"item-img\">\n        <img [src]=\"cart.image\" />\n      </div>\n\n      <div class=\"item-info\">\n        <p>Item Name: {{ cart.name }}</p>\n        <p>Merchant: {{ cart.owner }}</p>\n        <p>Price: RM {{ cart.price }}</p>\n        <ion-chip (click)=\"openChooseOptionsModal(cart.id, cart.quantity, cart.ownerId)\" mode=\"md\" >\n          <ion-label color=\"dark\" *ngFor=\"let entry of options\" class=\"ion-text-wrap\">\n              {{entry.name}}: {{entry.val}}&nbsp;\n          </ion-label>\n          <ion-icon name=\"caret-down-outline\"></ion-icon>\n        </ion-chip>\n        <div class=\"qty-selector\">\n          <p>Quantity: </p>\n          <ion-button fill=\"clear\" [disabled]=\"cart.quantity===1\" (click)=\"removeFromCart(cart.quantity)\">-</ion-button>\n          <ion-label>{{ cart.quantity }}</ion-label>\n          <ion-button fill=\"clear\" (click)=\"addToCart()\">+</ion-button>\n          <ion-icon name=\"trash-outline\" (click) = \"deleteItem()\"></ion-icon>\n        </div>\n        <ion-button expand=\"block\" (click) = \"openNoteModal(cart.id)\">Add Note</ion-button>\n      </div>\n      <ion-row><ion-label>Pick Up Time:</ion-label></ion-row>\n      <ion-row><ion-label>{{this.date}}</ion-label></ion-row>\n        <ion-datetime\n          #datetime (ionChange)=\"dateChanges(datetime.value)\"\n          presentation= 'date-time'\n          [min]=\"myDateString\"\n          [max]=\"nextWeek\"\n          [hourValues]=\"[8,9,10,11,12,13,14,15,16,17,18,19,20,21]\">\n        </ion-datetime>\n  </ion-card-content>\n  </ion-card>\n</ng-container>\n");
 
 /***/ }),
 
@@ -146,7 +146,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\n  <ion-toolbar>\n    <ion-title>Customise Order</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div class=\"ion-margin\">\n    <ion-list lines = 'none'>\n    <ion-radio-group allow-empty-selection=\"'true\" (ionChange)=\"_ionChange(entry.title, $event)\" *ngFor=\"let entry of form\" >\n      <ion-list-header>\n        <ion-label>{{entry.title}}</ion-label>\n      </ion-list-header>\n      <ion-item *ngFor=\"let option of entry.data\">\n        <ion-label>{{option.name}}</ion-label>\n        <ion-radio slot = \"end\" [value]=\"option.val\"  mode = 'md'></ion-radio>\n      </ion-item>\n    </ion-radio-group>\n    </ion-list>\n  </div>\n    <div class=\"ion-margin\">\n  <ion-list>\n    <div class=\"qty-selector\">\n      <p>Quantity: </p>\n      <ion-button fill=\"clear\" [disabled]=\"this.quantity===1\" (click)=\"reduceQuantity()\">-</ion-button>\n      <ion-label>{{this.quantity}}</ion-label>\n      <ion-button fill=\"clear\" (click)=\"addQuantity()\">+</ion-button>\n    </div>\n  </ion-list>\n\n  </div>\n  <div class=\"ion-padding\">\n    <ion-button\n      *ngIf=\"!isLoading\"\n      size=\"large\"\n      expand=\"block\"\n      shape=\"round\"\n      color=\"primary\"\n      (click)=\"addToCart()\">\n      <ion-text>Confirm</ion-text>\n    </ion-button>\n    <ion-button\n      *ngIf=\"isLoading\"\n      size=\"large\"\n      expand=\"block\"\n      shape=\"round\"\n      color=\"primary\">\n      <ion-spinner></ion-spinner>\n    </ion-button>\n  </div>\n</ion-content>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\n  <ion-toolbar>\n    <ion-title>Customise Order</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div class=\"ion-margin\">\n    <ion-list lines=\"none\">\n    <ion-radio-group allow-empty-selection=\"true\" (ionChange)=\"_ionChange(entry.title, $event)\" *ngFor=\"let entry of form\" >\n      <ion-list-header>\n        <ion-label>{{entry.title}}</ion-label>\n      </ion-list-header>\n      <ion-item *ngFor=\"let option of entry.data\">\n        <ion-label>{{option.name}}</ion-label>\n        <ion-radio slot = \"end\" [value]=\"option.val\" mode=\"md\"></ion-radio>\n      </ion-item>\n    </ion-radio-group>\n    </ion-list>\n  </div>\n    <div class=\"ion-margin\">\n  <ion-list>\n    <div class=\"qty-selector\">\n      <p>Quantity: </p>\n      <ion-button fill=\"clear\" [disabled]=\"this.quantity===1\" (click)=\"reduceQuantity()\">-</ion-button>\n      <ion-label>{{this.quantity}}</ion-label>\n      <ion-button fill=\"clear\" (click)=\"addQuantity()\">+</ion-button>\n    </div>\n  </ion-list>\n\n  </div>\n  <div class=\"ion-padding\">\n    <ion-button\n      *ngIf=\"!isLoading\"\n      size=\"large\"\n      expand=\"block\"\n      shape=\"round\"\n      color=\"primary\"\n      (click)=\"addToCart()\">\n      <ion-text>Confirm</ion-text>\n    </ion-button>\n    <ion-button\n      *ngIf=\"isLoading\"\n      size=\"large\"\n      expand=\"block\"\n      shape=\"round\"\n      color=\"primary\">\n      <ion-spinner></ion-spinner>\n    </ion-button>\n  </div>\n</ion-content>\n");
 
 /***/ }),
 
@@ -209,7 +209,7 @@ const routes = [
     },
     {
         path: 'auth-screen',
-        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_pages_auth-screen_auth-screen_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! src/app/pages/auth-screen/auth-screen.module */ 60196)).then(m => m.AuthScreenPageModule),
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_pages_auth-screen_auth-screen_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! src/app/pages/auth-screen/auth-screen.module */ 60196)).then(m => m.AuthScreenPageModule),
     },
     {
         path: 'tabs',
@@ -218,7 +218,7 @@ const routes = [
     },
     {
         path: 'home',
-        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_pages_tabs_home_home_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./pages/tabs/home/home.module */ 77788)).then(m => m.HomePageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_pages_tabs_home_home_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./pages/tabs/home/home.module */ 77788)).then(m => m.HomePageModule)
     },
     {
         path: 'list',
@@ -294,7 +294,7 @@ const routes = [
     },
     {
         path: 'update-store',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_cafe_firebase-upload_service_ts"), __webpack_require__.e("default-src_app_shared_components_modal_add-item_add-item_component_ts"), __webpack_require__.e("default-src_app_shared_components_modal_edit-item_edit-item_component_ts"), __webpack_require__.e("src_app_pages_update-store_update-store_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./pages/update-store/update-store.module */ 52548)).then(m => m.UpdateStorePageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_cafe_firebase-upload_service_ts"), __webpack_require__.e("default-src_app_shared_components_modal_customise-order_customise-order_page_ts"), __webpack_require__.e("default-src_app_shared_components_modal_add-item_add-item_component_ts"), __webpack_require__.e("default-src_app_shared_components_modal_edit-item_edit-item_component_ts"), __webpack_require__.e("src_app_pages_update-store_update-store_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./pages/update-store/update-store.module */ 52548)).then(m => m.UpdateStorePageModule)
     },
     {
         path: 'start-selling',
@@ -342,15 +342,15 @@ const routes = [
     },
     {
         path: 'add-item',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_cafe_firebase-upload_service_ts"), __webpack_require__.e("default-src_app_shared_components_modal_add-item_add-item_component_ts"), __webpack_require__.e("src_app_shared_components_modal_add-item_add-item_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./shared/components/modal/add-item/add-item.module */ 14782)).then(m => m.AddItemPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_cafe_firebase-upload_service_ts"), __webpack_require__.e("default-src_app_shared_components_modal_customise-order_customise-order_page_ts"), __webpack_require__.e("default-src_app_shared_components_modal_add-item_add-item_component_ts"), __webpack_require__.e("src_app_shared_components_modal_add-item_add-item_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./shared/components/modal/add-item/add-item.module */ 14782)).then(m => m.AddItemPageModule)
     },
     {
         path: 'edit-item',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_cafe_firebase-upload_service_ts"), __webpack_require__.e("default-src_app_shared_components_modal_edit-item_edit-item_component_ts"), __webpack_require__.e("src_app_shared_components_modal_customise-order_customise-order_page_ts-src_app_shared_compon-98222d")]).then(__webpack_require__.bind(__webpack_require__, /*! ./shared/components/modal/edit-item/edit-item.module */ 91321)).then(m => m.EditItemModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_cafe_firebase-upload_service_ts"), __webpack_require__.e("default-src_app_shared_components_modal_customise-order_customise-order_page_ts"), __webpack_require__.e("default-src_app_shared_components_modal_edit-item_edit-item_component_ts"), __webpack_require__.e("src_app_shared_components_modal_edit-item_edit-item_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./shared/components/modal/edit-item/edit-item.module */ 91321)).then(m => m.EditItemModule)
     },
     {
         path: 'verify-email-address',
-        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_pages_verify-email-address_verify-email-address_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./pages/verify-email-address/verify-email-address.module */ 38002)).then(m => m.VerifyEmailAddressPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_pages_verify-email-address_verify-email-address_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./pages/verify-email-address/verify-email-address.module */ 38002)).then(m => m.VerifyEmailAddressPageModule)
     },
     {
         path: 'biometric-login',
@@ -362,7 +362,7 @@ const routes = [
     },
     {
         path: 'customise-order',
-        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_shared_components_modal_customise-order_customise-order_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./shared/components/modal/customise-order/customise-order.module */ 98318)).then(m => m.CustomiseOrderPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_shared_components_modal_customise-order_customise-order_page_ts"), __webpack_require__.e("src_app_shared_components_modal_customise-order_customise-order_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./shared/components/modal/customise-order/customise-order.module */ 98318)).then(m => m.CustomiseOrderPageModule)
     },
     {
         path: 'choose-options',
@@ -413,8 +413,8 @@ let AppComponent = class AppComponent {
     }
     initializeApp() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
-            this.platform.ready().then(() => {
-            });
+            this.platform.ready().then(() => (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
+            }));
         });
     }
 };
@@ -444,30 +444,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AppModule": () => (/* binding */ AppModule)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! tslib */ 48111);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core */ 14001);
-/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/platform-browser */ 86219);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! @angular/router */ 13252);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @ionic/angular */ 91346);
-/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @angular/platform-browser/animations */ 52650);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! tslib */ 48111);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 14001);
+/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/platform-browser */ 86219);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @angular/router */ 13252);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic/angular */ 91346);
+/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @angular/platform-browser/animations */ 52650);
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app.component */ 36104);
 /* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app-routing.module */ 68438);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @angular/forms */ 18346);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @angular/forms */ 18346);
 /* harmony import */ var _shared__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./shared */ 54113);
-/* harmony import */ var _angular_fire_app__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/fire/app */ 11576);
+/* harmony import */ var _angular_fire_app__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/fire/app */ 11576);
 /* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../environments/environment */ 41251);
-/* harmony import */ var _angular_fire_auth__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @angular/fire/auth */ 75656);
-/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
-/* harmony import */ var _angular_fire_functions__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @angular/fire/functions */ 60639);
-/* harmony import */ var _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @angular/fire/messaging */ 57420);
-/* harmony import */ var _angular_fire_storage__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @angular/fire/storage */ 9243);
-/* harmony import */ var _angular_fire_compat__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/fire/compat */ 33467);
+/* harmony import */ var _angular_fire_auth__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/fire/auth */ 75656);
+/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
+/* harmony import */ var _angular_fire_functions__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @angular/fire/functions */ 60639);
+/* harmony import */ var _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @angular/fire/messaging */ 57420);
+/* harmony import */ var _angular_fire_storage__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @angular/fire/storage */ 9243);
+/* harmony import */ var _angular_fire_compat__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/fire/compat */ 33467);
 /* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! firebase/auth */ 21286);
 /* harmony import */ var _capacitor_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @capacitor/core */ 24249);
-/* harmony import */ var _awesome_cordova_plugins_badge_ngx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @awesome-cordova-plugins/badge/ngx */ 81413);
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/common/http */ 83981);
-/* harmony import */ var _ionic_native_file_opener_ngx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic-native/file-opener/ngx */ 3120);
-
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/common/http */ 83981);
+/* harmony import */ var _ionic_native_file_opener_ngx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic-native/file-opener/ngx */ 3120);
 
 
 
@@ -493,42 +491,41 @@ __webpack_require__.r(__webpack_exports__);
 
 let AppModule = class AppModule {
 };
-AppModule = (0,tslib__WEBPACK_IMPORTED_MODULE_8__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.NgModule)({
+AppModule = (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.NgModule)({
         declarations: [_app_component__WEBPACK_IMPORTED_MODULE_0__.AppComponent],
         entryComponents: [],
         imports: [
-            _angular_platform_browser__WEBPACK_IMPORTED_MODULE_10__.BrowserModule,
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_11__.IonicModule.forRoot(),
+            _angular_platform_browser__WEBPACK_IMPORTED_MODULE_9__.BrowserModule,
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_10__.IonicModule.forRoot(),
             _app_routing_module__WEBPACK_IMPORTED_MODULE_1__.AppRoutingModule,
-            _angular_common_http__WEBPACK_IMPORTED_MODULE_12__.HttpClientModule,
-            _angular_fire_compat__WEBPACK_IMPORTED_MODULE_13__.AngularFireModule.initializeApp(_environments_environment__WEBPACK_IMPORTED_MODULE_3__.environment.firebaseConfig),
-            (0,_angular_fire_app__WEBPACK_IMPORTED_MODULE_14__.provideFirebaseApp)(() => (0,_angular_fire_app__WEBPACK_IMPORTED_MODULE_14__.initializeApp)(_environments_environment__WEBPACK_IMPORTED_MODULE_3__.environment.firebaseConfig)),
-            (0,_angular_fire_auth__WEBPACK_IMPORTED_MODULE_15__.provideAuth)(() => {
+            _angular_common_http__WEBPACK_IMPORTED_MODULE_11__.HttpClientModule,
+            _angular_fire_compat__WEBPACK_IMPORTED_MODULE_12__.AngularFireModule.initializeApp(_environments_environment__WEBPACK_IMPORTED_MODULE_3__.environment.firebaseConfig),
+            (0,_angular_fire_app__WEBPACK_IMPORTED_MODULE_13__.provideFirebaseApp)(() => (0,_angular_fire_app__WEBPACK_IMPORTED_MODULE_13__.initializeApp)(_environments_environment__WEBPACK_IMPORTED_MODULE_3__.environment.firebaseConfig)),
+            (0,_angular_fire_auth__WEBPACK_IMPORTED_MODULE_14__.provideAuth)(() => {
                 if (_capacitor_core__WEBPACK_IMPORTED_MODULE_5__.Capacitor.isNativePlatform()) {
-                    return (0,firebase_auth__WEBPACK_IMPORTED_MODULE_4__.initializeAuth)((0,_angular_fire_app__WEBPACK_IMPORTED_MODULE_14__.getApp)(), {
+                    return (0,firebase_auth__WEBPACK_IMPORTED_MODULE_4__.initializeAuth)((0,_angular_fire_app__WEBPACK_IMPORTED_MODULE_13__.getApp)(), {
                         persistence: firebase_auth__WEBPACK_IMPORTED_MODULE_4__.indexedDBLocalPersistence,
                     });
                 }
                 else {
-                    return (0,_angular_fire_auth__WEBPACK_IMPORTED_MODULE_15__.getAuth)();
+                    return (0,_angular_fire_auth__WEBPACK_IMPORTED_MODULE_14__.getAuth)();
                 }
             }),
-            (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_16__.provideFirestore)(() => (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_16__.getFirestore)()),
-            (0,_angular_fire_functions__WEBPACK_IMPORTED_MODULE_17__.provideFunctions)(() => (0,_angular_fire_functions__WEBPACK_IMPORTED_MODULE_17__.getFunctions)()),
-            (0,_angular_fire_messaging__WEBPACK_IMPORTED_MODULE_18__.provideMessaging)(() => (0,_angular_fire_messaging__WEBPACK_IMPORTED_MODULE_18__.getMessaging)()),
-            (0,_angular_fire_storage__WEBPACK_IMPORTED_MODULE_19__.provideStorage)(() => (0,_angular_fire_storage__WEBPACK_IMPORTED_MODULE_19__.getStorage)()),
-            _angular_forms__WEBPACK_IMPORTED_MODULE_20__.ReactiveFormsModule,
-            _angular_forms__WEBPACK_IMPORTED_MODULE_20__.FormsModule,
-            _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_21__.BrowserAnimationsModule,
+            (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_15__.provideFirestore)(() => (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_15__.getFirestore)()),
+            (0,_angular_fire_functions__WEBPACK_IMPORTED_MODULE_16__.provideFunctions)(() => (0,_angular_fire_functions__WEBPACK_IMPORTED_MODULE_16__.getFunctions)()),
+            (0,_angular_fire_messaging__WEBPACK_IMPORTED_MODULE_17__.provideMessaging)(() => (0,_angular_fire_messaging__WEBPACK_IMPORTED_MODULE_17__.getMessaging)()),
+            (0,_angular_fire_storage__WEBPACK_IMPORTED_MODULE_18__.provideStorage)(() => (0,_angular_fire_storage__WEBPACK_IMPORTED_MODULE_18__.getStorage)()),
+            _angular_forms__WEBPACK_IMPORTED_MODULE_19__.ReactiveFormsModule,
+            _angular_forms__WEBPACK_IMPORTED_MODULE_19__.FormsModule,
+            _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_20__.BrowserAnimationsModule,
             _shared__WEBPACK_IMPORTED_MODULE_2__.SharedModule,
         ],
         providers: [
-            _angular_forms__WEBPACK_IMPORTED_MODULE_20__.FormBuilder,
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_11__.NavParams,
-            _ionic_native_file_opener_ngx__WEBPACK_IMPORTED_MODULE_7__.FileOpener,
-            _awesome_cordova_plugins_badge_ngx__WEBPACK_IMPORTED_MODULE_6__.Badge,
-            { provide: _angular_router__WEBPACK_IMPORTED_MODULE_22__.RouteReuseStrategy, useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_11__.IonicRouteStrategy },
+            _angular_forms__WEBPACK_IMPORTED_MODULE_19__.FormBuilder,
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_10__.NavParams,
+            _ionic_native_file_opener_ngx__WEBPACK_IMPORTED_MODULE_6__.FileOpener,
+            { provide: _angular_router__WEBPACK_IMPORTED_MODULE_21__.RouteReuseStrategy, useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_10__.IonicRouteStrategy },
         ],
         exports: [],
         bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_0__.AppComponent]
@@ -975,7 +972,6 @@ let ProductService = class ProductService {
         this.orderNotePair = new Map();
         this.orderTimePair = new Map();
         this.selectedOption = new Map();
-        this.currentOption = new Map();
         this.orderStatus = [];
         this.statusPair = [];
         this.store = {
@@ -1015,6 +1011,7 @@ let ProductService = class ProductService {
         this.role = 'seller';
         this.customNew = true;
         this.editOption = false;
+        this.editQuantity = 0;
         this.cart = new rxjs__WEBPACK_IMPORTED_MODULE_2__.BehaviorSubject({});
         this.id = this.ionicAuthService.getUid();
     }
@@ -1026,24 +1023,41 @@ let ProductService = class ProductService {
         });
         this.idOwnerPair.set(id, owner);
     }
+    areEqual(_array1, _array2) {
+        if (_array1 == null || _array2 == null) {
+            return false;
+        }
+        if (_array1.length !== _array2.length) {
+            return false;
+        }
+        _array1.sort();
+        _array2.sort();
+        for (let i = 0; i < _array1.length; ++i) {
+            if (_array1[i] !== _array2[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
     addToCartModal(id, owner, quantity, selectedOption) {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
             let custom = '';
             selectedOption.forEach((value, key) => {
-                custom = custom + key + value;
+                custom = custom + key + value + '-';
             });
-            const q = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_4__.collection)(this._firestore, `carts/${(this.id)}`);
-            const querySnapshot = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_4__.getDocs)(q);
-            querySnapshot.forEach((docs) => {
-                console.log(docs.id, ' => ', docs.data());
-                delete docs.data().id;
-                delete docs.data().lastUpdate;
-                const docRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_4__.doc)(this._firestore, 'cities', `${(this.id)}`);
-                if (Object.keys(docs.data()) === id) {
-                    (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_4__.updateDoc)(docRef, {
-                        [id]: (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_4__.deleteField)()
-                    });
+            const options = custom.split('-');
+            console.log(options);
+            let oldOpt = '';
+            if (this.currentOption !== undefined) {
+                console.log(this.currentOption.split('-'));
+                if (this.areEqual(options, this.currentOption.split('-'))) {
+                    console.log('areEqual');
+                    oldOpt = this.currentOption;
                 }
+            }
+            const docRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_4__.doc)(this._firestore, `carts/${(this.id)}`);
+            yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_4__.updateDoc)(docRef, {
+                [id + '@' + oldOpt]: firebase_compat_app__WEBPACK_IMPORTED_MODULE_0__["default"].firestore.FieldValue["delete"]()
             });
             if (id.includes('@')) {
                 id = id.split('@')[0];
@@ -1648,14 +1662,18 @@ let CartCardComponent = class CartCardComponent {
             this.myDateString = this.myDate.toISOString();
         });
     }
-    openChooseOptionsModal(id) {
+    openChooseOptionsModal(id, quantity, ownerId) {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_8__.__awaiter)(this, void 0, void 0, function* () {
+            this.product.itemOwner = ownerId;
+            console.log(this.product.itemOwner);
             this.product.editOption = true;
             this.product.itemId = id;
+            this.product.editQuantity = quantity;
+            this.product.currentOption = '';
             for (const key in this.options) {
-                this.product.currentOption.set(this.options[key].name, this.options[key].val);
+                console.log(this.options[key], this.options[key].name, this.options[key].val);
+                this.product.currentOption = this.product.currentOption + this.options[key].name + this.options[key].val + '-';
             }
-            console.log(this.product.currentOption);
             const modal = yield this.modalController.create({
                 component: _modal_choose_options_choose_options_page__WEBPACK_IMPORTED_MODULE_4__.ChooseOptionsPage,
                 swipeToClose: true,
@@ -1663,7 +1681,8 @@ let CartCardComponent = class CartCardComponent {
             });
             yield modal.present();
             yield modal.onDidDismiss().then(r => {
-                this.ngOnInit();
+                this.product.editQuantity = 0;
+                setTimeout(() => { this.childEvent.emit(); }, 500);
             });
         });
     }
@@ -1671,8 +1690,10 @@ let CartCardComponent = class CartCardComponent {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_8__.__awaiter)(this, void 0, void 0, function* () {
             this.product.customOptions = [];
             this.product.customOption = [];
+            console.log(id);
             const key = id.split('@')[1];
             id = id.split('@')[0];
+            console.log('carts/' + this.uid + '/option/' + id + '/grouping/' + key);
             const dataRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_9__.doc)(this._firestore, 'carts/' + this.uid + '/option/' + id + '/grouping/' + key);
             const dataSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_9__.getDoc)(dataRef);
             const data = dataSnap.data();
@@ -1713,12 +1734,11 @@ let CartCardComponent = class CartCardComponent {
             return yield modal.present();
         });
     }
-    dateChanges(date, id) {
+    dateChanges(date) {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_8__.__awaiter)(this, void 0, void 0, function* () {
             this.date = date.split('T')[0] + ' ' + date.split('T')[1].substring(0, 5);
-            ;
-            yield this.product.addTime(id, this.date);
-            console.log(this.product.orderTimePair.get(id));
+            yield this.product.addTime(this.cart.id, this.date);
+            console.log(this.product.orderTimePair.get(this.cart.id));
         });
     }
     deleteItem() {
@@ -2278,11 +2298,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let ChooseOptionsPage = class ChooseOptionsPage {
-    constructor(product, alertController, _firestore, ionicAuthService) {
+    constructor(product, alertController, _firestore, ionicAuthService, modalController) {
         this.product = product;
         this.alertController = alertController;
         this._firestore = _firestore;
         this.ionicAuthService = ionicAuthService;
+        this.modalController = modalController;
         this.options = [];
         this.form = [];
         this.selectedOption = new Map();
@@ -2295,16 +2316,10 @@ let ChooseOptionsPage = class ChooseOptionsPage {
     }
     ngOnInit() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
-            yield this.getOptions();
-            if (this.product.editOption === true) {
-                yield this.editOptions();
+            if (this.product.editQuantity !== 0) {
+                this.quantity = this.product.editQuantity;
             }
-        });
-    }
-    editOptions() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
-            this.product.currentOption.forEach((value, key) => {
-            });
+            yield this.getOptions();
         });
     }
     getOptions() {
@@ -2312,12 +2327,12 @@ let ChooseOptionsPage = class ChooseOptionsPage {
             // if option changed delete old
             this.product.customOptions = [];
             this.product.customOption = [];
-            const dataRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.collection)(this._firestore, 'stores/' + this.uid + '/items/' + this.product.itemId.split('@')[0] + '/options');
+            const dataRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.collection)(this._firestore, 'stores/' + this.product.itemOwner + '/items/' + this.product.itemId.split('@')[0] + '/options');
             const q = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.query)(dataRef);
             const querySnapshot = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.getDocs)(q);
+            console.log('stores/' + this.uid + '/items/' + this.product.itemId.split('@')[0] + '/options');
             querySnapshot.forEach((docu) => {
-                const data = docu.data();
-                this.product.customOption = data;
+                this.product.customOption = docu.data();
                 this.product.customOptions.push({
                     name: this.product.customOption.name,
                     data: this.product.customOption,
@@ -2359,7 +2374,8 @@ let ChooseOptionsPage = class ChooseOptionsPage {
                 yield this.showAlert('Please pick an option.');
             }
             else {
-                this.product.addToCartModal(this.product.itemId.split('@')[0], this.product.itemOwner, this.quantity, this.selectedOption);
+                yield this.product.addToCartModal(this.product.itemId.split('@')[0], this.product.itemOwner, this.quantity, this.selectedOption);
+                yield this.modalController.dismiss();
             }
         });
     }
@@ -2382,7 +2398,8 @@ ChooseOptionsPage.ctorParameters = () => [
     { type: _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_2__.ProductService },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.AlertController },
     { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.Firestore },
-    { type: _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_3__.AuthService }
+    { type: _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_3__.AuthService },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.ModalController }
 ];
 ChooseOptionsPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.Component)({

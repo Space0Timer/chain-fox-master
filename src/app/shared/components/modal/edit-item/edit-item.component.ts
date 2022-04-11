@@ -55,9 +55,8 @@ export class EditItemComponent{
   initForm() {
     this.form = new FormGroup({
       name: new FormControl(null, {validators: [Validators.required]}),
-      price: new FormControl(null, {validators: [Validators.required]}), // added email validator also
-      category: new FormControl(null, {validators: [Validators.required]}), // added email validator also
-      description: new FormControl(null, {validators: [Validators.required]}), // added email validator also
+      price: new FormControl(null, {validators: [Validators.required]}),
+      description: new FormControl(null, {validators: [Validators.required]}),
     });
   }
 
@@ -101,31 +100,36 @@ export class EditItemComponent{
     this.type = !this.type;
   }
 
+  async deleteCustomisation(id) {
+    await this.afs.collection(`stores/${(this.uid)}/items/${(this.product.editItemId)}/options`).doc(id).delete();
+    await this.ionViewWillEnter();
+  }
+  async back() {
+    await this.modalController.dismiss();
+  }
+
+
   async onSubmit() {
+    console.log(this.form.value);
     this.errorMessage = '';
     if(!this.form.valid) {
       this.form.markAllAsTouched();
       return;
     }
     this.isLoading = true;
-    console.log(this.form.value);
     await this.edit(this.product.editItemId);
     await this.showAlert('Editing Item', 'Item successfully edited.');
     this.isLoading = false;
+    await this.modalController.dismiss();
   }
 
   async edit(id) {
-    await this.afs.collection(`stores/${(this.uid)}/items`).doc(id).update({
+    await this.afs.collection(`stores/${(this.uid)}/items`).doc(id.split('@')[0]).update({
       name: this.form.value.name,
       price: this.form.value.price,
-      category: this.form.value.category,
       description: this.form.value.description,
       lastUpdate: firebase.firestore.FieldValue.serverTimestamp()
     });
-  }
-
-  async back() {
-    await this.modalController.dismiss();
   }
 
   async openCustomiseOrderModal(nameInput) {

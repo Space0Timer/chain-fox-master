@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunkapp"] = self["webpackChunkapp"] || []).push([["src_app_shared_components_modal_customise-order_customise-order_page_ts-src_app_shared_compon-98222d"],{
+(self["webpackChunkapp"] = self["webpackChunkapp"] || []).push([["default-src_app_shared_components_modal_customise-order_customise-order_page_ts"],{
 
 /***/ 93011:
 /*!*********************************************************************************************************************************************************************************************!*\
@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"end\">\n      <ion-button color=\"primary\" (click)=\"back()\" routerDirection=\"forward\">\n        <ion-icon name=\"close-outline\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>\n      Name: {{this.name}}\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-card mode=\"ios\" class=\"ion-padding\" *ngIf=\"this.product.customNew\">\n    <ion-row>\n      <ion-col size=\"10\">\n        <ion-card-title style=\"font-size: 18px; padding-top: 3px\" >Edit Customisation Name</ion-card-title>\n      </ion-col>\n      <ion-col size=\"2\" class=\"ion-text-right\">\n        <ion-buttons>\n          <ion-button  (click)=\"addName()\">\n            <ion-icon name=\"add-circle-outline\"></ion-icon>\n          </ion-button>\n        </ion-buttons>\n      </ion-col>\n    </ion-row>\n  </ion-card>\n  <ion-list lines=\"none\">\n    <form [formGroup]=\"form\">\n      <ion-item *ngFor=\"let control of form.controls | keyvalue\">\n        <ion-input requiredtype=\"text\" [formControlName]=\"control.key\" placeHolder=\"option names...\"></ion-input>\n        <ion-icon (click)=\"removeControl(control)\" name=\"close-circle\"></ion-icon>\n      </ion-item>\n    </form>\n  </ion-list>\n\n  <ion-button expand=\"full\" color=\"light\" (click)=\"addControl()\">Add Option</ion-button>\n  <div class=\"ion-margin-horizontal\">\n    <ion-button\n      *ngIf=\"!isLoading\"\n      size=\"large\"\n      expand=\"block\"\n      shape=\"round\"\n      color=\"primary\" (click)=\"submitRequest()\">\n      Confirm\n    </ion-button>\n    <ion-button\n      *ngIf=\"isLoading\"\n      size=\"large\"\n      expand=\"block\"\n      shape=\"round\"\n      color=\"primary\">\n      <ion-spinner></ion-spinner>\n    </ion-button>\n  </div>\n</ion-content>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"end\">\n      <ion-button color=\"primary\" (click)=\"back()\" routerDirection=\"forward\">\n        <ion-icon name=\"close-outline\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>\n      Name: {{this.name}}\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-card mode=\"ios\" class=\"ion-padding\" *ngIf=\"this.product.customNew\">\n    <ion-row>\n      <ion-col size=\"10\">\n        <ion-card-title style=\"font-size: 18px; padding-top: 3px\" >Edit Customisation Name</ion-card-title>\n      </ion-col>\n      <ion-col size=\"2\" class=\"ion-text-right\">\n        <ion-buttons>\n          <ion-button  (click)=\"addName()\">\n            <ion-icon name=\"add-circle-outline\"></ion-icon>\n          </ion-button>\n        </ion-buttons>\n      </ion-col>\n    </ion-row>\n  </ion-card>\n  <ion-list lines=\"none\">\n    <form [formGroup]=\"form\">\n      <ion-item *ngFor=\"let control of form.controls | keyvalue\">\n        <ion-input requiredtype=\"text\" [formControlName]=\"control.key\" placeHolder=\"option names...\"></ion-input>\n        <ion-icon (click)=\"removeControl(control)\" name=\"close-circle\"></ion-icon>\n        <ion-text\n          color=\"danger\"\n          *ngIf=\"!form.get(control.key).valid && form.get(control.key).touched\">\n          <ion-text\n            class=\"error\"\n            *ngIf=\"form.get(control.key).hasError('required')\">\n            * Please enter your option name\n          </ion-text>\n          <ion-text\n            class=\"error\"\n            *ngIf=\"form.get(control.key).hasError('pattern')\">\n            * Invalid option name. Only characters a-z and A-Z are allowed.\n          </ion-text>\n          <ion-text\n            class=\"error\"\n            *ngIf=\"!form.get(control.key).hasError('required') &&!form.get('username').hasError('pattern') && form.get('username').hasError('minlength')\">\n            * Invalid option name. Your option must have at least 6 characters.\n          </ion-text>\n          <ion-text\n            class=\"error\"\n            *ngIf=\"!form.get('username').hasError('required') && !form.get('username').hasError('pattern') && !form.get('username').hasError('minlength') && form.get('username').hasError('maxlength')\">\n            * Invalid option name. Your username must have at most 15 characters.\n          </ion-text>\n        </ion-text>\n      </ion-item>\n    </form>\n  </ion-list>\n\n  <ion-button expand=\"full\" color=\"light\" (click)=\"addControl()\">Add Option</ion-button>\n  <div class=\"ion-margin-horizontal\">\n    <ion-button\n      *ngIf=\"!isLoading\"\n      size=\"large\"\n      expand=\"block\"\n      shape=\"round\"\n      color=\"primary\" (click)=\"submitRequest()\">\n      Confirm\n    </ion-button>\n    <ion-button\n      *ngIf=\"isLoading\"\n      size=\"large\"\n      expand=\"block\"\n      shape=\"round\"\n      color=\"primary\">\n      <ion-spinner></ion-spinner>\n    </ion-button>\n  </div>\n</ion-content>\n");
 
 /***/ }),
 
@@ -57,7 +57,7 @@ let CustomiseOrderPage = class CustomiseOrderPage {
     init() {
         if (this.product.customOption.length === 0) {
             this.form = this.formBuilder.group({
-                1: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.required]
+                1: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.required, _angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.pattern('^[a-zA-Z]+$'), _angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.maxLength(10), _angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.minLength(6)]]
             });
         }
         else {
@@ -71,10 +71,10 @@ let CustomiseOrderPage = class CustomiseOrderPage {
             const keys = [...temp.keys()];
             const group = {};
             for (let i = 0; i < keys.length; i++) {
-                group[`${keys[i]}`] = [temp.get(`${keys[i]}`), _angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.required];
+                group[`${keys[i]}`] = [temp.get(`${keys[i]}`), [_angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.required, _angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.pattern('^[a-zA-Z]+$'), _angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.maxLength(10), _angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.minLength(6)]];
             }
             this.optionCount = keys.length + 1;
-            group[`${this.optionCount}`] = ['', _angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.required];
+            group[`${this.optionCount}`] = ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.required, _angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.pattern('^[a-zA-Z]+$'), _angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.maxLength(10), _angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.minLength(6)]];
             this.form = this.formBuilder.group(group);
             this.product.customOption = [];
             this.product.customOptions = [];
@@ -203,86 +203,6 @@ CustomiseOrderPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
 
 /***/ }),
 
-/***/ 44479:
-/*!*******************************************************************************!*\
-  !*** ./src/app/shared/components/modal/edit-item/edit-item-routing.module.ts ***!
-  \*******************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "EditItemPageRoutingModule": () => (/* binding */ EditItemPageRoutingModule)
-/* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 48111);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 14001);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ 13252);
-/* harmony import */ var _edit_item_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./edit-item.component */ 36122);
-
-
-
-
-const routes = [
-    {
-        path: '',
-        component: _edit_item_component__WEBPACK_IMPORTED_MODULE_0__.EditItemComponent
-    }
-];
-let EditItemPageRoutingModule = class EditItemPageRoutingModule {
-};
-EditItemPageRoutingModule = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.NgModule)({
-        imports: [_angular_router__WEBPACK_IMPORTED_MODULE_3__.RouterModule.forChild(routes)],
-        exports: [_angular_router__WEBPACK_IMPORTED_MODULE_3__.RouterModule],
-    })
-], EditItemPageRoutingModule);
-
-
-
-/***/ }),
-
-/***/ 91321:
-/*!***********************************************************************!*\
-  !*** ./src/app/shared/components/modal/edit-item/edit-item.module.ts ***!
-  \***********************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "EditItemModule": () => (/* binding */ EditItemModule)
-/* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 48111);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 14001);
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ 28267);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ 18346);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 91346);
-/* harmony import */ var _edit_item_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./edit-item.component */ 36122);
-/* harmony import */ var _edit_item_routing_module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./edit-item-routing.module */ 44479);
-
-
-
-
-
-
-
-let EditItemModule = class EditItemModule {
-};
-EditItemModule = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_3__.NgModule)({
-        imports: [
-            _angular_common__WEBPACK_IMPORTED_MODULE_4__.CommonModule,
-            _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormsModule,
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.IonicModule,
-            _edit_item_routing_module__WEBPACK_IMPORTED_MODULE_1__.EditItemPageRoutingModule,
-            _angular_forms__WEBPACK_IMPORTED_MODULE_5__.ReactiveFormsModule
-        ],
-        declarations: [_edit_item_component__WEBPACK_IMPORTED_MODULE_0__.EditItemComponent]
-    })
-], EditItemModule);
-
-
-
-/***/ }),
-
 /***/ 25734:
 /*!***********************************************************************************!*\
   !*** ./src/app/shared/components/modal/customise-order/customise-order.page.scss ***!
@@ -294,4 +214,4 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /***/ })
 
 }]);
-//# sourceMappingURL=src_app_shared_components_modal_customise-order_customise-order_page_ts-src_app_shared_compon-98222d.js.map
+//# sourceMappingURL=default-src_app_shared_components_modal_customise-order_customise-order_page_ts.js.map

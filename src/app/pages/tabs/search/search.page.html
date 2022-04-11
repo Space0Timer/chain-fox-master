@@ -1,4 +1,4 @@
-<ion-header translucent="true">
+<ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button autoHide="false"></ion-menu-button>
@@ -26,7 +26,6 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-content>
     <ion-spinner *ngIf="spinner"></ion-spinner>
     <div class="default-top-padding title" *ngIf="notFound">
       <h2>User not found</h2>
@@ -40,9 +39,8 @@
       <h2>Most Frequent Receivers</h2>
     </div>
     <ion-list *ngFor="let fav of fav">
-      <ion-item routerLink="/test" (click)="frequentReceivers(fav)">
-        <ion-label>{{fav}}</ion-label>
+      <ion-item *ngIf="fav!==''" routerLink="/test" (click)="frequentReceivers(fav)">
+        <ion-label >{{fav}}</ion-label>
       </ion-item>
     </ion-list>
-  </ion-content>
 </ion-content>

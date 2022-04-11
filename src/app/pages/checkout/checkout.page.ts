@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ProductService} from '../../services/cafe/product.service';
 import {Router} from '@angular/router';
-import {doc, Firestore, getDoc} from "@angular/fire/firestore";
+import {doc, Firestore, getDoc, setDoc} from "@angular/fire/firestore";
 import {ICartCard} from "../../shared";
 import {AngularFirestore, DocumentData} from "@angular/fire/compat/firestore";
 import {AuthService} from "../../services/auth/auth.service";
@@ -49,7 +49,7 @@ export class CheckoutPage implements OnInit {
       .then(snap =>   { data = snap.data(); delete data.lastUpdate; delete data.id;});
     for (const key in data) {
       console.log(key);
-      const idOwnerRef = doc(this._firestore, `idOwner/${(key)}`);
+      const idOwnerRef = doc(this._firestore, `idOwner/${(key.split('@')[0])}`);
       const idOwnerSnap = await getDoc(idOwnerRef);
       const idOwnerName = idOwnerSnap.data();
       this.owner = idOwnerName.owner;
@@ -58,21 +58,30 @@ export class CheckoutPage implements OnInit {
       const ownerSnap = await getDoc(ownerRef);
       const ownerName = ownerSnap.data();
       // eslint-disable-next-line no-underscore-dangle
-      const dataRef = doc(this._firestore, `stores/${(this.owner)}/items/${(key)}`);
+      const dataRef = doc(this._firestore, `stores/${(this.owner)}/items/${(key.split('@')[0])}`);
       const docSnap = await getDoc(dataRef);
       const dataSnap = docSnap.data();
       const value = data[key];
+      const keys = key.split('@')[1].split('-').slice(0, -1);
+      let optionSnap = 0;
+      for (const price of keys) {
+        // eslint-disable-next-line max-len
+        const optionRef = doc(this._firestore, `stores/${(this.owner)}/items/${(key.split('@')[0])}/optionPrice/${(price)}`);
+        const optSnap = await getDoc(optionRef);
+        optionSnap += Number(optSnap.data().price);
+      }
       this.checkout.push(
         {
           name: dataSnap.name,
           owner: ownerName.name,
-          price: dataSnap.price,
+          price: Number(dataSnap.price)+ optionSnap,
           image: dataSnap.imageUrl,
           id: key,
+          ownerId: this.owner,
           quantity: value,
         },
       );
-      this.total += dataSnap.price*value;
+      this.total += (Number(dataSnap.price)+optionSnap)*value;
     }
   }
 

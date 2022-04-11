@@ -174,9 +174,8 @@ let MyCartPage = class MyCartPage {
             });
             for (const key in data) {
                 // get owner id from item id
-                const id = key.split('@')[0];
-                this.keys.push({ id: id });
-                const idOwnerRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.doc)(this._firestore, `idOwner/${(id)}`);
+                this.keys.push({ id: key });
+                const idOwnerRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.doc)(this._firestore, `idOwner/${(key.split('@')[0])}`);
                 const idOwnerSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.getDoc)(idOwnerRef);
                 const idOwnerName = idOwnerSnap.data();
                 this.owner = idOwnerName.owner;
@@ -184,7 +183,7 @@ let MyCartPage = class MyCartPage {
                 const ownerSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.getDoc)(ownerRef);
                 const ownerName = ownerSnap.data();
                 // eslint-disable-next-line no-underscore-dangle
-                const dataRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.doc)(this._firestore, `stores/${(this.owner)}/items/${(id)}`);
+                const dataRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.doc)(this._firestore, `stores/${(this.owner)}/items/${(key.split('@')[0])}`);
                 const docSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.getDoc)(dataRef);
                 const dataSnap = docSnap.data();
                 const value = data[key];
@@ -194,6 +193,7 @@ let MyCartPage = class MyCartPage {
                     price: dataSnap.price,
                     image: dataSnap.imageUrl,
                     id: key,
+                    ownerId: this.owner,
                     quantity: value,
                 });
                 this.total += dataSnap.price;

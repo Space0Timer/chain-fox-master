@@ -20,7 +20,6 @@ import { provideStorage,getStorage} from '@angular/fire/storage';
 import {AngularFireModule} from '@angular/fire/compat';
 import { indexedDBLocalPersistence, initializeAuth } from 'firebase/auth';
 import {Capacitor} from '@capacitor/core';
-import { Badge } from '@awesome-cordova-plugins/badge/ngx';
 import {HttpClientModule} from '@angular/common/http';
 import { FileOpener } from '@ionic-native/file-opener/ngx';
 
@@ -56,7 +55,6 @@ import { FileOpener } from '@ionic-native/file-opener/ngx';
     FormBuilder,
     NavParams,
     FileOpener,
-    Badge,
     {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
   ],
   exports: [],

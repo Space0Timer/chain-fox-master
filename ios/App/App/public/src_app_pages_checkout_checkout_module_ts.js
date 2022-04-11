@@ -159,7 +159,7 @@ let CheckoutPage = class CheckoutPage {
                 .then(snap => { data = snap.data(); delete data.lastUpdate; delete data.id; });
             for (const key in data) {
                 console.log(key);
-                const idOwnerRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.doc)(this._firestore, `idOwner/${(key)}`);
+                const idOwnerRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.doc)(this._firestore, `idOwner/${(key.split('@')[0])}`);
                 const idOwnerSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.getDoc)(idOwnerRef);
                 const idOwnerName = idOwnerSnap.data();
                 this.owner = idOwnerName.owner;
@@ -168,7 +168,7 @@ let CheckoutPage = class CheckoutPage {
                 const ownerSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.getDoc)(ownerRef);
                 const ownerName = ownerSnap.data();
                 // eslint-disable-next-line no-underscore-dangle
-                const dataRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.doc)(this._firestore, `stores/${(this.owner)}/items/${(key)}`);
+                const dataRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.doc)(this._firestore, `stores/${(this.owner)}/items/${(key.split('@')[0])}`);
                 const docSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.getDoc)(dataRef);
                 const dataSnap = docSnap.data();
                 const value = data[key];
@@ -178,6 +178,7 @@ let CheckoutPage = class CheckoutPage {
                     price: dataSnap.price,
                     image: dataSnap.imageUrl,
                     id: key,
+                    ownerId: this.owner,
                     quantity: value,
                 });
                 this.total += dataSnap.price * value;
