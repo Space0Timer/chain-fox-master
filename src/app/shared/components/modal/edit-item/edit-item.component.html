@@ -1,14 +1,32 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="end">
+    <ion-buttons slot="start">
       <ion-button color="primary" (click)="back()" routerDirection="forward">
-        <ion-icon name="close-outline"></ion-icon>
+        <ion-text>Cancel</ion-text>
       </ion-button>
     </ion-buttons>
-    <ion-title>Your Item</ion-title>
+    <ion-buttons slot="end">
+    <ion-button
+      *ngIf="!isLoading"
+      color="primary"
+      (click)="onSubmit()">
+      <ion-text style="font-weight: bold">Confirm</ion-text>
+    </ion-button>
+    <ion-button
+      *ngIf="isLoading"
+      >
+      <ion-spinner color="primary"></ion-spinner>
+    </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content fullscreen="true">
+  <div class ='ion-padding'>
+  <ion-row style="padding-left: 0">
+    <ion-col size="10">
+      <ion-text  color="primary" style="font-size: 26px; font-weight: bold">Your Item</ion-text>
+    </ion-col>
+  </ion-row>
   <div class="ion-margin-horizontal">
     <form [formGroup]="form" class="ion-margin">
       <div class="ion-margin-vertical">
@@ -93,23 +111,5 @@
       </ion-card>
     </ion-item>
       </div>
-  <div class="ion-padding">
-    <ion-button
-      *ngIf="!isLoading"
-      size="large"
-      expand="block"
-      shape="round"
-      color="primary"
-      (click)="onSubmit()">
-      <ion-text>Confirm</ion-text>
-    </ion-button>
-    <ion-button
-      *ngIf="isLoading"
-      size="large"
-      expand="block"
-      shape="round"
-      color="primary">
-      <ion-spinner></ion-spinner>
-    </ion-button>
   </div>
 </ion-content>

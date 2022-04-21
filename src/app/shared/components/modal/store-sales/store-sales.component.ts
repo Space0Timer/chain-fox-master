@@ -21,6 +21,7 @@ export class StoreSalesComponent implements OnInit{
   }
 
   showChart() {
+    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
     const ctx = (<any>document.getElementById('sales-chart')).getContext('2d');
     const chart = new Chart(ctx, {
       type: 'doughnut',

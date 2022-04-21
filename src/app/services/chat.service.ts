@@ -71,6 +71,7 @@ export class ChatService {
       status: 'unread',
     });
   }
+
   async addChatMessageCafe(msg) {
     await this.afs.collection('messages').doc(this.product.store.name).update({
       [this.currentUser.uid]: 1,

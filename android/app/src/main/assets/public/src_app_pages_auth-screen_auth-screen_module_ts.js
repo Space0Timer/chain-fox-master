@@ -25,7 +25,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\n<form [formGroup]=\"form\" class=\"ion-margin\">\n  <div class=\"ion-margin-vertical\">\n  <ion-item lines=\"full\" color=\"light\" >\n    <ion-icon\n      *ngIf=\"this.authService.biometricLogin\"\n      name=\"finger-print-outline\"\n      slot=\"end\"\n      color=\"dark\"\n      (click)=\"biometricLogin()\">\n    </ion-icon>\n    <ion-input formControlName=\"email\" [type]=\"type ? 'text' : 'text'\" placeholder=\"Enter email\"></ion-input>\n  </ion-item>\n  <ion-text\n    color=\"danger\"\n    *ngIf=\"!form.get('email').valid && form.get('email').touched\">\n    <ion-text\n      class=\"error\"\n      *ngIf=\"form.get('email').hasError('required')\">\n      * Please enter the email\n    </ion-text>\n    <!-- for email error -->\n    <ion-text\n      class=\"error\"\n      *ngIf=\"!form.get('email').hasError('required')\">\n      * Please enter a proper email\n    </ion-text>\n  </ion-text>\n  </div>\n\n  <div class=\"ion-margin-vertical\">\n    <ion-item lines=\"full\" color=\"light\" shape=\"round\">\n      <ion-icon\n        [name]=\"type ? 'eye' : 'eye-off'\"\n        slot=\"end\"\n        color=\"dark\"\n        (click)=\"changeType()\">\n      </ion-icon>\n      <ion-input formControlName=\"password\" [type]=\"type ? 'password' : 'text'\" placeholder=\"Enter password\"></ion-input>\n    </ion-item>\n      <ion-text\n        color=\"danger\"\n        *ngIf=\"!form.get('password').valid && form.get('password').touched\">\n        <ion-text\n          class=\"error\"\n          *ngIf=\"form.get('password').hasError('required')\">\n          * Please enter your password\n        </ion-text>\n        <ion-text\n          class=\"error\"\n          *ngIf=\"!form.get('password').hasError('required') && form.get('password').hasError('minlength')\">\n          * Please enter a password of at least 8 characters long\n        </ion-text>\n      </ion-text>\n  </div>\n</form>\n\n<p class=\"ion-text-right ion-margin-horizontal\">\n  <ion-text color=\"medium\" (click)=\"forgotPassword()\">Forgot password?</ion-text>\n</p>\n\n<div class=\"ion-margin-horizontal\">\n  <ion-button\n    *ngIf=\"!isLoading\"\n   class=\"ion-margin-horizontal\"\n    size=\"large\"\n    expand=\"block\"\n    shape=\"round\"\n    color=\"primary\"\n    (click)=\"onSubmit()\">\n    <ion-text style=\"color: white;font-size: 18px\">Log In</ion-text>\n  </ion-button>\n  <ion-button\n    *ngIf=\"isLoading\"\n   class=\"ion-margin-horizontal\"\n    size=\"large\"\n    expand=\"block\"\n    shape=\"round\"\n    color=\"primary\">\n    <ion-spinner></ion-spinner>\n  </ion-button>\n</div>\n\n\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\n<form [formGroup]=\"form\" class=\"ion-margin\">\n  <div class=\"ion-margin-vertical\">\n  <ion-item lines=\"full\" color=\"light\" >\n    <ion-icon\n      *ngIf=\"this.authService.biometricLogin === 'true'\"\n      name=\"finger-print-outline\"\n      slot=\"end\"\n      color=\"dark\"\n      (click)=\"biometricLogin()\">\n    </ion-icon>\n    <ion-input formControlName=\"email\" [type]=\"type ? 'text' : 'text'\" placeholder=\"Enter email\"></ion-input>\n  </ion-item>\n  <ion-text\n    color=\"danger\"\n    *ngIf=\"!form.get('email').valid && form.get('email').touched\">\n    <ion-text\n      class=\"error\"\n      *ngIf=\"form.get('email').hasError('required')\">\n      * Please enter the email\n    </ion-text>\n    <!-- for email error -->\n    <ion-text\n      class=\"error\"\n      *ngIf=\"!form.get('email').hasError('required')\">\n      * Please enter a proper email\n    </ion-text>\n  </ion-text>\n  </div>\n\n  <div class=\"ion-margin-vertical\">\n    <ion-item lines=\"full\" color=\"light\" shape=\"round\">\n      <ion-icon\n        [name]=\"type ? 'eye' : 'eye-off'\"\n        slot=\"end\"\n        color=\"dark\"\n        (click)=\"changeType()\">\n      </ion-icon>\n      <ion-input formControlName=\"password\" [type]=\"type ? 'password' : 'text'\" placeholder=\"Enter password\"></ion-input>\n    </ion-item>\n      <ion-text\n        color=\"danger\"\n        *ngIf=\"!form.get('password').valid && form.get('password').touched\">\n        <ion-text\n          class=\"error\"\n          *ngIf=\"form.get('password').hasError('required')\">\n          * Please enter your password\n        </ion-text>\n        <ion-text\n          class=\"error\"\n          *ngIf=\"!form.get('password').hasError('required') && form.get('password').hasError('minlength')\">\n          * Please enter a password of at least 8 characters long\n        </ion-text>\n      </ion-text>\n  </div>\n</form>\n\n<p class=\"ion-text-right ion-margin-horizontal\">\n  <ion-text color=\"medium\" (click)=\"forgotPassword()\">Forgot password?</ion-text>\n</p>\n\n<div class=\"ion-margin-horizontal\">\n  <ion-button\n    *ngIf=\"!isLoading\"\n   class=\"ion-margin-horizontal\"\n    size=\"large\"\n    expand=\"block\"\n    shape=\"round\"\n    color=\"primary\"\n    (click)=\"onSubmit()\">\n    <ion-text style=\"color: white;font-size: 18px\">Log In</ion-text>\n  </ion-button>\n  <ion-button\n    *ngIf=\"isLoading\"\n   class=\"ion-margin-horizontal\"\n    size=\"large\"\n    expand=\"block\"\n    shape=\"round\"\n    color=\"primary\">\n    <ion-spinner></ion-spinner>\n  </ion-button>\n</div>\n\n\n");
 
 /***/ }),
 
@@ -2243,14 +2243,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AuthScreenPage": () => (/* binding */ AuthScreenPage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 48111);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 48111);
 /* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_auth_screen_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./auth-screen.page.html */ 58969);
 /* harmony import */ var _auth_screen_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./auth-screen.page.scss */ 92655);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 14001);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 14001);
 /* harmony import */ var src_app_services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/auth/auth.service */ 68927);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ 13252);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 91346);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ 13252);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic/angular */ 91346);
 /* harmony import */ var _capacitor_splash_screen__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @capacitor/splash-screen */ 26391);
+/* harmony import */ var _services_storage_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/storage.service */ 17208);
+
 
 
 
@@ -2260,10 +2262,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let AuthScreenPage = class AuthScreenPage {
-    constructor(auth, router, menu) {
+    constructor(auth, router, menu, storage) {
         this.auth = auth;
         this.router = router;
         this.menu = menu;
+        this.storage = storage;
         this.segmentValue = '1';
         this.config = {
             slidesPerView: 3,
@@ -2278,12 +2281,18 @@ let AuthScreenPage = class AuthScreenPage {
         slides.startAutoplay();
     }
     ionViewDidLeave() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
             yield this.menu.enable(true);
         });
     }
+    ionViewDidEnter() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            this.auth.biometricLogin = yield this.storage.get('bio-login');
+            console.log(this.auth.biometricLogin);
+        });
+    }
     ngOnInit() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
             yield _capacitor_splash_screen__WEBPACK_IMPORTED_MODULE_3__.SplashScreen.hide();
         });
     }
@@ -2317,11 +2326,12 @@ let AuthScreenPage = class AuthScreenPage {
 };
 AuthScreenPage.ctorParameters = () => [
     { type: src_app_services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__.AuthService },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__.Router },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.MenuController }
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_6__.Router },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.MenuController },
+    { type: _services_storage_service__WEBPACK_IMPORTED_MODULE_4__.StorageService }
 ];
-AuthScreenPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.Component)({
+AuthScreenPage = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.Component)({
         selector: 'app-auth-screen',
         template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_auth_screen_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_auth_screen_page_scss__WEBPACK_IMPORTED_MODULE_1__]
@@ -2342,18 +2352,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "SignInComponent": () => (/* binding */ SignInComponent)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 48111);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tslib */ 48111);
 /* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_sign_in_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./sign-in.component.html */ 86103);
 /* harmony import */ var _sign_in_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./sign-in.component.scss */ 36862);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/core */ 14001);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/forms */ 18346);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/router */ 13252);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic/angular */ 91346);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/core */ 14001);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/forms */ 18346);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/router */ 13252);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic/angular */ 91346);
 /* harmony import */ var src_app_services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/auth/auth.service */ 68927);
 /* harmony import */ var _services_iroha_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../services/iroha.service */ 49187);
-/* harmony import */ var _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/fire/compat/auth */ 60111);
-/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
+/* harmony import */ var _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/fire/compat/auth */ 60111);
+/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
 /* harmony import */ var capacitor_native_biometric__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! capacitor-native-biometric */ 41380);
+/* harmony import */ var _services_storage_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../services/storage.service */ 17208);
+
 
 
 
@@ -2367,7 +2379,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let SignInComponent = class SignInComponent {
-    constructor(authService, router, alertController, loadingController, iroha, afAuth, _firestore, menu) {
+    constructor(authService, router, alertController, loadingController, iroha, afAuth, _firestore, menu, storage) {
         this.authService = authService;
         this.router = router;
         this.alertController = alertController;
@@ -2376,6 +2388,7 @@ let SignInComponent = class SignInComponent {
         this.afAuth = afAuth;
         this._firestore = _firestore;
         this.menu = menu;
+        this.storage = storage;
         this.type = true;
         this.initForm();
         this.afAuth.onAuthStateChanged(user => {
@@ -2384,15 +2397,15 @@ let SignInComponent = class SignInComponent {
         this.menu.enable(false);
     }
     ionViewDidLeave() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
             yield this.menu.enable(true);
         });
     }
     ngOnInit() { }
     initForm() {
-        this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormGroup({
-            email: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormControl(null, { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_6__.Validators.required] }),
-            password: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormControl(null, { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_6__.Validators.required, _angular_forms__WEBPACK_IMPORTED_MODULE_6__.Validators.minLength(8)] }),
+        this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_7__.FormGroup({
+            email: new _angular_forms__WEBPACK_IMPORTED_MODULE_7__.FormControl(null, { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_7__.Validators.required] }),
+            password: new _angular_forms__WEBPACK_IMPORTED_MODULE_7__.FormControl(null, { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_7__.Validators.required, _angular_forms__WEBPACK_IMPORTED_MODULE_7__.Validators.minLength(8)] }),
         });
     }
     changeType() {
@@ -2418,12 +2431,12 @@ let SignInComponent = class SignInComponent {
                         // Authentication successful
                         this.loadingController.create({
                             message: 'Logging in...',
-                        }).then((overlay) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+                        }).then((overlay) => (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
                             this.loading = overlay;
                             this.loading.present();
-                            this.authService.login(form).then((data) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
-                                const docRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_7__.doc)(this._firestore, 'users', this.currentUser.uid);
-                                const docSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_7__.getDoc)(docRef);
+                            this.authService.login(form).then((data) => (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+                                const docRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_8__.doc)(this._firestore, 'users', this.currentUser.uid);
+                                const docSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_8__.getDoc)(docRef);
                                 if (docSnap.exists()) {
                                     const name = docSnap.data().username.concat('@test');
                                     this.iroha.wallet.name = '';
@@ -2458,19 +2471,19 @@ let SignInComponent = class SignInComponent {
         });
     }
     onSubmit() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
             if (!this.form.valid) {
                 this.form.markAllAsTouched();
                 return;
             }
             this.loadingController.create({
                 message: 'Logging in...',
-            }).then((overlay) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            }).then((overlay) => (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
                 this.loading = overlay;
                 this.loading.present();
-                this.authService.login(this.form.value).then((data) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
-                    const docRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_7__.doc)(this._firestore, 'users', this.currentUser.uid);
-                    const docSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_7__.getDoc)(docRef);
+                this.authService.login(this.form.value).then((data) => (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+                    const docRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_8__.doc)(this._firestore, 'users', this.currentUser.uid);
+                    const docSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_8__.getDoc)(docRef);
                     if (docSnap.exists()) {
                         const name = docSnap.data().username.concat('@test');
                         this.iroha.wallet.name = '';
@@ -2502,7 +2515,7 @@ let SignInComponent = class SignInComponent {
         });
     }
     forgotPassword() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
             const alert = yield this.alertController.create({
                 header: 'Enter your email',
                 inputs: [
@@ -2522,19 +2535,19 @@ let SignInComponent = class SignInComponent {
                     },
                     {
                         text: 'Confirm',
-                        handler: (data) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+                        handler: (data) => (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
                             console.log(data.email);
                             this.loadingController.create({
                                 message: 'Verifying...',
-                            }).then((overlay) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+                            }).then((overlay) => (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
                                 this.loading = overlay;
                                 this.loading.present();
                                 yield this.authService.resetPassword(data.email)
-                                    .then((d) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+                                    .then((d) => (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
                                     this.loading.dismiss();
                                     yield this.showAlert('Authentication Success', 'Check your email to reset your password.');
                                 }))
-                                    .catch((e) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+                                    .catch((e) => (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
                                     this.loading.dismiss();
                                     yield this.showAlert('Authentication Failed', e);
                                 }));
@@ -2547,7 +2560,7 @@ let SignInComponent = class SignInComponent {
         });
     }
     showAlert(header, message) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
             const alert = yield this.alertController.create({
                 header,
                 message,
@@ -2559,16 +2572,17 @@ let SignInComponent = class SignInComponent {
 };
 SignInComponent.ctorParameters = () => [
     { type: src_app_services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__.AuthService },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_8__.Router },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_9__.AlertController },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_9__.LoadingController },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_9__.Router },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_10__.AlertController },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_10__.LoadingController },
     { type: _services_iroha_service__WEBPACK_IMPORTED_MODULE_3__.IrohaService },
-    { type: _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_10__.AngularFireAuth },
-    { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_7__.Firestore },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_9__.MenuController }
+    { type: _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_11__.AngularFireAuth },
+    { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_8__.Firestore },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_10__.MenuController },
+    { type: _services_storage_service__WEBPACK_IMPORTED_MODULE_5__.StorageService }
 ];
-SignInComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_11__.Component)({
+SignInComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_12__.Component)({
         selector: 'app-sign-in',
         template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_sign_in_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_sign_in_component_scss__WEBPACK_IMPORTED_MODULE_1__]

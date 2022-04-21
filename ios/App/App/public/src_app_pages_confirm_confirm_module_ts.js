@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-button color=\"primary\" (click)=\"back()\" routerDirection=\"forward\">\n        <ion-icon name=\"chevron-back-outline\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content fullscreen=\"true\">\n  <div *ngIf=\"showFallback\" class=\"ion-padding\">\n    <ion-button (click)=\"unlock()\" expand=\"block\" class=\"main-button\">\n      <ion-text class = ion-margin-horizontal >Confirm Payment</ion-text>\n      <ion-icon class = ion-margin-horizontal name=\"wallet-outline\"></ion-icon>\n    </ion-button>\n  </div>\n  <ion-col size=\"10\">\n    <ion-text  color=\"primary\" style=\"font-size: 26px; font-weight: bold\">Order Details</ion-text>\n  </ion-col>\n  <div class=\"cart-items\">\n    <ng-container *ngFor=\"let checkout of checkout\">\n      <div>\n        <app-checkout-card [checkout]=\"checkout\"></app-checkout-card>\n      </div>\n    </ng-container>\n  </div>\n\n  <hr>\n\n  <div class=\"cart-total\">\n    <ion-item lines=\"none\">\n      <ion-label>Total</ion-label>\n      <ion-label slot=\"end\" class=\"ion-text-right\">RM {{this.total}}</ion-label>\n    </ion-item>\n  </div>\n\n</ion-content>\n<ion-footer>\n  <ion-toolbar color = \"secondary\">\n    <ion-row>\n      <ion-col size=\"12\" class=\"ion-text-center\">\n        Timeout in: {{( logoutTimer | async )*1000| date: 'mm:ss'}}\n      </ion-col>\n    </ion-row>\n  </ion-toolbar>\n</ion-footer>\n\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-button color=\"primary\" (click)=\"back()\" routerDirection=\"forward\">\n        <ion-icon name=\"chevron-back-outline\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content fullscreen=\"true\">\n  <div *ngIf=\"showFallback\" class=\"ion-padding\">\n    <ion-button (click)=\"unlock()\" expand=\"block\" class=\"main-button\">\n      <ion-text class = ion-margin-horizontal >Confirm Payment</ion-text>\n      <ion-icon class = ion-margin-horizontal name=\"wallet-outline\"></ion-icon>\n    </ion-button>\n  <ion-col size=\"10\">\n    <ion-text  color=\"primary\" style=\"font-size: 26px; font-weight: bold\">Order Details</ion-text>\n  </ion-col>\n  <div class=\"cart-items\">\n    <ng-container *ngFor=\"let checkout of checkout\">\n      <div>\n        <app-checkout-card [checkout]=\"checkout\"></app-checkout-card>\n      </div>\n    </ng-container>\n  </div>\n\n  <hr>\n\n  <div class=\"cart-total\">\n    <ion-item lines=\"none\">\n      <ion-label>Total</ion-label>\n      <ion-label slot=\"end\" class=\"ion-text-right\">RM {{this.total}}</ion-label>\n    </ion-item>\n  </div>\n  </div>\n</ion-content>\n<ion-footer>\n  <ion-toolbar color = \"secondary\">\n    <ion-row>\n      <ion-col size=\"12\" class=\"ion-text-center\">\n        Timeout in: {{( logoutTimer | async )*1000| date: 'mm:ss'}}\n      </ion-col>\n    </ion-row>\n  </ion-toolbar>\n</ion-footer>\n\n");
 
 /***/ }),
 
@@ -273,16 +273,24 @@ let ConfirmPage = class ConfirmPage {
                 const docSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.getDoc)(dataRef);
                 const dataSnap = docSnap.data();
                 const value = data[key];
+                const keys = key.split('@')[1].split('-').slice(0, -1);
+                let optionSnap = 0;
+                for (const price of keys) {
+                    // eslint-disable-next-line max-len
+                    const optionRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.doc)(this._firestore, `stores/${(this.owner)}/items/${(key.split('@')[0])}/optionPrice/${(price)}`);
+                    const optSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.getDoc)(optionRef);
+                    optionSnap += Number(optSnap.data().price);
+                }
                 this.checkout.push({
                     name: dataSnap.name,
                     owner: ownerName.name,
-                    price: dataSnap.price,
+                    price: Number(dataSnap.price) + optionSnap,
                     image: dataSnap.imageUrl,
                     id: key,
                     ownerId: this.owner,
                     quantity: value,
                 });
-                this.total += dataSnap.price * value;
+                this.total += (Number(dataSnap.price) + optionSnap) * value;
             }
         });
     }
@@ -348,10 +356,18 @@ let ConfirmPage = class ConfirmPage {
                     const ownerSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.getDoc)(ownerRef);
                     const ownerName = ownerSnap.data();
                     // find price times value
+                    const keys = key.split('@')[1].split('-').slice(0, -1);
+                    let optionSnap = 0;
+                    for (const price of keys) {
+                        // eslint-disable-next-line max-len
+                        const optionRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.doc)(this._firestore, `stores/${(this.owner)}/items/${(key.split('@')[0])}/optionPrice/${(price)}`);
+                        const optSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.getDoc)(optionRef);
+                        optionSnap += Number(optSnap.data().price);
+                    }
                     const dataRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.doc)(this._firestore, `stores/${(this.owner)}/items/${(key.split('@')[0])}`);
                     const docSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.getDoc)(dataRef);
                     const dataSnap = docSnap.data();
-                    const price = dataSnap.price;
+                    const price = Number(dataSnap.price) + optionSnap;
                     const pay = price * value;
                     const payString = pay.toString();
                     // get owner name

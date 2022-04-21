@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {ProductService} from '../../../../services/cafe/product.service';
 import {AngularFirestore} from '@angular/fire/compat/firestore';
@@ -6,6 +6,7 @@ import {AuthService} from '../../../../services/auth/auth.service';
 import {IrohaService} from '../../../../services/iroha.service';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
+import {collection, doc, Firestore, getDoc, getDocs} from "@angular/fire/firestore";
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -28,14 +29,21 @@ export interface IOrderCard {
   selector: 'app-order-card',
   templateUrl: 'order-card.component.html',
 })
-export class OrderCardComponent {
+export class OrderCardComponent implements OnInit{
   @Input() order: IOrderCard;
-  private id = this.ionicAuthService.getUid();
+  public option = [];
+  public options = [];
+  private uid = this.ionicAuthService.getUid();
   constructor(private router: Router,
               private product: ProductService,
               private afs: AngularFirestore,
               private ionicAuthService: AuthService,
-              private iroha: IrohaService) {
+              private _firestore: Firestore) {
+  }
+
+  async ngOnInit() {
+    await this.getOptions();
+    console.log(this.options[0].data);
   }
 
   goToCheckStatusUser(name, id, price, owner, ownerId) {
@@ -47,11 +55,51 @@ export class OrderCardComponent {
     this.router.navigate(['check-status-user']);
   }
 
-  generatePdf(name, id, price, owner, ownerId, quantity, amountPaid, status, orderTime, deliverTime){
-    const documentDefinition = { content: 'Name : ' + name + '\nOrder ID : '
-        + id + '\nPrice: RM ' + price + '\nPrice: RM ' +   owner + '\nPrice: RM ' +  ownerId + '\nPrice: RM '
-        +  quantity + '\nPrice: RM ' + amountPaid + '\nPrice: RM ' +
-        status + '\nPrice: RM ' +  orderTime + '\nPrice: RM ' +  deliverTime };
-    pdfMake.createPdf(documentDefinition).open();
+
+  async getOptions() {
+    if (this.product.orderHistory == false) {
+      const opt = collection(this._firestore, `users/${(this.uid)}/activeOrders/${(this.order.id)}/options`);
+      const optSnapshot = await getDocs(opt);
+      optSnapshot.forEach((docs) => {
+        console.log(docs.id, ' => ', docs.data());
+        this.options.push(
+          {
+            data: docs.data()
+          },
+        );
+      });
+      for (const i in this.options) {
+        const key = Object.keys(this.options[i].data);
+        const value = Object.values(this.options[i].data);
+        this.option.push(
+          {
+            name: key,
+            value: value
+          }
+        );
+      }
+    }
+    else {
+      const opt = collection(this._firestore, `users/${(this.uid)}/allOrders/${(this.order.id)}/options`);
+      const optSnapshot = await getDocs(opt);
+      optSnapshot.forEach((docs) => {
+        console.log(docs.id, ' => ', docs.data());
+        this.options.push(
+          {
+            data: docs.data()
+          },
+        );
+      });
+      for (const i in this.options) {
+        const key = Object.keys(this.options[i].data);
+        const value = Object.values(this.options[i].data);
+        this.option.push(
+          {
+            name: key,
+            value: value
+          }
+        );
+      }
+    }
   }
 }

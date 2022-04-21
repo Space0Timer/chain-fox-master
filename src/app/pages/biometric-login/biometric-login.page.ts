@@ -6,6 +6,7 @@ import {Firestore} from "@angular/fire/firestore";
 import {IrohaService} from "../../services/iroha.service";
 import {AlertController, LoadingController, MenuController} from "@ionic/angular";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
+import {StorageService} from "../../services/storage.service";
 
 @Component({
   selector: 'app-biometric-login',
@@ -18,20 +19,21 @@ export class BiometricLoginPage implements OnInit {
   type = false;
   loading: any;
   isToggled: boolean;
-  id = this.ionicAuthService.getUid();
+  id = this.authService.getUid();
   private currentUser: any;
 
   constructor(
     private authService: AuthService,
     private router: Router,
     private _firestore: Firestore,
-    private ionicAuthService: AuthService,
     private iroha: IrohaService,
     private loadingController: LoadingController,
     private afAuth: AngularFireAuth,
     private alertController: AlertController,
-    private menu: MenuController
+    private menu: MenuController,
+    private storage: StorageService
   ) {
+
     this.initForm();
     this.afAuth.onAuthStateChanged(user => {
       this.currentUser = user;
@@ -42,7 +44,8 @@ export class BiometricLoginPage implements OnInit {
     await this.menu.enable(true);
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.isToggled = await this.storage.get('bio-login') !== 'false';
   }
 
   initForm() {
@@ -53,11 +56,16 @@ export class BiometricLoginPage implements OnInit {
   }
 
   async _ionChange(event) {
+    console.log(await this.storage.get('bio-login'));
     if (this.isToggled) {
-      await this.presentPrompt();
+      if (await this.storage.get('bio-login') === 'false') {
+        await this.presentPrompt();
+      }
     }
-    else{
-      await this.showAlert('Disable Biometric Login', 'Are you sure you want to disable biometric login?');
+    else {
+      if (await this.storage.get('bio-login') === 'true') {
+        await this.showAlert('Disable Biometric Login', 'Are you sure you want to disable biometric login?');
+      }
     }
   }
 
@@ -88,13 +96,16 @@ export class BiometricLoginPage implements OnInit {
           text: 'No',
           role: 'cancel',
           handler: data => {
+            this.isToggled = true;
             console.log('Cancel clicked');
           }
         },
         {
           text: 'Yes',
           handler: async data => {
-            this.authService.biometricLogin = false;
+            await this.storage.set('bio-login', 'false');
+            this.authService.biometricLogin = await this.storage.get('bio-login');
+            console.log(this.authService.biometricLogin);
           }
         }
       ]
@@ -118,6 +129,7 @@ export class BiometricLoginPage implements OnInit {
           text: 'Cancel',
           role: 'cancel',
           handler: data => {
+            this.isToggled = false;
             console.log('Cancel clicked');
           }
         },
@@ -126,9 +138,12 @@ export class BiometricLoginPage implements OnInit {
           handler: async data => {
             await this.iroha.getAccDetail('sec');
             if (data.password === this.iroha.pw) {
-              this.authService.biometricLogin = true;
+              await this.storage.set('bio-login', 'true');
+              this.authService.biometricLogin = await this.storage.get('bio-login');
+              console.log(this.authService.biometricLogin);
             }
             else {
+              this.isToggled = false;
               await this.showAlert('Verification Failed', 'You entered the wrong password');
             }
           }

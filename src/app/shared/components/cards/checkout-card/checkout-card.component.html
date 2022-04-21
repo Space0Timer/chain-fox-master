@@ -9,6 +9,8 @@
       <p>Merchant: {{checkout.owner}}</p>
       <p>Price: RM {{checkout.price}}</p>
       <p>Quantity: {{checkout.quantity}}</p>
+      <p>Options: </p>
+      <p *ngFor="let entry of options"> {{entry.name}} - {{entry.val}}&nbsp;</p>
     </div>
   </ion-card-content>
 </ion-card>

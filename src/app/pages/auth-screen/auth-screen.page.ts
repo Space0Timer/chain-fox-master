@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import SwiperCore, { SwiperOptions } from 'swiper';
 import {MenuController} from "@ionic/angular";
 import {SplashScreen} from "@capacitor/splash-screen";
+import {StorageService} from "../../services/storage.service";
 
 @Component({
   selector: 'app-auth-screen',
@@ -21,7 +22,8 @@ export class AuthScreenPage implements OnInit {
     pagination: { clickable: true },
     scrollbar: { draggable: true },
   };
-  constructor(private auth: AuthService, private router: Router, private menu: MenuController) {
+  constructor(private auth: AuthService, private router: Router, private menu: MenuController,
+              private storage: StorageService) {
 
     this.menu.enable(false);
   }
@@ -30,6 +32,10 @@ export class AuthScreenPage implements OnInit {
   }
   async ionViewDidLeave() {
     await this.menu.enable(true);
+  }
+  async ionViewDidEnter() {
+    this.auth.biometricLogin = await this.storage.get('bio-login');
+    console.log(this.auth.biometricLogin);
   }
 
   async ngOnInit() {

@@ -36,7 +36,9 @@ export class OrderHistoryPage {
   async ionViewWillEnter() {
     this.order = [];
     await this.addItemsToOrder();
+    this.product.orderHistory = true;
   }
+
   _ionChange(event) {
     const val = event.target.value;
     this.searchedItem = this.order;

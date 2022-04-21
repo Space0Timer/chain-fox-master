@@ -13,7 +13,7 @@ import * as _ from 'lodash';
 
 const moment = require('moment');
 
-const IROHA_ADDRESS = 'http://34.101.37.91:8081';
+const IROHA_ADDRESS = 'http://34.131.10.34:8081';
 
 const commandService = new CommandService(
   IROHA_ADDRESS,

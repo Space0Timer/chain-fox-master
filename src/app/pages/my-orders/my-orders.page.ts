@@ -37,6 +37,7 @@ export class MyOrdersPage implements OnInit{
     this.order = [];
     await this.addItemsToOrder();
     this.searchedItem = this.order;
+    this.product.orderHistory = false;
   }
 
   _ionChange(event) {

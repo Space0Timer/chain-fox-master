@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ProductService} from '../../../../services/cafe/product.service';
 import {AlertController, ModalController} from '@ionic/angular';
-import {collection, Firestore, getDocs, query} from '@angular/fire/firestore';
+import {collection, doc, Firestore, getDoc, getDocs, query} from '@angular/fire/firestore';
 import {AuthService} from '../../../../services/auth/auth.service';
 
 export interface Form {
@@ -12,6 +12,7 @@ export interface Form {
 export interface Options {
   val: string;
   name: string;
+  price: string;
   checked: boolean;
 }
 
@@ -68,9 +69,15 @@ export class ChooseOptionsPage implements OnInit {
         delete this.product.customOptions[i].data.name;
         for (const j in this.product.customOptions[i].data) {
           console.log(this.product.customOptions[i].data[j]);
-          this.options.push({
+          const priceTag = this.product.customOptions[i].name + this.product.customOptions[i].data[j];
+          // eslint-disable-next-line max-len
+          const optionRef = doc(this._firestore, `stores/${(this.product.itemOwner)}/items/${(this.product.itemId.split('@')[0])}/optionPrice/${(priceTag)}`);
+          const optSnap = await getDoc(optionRef);
+          const optionSnap = optSnap.data().price;
+            this.options.push({
             val: this.product.customOptions[i].data[j],
             name: this.product.customOptions[i].data[j],
+            price: optionSnap,
             checked: false
           });
         }
@@ -84,7 +91,9 @@ export class ChooseOptionsPage implements OnInit {
     }
     console.log(this.form);
   }
-
+  async back() {
+    await this.modalController.dismiss();
+  }
   addQuantity() {
     this.quantity += 1;
   }

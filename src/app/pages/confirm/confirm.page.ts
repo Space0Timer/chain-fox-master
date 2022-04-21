@@ -208,10 +208,18 @@ export class ConfirmPage implements OnInit {
         const ownerSnap = await getDoc(ownerRef);
         const ownerName = ownerSnap.data();
         // find price times value
+        const keys = key.split('@')[1].split('-').slice(0, -1);
+        let optionSnap = 0;
+        for (const price of keys) {
+          // eslint-disable-next-line max-len
+          const optionRef = doc(this._firestore, `stores/${(this.owner)}/items/${(key.split('@')[0])}/optionPrice/${(price)}`);
+          const optSnap = await getDoc(optionRef);
+          optionSnap += Number(optSnap.data().price);
+        }
         const dataRef = doc(this._firestore, `stores/${(this.owner)}/items/${(key.split('@')[0])}`);
         const docSnap = await getDoc(dataRef);
         const dataSnap = docSnap.data();
-        const price = dataSnap.price;
+        const price = Number(dataSnap.price) + optionSnap;
         const pay = price * value;
         const payString = pay.toString();
         // get owner name
@@ -281,7 +289,7 @@ export class ConfirmPage implements OnInit {
         });
         for (const key in this.options)
           await updateDoc(optRef, {
-            [this.options[key].name]: [this.options[key].val]
+            [this.options[key].name]: this.options[key].val
           })
         // add orders for stall
         const trackActiveOrderRef = doc(this._firestore, `trackOrders/${(this.owner)}/activeOrders/${(pushKey)}`);
@@ -307,7 +315,7 @@ export class ConfirmPage implements OnInit {
         });
         for (const key in this.options)
           await updateDoc(optRef, {
-            [this.options[key].name]: [this.options[key].val]
+            [this.options[key].name]: this.options[key].val
           })
         // add all orders for stall
         const trackOrderRef = doc(this._firestore, `trackOrders/${(this.owner)}/allOrders/${(pushKey)}`);
@@ -332,7 +340,7 @@ export class ConfirmPage implements OnInit {
         });
         for (const key in this.options)
           await updateDoc(optRef, {
-            [this.options[key].name]: [this.options[key].val]
+            [this.options[key].name]: this.options[key].val
           })
         // add to sales
         const currentDate = new Date();

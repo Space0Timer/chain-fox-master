@@ -197,7 +197,6 @@ let UpdateStorePage = class UpdateStorePage {
                 this.barStatus = false;
             }
         }, (error) => {
-            this.errorMessage = 'File size exceeded. Maximum file size 1 MB';
             this.barStatus = false;
         });
     }

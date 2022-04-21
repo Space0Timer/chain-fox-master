@@ -7,16 +7,16 @@ import {
   signOut
 } from '@angular/fire/auth';
 import {collection, doc, Firestore, getDocs, query, setDoc, where} from '@angular/fire/firestore';
-import {AngularFirestore} from "@angular/fire/compat/firestore";
-import firebase from "firebase/compat/app";
-import {tryCatch} from "rxjs/internal-compatibility";
-import {AngularFireAuth} from "@angular/fire/compat/auth";
-import {Router} from "@angular/router";
-import {ControlContainer} from "@angular/forms";
-import {LoadingController} from "@ionic/angular";
-import {StorageService} from "../storage.service";
-import {NativeBiometric} from "capacitor-native-biometric";
-import {FCM} from "@capacitor-community/fcm";
+import {AngularFirestore} from '@angular/fire/compat/firestore';
+import firebase from 'firebase/compat/app';
+import {tryCatch} from 'rxjs/internal-compatibility';
+import {AngularFireAuth} from '@angular/fire/compat/auth';
+import {Router} from '@angular/router';
+import {ControlContainer} from '@angular/forms';
+import {LoadingController} from '@ionic/angular';
+import {StorageService} from '../storage.service';
+import {NativeBiometric} from 'capacitor-native-biometric';
+import {FCM} from '@capacitor-community/fcm';
 
 export interface AccData {
   mywallet: string;
@@ -43,8 +43,8 @@ export interface WalletDataTo {
 export class AuthService {
   uid = '';
   currentUser: any;
-  biometricLogin = false;
   private id: string;
+  biometricLogin: string;
 
   constructor(
     private _fireAuth: Auth,
@@ -53,8 +53,14 @@ export class AuthService {
     private router: Router,
     private loading: LoadingController,
     private storage: StorageService
-  ) {     this.afAuth.onAuthStateChanged(user => {
+  ) {     this.afAuth.onAuthStateChanged(async user => {
     this.currentUser = user;
+    if (await this.storage.get('bio-login') === undefined) {
+      await this.storage.set('bio-login', 'false');
+      this.biometricLogin = 'false';
+    } else {
+      this.biometricLogin = await this.storage.get('bio-login');
+    }
   });}
 
   // Creating a firebase account
@@ -186,7 +192,7 @@ export class AuthService {
     try {
       await NativeBiometric.setCredentials({
         username: email,
-        password: password,
+        password,
         server: 'chainfox',
       });
     } catch (e) {

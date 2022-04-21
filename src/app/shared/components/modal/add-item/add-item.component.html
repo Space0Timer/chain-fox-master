@@ -1,15 +1,57 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="end">
+    <ion-buttons slot="start">
       <ion-button color="primary" (click)="back()" routerDirection="forward">
-        <ion-icon name="close-outline"></ion-icon>
+        <ion-text>Cancel</ion-text>
       </ion-button>
     </ion-buttons>
-    <ion-title>Add New Item</ion-title>
+    <ion-buttons slot="end">
+      <ion-button
+        *ngIf="!isLoading"
+        color="primary"
+        (click)="onSubmit()">
+        <ion-text style="font-weight: bold">Confirm</ion-text>
+      </ion-button>
+      <ion-button
+        *ngIf="isLoading">
+        <ion-spinner color="primary"></ion-spinner>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content fullscreen="true">
   <div class="ion-padding">
+    <ion-row style="padding-left: 0">
+      <ion-col size="10">
+        <ion-text  color="primary" style="font-size: 26px; font-weight: bold">Add New Item</ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-card>
+      <div class="ion-padding">
+    <div>
+      <form method="post" enctype="multipart/form-data">
+        <div>
+          <div><b>Upload a photo for your item.</b></div><br/>
+          <input type="file" (change)="uploadPhoto($event)" accept=".png,.jpg" multiple="true"/>
+          <div *ngIf="errorMessage">
+            <ion-text color="danger">
+              <ion-text
+                class="error">* {{errorMessage}}</ion-text>
+            </ion-text>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div *ngIf="barStatus">
+      Uploading.....
+    </div>
+    <div id="photoPreview">
+      <div *ngFor="let image of imageUploads">
+        <img loading="lazy" [src]="image" class="preview"/>
+      </div>
+    </div>
+      </div>
+    </ion-card>
     <form [formGroup]="form" class="ion-margin">
       <div class="ion-margin-vertical">
         <ion-item lines="full">
@@ -68,26 +110,10 @@
         </div>
       </div>
     </form>
-    <ion-card mode="ios" class="ion-padding">
-      <ion-row>
-        <ion-col size="10">
-          <ion-card-title style="font-size: 18px; padding-top: 3px" >Order customisation</ion-card-title>
-        </ion-col>
-        <ion-col size="2" class="ion-text-right">
-          <ion-buttons>
-            <ion-button  (click)="openCustomiseOrderModal('')">
-              <ion-icon name="add-circle-outline"></ion-icon>
-            </ion-button>
-          </ion-buttons>
-        </ion-col>
-      </ion-row>
-    </ion-card>
-    <ion-row style="padding-left: 0">
-      <ion-col size="10">
-        <ion-text  color="primary" style="font-size: 26px; font-weight: bold">Current Customisation</ion-text>
-      </ion-col>
-    </ion-row>
     <ion-item *ngFor="let customOption of this.product.customOptions">
+      <div class="title">
+        <h2 color="primary">Current Customisation</h2>
+      </div>
       <ion-card mode="ios" class="ion-padding">
         <ion-row>
           <ion-col size="10">
@@ -103,47 +129,6 @@
         </ion-row>
       </ion-card>
     </ion-item>
-    <div>
-      <form method="post" enctype="multipart/form-data">
-        <div>
-          <div><b>Upload a photo for your item.</b></div><br/>
-          <input type="file" (change)="uploadPhoto($event)" accept=".png,.jpg" multiple="true"/>
-          <div *ngIf="errorMessage">
-            <ion-text color="danger">
-              <ion-text
-                class="error">* {{errorMessage}}</ion-text>
-            </ion-text>
-          </div>
-        </div>
-      </form>
-    </div>
-    <div *ngIf="barStatus">
-      Uploading.....
-    </div>
-
-    <div id="photoPreview">
-      <div *ngFor="let image of imageUploads">
-        <img loading="lazy" [src]="image" class="preview"/>
-      </div>
-    </div>
-
-    <ion-button
-      *ngIf="!isLoading"
-      size="large"
-      expand="block"
-      shape="round"
-      color="primary"
-      (click)="onSubmit()">
-      <ion-text>Confirm</ion-text>
-    </ion-button>
-    <ion-button
-      *ngIf="isLoading"
-      size="large"
-      expand="block"
-      shape="round"
-      color="primary">
-      <ion-spinner></ion-spinner>
-    </ion-button>
   </div>
 </ion-content>
 

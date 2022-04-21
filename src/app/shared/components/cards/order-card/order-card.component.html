@@ -1,14 +1,13 @@
 <ng-container *ngIf="order">
   <ion-card mode="ios">
     <ion-card-content>
-
       <div class="item-info">
-        <p>Item Name: {{order.name}}</p>
-        <p>Merchant: {{order.owner}}</p>
-        <p>Price: RM {{order.price}}</p>
-        <p>Quantity: {{order.quantity}}</p>
-        <p>Amount Paid: {{order.amountPaid}}</p>
         <p>Order ID: {{order.id}}</p>
+        <p>Item Name: {{order.name}}</p>
+        <p>Options: </p>
+        <p *ngFor="let entry of option">{{entry.name}} - {{entry.value}}&nbsp;</p>
+        <p>Merchant: {{order.owner}}</p>
+        <p>Amount Paid: RM{{order.amountPaid}}</p>
         <p>Status: {{order.status}}</p>
         <p>Order Time: {{order.orderTime.toDate() | date:'yyyy/MM/dd h:mm:ss a'}}</p>
         <p>Deliver Time: {{order.deliverTime}}</p>

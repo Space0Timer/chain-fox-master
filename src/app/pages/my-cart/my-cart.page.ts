@@ -77,9 +77,11 @@ export class MyCartPage implements OnInit{
         const docSnap = await getDoc(dataRef);
         const dataSnap = docSnap.data();
         const value = data[key];
+        console.log(key);
         const keys = key.split('@')[1].split('-').slice(0, -1);
         let optionSnap = 0;
         for (const price of keys) {
+          console.log(price);
           // eslint-disable-next-line max-len
           const optionRef = doc(this._firestore, `stores/${(this.owner)}/items/${(key.split('@')[0])}/optionPrice/${(price)}`);
           const optSnap = await getDoc(optionRef);
@@ -109,14 +111,13 @@ export class MyCartPage implements OnInit{
   async checkOut() {
     for (const key in this.keys) {
       const illegalTime = ['00', '01', '01', '02', '03', '04', '05', '06', '07', '22', '23'];
-      console.log(this.keys[key].id);
       if (this.product.orderTimePair.get(this.keys[key].id) === undefined) {
-        await this.showAlert('Please choose a valid pickup date for your orders.');
+        await this.showAlert('Please choose a valid pickup date for your orders.' + this.keys[key].id );
         this.counter = 1;
         break;
       }
       else if(illegalTime.includes(this.product.orderTimePair.get(this.keys[key].id.substring(11, 13)))) {
-        await this.showAlert('Please choose a valid pickup date for your orders.');
+        await this.showAlert('Please choose a valid pickup date for your orders.' +  this.product.orderTimePair.get(this.keys[key].id.substring(11, 13)) );
         this.counter = 1;
         break;
       }

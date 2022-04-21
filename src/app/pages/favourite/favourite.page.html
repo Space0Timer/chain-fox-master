@@ -10,14 +10,16 @@
 
 <ion-content>
   <div class = ion-padding>
-    <h1 class="title">Favourite</h1>
-    <ng-container *ngFor="let fav of fav">
+    <h1 class="title">Favourites</h1>
+    <ng-container *ngFor="let fav of fav" style="margin-top: 20px">
     <app-fav-card [fav]="fav" (childEvent)="loadFav()"></app-fav-card>
     </ng-container>
-  </div>
+
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click) = "goToCart()">
     <ion-fab-button>
       <ion-icon name="cart-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+
+  </div>
 </ion-content>

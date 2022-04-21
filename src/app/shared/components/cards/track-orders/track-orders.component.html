@@ -4,6 +4,8 @@
       <div class="item-info">
         <p>Order ID: {{ trackOrder.id}}</p>
         <p>Item Name: {{trackOrder.name}}</p>
+        <p>Options: </p>
+        <p *ngFor="let entry of option">{{entry.name}} - {{entry.value}}&nbsp;</p>
         <p>Customer: {{trackOrder.user}}</p>
         <p>Price: {{trackOrder.price}}</p>
         <p>Order Time: {{trackOrder.time}}</p>

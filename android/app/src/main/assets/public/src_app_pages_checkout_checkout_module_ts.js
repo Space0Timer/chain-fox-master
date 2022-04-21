@@ -172,16 +172,24 @@ let CheckoutPage = class CheckoutPage {
                 const docSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.getDoc)(dataRef);
                 const dataSnap = docSnap.data();
                 const value = data[key];
+                const keys = key.split('@')[1].split('-').slice(0, -1);
+                let optionSnap = 0;
+                for (const price of keys) {
+                    // eslint-disable-next-line max-len
+                    const optionRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.doc)(this._firestore, `stores/${(this.owner)}/items/${(key.split('@')[0])}/optionPrice/${(price)}`);
+                    const optSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.getDoc)(optionRef);
+                    optionSnap += Number(optSnap.data().price);
+                }
                 this.checkout.push({
                     name: dataSnap.name,
                     owner: ownerName.name,
-                    price: dataSnap.price,
+                    price: Number(dataSnap.price) + optionSnap,
                     image: dataSnap.imageUrl,
                     id: key,
                     ownerId: this.owner,
                     quantity: value,
                 });
-                this.total += dataSnap.price * value;
+                this.total += (Number(dataSnap.price) + optionSnap) * value;
             }
         });
     }

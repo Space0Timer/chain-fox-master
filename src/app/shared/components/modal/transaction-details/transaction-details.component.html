@@ -2,14 +2,19 @@
   <ion-toolbar>
     <ion-buttons slot="end">
       <ion-button color="primary" (click)="back()" routerDirection="forward">
-        <ion-icon name="close-outline"></ion-icon>
+        <ion-text>Close</ion-text>
       </ion-button>
     </ion-buttons>
-    <ion-title>Transaction Details</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <div class="ion-padding">
+    <ion-row style="padding-left: 0">
+      <ion-col size="10">
+        <ion-text  color="primary" style="font-size: 26px; font-weight: bold">Transaction Details</ion-text>
+      </ion-col>
+    </ion-row>
   <div class="ion-margin-horizontal">
     <ion-grid>
       <ion-row><ion-col>{{'Date'}}:</ion-col><ion-col>{{this.iroha.transactionDate}}</ion-col></ion-row>
@@ -18,5 +23,6 @@
       <ion-row><ion-col>{{'Amount'}}:</ion-col><ion-col>{{this.iroha.transactionAmount}}</ion-col></ion-row>
       <ion-row><ion-col>{{'Message'}}:</ion-col><ion-col>{{this.iroha.transactionMsg}}</ion-col></ion-row>
     </ion-grid>
+  </div>
   </div>
 </ion-content>

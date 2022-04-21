@@ -1,24 +1,43 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Customise Order</ion-title>
+    <ion-buttons slot="start">
+      <ion-button color="primary" (click)="back()" routerDirection="forward">
+        <ion-text>Cancel</ion-text>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+    <ion-button
+      *ngIf="!isLoading"
+      color="primary"
+      (click)="addToCart()">
+      <ion-text style="font-weight: bold">Confirm</ion-text>
+    </ion-button>
+    <ion-button
+      *ngIf="isLoading">
+      <ion-spinner color="primary"></ion-spinner>
+    </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="ion-margin">
+  <div class="ion-padding">
+  <ion-row style="padding-left: 0">
+    <ion-col size="10">
+      <ion-text  color="primary" style="font-size: 26px; font-weight: bold">Customise Order</ion-text>
+    </ion-col>
+  </ion-row>
     <ion-list lines="none">
     <ion-radio-group allow-empty-selection="true" (ionChange)="_ionChange(entry.title, $event)" *ngFor="let entry of form" >
       <ion-list-header>
         <ion-label>{{entry.title}}</ion-label>
       </ion-list-header>
       <ion-item *ngFor="let option of entry.data">
-        <ion-label>{{option.name}}</ion-label>
+        <ion-label>{{option.name}} (Add-on RM {{option.price}})</ion-label>
         <ion-radio slot = "end" [value]="option.val" mode="md"></ion-radio>
       </ion-item>
     </ion-radio-group>
     </ion-list>
-  </div>
-    <div class="ion-margin">
   <ion-list>
     <div class="qty-selector">
       <p>Quantity: </p>
@@ -27,25 +46,5 @@
       <ion-button fill="clear" (click)="addQuantity()">+</ion-button>
     </div>
   </ion-list>
-
-  </div>
-  <div class="ion-padding">
-    <ion-button
-      *ngIf="!isLoading"
-      size="large"
-      expand="block"
-      shape="round"
-      color="primary"
-      (click)="addToCart()">
-      <ion-text>Confirm</ion-text>
-    </ion-button>
-    <ion-button
-      *ngIf="isLoading"
-      size="large"
-      expand="block"
-      shape="round"
-      color="primary">
-      <ion-spinner></ion-spinner>
-    </ion-button>
   </div>
 </ion-content>

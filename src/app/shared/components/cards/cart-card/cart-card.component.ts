@@ -1,11 +1,10 @@
 import {Component, EventEmitter, Injectable, Input, OnInit, Output} from '@angular/core';
 import {ProductService} from '../../../../services/cafe/product.service';
 import {Router} from '@angular/router';
-import {collection, doc, Firestore, getDoc, getDocs, onSnapshot, query} from '@angular/fire/firestore';
+import {doc, Firestore, getDoc, getDocs, onSnapshot, query} from '@angular/fire/firestore';
 import {AlertController, IonRouterOutlet, ModalController} from '@ionic/angular';
-import {StoreSalesPage} from '../../../../pages/store-sales/store-sales.page';
 import {NoteComponent} from '../../modal/note/note.component';
-import {addDays, addMinutes, format, getDay, getHours, getMinutes, parseISO} from 'date-fns';
+import {addDays, addMinutes, format, getHours, getMinutes, parseISO} from 'date-fns';
 import {AuthService} from "../../../../services/auth/auth.service";
 import {ChooseOptionsPage, Form, Options} from "../../modal/choose-options/choose-options.page";
 
@@ -22,6 +21,7 @@ export interface ICartCard {
 @Component({
   selector: 'app-cart-card',
   templateUrl: 'cart-card.component.html',
+  styleUrls: ['cart-card.component.scss']
 })
 
 export class CartCardComponent implements OnInit{
@@ -128,8 +128,8 @@ export class CartCardComponent implements OnInit{
 
   async dateChanges(date) {
     this.date = date.split('T')[0] + ' ' + date.split('T')[1].substring(0, 5);
+    console.log(this.cart.id, this.date);
     await this.product.addTime(this.cart.id, this.date);
-    console.log(this.product.orderTimePair.get(this.cart.id));
   }
 
     async deleteItem() {
@@ -138,6 +138,16 @@ export class CartCardComponent implements OnInit{
         this.childEvent.emit();
       }, 500);
     }
+
+  async showAlert(message) {
+    const alert = await this.alertController.create({
+      header: 'Authentication Failed',
+      message,
+      buttons: ['OK'],
+    });
+
+    await alert.present();
+  }
 
 
 

@@ -46,7 +46,7 @@ export class CustomiseOrderPage{
   async init() {
     if (this.product.customNew === true) {
       this.form = this.formBuilder.group({
-        1: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$'), Validators.maxLength(10), Validators.minLength(6)]]
+        1: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]+$'), Validators.maxLength(10), Validators.minLength(6)]]
       });
     } else {
       const temp = new Map<string, string>();
@@ -59,12 +59,12 @@ export class CustomiseOrderPage{
       const keys = [...temp.keys()];
       for (let i = 0; i < keys.length; i++) {
         // eslint-disable-next-line max-len
-        this.group[`${keys[i]}`] = [temp.get(`${keys[i]}`), [Validators.required, Validators.pattern('^[a-zA-Z]+$'), Validators.maxLength(10), Validators.minLength(6)]];
+        this.group[`${keys[i]}`] = [temp.get(`${keys[i]}`), [Validators.required, Validators.pattern('^[a-zA-Z ]+$'), Validators.maxLength(10), Validators.minLength(6)]];
         const key = Number(keys[i]);
         this.optionCount = key + 1;
         // eslint-disable-next-line max-len
       }
-      this.group[`${this.optionCount}`] = ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$'), Validators.maxLength(10), Validators.minLength(6)]];
+      this.group[`${this.optionCount}`] = ['', [Validators.required, Validators.pattern('^[a-zA-Z ]+$'), Validators.maxLength(10), Validators.minLength(6)]];
       this.form = this.formBuilder.group(this.group);
       for (let i = 0; i < keys.length; i++) {
         // eslint-disable-next-line max-len
@@ -105,7 +105,7 @@ async addName() {
         {
           text: 'Confirm',
           handler: async data => {
-            if (!data.name.match('^[a-zA-Z]+$')) {
+            if (!data.name.match('^[a-zA-Z ]+$')) {
               await this.showAlert('Invalid name.', 'Only characters a-z and A-Z are allowed.');
             }
             else if (!data.name.match('^.{6,}$')) {
@@ -126,7 +126,7 @@ async addName() {
   }
   async addControl() {
     if (this.form.value[this.optionCount]!=='') {
-      if (!this.form.value[this.optionCount].match('^[a-zA-Z]+$')) {
+      if (!this.form.value[this.optionCount].match('^[a-zA-Z ]+$')) {
         await this.showAlert('Invalid option.', 'Only characters a-z and A-Z are allowed.');
       }
       else if (!this.form.value[this.optionCount].match('^.{6,}$')) {
@@ -241,7 +241,7 @@ async addName() {
               this.optionCount++;
             }
             // eslint-disable-next-line max-len
-            this.form.addControl(String(this.optionCount), new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z]+$'), Validators.maxLength(10), Validators.minLength(6)]));
+            this.form.addControl(String(this.optionCount), new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z ]+$'), Validators.maxLength(10), Validators.minLength(6)]));
           }
         }
       ]
@@ -290,7 +290,7 @@ async addName() {
           handler: data => {
             this.form.removeControl(control.key);
             // eslint-disable-next-line max-len
-            this.form.addControl(String(this.optionCount), new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z]+$'), Validators.maxLength(10), Validators.minLength(6)]));
+            this.form.addControl(String(this.optionCount), new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z ]+$'), Validators.maxLength(10), Validators.minLength(6)]));
           }
         }],
     });

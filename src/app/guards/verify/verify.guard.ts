@@ -44,8 +44,9 @@ export class VerifyGuard implements CanActivate {
             await this.iroha.setAccDetail(user);
             await this.createCart();
             await this.createFav();
-            const docReff = doc(this._firestore, 'users', this.auth.currentUser.uid);
-            const docSnapp = await getDoc(docReff);
+            await this.afs.collection('messages').doc(this.auth.currentUser.uid).set({
+              test: 'test'
+            });
             if (docSnap.exists()) {
               await this.afs.collection('users').doc(this.auth.currentUser.uid).update({
                 verify: true
@@ -62,7 +63,7 @@ export class VerifyGuard implements CanActivate {
         }
     })
       .catch(e => {
-        this.navigate();
+        this.goToLogin();
         return false;
       });
   }
@@ -75,6 +76,10 @@ export class VerifyGuard implements CanActivate {
 
   goToHome(){
     this.router.navigateByUrl('/tabs', {replaceUrl: true});
+  }
+
+  goToLogin(){
+    this.router.navigateByUrl('/auth-screen', {replaceUrl: true});
   }
 
   async createCart() {

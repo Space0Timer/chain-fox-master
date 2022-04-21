@@ -8,6 +8,7 @@ import {AngularFirestore} from '@angular/fire/compat/firestore';
 import {AngularFireAuth} from '@angular/fire/compat/auth';
 import {doc, Firestore, getDoc, setDoc} from '@angular/fire/firestore';
 import {AvailableResult, BiometryType, Credentials, NativeBiometric} from 'capacitor-native-biometric';
+import {StorageService} from "../../../services/storage.service";
 
 @Component({
   selector: 'app-sign-in',
@@ -30,7 +31,8 @@ export class SignInComponent implements OnInit {
     private iroha: IrohaService,
     private afAuth: AngularFireAuth,
     private _firestore: Firestore,
-    private menu: MenuController
+    private menu: MenuController,
+    private storage: StorageService
   ) {
     this.initForm();
     this.afAuth.onAuthStateChanged(user => {
@@ -38,6 +40,7 @@ export class SignInComponent implements OnInit {
     });
     this.menu.enable(false);
   }
+
   async ionViewDidLeave() {
     await this.menu.enable(true);
   }

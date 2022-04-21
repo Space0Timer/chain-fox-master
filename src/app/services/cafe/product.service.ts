@@ -52,6 +52,7 @@ export interface CustomOptions {
 
 export class ProductService {
 
+  orderHistory = false;
   total = 0;
   idOwnerPair = new Map<string, string>();
   orderNotePair = new Map<string, string>();

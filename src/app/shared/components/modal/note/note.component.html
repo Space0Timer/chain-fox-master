@@ -1,19 +1,29 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="end">
+    <ion-buttons slot="start">
       <ion-button color="primary" (click)="back()" routerDirection="forward">
-        <ion-icon name="close-outline"></ion-icon>
+        <ion-text>Cancel</ion-text>
       </ion-button>
     </ion-buttons>
-    <ion-title>Add Note</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="primary" [disabled]="newMsg === ''" (click)="addNote()">
+        <ion-text style="font-weight: bold">Confirm</ion-text>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content fullscreen="true">
+  <div class="ion-padding">
+    <ion-row style="padding-left: 0">
+      <ion-col size="10">
+        <ion-text  color="primary" style="font-size: 26px; font-weight: bold">Add Note</ion-text>
+      </ion-col>
+    </ion-row>
   <div class ="ion-padding-bottom">
   </div>
   <div class="titles">
-    <ion-text  color="primary" style="font-size: 20px; font-weight: bold">Send a message to the seller regarding this order</ion-text>
+    <ion-text style="font-size: 20px; font-weight: bold">Send a message to the seller regarding this order</ion-text>
   </div>
   <div color="light" class="ion-padding">
   <ion-row class="ion-align-items-center">
@@ -21,11 +31,7 @@
       <ion-textarea color="dark" class="message-input" autoGrow="true" rows="1" maxLength="500" [(ngModel)]="newMsg" placeholder="Enter your message here" >
       </ion-textarea>
     </ion-col>
-    <ion-col size="2">
-      <ion-button fill="clear" color="primary" [disabled]="newMsg === ''" (click)="addNote()">
-        <ion-icon name="send"></ion-icon>
-      </ion-button>
-    </ion-col>
   </ion-row>
+  </div>
   </div>
 </ion-content>

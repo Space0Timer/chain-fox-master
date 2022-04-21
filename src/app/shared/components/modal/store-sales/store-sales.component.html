@@ -2,15 +2,19 @@
   <ion-toolbar>
     <ion-buttons slot="end">
       <ion-button color="primary" (click)="back()" routerDirection="forward">
-        <ion-icon name="close-outline"></ion-icon>
+        <ion-text>Close</ion-text>
       </ion-button>
     </ion-buttons>
-    <ion-title>Your Sales</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content fullscreen="true">
   <div class="ion-padding">
-    <div><canvas id="sales-chart"></canvas></div>
+    <ion-row style="padding-left: 0">
+      <ion-col size="10">
+        <ion-text  color="primary" style="font-size: 26px; font-weight: bold">Your Sales</ion-text>
+      </ion-col>
+    </ion-row>
+    <canvas id="sales-chart"></canvas>
   </div>
 </ion-content>

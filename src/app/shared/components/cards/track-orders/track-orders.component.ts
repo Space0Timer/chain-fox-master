@@ -5,6 +5,7 @@ import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {AuthService} from "../../../../services/auth/auth.service";
 import {IrohaService} from "../../../../services/iroha.service";
 import {AlertController} from "@ionic/angular";
+import {collection, Firestore, getDocs} from "@angular/fire/firestore";
 
 export interface ITrackOrderCard {
   name: string;
@@ -26,16 +27,20 @@ export interface ITrackOrderCard {
 
 export class TrackOrdersComponent implements OnInit {
   @Input() trackOrder: ITrackOrderCard;
+  option = [];
+  options = [];
   private id = this.ionicAuthService.getUid();
   constructor(private product: ProductService,
               private router: Router,
               private afs: AngularFirestore,
               private ionicAuthService: AuthService,
               private iroha: IrohaService,
-              private alertController: AlertController) { }
+              private alertController: AlertController,
+              private _firestore: Firestore) { }
 
-  ngOnInit(
-  ) {}
+  async ngOnInit() {
+    await this.getOptions();
+  }
 
   async goToCheckStatusStore(name, id, price, user, status, userId) {
     this.product.orderName = name;
@@ -63,10 +68,31 @@ export class TrackOrdersComponent implements OnInit {
         await this.router.navigateByUrl('tabs/account', {replaceUrl: true});
       }
     )
-      .catch( async e => await this.showAlert('Cancellation failed', e))
+      .catch( async e => await this.showAlert('Cancellation failed', e));
 
   }
-
+  async getOptions() {
+      const opt = collection(this._firestore, `trackOrders/${(this.id)}/activeOrders/${(this.trackOrder.id)}/options`);
+      const optSnapshot = await getDocs(opt);
+      optSnapshot.forEach((docs) => {
+        console.log(docs.id, ' => ', docs.data());
+        this.options.push(
+          {
+            data: docs.data()
+          },
+        );
+      });
+      for (const i in this.options) {
+        const key = Object.keys(this.options[i].data);
+        const value = Object.values(this.options[i].data);
+        this.option.push(
+          {
+            name: key,
+            value: value
+          }
+        );
+      }
+  }
   async showAlert(header, message) {
     const alert = await this.alertController.create({
       header,
