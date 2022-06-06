@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {IrohaService} from "../../services/iroha.service";
+import {IrohaService} from "../../services/iroha/iroha.service";
 import {AlertController, LoadingController, MenuController} from "@ionic/angular";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AvailableResult, BiometryType, Credentials, NativeBiometric} from "capacitor-native-biometric";
@@ -41,7 +41,7 @@ export class ScanPayPage implements OnInit {
   }
   initForm() {
     this.form = new FormGroup({
-      amount: new FormControl(null, {validators: [Validators.required, Validators.pattern('^[0-9]*$')] }),
+      amount: new FormControl(null, {validators: [Validators.required, Validators.pattern('^(\\d+(\\.\\d{0,2})?|\\.?\\d{1,2})$')]}),
       reference: new FormControl(null, {validators: [Validators.required]}), // added email validator also
     });
   }
@@ -95,25 +95,26 @@ export class ScanPayPage implements OnInit {
       this.loading = overlay;
       this.loading.present();
       // eslint-disable-next-line no-underscore-dangle
-      await this.pay(this.form.value.reference, this.form.value.amount)
-        .then(async d => {
-          this.iroha.wallet.balance = '0';
-          await this.iroha.setBalance(this.iroha.wallet.name + '@test');
-          this.loading.dismiss();
-          // eslint-disable-next-line max-len
-          await this.showAlert('Transfer Success', 'You have sent RM' + this.form.value.amount + ' to ' + this.iroha.result.split('@')[0] + '.');
-          this.form.reset();
-          this.router.navigate(['tabs']);
-        })
-        .catch(e => {
-          this.loading.dismiss();
-          this.showAlert('Transfer Failed', e);
-        });
+      await this.pay(this.form.value.reference, this.form.value.amount);
     });
   }
 
   async pay(message, amount) {
-    await this.iroha.payment(this.iroha.result, message, amount);
+    await this.iroha.payment(this.iroha.result, message, amount)
+      .then(async d => {
+      this.iroha.wallet.balance = '0';
+      await this.iroha.setBalance(this.iroha.wallet.name + '@test');
+      this.loading.dismiss();
+      // eslint-disable-next-line max-len
+      await this.showAlert('Transfer Success', 'You have sent RM' + this.form.value.amount + ' to ' + this.iroha.result.split('@')[0] + '.');
+      this.form.reset();
+      await this.router.navigate(['tabs']);
+    })
+      .catch(e => {
+        this.loading.dismiss();
+        this.showAlert('Transfer Failed', e);
+      });
+    this.iroha.result = '';
   }
 
   async presentPrompt() {

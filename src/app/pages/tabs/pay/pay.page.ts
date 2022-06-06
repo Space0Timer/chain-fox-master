@@ -2,8 +2,7 @@ import {AfterViewInit, Component, OnDestroy} from '@angular/core';
 import {Router} from '@angular/router';
 import {AlertController, IonRouterOutlet, ModalController, Platform} from '@ionic/angular';
 import {BarcodeScanner, SupportedFormat} from '@capacitor-community/barcode-scanner';
-import {IrohaService} from '../../../services/iroha.service';
-import {ProductService} from "../../../services/cafe/product.service";
+import {IrohaService} from '../../../services/iroha/iroha.service';
 
 @Component({
   selector: 'app-home',
@@ -41,7 +40,10 @@ export class PayPage implements AfterViewInit, OnDestroy{
       if (result.hasContent) {
         this.iroha.result = result.content;
         this.scanActive = false;
-        console.log(this.iroha.result);
+        this.iroha.setOtherName(this.iroha.result + '@test').catch(async e => {
+          await this.showAlert('Invalid code', e);
+          await this.router.navigate(['tabs']);
+        });
         await this.router.navigate(['scan-pay']);
       }
     }
@@ -80,7 +82,6 @@ export class PayPage implements AfterViewInit, OnDestroy{
     BarcodeScanner.stopScan();
     this.scanActive = false;
   }
-
 
   async showAlert(header, message) {
     const alert = await this.alertController.create({

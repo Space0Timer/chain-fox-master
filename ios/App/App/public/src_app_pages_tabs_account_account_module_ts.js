@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button autoHide=\"false\"></ion-menu-button>\n      <ion-button (click) = \"qrCode()\">\n        <ion-icon name=\"qr-code\" ></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>\n      <div class=\"title\">\n        <img style=\"height: 30px\" src='assets/header/chainfoxaccount.png'>\n      </div>\n    </ion-title>\n    <ion-buttons slot=\"end\">\n      <ion-button (click)=\"chat()\">\n        <ion-icon name=\"chatbubbles-outline\"></ion-icon>\n      </ion-button>\n      <ion-button (click)=\"logOut()\">\n        <ion-icon name=\"lock-closed\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n\n<ion-content [fullscreen]=\"true\">\n  <ion-grid class=\"ion-padding-horizontal\">\n    <ion-row class=\"ion-align-items-center ion-margin-top\" *ngIf=\"this.product.role==='seller'\" >\n      <ion-col size=\"6\" *ngFor=\"let category of categories\" class=\"ion-text-center\">\n        <ion-card color=\"light\" (click)=\"getRoute(category?.id)\">\n          <ion-card-header>\n            <ion-icon name=\"{{category?.icon}}\"></ion-icon>\n            <ion-card-title >{{category?.name}}</ion-card-title>\n          </ion-card-header>\n        </ion-card>\n      </ion-col>\n    </ion-row>\n    <ion-row class=\"ion-align-items-center ion-margin-top\" *ngIf=\"this.product.role==='buyer'\" >\n      <ion-col size=\"6\" *ngFor=\"let category of category\" class=\"ion-text-center\">\n        <ion-card color=\"light\" (click)=\"getRoute(category?.id)\">\n          <ion-card-header>\n            <ion-icon name=\"{{category?.icon}}\"></ion-icon>\n            <ion-card-title >{{category?.name}}</ion-card-title>\n          </ion-card-header>\n        </ion-card>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n\n\n</ion-content>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button autoHide=\"false\"></ion-menu-button>\n      <ion-button (click) = \"qrCode()\">\n        <ion-icon name=\"qr-code\" ></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>\n      <div class=\"title\">\n        <img style=\"height: 30px\" src='assets/header/chainfoxaccount.png'>\n      </div>\n    </ion-title>\n    <ion-buttons slot=\"end\">\n      <ion-button (click)=\"chat()\">\n        <ion-icon name=\"chatbubbles-outline\"></ion-icon>\n      </ion-button>\n      <ion-button (click)=\"showAlertLogOut('Log out', 'Are you sure?')\">\n        <ion-icon name=\"lock-closed\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n\n<ion-content [fullscreen]=\"true\">\n  <ion-grid class=\"ion-padding-horizontal\">\n    <ion-row class=\"ion-align-items-center ion-margin-top\" *ngIf=\"this.product.role==='seller'\" >\n      <ion-col size=\"6\" *ngFor=\"let category of categories\" class=\"ion-text-center\">\n        <ion-card color=\"light\" (click)=\"getRoute(category?.id)\">\n          <ion-card-header>\n            <ion-icon name=\"{{category?.icon}}\"></ion-icon>\n            <ion-card-title >{{category?.name}}</ion-card-title>\n          </ion-card-header>\n        </ion-card>\n      </ion-col>\n    </ion-row>\n    <ion-row class=\"ion-align-items-center ion-margin-top\" *ngIf=\"this.product.role==='buyer'\" >\n      <ion-col size=\"6\" *ngFor=\"let category of category\" class=\"ion-text-center\">\n        <ion-card color=\"light\" (click)=\"getRoute(category?.id)\">\n          <ion-card-header>\n            <ion-icon name=\"{{category?.icon}}\"></ion-icon>\n            <ion-card-title >{{category?.name}}</ion-card-title>\n          </ion-card-header>\n        </ion-card>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n\n\n</ion-content>\n");
 
 /***/ }),
 
@@ -104,13 +104,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AccountPage": () => (/* binding */ AccountPage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 48111);
-/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_account_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./account.page.html */ 64010);
-/* harmony import */ var _account_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./account.page.scss */ 69424);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 14001);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 48111);
+/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_account_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./account.page.html */ 64010);
+/* harmony import */ var _account_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./account.page.scss */ 98333);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 14001);
 /* harmony import */ var src_app_services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/auth/auth.service */ 68927);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ 13252);
-/* harmony import */ var _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../services/cafe/product.service */ 41575);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ 13252);
+/* harmony import */ var _services_store_product_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../services/store/product.service */ 86250);
+/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic/angular */ 91346);
+
+
 
 
 
@@ -119,19 +123,46 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let AccountPage = class AccountPage {
-    constructor(router, ionicAuthService, product) {
+    constructor(router, ionicAuthService, product, _firestore, alertController) {
         this.router = router;
         this.ionicAuthService = ionicAuthService;
         this.product = product;
+        this._firestore = _firestore;
+        this.alertController = alertController;
         this.successMsg = '';
         this.errorMsg = '';
         this.categories = [];
         this.allRestaurants = [];
         this.restaurants = [];
         this.category = [];
+        this.uid = this.ionicAuthService.getUid();
     }
     chat() {
         this.router.navigate(['chat-list']);
+    }
+    showAlertLogOut(header, message) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            const alert = yield this.alertController.create({
+                header,
+                message,
+                buttons: [
+                    {
+                        text: 'Cancel',
+                        role: 'cancel',
+                        handler: data => {
+                            console.log('Cancel clicked');
+                        }
+                    },
+                    {
+                        text: 'OK',
+                        handler: (data) => (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+                            this.logOut();
+                        })
+                    }
+                ]
+            });
+            yield alert.present();
+        });
     }
     logOut() {
         this.ionicAuthService.logout()
@@ -150,38 +181,49 @@ let AccountPage = class AccountPage {
     qrCode() {
         this.router.navigate(['qr-code']);
     }
-    ngOnInit() {
-        this.categories = [
-            { id: 'my-cart', name: 'My Cart', icon: 'cart-outline' },
-            { id: 'my-orders', name: 'My Orders', icon: 'bag-handle-outline' },
-            { id: 'favourites', name: 'Favourites', icon: 'heart-outline' },
-            { id: 'order-history', name: 'Order History', icon: 'receipt-outline' },
-            { id: 'start-selling', name: 'Setup Store', icon: 'storefront-outline' },
-            { id: 'update-store', name: 'Update Store', icon: 'construct-outline' },
-            { id: 'track-sales', name: 'Track Sales', icon: 'cash-outline' },
-            { id: 'track-orders', name: 'Track Orders', icon: 'file-tray-full-outline' },
-        ];
-        this.category = [
-            { id: 'my-cart', name: 'My Cart', icon: 'cart-outline' },
-            { id: 'my-orders', name: 'My Orders', icon: 'bag-handle-outline' },
-            { id: 'favourites', name: 'Favourites', icon: 'heart-outline' },
-            { id: 'order-history', name: 'Order History', icon: 'receipt-outline' },
-            { id: 'start-selling', name: 'Setup Store', icon: 'storefront-outline' },
-        ];
+    ionViewWillEnter() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            const userID = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.doc)(this._firestore, `users/${(this.uid)}`);
+            const userIDSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.getDoc)(userID);
+            const userIDRole = userIDSnap.data().role;
+            if (userIDRole === 'seller') {
+                this.categories = [
+                    { id: 'my-cart', name: 'My Cart', icon: 'cart-outline' },
+                    { id: 'my-orders', name: 'My Orders', icon: 'bag-handle-outline' },
+                    { id: 'favourites', name: 'Favourites', icon: 'heart-outline' },
+                    { id: 'order-history', name: 'Order History', icon: 'receipt-outline' },
+                    { id: 'start-selling', name: 'Setup Store', icon: 'storefront-outline' },
+                    { id: 'update-store', name: 'Update Store', icon: 'construct-outline' },
+                    { id: 'track-sales', name: 'Track Sales', icon: 'cash-outline' },
+                    { id: 'track-orders', name: 'Track Orders', icon: 'file-tray-full-outline' },
+                ];
+            }
+            else {
+                this.categories = [
+                    { id: 'my-cart', name: 'My Cart', icon: 'cart-outline' },
+                    { id: 'my-orders', name: 'My Orders', icon: 'bag-handle-outline' },
+                    { id: 'favourites', name: 'Favourites', icon: 'heart-outline' },
+                    { id: 'order-history', name: 'Order History', icon: 'receipt-outline' },
+                    { id: 'start-selling', name: 'Setup Store', icon: 'storefront-outline' },
+                ];
+            }
+        });
     }
     getRoute(route) {
         this.router.navigate([route]);
     }
 };
 AccountPage.ctorParameters = () => [
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__.Router },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_6__.Router },
     { type: src_app_services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__.AuthService },
-    { type: _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_3__.ProductService }
+    { type: _services_store_product_service__WEBPACK_IMPORTED_MODULE_3__.ProductService },
+    { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.Firestore },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.AlertController }
 ];
-AccountPage = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.Component)({
+AccountPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.Component)({
         selector: 'app-account',
-        template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_account_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        template: _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_account_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_account_page_scss__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], AccountPage);
@@ -190,7 +232,7 @@ AccountPage = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
 
 /***/ }),
 
-/***/ 69424:
+/***/ 98333:
 /*!******************************************************!*\
   !*** ./src/app/pages/tabs/account/account.page.scss ***!
   \******************************************************/

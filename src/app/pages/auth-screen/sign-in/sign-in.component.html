@@ -22,7 +22,7 @@
     <!-- for email error -->
     <ion-text
       class="error"
-      *ngIf="!form.get('email').hasError('required')">
+      *ngIf="form.get('email').hasError('email')">
       * Please enter a proper email
     </ion-text>
   </ion-text>
@@ -61,7 +61,7 @@
 
 <div class="ion-margin-horizontal">
   <ion-button
-    *ngIf="!isLoading"
+    *ngIf="!this.authService.loginIsLoading"
    class="ion-margin-horizontal"
     size="large"
     expand="block"
@@ -71,7 +71,7 @@
     <ion-text style="color: white;font-size: 18px">Log In</ion-text>
   </ion-button>
   <ion-button
-    *ngIf="isLoading"
+    *ngIf="this.authService.loginIsLoading"
    class="ion-margin-horizontal"
     size="large"
     expand="block"

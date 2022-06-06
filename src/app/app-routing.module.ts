@@ -39,9 +39,9 @@ const routes: Routes = [
     loadChildren: () => import('./pages/tabs/cafe/cafe.module').then(m => m.CafePageModule)
   },
   {
-    path: 'lunch',
+    path: 'store',
     loadChildren: () =>
-      import('./pages/lunch/lunch.module').then((m) => m.LunchPageModule),
+      import('./pages/store/store.module').then((m) => m.StorePageModule),
   },
   {
     path: 'item-details',
@@ -116,14 +116,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/track-sales/track-sales.module').then( m => m.TrackSalesPageModule)
   },
   {
-    path: 'check-status',
-    loadChildren: () => import('./pages/check-status/check-status.module').then( m => m.CheckStatusPageModule)
-  },
-  {
-    path: 'pin-code',
-    loadChildren: () => import('./pages/pin-code/pin-code.module').then( m => m.PinCodePageModule)
-  },
-  {
     path: 'store-sales',
     loadChildren: () => import('./pages/store-sales/store-sales.module').then( m => m.StoreSalesPageModule)
   },
@@ -134,10 +126,6 @@ const routes: Routes = [
   {
     path: 'chat-list',
     loadChildren: () => import('./pages/chat-list/chat-list.module').then( m => m.ChatListPageModule)
-  },
-  {
-    path: 'chat-rooms',
-    loadChildren: () => import('./pages/chat-rooms/chat-rooms.module').then( m => m.ChatRoomsPageModule)
   },
   {
     path: 'check-status-user',

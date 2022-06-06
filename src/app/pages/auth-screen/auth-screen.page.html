@@ -11,8 +11,8 @@
 <ion-content [fullscreen]="true">
     <div class="banner">
       <ion-slides pager #mySlider class="slides" (ionSlidesDidLoad)="slidesDidLoad(mySlider)">
-        <ion-slide *ngFor="let number of [1,2,3]">
-          <img src="assets/imgs/screen{{number}}.png" alt="" width="640" height="360">
+        <ion-slide *ngFor="let images of options">
+          <img src="{{images}}.png" alt="" width="640" height="360">
         </ion-slide>
       </ion-slides>
     </div>

@@ -3,9 +3,11 @@ import {IOption} from 'src/app/shared';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import {Router} from '@angular/router';
 import {AngularFirestore} from '@angular/fire/compat/firestore';
-import {collection, doc, Firestore, getDoc, getDocs, query, setDoc} from '@angular/fire/firestore';
-import {ProductService} from '../../../services/cafe/product.service';
+import {collection, Firestore, getDoc, getDocs, query, setDoc} from '@angular/fire/firestore';
+import {ProductService} from '../../../services/store/product.service';
+import {AlertController} from "@ionic/angular";
 
+// @ts-ignore
 @Component({
   selector: 'app-home',
   templateUrl: 'cafe.page.html',
@@ -25,7 +27,8 @@ export class CafePage implements OnInit{
     private router: Router,
     private afs: AngularFirestore,
     private _firestore: Firestore,
-    private product: ProductService) {}
+    private product: ProductService,
+    private alertController: AlertController) {}
 
   async ngOnInit() {
     await this.addStoreToCafe();
@@ -46,6 +49,7 @@ export class CafePage implements OnInit{
   }
 
   async addStoreToCafe() {
+    this.options = [];
     // eslint-disable-next-line no-underscore-dangle
     const dataRef = collection(this._firestore, 'stores');
     const q = query(dataRef);
@@ -72,6 +76,29 @@ export class CafePage implements OnInit{
     // this.search.getInputElement().then(item => console.log(item))
   }
 
+  async showAlertLogOut(header, message) {
+    const alert = await this.alertController.create({
+      header,
+      message,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'OK',
+          handler: async data => {
+            this.logOut();
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
   logOut() {
     this.ionicAuthService.logout()
       .then((response) => {
@@ -86,7 +113,7 @@ export class CafePage implements OnInit{
 
   goToLunch(storeName) {
     this.product.store.name = storeName;
-    this.router.navigate(['lunch']);
+    this.router.navigate(['store']);
   }
 
   goToLogin() {

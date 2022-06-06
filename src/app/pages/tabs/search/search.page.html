@@ -15,7 +15,7 @@
       <ion-button (click)="chat()">
         <ion-icon name="chatbubbles-outline"></ion-icon>
       </ion-button>
-      <ion-button (click)="logOut()">
+      <ion-button (click)="showAlertLogOut('Log out', 'Are you sure?')">
         <ion-icon name="lock-closed"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -30,16 +30,16 @@
     <div class="default-top-padding title" *ngIf="notFound">
       <h2>User not found</h2>
     </div>
-    <ion-list  *ngIf="this.iroha.otherWallet.name !== ''">
+    <ion-list  *ngIf="this.iroha.otherWallet.name !== '' || this.iroha.otherWallet.name === this.iroha.wallet.name">
       <ion-item routerLink="/user-details">
         <ion-label>{{this.iroha.otherWallet.name}}</ion-label>
       </ion-item>
     </ion-list>
     <div class="default-top-padding title">
-      <h2>Most Frequent Receivers</h2>
+      <h2>Previous Receivers of Your Money</h2>
     </div>
     <ion-list *ngFor="let fav of fav">
-      <ion-item *ngIf="fav!==''" routerLink="/test" (click)="frequentReceivers(fav)">
+      <ion-item *ngIf="fav!=='You'" routerLink="/test" (click)="frequentReceivers(fav)">
         <ion-label >{{fav}}</ion-label>
       </ion-item>
     </ion-list>

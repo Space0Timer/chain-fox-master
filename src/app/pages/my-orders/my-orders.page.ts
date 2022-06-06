@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 import {IOrderCard} from '../../shared';
 import {AuthService} from "../../services/auth/auth.service";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
-import {ProductService} from "../../services/cafe/product.service";
+import {ProductService} from "../../services/store/product.service";
 import {collection, Firestore, getDocs, orderBy, query} from "@angular/fire/firestore";
 import {format, parseISO} from 'date-fns';
 import {MenuController} from "@ionic/angular";
@@ -67,7 +67,8 @@ export class MyOrdersPage implements OnInit{
           amountPaid: docs.data().amountPaid,
           deliverTime: docs.data().deliverTime,
           orderTime: docs.data().orderTime,
-          quantity: docs.data().quantity
+          quantity: docs.data().quantity,
+          message: docs.data().message
         },
       );
       this.isEmpty = false;

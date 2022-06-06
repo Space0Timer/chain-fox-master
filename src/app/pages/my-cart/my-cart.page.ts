@@ -4,7 +4,7 @@ import {AuthService} from '../../services/auth/auth.service';
 import {AngularFirestore, DocumentData} from '@angular/fire/compat/firestore';
 import {doc, Firestore, getDoc, onSnapshot, query} from '@angular/fire/firestore';
 import {ICartCard} from '../../shared';
-import {ProductService} from '../../services/cafe/product.service';
+import {ProductService} from '../../services/store/product.service';
 import {AlertController, LoadingController, MenuController} from '@ionic/angular';
 
 export interface Keys {
@@ -95,6 +95,8 @@ export class MyCartPage implements OnInit{
             image: dataSnap.imageUrl,
             id: key,
             ownerId: this.owner,
+            message: '',
+            deliveryTime: '',
             quantity: value,
           },
         );
@@ -108,6 +110,7 @@ export class MyCartPage implements OnInit{
     this.addItemsToCart();
   }
 
+  // check for illegal time (out business hours) pickup time
   async checkOut() {
     for (const key in this.keys) {
       const illegalTime = ['00', '01', '01', '02', '03', '04', '05', '06', '07', '22', '23'];

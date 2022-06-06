@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\n  <ion-toolbar>\n    <ion-title>Verify email address</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div class=\"ion-padding\">\n<p>Please check your email and verify your email address.</p>\n  <p>You cannot proceed with this app with verifying your email.</p>\n  <p>Your unverified new account will be deleted within 1 hour. You can use your account once it's verified.</p>\n  <div class=\"ion-padding\" *ngIf=\"!isLoading\">\n    <ion-button (click)=\"unlock()\" expand=\"block\" class=\"main-button\">\n      <ion-text class = ion-margin-horizontal >Email Verified</ion-text>\n      <ion-icon class = ion-margin-horizontal name=\"arrow-forward-circle-outline\"></ion-icon>\n    </ion-button>\n  </div>\n  <div class=\"ion-padding\" *ngIf=\"isLoading\">\n    <ion-button (click)=\"unlock()\" expand=\"block\" class=\"main-button\">\n      <ion-spinner></ion-spinner>\n    </ion-button>\n  </div>\n  <p> Login with another account?</p>\n  <div class=\"ion-padding\">\n    <ion-button (click)=\"switch()\" expand=\"block\" class=\"main-button\">\n      <ion-text class = ion-margin-horizontal >Switch Account</ion-text>\n      <ion-icon class = ion-margin-horizontal name=\"arrow-forward-circle-outline\"></ion-icon>\n    </ion-button>\n  </div>\n  </div>\n</ion-content>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\n  <ion-toolbar>\n    <ion-title>Verify email address</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div class=\"ion-padding\">\n<p>Please check your email inbox or junk and verify your email address.</p>\n  <p>You cannot proceed with this app with verifying your email.</p>\n  <p>Your unverified new account will be deleted within 1 hour. You can use your account once it's verified.</p>\n  <div class=\"ion-padding\" *ngIf=\"!isLoading\">\n    <ion-button (click)=\"unlock()\" expand=\"block\" class=\"main-button\">\n      <ion-text class = ion-margin-horizontal >Email Verified</ion-text>\n      <ion-icon class = ion-margin-horizontal name=\"arrow-forward-circle-outline\"></ion-icon>\n    </ion-button>\n  </div>\n    <div class=\"ion-padding\" *ngIf=\"isLoading\">\n      <ion-button (click)=\"unlock()\" expand=\"block\" class=\"main-button\">\n        <ion-spinner></ion-spinner>\n      </ion-button>\n    </div>\n    <div class=\"ion-padding\" *ngIf=\"!isLoading1\">\n      <ion-button (click)=\"resend()\" expand=\"block\" class=\"main-button\">\n        <ion-text class = ion-margin-horizontal >Resend verification email</ion-text>\n        <ion-icon class = ion-margin-horizontal name=\"arrow-forward-circle-outline\"></ion-icon>\n      </ion-button>\n    </div>\n    <div class=\"ion-padding\" *ngIf=\"isLoading1\">\n      <ion-button (click)=\"unlock()\" expand=\"block\" class=\"main-button\">\n        <ion-spinner></ion-spinner>\n      </ion-button>\n    </div>\n  <p> Login with another account?</p>\n  <div class=\"ion-padding\">\n    <ion-button (click)=\"switch()\" expand=\"block\" class=\"main-button\">\n      <ion-text class = ion-margin-horizontal >Switch Account</ion-text>\n      <ion-icon class = ion-margin-horizontal name=\"arrow-forward-circle-outline\"></ion-icon>\n    </ion-button>\n  </div>\n  </div>\n</ion-content>\n");
 
 /***/ }),
 
@@ -105,14 +105,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "VerifyEmailAddressPage": () => (/* binding */ VerifyEmailAddressPage)
 /* harmony export */ });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 48111);
-/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_verify_email_address_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./verify-email-address.page.html */ 47895);
-/* harmony import */ var _verify_email_address_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./verify-email-address.page.scss */ 34691);
+/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_verify_email_address_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./verify-email-address.page.html */ 47895);
+/* harmony import */ var _verify_email_address_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./verify-email-address.page.scss */ 93711);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core */ 14001);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ 13252);
 /* harmony import */ var _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/auth/auth.service */ 68927);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic/angular */ 91346);
 /* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
-/* harmony import */ var _services_storage_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/storage.service */ 17208);
+/* harmony import */ var _services_storage_storage_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/storage/storage.service */ 74065);
 /* harmony import */ var _capacitor_splash_screen__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @capacitor/splash-screen */ 26391);
 
 
@@ -133,15 +133,21 @@ let VerifyEmailAddressPage = class VerifyEmailAddressPage {
         this.storage = storage;
         this.menu = menu;
         this.isLoading = false;
-        this.menu.enable(false);
+        this.isLoading1 = false;
     }
     ionViewDidLeave() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
             yield this.menu.enable(true);
         });
     }
+    ionViewDidEnter() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            this.ionicAuthService.isLoadingSignUp = false;
+        });
+    }
     ngOnInit() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            yield this.menu.enable(false);
             yield _capacitor_splash_screen__WEBPACK_IMPORTED_MODULE_4__.SplashScreen.hide();
         });
     }
@@ -153,11 +159,13 @@ let VerifyEmailAddressPage = class VerifyEmailAddressPage {
             const username1 = yield this.storage.get(docSnap1.data().username);
             yield this.ionicAuthService.reAuth(docSnap1.data().email, username1);
             if ((yield this.ionicAuthService.checkVerify()) === true) {
-                yield this.router.navigate(['tabs']);
+                this.isLoading = false;
+                yield this.showAlert('Verification Success', 'Email has been verified! You can now login to your account.');
+                yield this.router.navigate(['auth-screen']);
             }
             else {
                 this.isLoading = false;
-                yield this.showAlert('Email not yet verified!');
+                yield this.showAlert('Verification Failed', 'Email not yet verified!');
             }
         });
     }
@@ -166,10 +174,18 @@ let VerifyEmailAddressPage = class VerifyEmailAddressPage {
             yield this.router.navigate(['auth-screen']);
         });
     }
-    showAlert(message) {
+    resend() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            this.isLoading1 = true;
+            yield this.ionicAuthService.sendVerificationMail();
+            yield this.showAlert('Verification mail sent', 'Please check your inbox or junk for new verification mail.');
+            this.isLoading1 = false;
+        });
+    }
+    showAlert(header, message) {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
             const alert = yield this.alertController.create({
-                header: 'Authentication Failed',
+                header,
                 message,
                 buttons: ['OK'],
             });
@@ -182,13 +198,13 @@ VerifyEmailAddressPage.ctorParameters = () => [
     { type: _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__.AuthService },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.AlertController },
     { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.Firestore },
-    { type: _services_storage_service__WEBPACK_IMPORTED_MODULE_3__.StorageService },
+    { type: _services_storage_storage_service__WEBPACK_IMPORTED_MODULE_3__.StorageService },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.MenuController }
 ];
 VerifyEmailAddressPage = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.Component)({
         selector: 'app-verify-email-address',
-        template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_verify_email_address_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        template: _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_verify_email_address_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_verify_email_address_page_scss__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], VerifyEmailAddressPage);
@@ -197,7 +213,7 @@ VerifyEmailAddressPage = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
 
 /***/ }),
 
-/***/ 34691:
+/***/ 93711:
 /*!***************************************************************************!*\
   !*** ./src/app/pages/verify-email-address/verify-email-address.page.scss ***!
   \***************************************************************************/

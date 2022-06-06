@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-button color=\"primary\" (click)=\"back()\" routerDirection=\"forward\">\n        <ion-icon name=\"chevron-back-outline\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div class = ion-padding>\n    <h1 class=\"title\">Favourites</h1>\n    <ng-container *ngFor=\"let fav of fav\" style=\"margin-top: 20px\">\n    <app-fav-card [fav]=\"fav\" (childEvent)=\"loadFav()\"></app-fav-card>\n    </ng-container>\n\n  <ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\" (click) = \"goToCart()\">\n    <ion-fab-button>\n      <ion-icon name=\"cart-outline\"></ion-icon>\n    </ion-fab-button>\n  </ion-fab>\n\n  </div>\n</ion-content>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-button color=\"primary\" (click)=\"back()\" routerDirection=\"forward\">\n        <ion-icon name=\"chevron-back-outline\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content fullscreen=\"true\">\n  <div class = ion-padding>\n    <h1 class=\"title\">Favourites</h1>\n    <ng-container *ngFor=\"let fav of fav\">\n      <app-fav-card [fav]=\"fav\" (childEvent)=\"loadFav()\"></app-fav-card>\n    </ng-container>\n  <ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\" (click) = \"goToCart()\">\n    <ion-fab-button>\n      <ion-icon name=\"cart-outline\"></ion-icon>\n    </ion-fab-button>\n  </ion-fab>\n\n  </div>\n</ion-content>\n");
 
 /***/ }),
 
@@ -108,8 +108,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "FavouritePage": () => (/* binding */ FavouritePage)
 /* harmony export */ });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 48111);
-/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_favourite_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./favourite.page.html */ 29701);
-/* harmony import */ var _favourite_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./favourite.page.scss */ 30187);
+/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_favourite_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./favourite.page.html */ 29701);
+/* harmony import */ var _favourite_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./favourite.page.scss */ 29944);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 14001);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ 13252);
 /* harmony import */ var _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/fire/compat/firestore */ 27091);
@@ -142,13 +142,14 @@ let FavouritePage = class FavouritePage {
             yield this.menu.enable(true);
         });
     }
-    ionViewWillEnter() {
+    ngOnInit() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
             yield this.loadFav();
         });
     }
     loadFav() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
+            this.fav = [];
             let data;
             // eslint-disable-next-line no-underscore-dangle
             const itemIdRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_4__.doc)(this._firestore, `favourites/${(this.id)}`);
@@ -161,16 +162,18 @@ let FavouritePage = class FavouritePage {
                 this.owner = idOwnerName.owner;
                 const ownerRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_4__.doc)(this._firestore, `stores/${(this.owner)}`);
                 const ownerSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_4__.getDoc)(ownerRef);
-                const ownerName = ownerSnap.data();
+                const ownerName = ownerSnap.data().name;
                 // eslint-disable-next-line no-underscore-dangle
                 const dataRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_4__.doc)(this._firestore, `stores/${(this.owner)}/items/${(key)}`);
                 const docSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_4__.getDoc)(dataRef);
-                const dataSnap = docSnap.data();
+                const name = docSnap.data().name;
+                const price = docSnap.data().price;
+                const imageUrl = docSnap.data().imageUrl;
                 this.fav.push({
-                    name: dataSnap.name,
-                    owner: ownerName.name,
-                    price: dataSnap.price,
-                    image: dataSnap.imageUrl,
+                    name,
+                    owner: ownerName,
+                    price,
+                    image: imageUrl,
                     itemId: key,
                     ownerId: idOwnerName.owner,
                     id: key,
@@ -196,7 +199,7 @@ FavouritePage.ctorParameters = () => [
 FavouritePage = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.Component)({
         selector: 'app-favorite',
-        template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_favourite_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        template: _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_favourite_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_favourite_page_scss__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], FavouritePage);
@@ -205,7 +208,7 @@ FavouritePage = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
 
 /***/ }),
 
-/***/ 30187:
+/***/ 29944:
 /*!*****************************************************!*\
   !*** ./src/app/pages/favourite/favourite.page.scss ***!
   \*****************************************************/

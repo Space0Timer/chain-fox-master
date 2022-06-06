@@ -2,10 +2,10 @@ import {Component, OnChanges, OnDestroy, OnInit} from '@angular/core';
 import firebase from 'firebase/compat/app';
 import {AuthService} from '../../../../services/auth/auth.service';
 import {AngularFirestore} from '@angular/fire/compat/firestore';
-import {FirebaseUploadService} from '../../../../services/cafe/firebase-upload.service';
+import {FirebaseUploadService} from '../../../../services/utils/firebase-upload.service';
 import {Router} from '@angular/router';
 import {collection, doc, Firestore, getDoc, getDocs, query, setDoc} from '@angular/fire/firestore';
-import {ProductService} from '../../../../services/cafe/product.service';
+import {ProductService} from '../../../../services/store/product.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AlertController, ModalController} from '@ionic/angular';
 import {CustomiseOrderPage} from '../customise-order/customise-order.page';
@@ -39,6 +39,8 @@ export class EditItemComponent{
   }
 
   async ionViewWillEnter() {
+    this.product.customOptions = [];
+    this.product.customOption = [];
     await this.getOptionFromFirebase();
   }
 
@@ -149,5 +151,28 @@ export class EditItemComponent{
     await modal.onDidDismiss().then(r=> {
       this.ionViewWillEnter();
     });
+  }
+
+  async showAlertDelete(header, message, id) {
+    const alert = await this.alertController.create({
+      header,
+      message,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'OK',
+          handler: async data => {
+            await this.deleteCustomisation(id);
+          }
+        }
+      ]
+    });
+    await alert.present();
   }
 }

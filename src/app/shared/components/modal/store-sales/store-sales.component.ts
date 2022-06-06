@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import Chart from 'chart.js/auto';
-import {ProductService} from "../../../../services/cafe/product.service";
+import {ProductService} from '../../../../services/store/product.service';
 
 @Component({
   selector: 'app-store-sales-component',
@@ -28,7 +28,7 @@ export class StoreSalesComponent implements OnInit{
       data: {
         labels: this.product.label,
         datasets: [{
-          label: 'This is chart',
+          label: 'Sales Chart',
           backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
             'rgba(54, 162, 235, 0.2)',

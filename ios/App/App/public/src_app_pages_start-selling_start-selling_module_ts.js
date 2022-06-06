@@ -106,11 +106,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "StartSellingPage": () => (/* binding */ StartSellingPage)
 /* harmony export */ });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 48111);
-/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_start_selling_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./start-selling.page.html */ 27468);
-/* harmony import */ var _start_selling_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./start-selling.page.scss */ 35491);
+/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_start_selling_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./start-selling.page.html */ 27468);
+/* harmony import */ var _start_selling_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./start-selling.page.scss */ 48799);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core */ 14001);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ 18346);
-/* harmony import */ var _services_cafe_firebase_upload_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/cafe/firebase-upload.service */ 53727);
+/* harmony import */ var _services_utils_firebase_upload_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/utils/firebase-upload.service */ 39084);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ 13252);
 /* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
 /* harmony import */ var _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/auth/auth.service */ 68927);
@@ -181,17 +181,25 @@ let StartSellingPage = class StartSellingPage {
                 this.form.markAllAsTouched();
                 return;
             }
-            if (this.imageUrl === '') {
-                this.errorMessage = 'You must upload an image for your storefront to proceed.';
-                return;
+            const userID = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.doc)(this._firestore, `users/${(this.uid)}`);
+            const userIDSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.getDoc)(userID);
+            const userIDRole = userIDSnap.data().role;
+            if (userIDRole === 'seller') {
+                if (this.imageUrl === '') {
+                    this.errorMessage = 'You must upload an image for your storefront to proceed.';
+                    return;
+                }
+                this.isLoading = true;
+                console.log(this.form.value);
+                yield this.uploadStoreDetails(this.form.value);
+                yield this.createTrackSales();
+                yield this.createTrackOrders();
+                this.isLoading = false;
+                yield this.showAlert('Creation Success', 'Your online store ' + this.form.value.name + ' has been created');
             }
-            this.isLoading = true;
-            console.log(this.form.value);
-            yield this.uploadStoreDetails(this.form.value);
-            yield this.createTrackSales();
-            yield this.createTrackOrders();
-            this.isLoading = false;
-            yield this.showAlert('Creation Success', 'Your online store ' + this.form.value.name + ' has been created');
+            else {
+                yield this.showAlert('Creation Failed', 'You are not authorised to perform this action. Please contact the app owner.');
+            }
         });
     }
     uploadStoreDetails(formValue) {
@@ -236,7 +244,7 @@ let StartSellingPage = class StartSellingPage {
     }
 };
 StartSellingPage.ctorParameters = () => [
-    { type: _services_cafe_firebase_upload_service__WEBPACK_IMPORTED_MODULE_2__.FirebaseUploadService },
+    { type: _services_utils_firebase_upload_service__WEBPACK_IMPORTED_MODULE_2__.FirebaseUploadService },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__.Router },
     { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.Firestore },
     { type: _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_3__.AuthService },
@@ -246,7 +254,7 @@ StartSellingPage.ctorParameters = () => [
 StartSellingPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.Component)({
         selector: 'app-start-selling',
-        template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_start_selling_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        template: _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_start_selling_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_start_selling_page_scss__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], StartSellingPage);
@@ -255,7 +263,7 @@ StartSellingPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
 
 /***/ }),
 
-/***/ 35491:
+/***/ 48799:
 /*!*************************************************************!*\
   !*** ./src/app/pages/start-selling/start-selling.page.scss ***!
   \*************************************************************/

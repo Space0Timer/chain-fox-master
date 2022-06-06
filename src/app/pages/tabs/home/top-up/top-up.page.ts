@@ -11,7 +11,7 @@ import {
 import {AuthService} from 'src/app/services/auth/auth.service';
 import {doc, Firestore, getDoc} from '@angular/fire/firestore';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {IrohaService} from '../../../../services/iroha.service';
+import {IrohaService} from '../../../../services/iroha/iroha.service';
 import {BarcodeScanner, SupportedFormat} from '@capacitor-community/barcode-scanner';
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 
@@ -28,7 +28,7 @@ export class TopUpPage implements OnInit, AfterViewInit, OnDestroy {
   isLoading = false;
   private loading;
   private uid = this.ionicAuthService.getUid();
-  private id: any;
+  private username: any;
   private scanActive= false;
   private result: string;
   private prk: any;
@@ -139,9 +139,9 @@ export class TopUpPage implements OnInit, AfterViewInit, OnDestroy {
       console.log(this.form.value);
       await this.transferMoney();
       this.iroha.wallet.name = '';
-      await this.iroha.setName(this.id);
+      await this.iroha.setName(this.username);
       this.iroha.wallet.balance = 0;
-      await this.iroha.setBalance(this.id);
+      await this.iroha.setBalance(this.username);
     });
   }
 
@@ -163,8 +163,7 @@ export class TopUpPage implements OnInit, AfterViewInit, OnDestroy {
     const docRef = doc(this._firestore, 'users', this.uid);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      console.log(docSnap.data().username.concat('@test'));
-      this.id = docSnap.data().username.concat('@test');
+      this.username = docSnap.data().username.concat('@test');
       // eslint-disable-next-line max-len
       await this.iroha.addSignatory(this.result);
       await this.getFirebaseData(this.result);
@@ -173,7 +172,7 @@ export class TopUpPage implements OnInit, AfterViewInit, OnDestroy {
         await this.showAlert('You entered the wrong amount!', 'Top Up Failed');
       }
       else {
-        await this.iroha.topUp(this.id, '', this.form.value.amount, this.prk).then(async d => {
+        await this.iroha.topUp(this.username, '', this.form.value.amount, this.prk).then(async d => {
             await this.iroha.removeSignatory(this.result);
             this.loading.dismiss();
             await this.showAlert('RM' + this.form.value.amount + ' has been added to your balance.', 'Top Up Success');

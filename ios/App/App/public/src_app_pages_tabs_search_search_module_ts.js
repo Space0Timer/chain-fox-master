@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button autoHide=\"false\"></ion-menu-button>\n      <ion-button (click) = \"qrCode()\">\n        <ion-icon name=\"qr-code\" ></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>\n      <div class=\"title\">\n        <img style=\"height: 30px\" src='assets/header/chainfoxsend.png'>\n      </div>\n    </ion-title>\n    <ion-buttons slot=\"end\">\n      <ion-button (click)=\"chat()\">\n        <ion-icon name=\"chatbubbles-outline\"></ion-icon>\n      </ion-button>\n      <ion-button (click)=\"logOut()\">\n        <ion-icon name=\"lock-closed\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n  <ion-toolbar>\n    <ion-searchbar animated=\"true\" debounce=\"800\" placeholder=\"Enter username\" show-cancel-button=\"focus\" (ionChange)=\"_ionChange($event)\"></ion-searchbar>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content [fullscreen]=\"true\">\n    <ion-spinner *ngIf=\"spinner\"></ion-spinner>\n    <div class=\"default-top-padding title\" *ngIf=\"notFound\">\n      <h2>User not found</h2>\n    </div>\n    <ion-list  *ngIf=\"this.iroha.otherWallet.name !== ''\">\n      <ion-item routerLink=\"/user-details\">\n        <ion-label>{{this.iroha.otherWallet.name}}</ion-label>\n      </ion-item>\n    </ion-list>\n    <div class=\"default-top-padding title\">\n      <h2>Most Frequent Receivers</h2>\n    </div>\n    <ion-list *ngFor=\"let fav of fav\">\n      <ion-item *ngIf=\"fav!==''\" routerLink=\"/test\" (click)=\"frequentReceivers(fav)\">\n        <ion-label >{{fav}}</ion-label>\n      </ion-item>\n    </ion-list>\n</ion-content>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button autoHide=\"false\"></ion-menu-button>\n      <ion-button (click) = \"qrCode()\">\n        <ion-icon name=\"qr-code\" ></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>\n      <div class=\"title\">\n        <img style=\"height: 30px\" src='assets/header/chainfoxsend.png'>\n      </div>\n    </ion-title>\n    <ion-buttons slot=\"end\">\n      <ion-button (click)=\"chat()\">\n        <ion-icon name=\"chatbubbles-outline\"></ion-icon>\n      </ion-button>\n      <ion-button (click)=\"showAlertLogOut('Log out', 'Are you sure?')\">\n        <ion-icon name=\"lock-closed\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n  <ion-toolbar>\n    <ion-searchbar animated=\"true\" debounce=\"800\" placeholder=\"Enter username\" show-cancel-button=\"focus\" (ionChange)=\"_ionChange($event)\"></ion-searchbar>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content [fullscreen]=\"true\">\n    <ion-spinner *ngIf=\"spinner\"></ion-spinner>\n    <div class=\"default-top-padding title\" *ngIf=\"notFound\">\n      <h2>User not found</h2>\n    </div>\n    <ion-list  *ngIf=\"this.iroha.otherWallet.name !== '' || this.iroha.otherWallet.name === this.iroha.wallet.name\">\n      <ion-item routerLink=\"/user-details\">\n        <ion-label>{{this.iroha.otherWallet.name}}</ion-label>\n      </ion-item>\n    </ion-list>\n    <div class=\"default-top-padding title\">\n      <h2>Previous Receivers of Your Money</h2>\n    </div>\n    <ion-list *ngFor=\"let fav of fav\">\n      <ion-item *ngIf=\"fav!=='You'\" routerLink=\"/test\" (click)=\"frequentReceivers(fav)\">\n        <ion-label >{{fav}}</ion-label>\n      </ion-item>\n    </ion-list>\n</ion-content>\n");
 
 /***/ }),
 
@@ -105,15 +105,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "SearchPage": () => (/* binding */ SearchPage)
 /* harmony export */ });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 48111);
-/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_search_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./search.page.html */ 83027);
-/* harmony import */ var _search_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./search.page.scss */ 87529);
+/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_search_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./search.page.html */ 83027);
+/* harmony import */ var _search_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./search.page.scss */ 39488);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core */ 14001);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ 13252);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ 13252);
 /* harmony import */ var src_app_services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/auth/auth.service */ 68927);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic/angular */ 91346);
-/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
-/* harmony import */ var _services_iroha_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../services/iroha.service */ 49187);
-/* harmony import */ var _services_storage_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../services/storage.service */ 17208);
+/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
+/* harmony import */ var _services_iroha_iroha_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../services/iroha/iroha.service */ 52857);
+/* harmony import */ var _services_storage_storage_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../services/storage/storage.service */ 74065);
 
 
 
@@ -125,7 +125,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let SearchPage = class SearchPage {
-    constructor(router, ionicAuthService, _firestore, navCtrl, navParams, iroha, storage) {
+    constructor(router, ionicAuthService, _firestore, navCtrl, navParams, iroha, storage, alertController) {
         this.router = router;
         this.ionicAuthService = ionicAuthService;
         this._firestore = _firestore;
@@ -133,14 +133,31 @@ let SearchPage = class SearchPage {
         this.navParams = navParams;
         this.iroha = iroha;
         this.storage = storage;
+        this.alertController = alertController;
         this.fav = [];
+        this.uid = this.ionicAuthService.getUid();
         this.spinner = false;
         this.notFound = false;
     }
     ngOnInit() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
-            this.fav = [yield this.storage.get('favperson')];
+            const docRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.doc)(this._firestore, 'users', this.uid);
+            const docSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.getDoc)(docRef);
+            this.id = docSnap.data().username.concat('@test');
+            this.iroha.wallet.name = '';
+            yield this.iroha.setName(this.id);
             this.iroha.otherWallet.name = '';
+            yield this.iroha.getTransactions();
+            yield this.getList();
+            this.fav = [...new Set(this.fav)];
+            console.log(this.iroha.wallet.name);
+        });
+    }
+    getList() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            this.iroha.txs.forEach(c => {
+                this.fav.push(c.to);
+            });
         });
     }
     ionViewWillEnter() {
@@ -154,6 +171,7 @@ let SearchPage = class SearchPage {
     }
     frequentReceivers(fav) {
         this.iroha.otherWallet.name = fav;
+        console.log(this.iroha.otherWallet.name);
         this.getRoute();
     }
     _ionChange(event) {
@@ -175,6 +193,30 @@ let SearchPage = class SearchPage {
     getRoute() {
         this.router.navigate(['user-details']);
     }
+    showAlertLogOut(header, message) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            const alert = yield this.alertController.create({
+                header,
+                message,
+                buttons: [
+                    {
+                        text: 'Cancel',
+                        role: 'cancel',
+                        handler: data => {
+                            console.log('Cancel clicked');
+                        }
+                    },
+                    {
+                        text: 'OK',
+                        handler: (data) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+                            this.logOut();
+                        })
+                    }
+                ]
+            });
+            yield alert.present();
+        });
+    }
     logOut() {
         this.ionicAuthService.logout()
             .then((response) => {
@@ -194,13 +236,14 @@ let SearchPage = class SearchPage {
     }
 };
 SearchPage.ctorParameters = () => [
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_6__.Router },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__.Router },
     { type: src_app_services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__.AuthService },
-    { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_7__.Firestore },
+    { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.Firestore },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.NavController },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.NavParams },
-    { type: _services_iroha_service__WEBPACK_IMPORTED_MODULE_3__.IrohaService },
-    { type: _services_storage_service__WEBPACK_IMPORTED_MODULE_4__.StorageService }
+    { type: _services_iroha_iroha_service__WEBPACK_IMPORTED_MODULE_3__.IrohaService },
+    { type: _services_storage_storage_service__WEBPACK_IMPORTED_MODULE_4__.StorageService },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.AlertController }
 ];
 SearchPage.propDecorators = {
     search: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__.ViewChild, args: ['search', { static: false },] }]
@@ -208,7 +251,7 @@ SearchPage.propDecorators = {
 SearchPage = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.Component)({
         selector: 'app-search',
-        template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_search_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        template: _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_search_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_search_page_scss__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], SearchPage);
@@ -217,7 +260,7 @@ SearchPage = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
 
 /***/ }),
 
-/***/ 87529:
+/***/ 39488:
 /*!****************************************************!*\
   !*** ./src/app/pages/tabs/search/search.page.scss ***!
   \****************************************************/

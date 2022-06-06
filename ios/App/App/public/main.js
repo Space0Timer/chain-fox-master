@@ -15,6 +15,21 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ 77223:
+/*!**************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./src/app/shared/components/cards/cafe-card/cafe-card.component.html ***!
+  \**************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ng-container *ngIf=\"option\">\n    <div class=\"grid grid-cols-1 grid-rows-1 mt-1 shadow-md \">\n        <ion-img class=\"col-start-1 col-span-1 row-start-1 row-span-1\" [src]=\"option.image\"></ion-img>\n        <div class=\"col-start-1 col-span-1 row-start-1 row-span-1 option-image-mask\"></div>\n      <span class=\"col-start-1 col-span-1\trow-start-1 row-span-1 self-center subpixel-antialiased justify-self-center font-sans italic font-medium text-4xl text-white\">{{ option.name }}</span>\n    </div>\n</ng-container>\n");
+
+/***/ }),
+
 /***/ 2417:
 /*!**************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./src/app/shared/components/cards/cart-card/cart-card.component.html ***!
@@ -41,7 +56,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ng-container *ngIf=\"checkout\">\n<ion-card mode=\"ios\">\n  <ion-card-content>\n    <div class=\"item-img\">\n      <img [src]=\"checkout.image\" />\n    </div>\n    <div class=\"item-info\">\n      <p>Item Name:{{checkout.name}}</p>\n      <p>Merchant: {{checkout.owner}}</p>\n      <p>Price: RM {{checkout.price}}</p>\n      <p>Quantity: {{checkout.quantity}}</p>\n      <p>Options: </p>\n      <p *ngFor=\"let entry of options\"> {{entry.name}} - {{entry.val}}&nbsp;</p>\n    </div>\n  </ion-card-content>\n</ion-card>\n</ng-container>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ng-container *ngIf=\"checkout\">\n<ion-card mode=\"ios\">\n  <ion-card-content>\n    <div class=\"item-img\">\n      <img [src]=\"checkout.image\" />\n    </div>\n    <div class=\"item-info\">\n      <p>Item Name:{{checkout.name}}</p>\n      <p>Merchant: {{checkout.owner}}</p>\n      <p>Price: RM {{checkout.price}}</p>\n      <p>Quantity: {{checkout.quantity}}</p>\n      <p>Remark: {{checkout.message}}</p>\n      <p>Options: </p>\n      <p *ngFor=\"let entry of options\"> {{entry.name}} - {{entry.val}}&nbsp;</p>\n      <p>Pickup Time: {{checkout.deliveryTime}}</p>\n    </div>\n  </ion-card-content>\n</ion-card>\n</ng-container>\n");
 
 /***/ }),
 
@@ -56,7 +71,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-card mode=\"ios\">\n  <ion-card-content>\n    <div class=\"item-info\">\n  <img [src]=\"fav.image\" />\n  <p style=\"margin-top: 5px\">Item Name: {{ fav.name }}</p>\n  <p>Merchant: {{ fav.owner }}</p>\n  <p style=\"margin-bottom: 5px\">Price: RM {{ fav.price }}</p>\n  </div>\n  <ion-icon name=\"trash-outline\" (click) = \"deleteItem()\"></ion-icon>\n  <ion-button expand=\"block\" (click)=\"addToCart(fav.name, fav.itemId, fav.ownerId)\">Add to Cart</ion-button>\n  </ion-card-content>\n</ion-card>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ng-container *ngIf=\"fav\">\n  <ion-card mode=\"ios\">\n    <ion-card-content>\n      <div class=\"item-info\">\n    <img [src]=\"fav.image\" />\n    <p style=\"margin-top: 5px\">Item Name: {{ fav.name }}</p>\n    <p>Merchant: {{ fav.owner }}</p>\n    <p style=\"margin-bottom: 5px\">Price: RM {{ fav.price }}</p>\n    </div>\n    <ion-icon name=\"trash-outline\" (click) = \"deleteItem()\"></ion-icon>\n    <ion-button expand=\"block\" (click)=\"openChooseOptionsModal(fav.itemId, fav.ownerId)\">Add to Cart</ion-button>\n    </ion-card-content>\n  </ion-card>\n</ng-container>\n");
 
 /***/ }),
 
@@ -75,21 +90,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 78197:
-/*!****************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./src/app/shared/components/cards/main-option-card/main-option-card.component.html ***!
-  \****************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ng-container *ngIf=\"option\">\n    <div class=\"grid grid-cols-1 grid-rows-1 mt-1 shadow-md \">\n        <ion-img class=\"col-start-1 col-span-1 row-start-1 row-span-1\" [src]=\"option.image\"></ion-img>\n        <div class=\"col-start-1 col-span-1 row-start-1 row-span-1 option-image-mask\"></div>\n      <span class=\"col-start-1 col-span-1\trow-start-1 row-span-1 self-center subpixel-antialiased justify-self-center font-sans italic font-medium text-4xl text-white\">{{ option.name }}</span>\n    </div>\n</ng-container>\n");
-
-/***/ }),
-
 /***/ 80716:
 /*!****************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./src/app/shared/components/cards/order-card/order-card.component.html ***!
@@ -101,7 +101,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ng-container *ngIf=\"order\">\n  <ion-card mode=\"ios\">\n    <ion-card-content>\n      <div class=\"item-info\">\n        <p>Order ID: {{order.id}}</p>\n        <p>Item Name: {{order.name}}</p>\n        <p>Merchant: {{order.owner}}</p>\n        <p>Amount Paid: RM{{order.amountPaid}}</p>\n        <p>Status: {{order.status}}</p>\n        <p>Order Time: {{order.orderTime.toDate() | date:'yyyy/MM/dd h:mm:ss a'}}</p>\n        <p>Deliver Time: {{order.deliverTime}}</p>\n        <ion-button *ngIf=\"order.status !== 'complete'\" expand=\"block\" class=\"main-button\" (click) = 'goToCheckStatusUser(order.name, order.id, order.price, order.owner, order.ownerId)'>Check Status</ion-button>\n      </div>\n    </ion-card-content>\n  </ion-card>\n</ng-container>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ng-container *ngIf=\"order\">\n  <ion-card mode=\"ios\">\n    <ion-card-content>\n      <div class=\"item-info\">\n        <p>Order ID: {{order.id}}</p>\n        <p>Item Name: {{order.name}}</p>\n        <p>Options: </p>\n        <p *ngFor=\"let entry of option\">{{entry.name}} - {{entry.value}}&nbsp;</p>\n        <p>Remark: {{order.message}}</p>\n        <p>Merchant: {{order.owner}}</p>\n        <p>Amount Paid: RM{{order.amountPaid}}</p>\n        <p>Status: {{order.status}}</p>\n        <p>Order Time: {{order.orderTime.toDate() | date:'yyyy/MM/dd h:mm:ss a'}}</p>\n        <p>Pickup Time: {{order.deliverTime}}</p>\n        <ion-button *ngIf=\"order.status !== 'complete'\" expand=\"block\" class=\"main-button\" (click) = 'goToCheckStatusUser(order.name, order.id, order.price, order.owner, order.ownerId, order.deliverTime)'>Check Status</ion-button>\n      </div>\n    </ion-card-content>\n  </ion-card>\n</ng-container>\n");
 
 /***/ }),
 
@@ -116,22 +116,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ng-container *ngIf=\"trackOrder\">\n  <ion-card mode=\"ios\">\n    <ion-card-content>\n      <div class=\"item-info\">\n        <p>Order ID: {{ trackOrder.id}}</p>\n        <p>Item Name: {{trackOrder.name}}</p>\n        <p>Customer: {{trackOrder.user}}</p>\n        <p>Price: {{trackOrder.price}}</p>\n        <p>Order Time: {{trackOrder.time}}</p>\n        <p>Deliver Time: {{trackOrder.deliverTime}}</p>\n        <p>Status: {{trackOrder.status}}</p>\n        <ion-button expand=\"block\" class=\"main-button\" (click) = 'cancelOrder(trackOrder.id, trackOrder.user, trackOrder.userId, trackOrder.amountPaid)'>Cancel Order</ion-button>\n        <ion-button expand=\"block\" class=\"main-button\" (click)=\"goToCheckStatusStore(trackOrder.name, trackOrder.id, trackOrder.price, trackOrder.user, trackOrder.status, trackOrder.userId)\">Check Status</ion-button>\n     </div>\n    </ion-card-content>\n  </ion-card>\n</ng-container>\n");
-
-/***/ }),
-
-/***/ 13340:
-/*!******************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./src/app/shared/components/cards/wallet-card/wallet-card.component.html ***!
-  \******************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-card color=\"warning\">\n  <ion-card-content *ngIf=\"this.balance!==''\">\n    <ion-row>\n      <ion-note class=\"no\" color=\"black\">Hello, {{this.iroha.wallet.name}}!</ion-note>\n      <ion-col class=\"ion-text-end\">\n        <ion-icon  name=\"calculator\" class=\"center-right\" routerLink=\"/list\" routerDirection=\"forward\"></ion-icon>\n      </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-chip>\n        <ion-label color=\"light\">\n          Balance: RM {{this.iroha.wallet.balance}}\n        </ion-label>\n      </ion-chip>\n      <ion-col class=\"ion-text-end\">\n        <ion-icon name=\"add-circle\" class=\"center-right\" routerLink=\"/top-up\" routerDirection=\"forward\"></ion-icon>\n      </ion-col>\n    </ion-row>\n  </ion-card-content>\n</ion-card>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ng-container *ngIf=\"trackOrder\">\n  <ion-card mode=\"ios\">\n    <ion-card-content>\n      <div class=\"item-info\">\n        <p>Order ID: {{ trackOrder.id}}</p>\n        <p>Item Name: {{trackOrder.name}}</p>\n        <p>Options: </p>\n        <p *ngFor=\"let entry of option\">{{entry.name}} - {{entry.value}}&nbsp;</p>\n        <p>Remark: {{trackOrder.message}}</p>\n        <p>Customer: {{trackOrder.user}}</p>\n        <p>Price: {{trackOrder.price}}</p>\n        <p>Order Time: {{trackOrder.time}}</p>\n        <p>Pickup Time: {{trackOrder.deliverTime}}</p>\n        <p>Status: {{trackOrder.status}}</p>\n        <ion-button *ngIf=\"!this.isLoading\" expand=\"block\" class=\"main-button\" (click) = 'showAlertCancel(\"Cancel Order\", \"Are you sure?\",  trackOrder.id, trackOrder.user, trackOrder.userId, trackOrder.amountPaid)'>Cancel Order</ion-button>\n        <ion-button\n          *ngIf=\"this.isLoading\"\n          class=\"ion-margin-horizontal\"\n          size=\"large\"\n          expand=\"block\"\n          shape=\"round\"\n          color=\"primary\">\n          <ion-spinner></ion-spinner>\n        </ion-button>\n        <ion-button expand=\"block\" class=\"main-button\" (click)=\"goToCheckStatusStore(trackOrder.name, trackOrder.id, trackOrder.price, trackOrder.user, trackOrder.status, trackOrder.userId, trackOrder.deliverTime)\">Check Status</ion-button>\n     </div>\n    </ion-card-content>\n  </ion-card>\n</ng-container>\n");
 
 /***/ }),
 
@@ -161,7 +146,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-button color=\"primary\" (click)=\"back()\" routerDirection=\"forward\">\n        <ion-text>Cancel</ion-text>\n      </ion-button>\n    </ion-buttons>\n    <ion-buttons slot=\"end\">\n      <ion-button color=\"primary\" [disabled]=\"newMsg === ''\" (click)=\"addNote()\">\n        <ion-text style=\"font-weight: bold\">Confirm</ion-text>\n      </ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content fullscreen=\"true\">\n  <div class=\"ion-padding\">\n    <ion-row style=\"padding-left: 0\">\n      <ion-col size=\"10\">\n        <ion-text  color=\"primary\" style=\"font-size: 26px; font-weight: bold\">Add Note</ion-text>\n      </ion-col>\n    </ion-row>\n  <div class =\"ion-padding-bottom\">\n  </div>\n  <div class=\"titles\">\n    <ion-text style=\"font-size: 20px; font-weight: bold\">Send a message to the seller regarding this order</ion-text>\n  </div>\n  <div color=\"light\" class=\"ion-padding\">\n  <ion-row class=\"ion-align-items-center\">\n    <ion-col size=\"10\" >\n      <ion-textarea color=\"dark\" class=\"message-input\" autoGrow=\"true\" rows=\"1\" maxLength=\"500\" [(ngModel)]=\"newMsg\" placeholder=\"Enter your message here\" >\n      </ion-textarea>\n    </ion-col>\n  </ion-row>\n  </div>\n  </div>\n</ion-content>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-button color=\"primary\" (click)=\"back()\" routerDirection=\"forward\">\n        <ion-text>Cancel</ion-text>\n      </ion-button>\n    </ion-buttons>\n    <ion-buttons slot=\"end\">\n      <ion-button color=\"primary\" [disabled]=\"newMsg === ''\" (click)=\"addNote()\">\n        <ion-text style=\"font-weight: bold\">Confirm</ion-text>\n      </ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content fullscreen=\"true\">\n  <div class=\"ion-padding\">\n    <ion-row style=\"padding-left: 0\">\n      <ion-col size=\"10\">\n        <ion-text  color=\"primary\" style=\"font-size: 26px; font-weight: bold\">Add Note</ion-text>\n      </ion-col>\n    </ion-row>\n  <div class =\"ion-padding-bottom\">\n  </div>\n  <div class=\"titles\">\n    <ion-text style=\"font-size: 20px; font-weight: bold\">Send a message to the seller regarding this order</ion-text>\n  </div>\n  <div color=\"light\" class=\"ion-padding\">\n  <ion-row class=\"ion-align-items-center\">\n    <ion-col size=\"10\" >\n      <ion-textarea color=\"dark\" class=\"message-input\" autoGrow=\"true\" rows=\"1\" maxLength=\"500\" [(ngModel)]=\"this.newMsg\" placeholder=\"Enter your message here\" >\n      </ion-textarea>\n    </ion-col>\n  </ion-row>\n  </div>\n  </div>\n</ion-content>\n");
 
 /***/ }),
 
@@ -234,11 +219,11 @@ const routes = [
     },
     {
         path: 'cafe',
-        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_pages_tabs_cafe_cafe_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./pages/tabs/cafe/cafe.module */ 63029)).then(m => m.CafePageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_pages_store_store_module_ts"), __webpack_require__.e("src_app_pages_tabs_cafe_cafe_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./pages/tabs/cafe/cafe.module */ 63029)).then(m => m.CafePageModule)
     },
     {
-        path: 'lunch',
-        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_pages_lunch_lunch_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./pages/lunch/lunch.module */ 34109)).then((m) => m.LunchPageModule),
+        path: 'store',
+        loadChildren: () => __webpack_require__.e(/*! import() */ "default-src_app_pages_store_store_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./pages/store/store.module */ 62462)).then((m) => m.StorePageModule),
     },
     {
         path: 'item-details',
@@ -294,11 +279,11 @@ const routes = [
     },
     {
         path: 'update-store',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_cafe_firebase-upload_service_ts"), __webpack_require__.e("default-src_app_shared_components_modal_customise-order_customise-order_page_ts"), __webpack_require__.e("default-src_app_shared_components_modal_add-item_add-item_component_ts"), __webpack_require__.e("default-src_app_shared_components_modal_edit-item_edit-item_component_ts"), __webpack_require__.e("src_app_pages_update-store_update-store_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./pages/update-store/update-store.module */ 52548)).then(m => m.UpdateStorePageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_utils_firebase-upload_service_ts"), __webpack_require__.e("default-src_app_shared_components_modal_customise-order_customise-order_page_ts"), __webpack_require__.e("default-src_app_shared_components_modal_add-item_add-item_component_ts"), __webpack_require__.e("default-src_app_shared_components_modal_edit-item_edit-item_component_ts"), __webpack_require__.e("src_app_pages_update-store_update-store_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./pages/update-store/update-store.module */ 52548)).then(m => m.UpdateStorePageModule)
     },
     {
         path: 'start-selling',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_cafe_firebase-upload_service_ts"), __webpack_require__.e("src_app_pages_start-selling_start-selling_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./pages/start-selling/start-selling.module */ 35481)).then(m => m.StartSellingPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_utils_firebase-upload_service_ts"), __webpack_require__.e("src_app_pages_start-selling_start-selling_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./pages/start-selling/start-selling.module */ 35481)).then(m => m.StartSellingPageModule)
     },
     {
         path: 'track-orders',
@@ -309,28 +294,16 @@ const routes = [
         loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_date-fns_esm_format_index_js"), __webpack_require__.e("default-src_app_pages_track-sales_track-sales_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./pages/track-sales/track-sales.module */ 85676)).then(m => m.TrackSalesPageModule)
     },
     {
-        path: 'check-status',
-        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_pages_check-status_check-status_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./pages/check-status/check-status.module */ 18761)).then(m => m.CheckStatusPageModule)
-    },
-    {
-        path: 'pin-code',
-        loadChildren: () => __webpack_require__.e(/*! import() */ "common").then(__webpack_require__.bind(__webpack_require__, /*! ./pages/pin-code/pin-code.module */ 14596)).then(m => m.PinCodePageModule)
-    },
-    {
         path: 'store-sales',
         loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_date-fns_esm_format_index_js"), __webpack_require__.e("default-src_app_pages_track-sales_track-sales_module_ts"), __webpack_require__.e("src_app_pages_store-sales_store-sales_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./pages/store-sales/store-sales.module */ 38948)).then(m => m.StoreSalesPageModule)
     },
     {
         path: 'chat',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_pages_chat_chat_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./pages/chat/chat.module */ 50032)).then(m => m.ChatPageModule)
+        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_pages_chat_chat_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./pages/chat/chat.module */ 50032)).then(m => m.ChatPageModule)
     },
     {
         path: 'chat-list',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_date-fns_esm_format_index_js"), __webpack_require__.e("common"), __webpack_require__.e("src_app_pages_chat-list_chat-list_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./pages/chat-list/chat-list.module */ 42648)).then(m => m.ChatListPageModule)
-    },
-    {
-        path: 'chat-rooms',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_pages_chat-rooms_chat-rooms_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./pages/chat-rooms/chat-rooms.module */ 55718)).then(m => m.ChatRoomsPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_date-fns_esm_format_index_js"), __webpack_require__.e("src_app_pages_chat-list_chat-list_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./pages/chat-list/chat-list.module */ 42648)).then(m => m.ChatListPageModule)
     },
     {
         path: 'check-status-user',
@@ -342,11 +315,11 @@ const routes = [
     },
     {
         path: 'add-item',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_cafe_firebase-upload_service_ts"), __webpack_require__.e("default-src_app_shared_components_modal_customise-order_customise-order_page_ts"), __webpack_require__.e("default-src_app_shared_components_modal_add-item_add-item_component_ts"), __webpack_require__.e("src_app_shared_components_modal_add-item_add-item_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./shared/components/modal/add-item/add-item.module */ 14782)).then(m => m.AddItemPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_utils_firebase-upload_service_ts"), __webpack_require__.e("default-src_app_shared_components_modal_customise-order_customise-order_page_ts"), __webpack_require__.e("default-src_app_shared_components_modal_add-item_add-item_component_ts"), __webpack_require__.e("src_app_shared_components_modal_add-item_add-item_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./shared/components/modal/add-item/add-item.module */ 14782)).then(m => m.AddItemPageModule)
     },
     {
         path: 'edit-item',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_cafe_firebase-upload_service_ts"), __webpack_require__.e("default-src_app_shared_components_modal_customise-order_customise-order_page_ts"), __webpack_require__.e("default-src_app_shared_components_modal_edit-item_edit-item_component_ts"), __webpack_require__.e("src_app_shared_components_modal_edit-item_edit-item_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./shared/components/modal/edit-item/edit-item.module */ 91321)).then(m => m.EditItemModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_utils_firebase-upload_service_ts"), __webpack_require__.e("default-src_app_shared_components_modal_customise-order_customise-order_page_ts"), __webpack_require__.e("default-src_app_shared_components_modal_edit-item_edit-item_component_ts"), __webpack_require__.e("src_app_shared_components_modal_edit-item_edit-item_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./shared/components/modal/edit-item/edit-item.module */ 91321)).then(m => m.EditItemModule)
     },
     {
         path: 'verify-email-address',
@@ -397,8 +370,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "AppComponent": () => (/* binding */ AppComponent)
 /* harmony export */ });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 48111);
-/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_app_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./app.component.html */ 66224);
-/* harmony import */ var _app_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app.component.scss */ 30836);
+/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_app_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./app.component.html */ 66224);
+/* harmony import */ var _app_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app.component.scss */ 73467);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 14001);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ 91346);
 
@@ -424,7 +397,7 @@ AppComponent.ctorParameters = () => [
 AppComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.Component)({
         selector: 'app-root',
-        template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_app_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        template: _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_app_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_app_component_scss__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], AppComponent);
@@ -497,7 +470,10 @@ AppModule = (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__decorate)([
         entryComponents: [],
         imports: [
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_9__.BrowserModule,
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_10__.IonicModule.forRoot(),
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_10__.IonicModule.forRoot({
+                swipeBackEnabled: false,
+                animated: false
+            }),
             _app_routing_module__WEBPACK_IMPORTED_MODULE_1__.AppRoutingModule,
             _angular_common_http__WEBPACK_IMPORTED_MODULE_11__.HttpClientModule,
             _angular_fire_compat__WEBPACK_IMPORTED_MODULE_12__.AngularFireModule.initializeApp(_environments_environment__WEBPACK_IMPORTED_MODULE_3__.environment.firebaseConfig),
@@ -553,7 +529,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var src_app_services_auth_auth_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/app/services/auth/auth.service */ 68927);
 
 
-// import { getAuth, onAuthStateChanged } from '@angular/fire/auth';
 
 
 let AuthGuard = class AuthGuard {
@@ -561,22 +536,28 @@ let AuthGuard = class AuthGuard {
         this.auth = auth;
         this.router = router;
     }
+    // check if the user is logged in or not before entering the home page
     canActivate(route, state) {
         return this.auth.checkAuth().then(response => {
+            // logged in
             if (response) {
+                // proceed to home
                 return true;
             }
+            // not logged in
             else {
-                this.navigate();
+                // go to login page
+                this.goToLogin();
                 return false;
             }
         })
+            // error when check login status, go to login regardless
             .catch(e => {
-            this.navigate();
+            this.goToLogin();
             return false;
         });
     }
-    navigate() {
+    goToLogin() {
         this.router.navigateByUrl('/auth-screen', { replaceUrl: true });
     }
 };
@@ -610,8 +591,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ 13252);
 /* harmony import */ var _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../services/auth/auth.service */ 68927);
 /* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
-/* harmony import */ var _services_iroha_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/iroha.service */ 49187);
-/* harmony import */ var _services_storage_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/storage.service */ 17208);
+/* harmony import */ var _services_iroha_iroha_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/iroha/iroha.service */ 52857);
+/* harmony import */ var _services_storage_storage_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/storage/storage.service */ 74065);
 /* harmony import */ var _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/fire/compat/firestore */ 27091);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic/angular */ 91346);
 
@@ -624,61 +605,62 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let VerifyGuard = class VerifyGuard {
-    constructor(auth, router, iroha, storage, _firestore, afs, loadingController) {
+    constructor(auth, router, iroha, storage, _firestore, afs, alertController, loadingController) {
         this.auth = auth;
         this.router = router;
         this.iroha = iroha;
         this.storage = storage;
         this._firestore = _firestore;
         this.afs = afs;
+        this.alertController = alertController;
         this.loadingController = loadingController;
     }
+    // check if the email used verified
     canActivate(route, state) {
+        // firebase check account verification
         return this.auth.checkVerify().then((response) => (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
+            const docRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_4__.doc)(this._firestore, 'users', this.auth.currentUser.uid);
+            const docSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_4__.getDoc)(docRef);
             if (response) {
-                const docRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_4__.doc)(this._firestore, 'users', this.auth.currentUser.uid);
-                const docSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_4__.getDoc)(docRef);
+                // this is always false for first time users
                 if (docSnap.data().verify === false) {
-                    const user = yield this.storage.get(docSnap.data().username);
-                    yield this.iroha.createAccount(docSnap.data().username);
-                    this.iroha.wallet.name = '';
-                    yield this.iroha.setName(docSnap.data().username + '@test');
-                    console.log(docSnap.data().username);
-                    this.iroha.wallet.balance = 0;
-                    yield this.iroha.topUpVerify(docSnap.data().username + '@test', '', '1');
-                    yield this.iroha.payment('admin', '', '1');
-                    yield this.iroha.setBalance(docSnap.data().username + '@test');
-                    yield this.iroha.setAccDetail(user);
-                    yield this.createCart();
-                    yield this.createFav();
-                    const docReff = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_4__.doc)(this._firestore, 'users', this.auth.currentUser.uid);
-                    const docSnapp = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_4__.getDoc)(docReff);
-                    if (docSnap.exists()) {
+                    // create iroha account
+                    yield this.iroha.createAccount(docSnap.data().username).then((p) => (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
+                        // create cart, favourites and message path for the user
+                        yield this.createCart();
+                        yield this.createFav();
+                        yield this.afs.collection('messages').doc(this.auth.currentUser.uid).set({});
+                        // update verification status. Indicate the account is not a first time user
                         yield this.afs.collection('users').doc(this.auth.currentUser.uid).update({
                             verify: true
                         });
-                    }
+                    }));
                     return true;
                 }
+                // not first time user comes here and go to the home page
                 if (docSnap.data().verify === true) {
                     return true;
                 }
             }
+            // Firebase states not verified, send user to verify email page
             else {
-                this.navigate();
+                this.verifyEmail();
                 return false;
             }
         }))
             .catch(e => {
-            this.navigate();
+            this.goToLogin();
             return false;
         });
     }
-    navigate() {
+    verifyEmail() {
         this.router.navigateByUrl('/verify-email-address', { replaceUrl: true });
     }
     goToHome() {
         this.router.navigateByUrl('/tabs', { replaceUrl: true });
+    }
+    goToLogin() {
+        this.router.navigateByUrl('/auth-screen', { replaceUrl: true });
     }
     createCart() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
@@ -698,14 +680,25 @@ let VerifyGuard = class VerifyGuard {
             });
         });
     }
+    showAlert(header, message) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
+            const alert = yield this.alertController.create({
+                header,
+                message,
+                buttons: ['OK'],
+            });
+            yield alert.present();
+        });
+    }
 };
 VerifyGuard.ctorParameters = () => [
     { type: _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_0__.AuthService },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__.Router },
-    { type: _services_iroha_service__WEBPACK_IMPORTED_MODULE_1__.IrohaService },
-    { type: _services_storage_service__WEBPACK_IMPORTED_MODULE_2__.StorageService },
+    { type: _services_iroha_iroha_service__WEBPACK_IMPORTED_MODULE_1__.IrohaService },
+    { type: _services_storage_storage_service__WEBPACK_IMPORTED_MODULE_2__.StorageService },
     { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_4__.Firestore },
     { type: _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_6__.AngularFirestore },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.AlertController },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.LoadingController }
 ];
 VerifyGuard = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
@@ -729,17 +722,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AuthService": () => (/* binding */ AuthService)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 48111);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 48111);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/core */ 14001);
-/* harmony import */ var _angular_fire_auth__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/fire/auth */ 75656);
-/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
+/* harmony import */ var _angular_fire_auth__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/fire/auth */ 75656);
+/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
+/* harmony import */ var _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/fire/compat/firestore */ 27091);
 /* harmony import */ var firebase_compat_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/compat/app */ 50947);
-/* harmony import */ var _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/fire/compat/auth */ 60111);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/router */ 13252);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic/angular */ 91346);
-/* harmony import */ var _storage_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../storage.service */ 17208);
+/* harmony import */ var _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/fire/compat/auth */ 60111);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ 13252);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic/angular */ 91346);
+/* harmony import */ var _storage_storage_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../storage/storage.service */ 74065);
 /* harmony import */ var capacitor_native_biometric__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! capacitor-native-biometric */ 41380);
-/* harmony import */ var _capacitor_community_fcm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @capacitor-community/fcm */ 33506);
 
 
 
@@ -752,15 +745,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let AuthService = class AuthService {
-    constructor(_fireAuth, _firestore, afAuth, router, loading, storage) {
+    constructor(_fireAuth, _firestore, afAuth, router, loading, storage, afs) {
         this._fireAuth = _fireAuth;
         this._firestore = _firestore;
         this.afAuth = afAuth;
         this.router = router;
         this.loading = loading;
         this.storage = storage;
+        this.afs = afs;
         this.uid = '';
-        this.afAuth.onAuthStateChanged((user) => (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+        this.loginIsLoading = false;
+        this.isLoadingSignUp = false;
+        this.afAuth.onAuthStateChanged((user) => (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
             this.currentUser = user;
             if ((yield this.storage.get('bio-login')) === undefined) {
                 yield this.storage.set('bio-login', 'false');
@@ -773,13 +769,13 @@ let AuthService = class AuthService {
     }
     // Creating a firebase account
     register(formValue) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
             try {
-                const registeredUser = yield (0,_angular_fire_auth__WEBPACK_IMPORTED_MODULE_5__.createUserWithEmailAndPassword)(this._fireAuth, formValue.email, formValue.password)
-                    .then((result) => (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+                console.log(formValue.email, formValue.password);
+                const registeredUser = yield (0,_angular_fire_auth__WEBPACK_IMPORTED_MODULE_4__.createUserWithEmailAndPassword)(this._fireAuth, formValue.email, formValue.password)
+                    .then((result) => (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
                     yield this.uploadFirestore(formValue.username, formValue.email);
                     yield this.storage.set(formValue.username, formValue.password);
-                    yield this.loading.dismiss();
                     yield this.sendVerificationMail();
                 }));
             }
@@ -796,26 +792,22 @@ let AuthService = class AuthService {
         });
     }
     uploadFirestore(username, email) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
-            let token = '';
-            _capacitor_community_fcm__WEBPACK_IMPORTED_MODULE_3__.FCM.getToken()
-                .then((r) => token = r.token);
-            console.log(token);
-            const dataRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.doc)(this._firestore, `users/${this.currentUser.uid}`);
-            yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.setDoc)(dataRef, {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
+            const dataRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.doc)(this._firestore, `users/${this.currentUser.uid}`);
+            yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.setDoc)(dataRef, {
                 username,
                 email,
-                fcm: token,
+                fcm: '',
                 verify: false
             });
         });
     }
     // Login Firebase User
     login(formValue) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
             try {
                 // eslint-disable-next-line no-underscore-dangle
-                const response = yield (0,_angular_fire_auth__WEBPACK_IMPORTED_MODULE_5__.signInWithEmailAndPassword)(this._fireAuth, formValue.email, formValue.password);
+                const response = yield (0,_angular_fire_auth__WEBPACK_IMPORTED_MODULE_4__.signInWithEmailAndPassword)(this._fireAuth, formValue.email, formValue.password);
                 console.log('login user: ', response);
                 if (response === null || response === void 0 ? void 0 : response.user) {
                     return response.user.uid;
@@ -833,7 +825,7 @@ let AuthService = class AuthService {
     checkAuth() {
         return new Promise((resolve, reject) => {
             // eslint-disable-next-line no-underscore-dangle
-            (0,_angular_fire_auth__WEBPACK_IMPORTED_MODULE_5__.onAuthStateChanged)(this._fireAuth, user => {
+            (0,_angular_fire_auth__WEBPACK_IMPORTED_MODULE_4__.onAuthStateChanged)(this._fireAuth, user => {
                 console.log(user);
                 if (user) {
                     resolve(true);
@@ -843,10 +835,10 @@ let AuthService = class AuthService {
         });
     }
     reAuth(email, pw) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
             try {
                 const credential = firebase_compat_app__WEBPACK_IMPORTED_MODULE_0__["default"].auth.EmailAuthProvider.credential(email, pw);
-                const response = yield (0,_angular_fire_auth__WEBPACK_IMPORTED_MODULE_5__.reauthenticateWithCredential)(this.currentUser, credential);
+                const response = yield (0,_angular_fire_auth__WEBPACK_IMPORTED_MODULE_4__.reauthenticateWithCredential)(this.currentUser, credential);
             }
             catch (e) {
                 throw (e);
@@ -854,9 +846,9 @@ let AuthService = class AuthService {
         });
     }
     deleteUser() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
             try {
-                const response = yield (0,_angular_fire_auth__WEBPACK_IMPORTED_MODULE_5__.deleteUser)(this.currentUser);
+                const response = yield (0,_angular_fire_auth__WEBPACK_IMPORTED_MODULE_4__.deleteUser)(this.currentUser);
             }
             catch (e) {
                 throw (e);
@@ -866,7 +858,7 @@ let AuthService = class AuthService {
     checkVerify() {
         return new Promise((resolve, reject) => {
             // eslint-disable-next-line no-underscore-dangle
-            (0,_angular_fire_auth__WEBPACK_IMPORTED_MODULE_5__.onAuthStateChanged)(this._fireAuth, user => {
+            (0,_angular_fire_auth__WEBPACK_IMPORTED_MODULE_4__.onAuthStateChanged)(this._fireAuth, user => {
                 if (firebase_compat_app__WEBPACK_IMPORTED_MODULE_0__["default"].auth().currentUser.emailVerified) {
                     resolve(true);
                 }
@@ -882,10 +874,10 @@ let AuthService = class AuthService {
     }
     // Logout, self-explanatory
     logout() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
             try {
                 // eslint-disable-next-line no-underscore-dangle
-                yield (0,_angular_fire_auth__WEBPACK_IMPORTED_MODULE_5__.signOut)(this._fireAuth);
+                yield (0,_angular_fire_auth__WEBPACK_IMPORTED_MODULE_4__.signOut)(this._fireAuth);
                 return true;
             }
             catch (e) {
@@ -894,9 +886,9 @@ let AuthService = class AuthService {
         });
     }
     resetPassword(email) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
             // eslint-disable-next-line no-underscore-dangle
-            yield (0,_angular_fire_auth__WEBPACK_IMPORTED_MODULE_5__.sendPasswordResetEmail)(this._fireAuth, email)
+            yield (0,_angular_fire_auth__WEBPACK_IMPORTED_MODULE_4__.sendPasswordResetEmail)(this._fireAuth, email)
                 .then(() => {
                 // Password reset email sent!
                 // ..
@@ -909,8 +901,11 @@ let AuthService = class AuthService {
         });
     }
     setBiometricLogin(email, password) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
             try {
+                yield capacitor_native_biometric__WEBPACK_IMPORTED_MODULE_2__.NativeBiometric.deleteCredentials({
+                    server: 'chainfox',
+                });
                 yield capacitor_native_biometric__WEBPACK_IMPORTED_MODULE_2__.NativeBiometric.setCredentials({
                     username: email,
                     password,
@@ -924,14 +919,15 @@ let AuthService = class AuthService {
     }
 };
 AuthService.ctorParameters = () => [
-    { type: _angular_fire_auth__WEBPACK_IMPORTED_MODULE_5__.Auth },
-    { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.Firestore },
-    { type: _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_7__.AngularFireAuth },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_8__.Router },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_9__.LoadingController },
-    { type: _storage_service__WEBPACK_IMPORTED_MODULE_1__.StorageService }
+    { type: _angular_fire_auth__WEBPACK_IMPORTED_MODULE_4__.Auth },
+    { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.Firestore },
+    { type: _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_6__.AngularFireAuth },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__.Router },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.LoadingController },
+    { type: _storage_storage_service__WEBPACK_IMPORTED_MODULE_1__.StorageService },
+    { type: _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_9__.AngularFirestore }
 ];
-AuthService = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
+AuthService = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_10__.Injectable)({
         providedIn: 'root'
     })
@@ -941,10 +937,484 @@ AuthService = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
 
 /***/ }),
 
-/***/ 41575:
-/*!**************************************************!*\
-  !*** ./src/app/services/cafe/product.service.ts ***!
-  \**************************************************/
+/***/ 52857:
+/*!*************************************************!*\
+  !*** ./src/app/services/iroha/iroha.service.ts ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "IrohaService": () => (/* binding */ IrohaService)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 48111);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/core */ 14001);
+/* harmony import */ var iroha_helpers_lib_proto_endpoint_pb_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! iroha-helpers/lib/proto/endpoint_pb_service */ 47575);
+/* harmony import */ var iroha_helpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! iroha-helpers */ 37762);
+/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
+/* harmony import */ var _storage_storage_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../storage/storage.service */ 74065);
+/* harmony import */ var _auth_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../auth/auth.service */ 68927);
+/* harmony import */ var _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/fire/compat/auth */ 60111);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! lodash */ 2113);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic/angular */ 91346);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/router */ 13252);
+
+
+
+
+
+
+
+
+
+
+
+const moment = __webpack_require__(/*! moment */ 34701);
+// should be the local address for testing purposes
+const IROHA_ADDRESS = 'http://34.143.144.75:8081';
+const commandService = new iroha_helpers_lib_proto_endpoint_pb_service__WEBPACK_IMPORTED_MODULE_0__.CommandService_v1Client(IROHA_ADDRESS);
+const queryService = new iroha_helpers_lib_proto_endpoint_pb_service__WEBPACK_IMPORTED_MODULE_0__.QueryService_v1Client(IROHA_ADDRESS);
+let IrohaService = class IrohaService {
+    constructor(storage, ionicAuthService, _firestore, afAuth, alertController, router, loading) {
+        this.storage = storage;
+        this.ionicAuthService = ionicAuthService;
+        this._firestore = _firestore;
+        this.afAuth = afAuth;
+        this.alertController = alertController;
+        this.router = router;
+        this.loading = loading;
+        this.wallet = {
+            name: '',
+            privateKey: null,
+            publicKey: null,
+            encrypted: false,
+            balance: 0.00,
+        };
+        this.otherWallet = {
+            name: '',
+            privateKey: null,
+            publicKey: null,
+            encrypted: false,
+            balance: 0.00,
+        };
+        this.txs = [];
+        this.prevPage = false;
+        this.nextPage = false;
+        this.pageHash = [undefined];
+        this.pageNum = 0;
+        this.pw = '';
+        this.note = '';
+        this.transactionMsg = '';
+        this.transactionFrom = '';
+        this.transactionTo = '';
+        this.transactionAmount = '';
+        this.transactionDate = '';
+        this.result = '';
+        this.fav = [];
+        this.noteDraft = '';
+        this.testprivateKey = '';
+        this.currentUser = null;
+        this.afAuth.onAuthStateChanged(user => {
+            this.currentUser = user;
+        });
+    }
+    getIrohaPrk() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            const keyRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.doc)(this._firestore, `keys/iroha`);
+            const keySnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.getDoc)(keyRef);
+            this.testprivateKey = keySnap.data().key;
+        });
+    }
+    // create iroha account during user sign up
+    createAccount(username) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            yield this.getIrohaPrk();
+            yield this.generateKeypair()
+                .then(({ publicKey, privateKey }) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+                yield this.storage.set(this.currentUser.uid, privateKey);
+                this.wallet.privateKey = yield this.storage.get(this.currentUser.uid);
+                yield iroha_helpers__WEBPACK_IMPORTED_MODULE_1__.commands.createAccount({
+                    privateKeys: [this.testprivateKey],
+                    creatorAccountId: 'admin@test',
+                    quorum: 1,
+                    commandService,
+                    timeoutLimit: 5000 // Set timeout limit
+                }, {
+                    accountName: username,
+                    domainId: 'test',
+                    publicKey
+                }).catch((e) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+                    this.ionicAuthService.loginIsLoading = false;
+                    yield this.showAlert('Server Error 1', e);
+                    this.goToLogin();
+                }));
+            }));
+        });
+    }
+    // generate private and public key for each created account
+    generateKeypair() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            const keypair = iroha_helpers__WEBPACK_IMPORTED_MODULE_1__.cryptoHelper.generateKeyPair();
+            const publicKey = keypair.publicKey;
+            const privateKey = keypair.privateKey;
+            return { publicKey, privateKey };
+        });
+    }
+    getKey() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            this.wallet.privateKey = '';
+            this.wallet.privateKey = yield this.storage.get(this.currentUser.uid);
+        });
+    }
+    setName(id) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            yield this.getKey();
+            yield iroha_helpers__WEBPACK_IMPORTED_MODULE_1__.queries.getAccount({
+                privateKey: this.wallet.privateKey,
+                creatorAccountId: id,
+                queryService,
+                timeoutLimit: 5000 // Set timeout limit
+            }, { accountId: id })
+                .then(account => (this.wallet.name = Object.values(account)[0].slice(0, Object.values(account)[0].length - 5)))
+                .catch((e) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+                yield this.showAlert('Server Error 2', e);
+                this.goToLogin();
+            }));
+        });
+    }
+    setOtherName(id) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            yield this.getKey();
+            yield this.getIrohaPrk();
+            yield iroha_helpers__WEBPACK_IMPORTED_MODULE_1__.queries.getAccount({
+                privateKey: this.testprivateKey,
+                creatorAccountId: 'admin@test',
+                queryService,
+                timeoutLimit: 5000 // Set timeout limit
+            }, { accountId: id })
+                .then(account => (this.otherWallet.name = Object.values(account)[0].slice(0, this.otherWallet.name.length - 5)));
+        });
+    }
+    setBalance(id) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            yield this.getKey();
+            yield iroha_helpers__WEBPACK_IMPORTED_MODULE_1__.queries.getAccountAssets({
+                privateKey: this.wallet.privateKey,
+                creatorAccountId: id,
+                queryService,
+                timeoutLimit: 5000 // Set timeout limit
+            }, { accountId: id, pageSize: 100, firstAssetId: 'coin#test' })
+                .then(account => this.wallet.balance = Object.values(account)[0].balance)
+                .catch((e) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            }));
+        });
+    }
+    topUp(id, message, amount, prk) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            const transfer = yield iroha_helpers__WEBPACK_IMPORTED_MODULE_1__.commands.transferAsset({
+                privateKeys: [prk],
+                creatorAccountId: 'admin@test',
+                quorum: 1,
+                commandService,
+                timeoutLimit: 5000 // Set timeout limit
+            }, { srcAccountId: 'admin@test', destAccountId: id, assetId: 'coin#test', description: message, amount })
+                .catch((e) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+                yield this.showAlert('Server Error 5', e);
+            }));
+        });
+    }
+    topUpVerify(id, message, amount) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            // eslint-disable-next-line max-len
+            yield this.getIrohaPrk();
+            const transfer = yield iroha_helpers__WEBPACK_IMPORTED_MODULE_1__.commands.transferAsset({
+                privateKeys: [this.testprivateKey],
+                creatorAccountId: 'admin@test',
+                quorum: 1,
+                commandService,
+                timeoutLimit: 5000 // Set timeout limit
+            }, { srcAccountId: 'admin@test', destAccountId: id, assetId: 'coin#test', description: message, amount })
+                .catch((e) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+                yield this.showAlert('Server Error 6', e);
+            }));
+        });
+    }
+    sendMoney(message, amount, temp) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            yield this.getKey();
+            console.log(temp);
+            // eslint-disable-next-line max-len
+            yield iroha_helpers__WEBPACK_IMPORTED_MODULE_1__.commands.transferAsset({
+                privateKeys: [this.wallet.privateKey],
+                creatorAccountId: this.wallet.name + '@test',
+                quorum: 1,
+                commandService,
+                timeoutLimit: 5000 // Set timeout limit
+            }, 
+            // eslint-disable-next-line max-len
+            {
+                srcAccountId: this.wallet.name + '@test',
+                destAccountId: temp + '@test',
+                assetId: 'coin#test',
+                description: message,
+                amount
+            })
+                .then((d) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+                this.wallet.balance = '0';
+                yield this.setBalance(this.wallet.name + '@test');
+                // eslint-disable-next-line max-len
+                yield this.showAlert('Transfer Success', 'You have sent RM' + amount + ' to ' + temp + '.');
+                this.otherWallet.name = '';
+            }));
+        });
+    }
+    payment(dest, message, amount) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            yield this.getKey();
+            yield iroha_helpers__WEBPACK_IMPORTED_MODULE_1__.commands.transferAsset({
+                privateKeys: [this.wallet.privateKey],
+                creatorAccountId: this.wallet.name + '@test',
+                quorum: 1,
+                commandService,
+                timeoutLimit: 5000 // Set timeout limit
+            }, 
+            // eslint-disable-next-line max-len
+            {
+                srcAccountId: this.wallet.name + '@test',
+                destAccountId: dest + '@test',
+                assetId: 'coin#test',
+                description: message,
+                amount
+            });
+        });
+    }
+    getTransactions() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            yield this.getKey();
+            this.txs = []; // empty any previous transaction
+            yield iroha_helpers__WEBPACK_IMPORTED_MODULE_1__.queries.getAccountAssetTransactions({
+                privateKey: this.wallet.privateKey,
+                creatorAccountId: this.wallet.name + '@test',
+                queryService,
+                timeoutLimit: 5000 // Set timeout limit
+            }, {
+                accountId: this.wallet.name + '@test',
+                assetId: 'coin#test',
+                firstTxHash: undefined,
+                firstTxHeight: undefined,
+                firstTxTime: undefined,
+                lastTxHeight: undefined,
+                lastTxTime: undefined,
+                ordering: { direction: undefined, field: undefined },
+                pageSize: 100,
+            })
+                .then(transactions => {
+                console.log(Object.values(transactions)[0]);
+                if (Object.values(transactions)[0].isEmpty) {
+                    return [];
+                }
+                if (Object.values(transactions)[0].length > 0 && this.pageNum === this.pageHash.length - 1) {
+                    this.pageHash.push(Object.values(transactions)[0].nextTxHash);
+                }
+                if (this.pageNum + 1 < this.pageHash.length) {
+                    this.nextPage = true;
+                }
+                else {
+                    this.nextPage = false;
+                }
+                if (this.pageNum > 0) {
+                    this.prevPage = true;
+                }
+                else {
+                    this.prevPage = false;
+                }
+                Object.values(transactions)[0].forEach(t => {
+                    const { commandsList, createdTime } = t.payload.reducedPayload;
+                    commandsList.forEach(c => {
+                        if (!c.transferAsset) {
+                            return;
+                        }
+                        const { amount, assetId, destAccountId, srcAccountId, description } = c.transferAsset;
+                        const tx = {
+                            from: srcAccountId === (this.wallet.name + '@test') ? 'You' : srcAccountId.split('@')[0],
+                            to: destAccountId === (this.wallet.name + '@test') ? 'You' : destAccountId.split('@')[0],
+                            amount,
+                            date: createdTime,
+                            currency: assetId.split('#')[0],
+                            message: description
+                        };
+                        if (!(tx.amount === '1' && (tx.to === 'admin' || tx.from === 'admin'))) {
+                            this.txs.push(tx);
+                        }
+                    });
+                });
+                this.txs = lodash__WEBPACK_IMPORTED_MODULE_4__.orderBy(this.txs, [object => new moment(object.date)], ['desc']);
+            })
+                .catch((e) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+                yield this.showAlert('Server Error 9', e);
+            }));
+        });
+    }
+    setAccDetail(value, key) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            yield this.getKey();
+            console.log(this.wallet.privateKey);
+            console.log(this.wallet.name);
+            yield iroha_helpers__WEBPACK_IMPORTED_MODULE_1__.commands.setAccountDetail({
+                privateKeys: [this.wallet.privateKey],
+                creatorAccountId: this.wallet.name + '@test',
+                quorum: 1,
+                commandService,
+                timeoutLimit: 5000 // Set timeout limit
+            }, { accountId: this.wallet.name + '@test', key, value })
+                .catch((e) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+                yield this.showAlert('Server Error 10', e);
+            }));
+        });
+    }
+    getAccDetail(key) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            yield this.getKey();
+            yield iroha_helpers__WEBPACK_IMPORTED_MODULE_1__.queries.getAccountDetail({
+                privateKey: this.wallet.privateKey,
+                creatorAccountId: this.wallet.name + '@test',
+                queryService,
+                timeoutLimit: 5000 // Set timeout limit
+            }, {
+                accountId: this.wallet.name + '@test',
+                key,
+                pageSize: 100,
+                paginationKey: key,
+                paginationWriter: this.wallet.name + '@test',
+                writer: this.wallet.name + '@test'
+            }).then(d => {
+                if (key === 'sec') {
+                    this.pw = d[this.wallet.name + '@test'].sec;
+                }
+                return d[this.wallet.name + '@test'][key];
+            });
+        });
+    }
+    addSignatory(result) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            yield this.getIrohaPrk();
+            yield iroha_helpers__WEBPACK_IMPORTED_MODULE_1__.commands.addSignatory({
+                privateKeys: [this.testprivateKey],
+                creatorAccountId: 'admin@test',
+                quorum: 1,
+                commandService,
+                timeoutLimit: 5000 // Set timeout limit
+            }, { accountId: 'admin@test', publicKey: result })
+                .catch((e) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+                yield this.showAlert('Server Error 12', e);
+            }));
+        });
+    }
+    removeSignatory(result) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            yield this.getIrohaPrk();
+            yield iroha_helpers__WEBPACK_IMPORTED_MODULE_1__.commands.removeSignatory({
+                privateKeys: [this.testprivateKey],
+                creatorAccountId: 'admin@test',
+                quorum: 1,
+                commandService,
+                timeoutLimit: 5000 // Set timeout limit
+            }, { accountId: 'admin@test', publicKey: result })
+                .catch((e) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+                yield this.showAlert('Server Error 13', e);
+            }));
+        });
+    }
+    showAlert(header, message) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            const alert = yield this.alertController.create({
+                header,
+                message,
+                buttons: ['OK'],
+            });
+            yield alert.present();
+        });
+    }
+    goToLogin() {
+        this.router.navigateByUrl('/auth-screen', { replaceUrl: true });
+    }
+};
+IrohaService.ctorParameters = () => [
+    { type: _storage_storage_service__WEBPACK_IMPORTED_MODULE_2__.StorageService },
+    { type: _auth_auth_service__WEBPACK_IMPORTED_MODULE_3__.AuthService },
+    { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.Firestore },
+    { type: _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_7__.AngularFireAuth },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.AlertController },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_9__.Router },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.LoadingController }
+];
+IrohaService = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_10__.Injectable)({
+        providedIn: 'root'
+    })
+], IrohaService);
+
+
+
+/***/ }),
+
+/***/ 74065:
+/*!*****************************************************!*\
+  !*** ./src/app/services/storage/storage.service.ts ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "StorageService": () => (/* binding */ StorageService)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 48111);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 14001);
+/* harmony import */ var _capacitor_storage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @capacitor/storage */ 83945);
+
+
+
+let StorageService = class StorageService {
+    constructor() {
+    }
+    set(key, value) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
+            yield _capacitor_storage__WEBPACK_IMPORTED_MODULE_0__.Storage.set({
+                key,
+                value,
+            });
+        });
+    }
+    get(key) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
+            const value = yield _capacitor_storage__WEBPACK_IMPORTED_MODULE_0__.Storage.get({ key });
+            return value.value;
+        });
+    }
+    remove(key) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
+            yield _capacitor_storage__WEBPACK_IMPORTED_MODULE_0__.Storage.remove({ key });
+        });
+    }
+};
+StorageService.ctorParameters = () => [];
+StorageService = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.Injectable)({
+        providedIn: 'root'
+    })
+], StorageService);
+
+
+
+/***/ }),
+
+/***/ 86250:
+/*!***************************************************!*\
+  !*** ./src/app/services/store/product.service.ts ***!
+  \***************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -973,6 +1443,7 @@ let ProductService = class ProductService {
         this.afs = afs;
         this.ionicAuthService = ionicAuthService;
         this._firestore = _firestore;
+        this.orderHistory = false;
         this.total = 0;
         this.idOwnerPair = new Map();
         this.orderNotePair = new Map();
@@ -1191,409 +1662,37 @@ ProductService = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
 
 /***/ }),
 
-/***/ 49187:
-/*!*******************************************!*\
-  !*** ./src/app/services/iroha.service.ts ***!
-  \*******************************************/
+/***/ 73081:
+/*!**************************************************************************!*\
+  !*** ./src/app/shared/components/cards/cafe-card/cafe-card.component.ts ***!
+  \**************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "IrohaService": () => (/* binding */ IrohaService)
+/* harmony export */   "CafeCardComponent": () => (/* binding */ CafeCardComponent)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 48111);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 14001);
-/* harmony import */ var iroha_helpers_lib_proto_endpoint_pb_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! iroha-helpers/lib/proto/endpoint_pb_service */ 47575);
-/* harmony import */ var iroha_helpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! iroha-helpers */ 37762);
-/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
-/* harmony import */ var _storage_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./storage.service */ 17208);
-/* harmony import */ var _auth_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./auth/auth.service */ 68927);
-/* harmony import */ var _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/fire/compat/auth */ 60111);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! lodash */ 2113);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_4__);
-
-
-
-
-
-
-
-
-
-const moment = __webpack_require__(/*! moment */ 34701);
-const IROHA_ADDRESS = 'http://34.131.10.34:8081';
-const commandService = new iroha_helpers_lib_proto_endpoint_pb_service__WEBPACK_IMPORTED_MODULE_0__.CommandService_v1Client(IROHA_ADDRESS);
-const queryService = new iroha_helpers_lib_proto_endpoint_pb_service__WEBPACK_IMPORTED_MODULE_0__.QueryService_v1Client(IROHA_ADDRESS);
-let IrohaService = class IrohaService {
-    constructor(storage, ionicAuthService, _firestore, afAuth) {
-        this.storage = storage;
-        this.ionicAuthService = ionicAuthService;
-        this._firestore = _firestore;
-        this.afAuth = afAuth;
-        this.wallet = {
-            name: '',
-            privateKey: null,
-            publicKey: null,
-            encrypted: false,
-            balance: 0.00,
-        };
-        this.otherWallet = {
-            name: '',
-            privateKey: null,
-            publicKey: null,
-            encrypted: false,
-            balance: 0.00,
-        };
-        this.txs = [];
-        this.prevPage = false;
-        this.nextPage = false;
-        this.pageHash = [undefined];
-        this.pageNum = 0;
-        this.pw = '';
-        this.note = '';
-        this.transactionMsg = '';
-        this.transactionFrom = '';
-        this.transactionTo = '';
-        this.transactionAmount = '';
-        this.transactionDate = '';
-        this.result = '';
-        this.testprivateKey = '';
-        this.testpublicKey = '';
-        this.currentUser = null;
-        this.afAuth.onAuthStateChanged(user => {
-            this.currentUser = user;
-        });
-    }
-    // create iroha account during user sign up
-    createAccount(username) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
-            yield this.generateKeypair()
-                .then(({ publicKey, privateKey }) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
-                console.log(this.currentUser.uid);
-                yield this.storage.set(this.currentUser.uid, privateKey);
-                yield this.getKey();
-                console.log(this.wallet.privateKey);
-                yield iroha_helpers__WEBPACK_IMPORTED_MODULE_1__.commands.createAccount({
-                    privateKeys: ['e2e3c49be71ae0e1721b1a573f3d49756b87fce58679243dd4bbe09008158cf0'],
-                    creatorAccountId: 'admin@test',
-                    quorum: 1,
-                    commandService,
-                    timeoutLimit: 5000 // Set timeout limit
-                }, {
-                    accountName: username,
-                    domainId: 'test',
-                    publicKey
-                }).catch(e => console.log(e));
-            }));
-        });
-    }
-    // generate private and public key for each created account
-    generateKeypair() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
-            const keypair = iroha_helpers__WEBPACK_IMPORTED_MODULE_1__.cryptoHelper.generateKeyPair();
-            const publicKey = keypair.publicKey;
-            const privateKey = keypair.privateKey;
-            return { publicKey, privateKey };
-        });
-    }
-    getKey() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
-            this.wallet.privateKey = yield this.storage.get(this.currentUser.uid);
-        });
-    }
-    setName(id) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
-            yield this.getKey();
-            yield iroha_helpers__WEBPACK_IMPORTED_MODULE_1__.queries.getAccount({
-                privateKey: this.wallet.privateKey,
-                creatorAccountId: id,
-                queryService,
-                timeoutLimit: 5000 // Set timeout limit
-            }, { accountId: id })
-                .then(account => (this.wallet.name = Object.values(account)[0].slice(0, this.wallet.name.length - 5)));
-        });
-    }
-    setOtherName(id) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
-            yield this.getKey();
-            yield iroha_helpers__WEBPACK_IMPORTED_MODULE_1__.queries.getAccount({
-                privateKey: 'e2e3c49be71ae0e1721b1a573f3d49756b87fce58679243dd4bbe09008158cf0',
-                creatorAccountId: 'admin@test',
-                queryService,
-                timeoutLimit: 5000 // Set timeout limit
-            }, { accountId: id })
-                .then(account => (this.otherWallet.name = Object.values(account)[0].slice(0, this.otherWallet.name.length - 5)));
-        });
-    }
-    setBalance(id) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
-            yield this.getKey();
-            yield iroha_helpers__WEBPACK_IMPORTED_MODULE_1__.queries.getAccountAssets({
-                privateKey: this.wallet.privateKey,
-                creatorAccountId: id,
-                queryService,
-                timeoutLimit: 5000 // Set timeout limit
-            }, { accountId: id, pageSize: 100, firstAssetId: 'coin#test' })
-                .then(account => this.wallet.balance = Object.values(account)[0].balance);
-        });
-    }
-    topUp(id, message, amount, prk) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
-            // eslint-disable-next-line max-len
-            try {
-                const transfer = yield iroha_helpers__WEBPACK_IMPORTED_MODULE_1__.commands.transferAsset({
-                    privateKeys: [prk],
-                    creatorAccountId: 'admin@test',
-                    quorum: 1,
-                    commandService,
-                    timeoutLimit: 5000 // Set timeout limit
-                }, { srcAccountId: 'admin@test', destAccountId: id, assetId: 'coin#test', description: message, amount });
-            }
-            catch (e) {
-                throw (e);
-            }
-        });
-    }
-    topUpVerify(id, message, amount) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
-            // eslint-disable-next-line max-len
-            try {
-                const transfer = yield iroha_helpers__WEBPACK_IMPORTED_MODULE_1__.commands.transferAsset({
-                    privateKeys: ['e2e3c49be71ae0e1721b1a573f3d49756b87fce58679243dd4bbe09008158cf0'],
-                    creatorAccountId: 'admin@test',
-                    quorum: 1,
-                    commandService,
-                    timeoutLimit: 5000 // Set timeout limit
-                }, { srcAccountId: 'admin@test', destAccountId: id, assetId: 'coin#test', description: message, amount });
-            }
-            catch (e) {
-                throw (e);
-            }
-        });
-    }
-    sendMoney(message, amount) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
-            yield this.getKey();
-            console.log(this.wallet.name);
-            console.log(this.wallet.privateKey);
-            console.log(this.otherWallet.name);
-            // eslint-disable-next-line max-len
-            yield iroha_helpers__WEBPACK_IMPORTED_MODULE_1__.commands.transferAsset({
-                privateKeys: [this.wallet.privateKey],
-                creatorAccountId: this.wallet.name + '@test',
-                quorum: 1,
-                commandService,
-                timeoutLimit: 5000 // Set timeout limit
-            }, 
-            // eslint-disable-next-line max-len
-            {
-                srcAccountId: this.wallet.name + '@test',
-                destAccountId: this.otherWallet.name + '@test',
-                assetId: 'coin#test',
-                description: message,
-                amount
-            });
-        });
-    }
-    payment(dest, message, amount) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
-            yield this.getKey();
-            yield iroha_helpers__WEBPACK_IMPORTED_MODULE_1__.commands.transferAsset({
-                privateKeys: [this.wallet.privateKey],
-                creatorAccountId: this.wallet.name + '@test',
-                quorum: 1,
-                commandService,
-                timeoutLimit: 5000 // Set timeout limit
-            }, 
-            // eslint-disable-next-line max-len
-            {
-                srcAccountId: this.wallet.name + '@test',
-                destAccountId: dest + '@test',
-                assetId: 'coin#test',
-                description: message,
-                amount
-            });
-        });
-    }
-    getTransactions() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
-            yield this.getKey();
-            this.txs = []; // empty any previous transaction
-            yield iroha_helpers__WEBPACK_IMPORTED_MODULE_1__.queries.getAccountAssetTransactions({
-                privateKey: this.wallet.privateKey,
-                creatorAccountId: this.wallet.name + '@test',
-                queryService,
-                timeoutLimit: 5000 // Set timeout limit
-            }, {
-                accountId: this.wallet.name + '@test',
-                assetId: 'coin#test',
-                firstTxHash: undefined,
-                firstTxHeight: undefined,
-                firstTxTime: undefined,
-                lastTxHeight: undefined,
-                lastTxTime: undefined,
-                ordering: { direction: undefined, field: undefined },
-                pageSize: 100,
-            })
-                .then(transactions => {
-                console.log(Object.values(transactions)[0]);
-                if (Object.values(transactions)[0].isEmpty) {
-                    return [];
-                }
-                if (Object.values(transactions)[0].length > 0 && this.pageNum === this.pageHash.length - 1) {
-                    this.pageHash.push(Object.values(transactions)[0].nextTxHash);
-                }
-                if (this.pageNum + 1 < this.pageHash.length) {
-                    this.nextPage = true;
-                }
-                else {
-                    this.nextPage = false;
-                }
-                if (this.pageNum > 0) {
-                    this.prevPage = true;
-                }
-                else {
-                    this.prevPage = false;
-                }
-                Object.values(transactions)[0].forEach(t => {
-                    const { commandsList, createdTime } = t.payload.reducedPayload;
-                    commandsList.forEach(c => {
-                        if (!c.transferAsset) {
-                            return;
-                        }
-                        const { amount, assetId, destAccountId, srcAccountId, description } = c.transferAsset;
-                        const tx = {
-                            from: srcAccountId === (this.wallet.name + '@test') ? 'You' : srcAccountId.split('@')[0],
-                            to: destAccountId === (this.wallet.name + '@test') ? 'You' : destAccountId.split('@')[0],
-                            amount,
-                            date: createdTime,
-                            currency: assetId.split('#')[0],
-                            message: description
-                        };
-                        if (!(tx.amount === '1' && (tx.to === 'admin' || tx.from === 'admin'))) {
-                            this.txs.push(tx);
-                        }
-                    });
-                });
-                this.txs = lodash__WEBPACK_IMPORTED_MODULE_4__.orderBy(this.txs, [object => new moment(object.date)], ['desc']);
-            })
-                .catch(err => console.log(err));
-        });
-    }
-    setAccDetail(value) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
-            yield this.getKey();
-            console.log(this.wallet.privateKey);
-            yield iroha_helpers__WEBPACK_IMPORTED_MODULE_1__.commands.setAccountDetail({
-                privateKeys: [this.wallet.privateKey],
-                creatorAccountId: this.wallet.name + '@test',
-                quorum: 1,
-                commandService,
-                timeoutLimit: 5000 // Set timeout limit
-            }, { accountId: this.wallet.name + '@test', key: 'sec', value });
-        });
-    }
-    getAccDetail(value) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
-            yield this.getKey();
-            yield iroha_helpers__WEBPACK_IMPORTED_MODULE_1__.queries.getAccountDetail({
-                privateKey: this.wallet.privateKey,
-                creatorAccountId: this.wallet.name + '@test',
-                queryService,
-                timeoutLimit: 5000 // Set timeout limit
-            }, {
-                accountId: this.wallet.name + '@test',
-                key: 'sec',
-                pageSize: 100,
-                paginationKey: 'sec',
-                paginationWriter: this.wallet.name + '@test',
-                writer: this.wallet.name + '@test'
-            }).then(d => {
-                this.pw = d[this.wallet.name + '@test'].sec;
-            });
-        });
-    }
-    addSignatory(result) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
-            yield iroha_helpers__WEBPACK_IMPORTED_MODULE_1__.commands.addSignatory({
-                privateKeys: ['e2e3c49be71ae0e1721b1a573f3d49756b87fce58679243dd4bbe09008158cf0'],
-                creatorAccountId: 'admin@test',
-                quorum: 1,
-                commandService,
-                timeoutLimit: 5000 // Set timeout limit
-            }, { accountId: 'admin@test', publicKey: result });
-        });
-    }
-    removeSignatory(result) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
-            yield iroha_helpers__WEBPACK_IMPORTED_MODULE_1__.commands.removeSignatory({
-                privateKeys: ['e2e3c49be71ae0e1721b1a573f3d49756b87fce58679243dd4bbe09008158cf0'],
-                creatorAccountId: 'admin@test',
-                quorum: 1,
-                commandService,
-                timeoutLimit: 5000 // Set timeout limit
-            }, { accountId: 'admin@test', publicKey: result });
-        });
-    }
-};
-IrohaService.ctorParameters = () => [
-    { type: _storage_service__WEBPACK_IMPORTED_MODULE_2__.StorageService },
-    { type: _auth_auth_service__WEBPACK_IMPORTED_MODULE_3__.AuthService },
-    { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.Firestore },
-    { type: _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_7__.AngularFireAuth }
-];
-IrohaService = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.Injectable)({
-        providedIn: 'root'
-    })
-], IrohaService);
-
-
-
-/***/ }),
-
-/***/ 17208:
-/*!*********************************************!*\
-  !*** ./src/app/services/storage.service.ts ***!
-  \*********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "StorageService": () => (/* binding */ StorageService)
-/* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 48111);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 48111);
+/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_cafe_card_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./cafe-card.component.html */ 77223);
+/* harmony import */ var _cafe_card_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./cafe-card.component.scss */ 59035);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 14001);
-/* harmony import */ var _capacitor_storage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @capacitor/storage */ 83945);
 
 
 
-let StorageService = class StorageService {
-    constructor() {
-    }
-    set(key, value) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
-            yield _capacitor_storage__WEBPACK_IMPORTED_MODULE_0__.Storage.set({
-                key,
-                value,
-            });
-        });
-    }
-    get(key) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__awaiter)(this, void 0, void 0, function* () {
-            const value = yield _capacitor_storage__WEBPACK_IMPORTED_MODULE_0__.Storage.get({ key });
-            return value.value;
-        });
-    }
+
+let CafeCardComponent = class CafeCardComponent {
 };
-StorageService.ctorParameters = () => [];
-StorageService = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.Injectable)({
-        providedIn: 'root'
+CafeCardComponent.propDecorators = {
+    option: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__.Input }]
+};
+CafeCardComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.Component)({
+        selector: 'app-cafe-card',
+        template: _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_cafe_card_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        styles: [_cafe_card_component_scss__WEBPACK_IMPORTED_MODULE_1__]
     })
-], StorageService);
+], CafeCardComponent);
 
 
 
@@ -1611,10 +1710,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "CartCardComponent": () => (/* binding */ CartCardComponent)
 /* harmony export */ });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! tslib */ 48111);
-/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_cart_card_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./cart-card.component.html */ 2417);
-/* harmony import */ var _cart_card_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./cart-card.component.scss */ 10463);
+/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_cart_card_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./cart-card.component.html */ 2417);
+/* harmony import */ var _cart_card_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./cart-card.component.scss */ 10006);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 14001);
-/* harmony import */ var _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../services/cafe/product.service */ 41575);
+/* harmony import */ var _services_store_product_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../services/store/product.service */ 86250);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/router */ 13252);
 /* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @ionic/angular */ 91346);
@@ -1759,7 +1858,7 @@ let CartCardComponent = class CartCardComponent {
     }
 };
 CartCardComponent.ctorParameters = () => [
-    { type: _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_2__.ProductService },
+    { type: _services_store_product_service__WEBPACK_IMPORTED_MODULE_2__.ProductService },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_11__.Router },
     { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_10__.Firestore },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_12__.IonRouterOutlet },
@@ -1774,7 +1873,7 @@ CartCardComponent.propDecorators = {
 CartCardComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_9__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.Component)({
         selector: 'app-cart-card',
-        template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_cart_card_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        template: _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_cart_card_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_cart_card_component_scss__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], CartCardComponent);
@@ -1795,11 +1894,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "CheckoutCardComponent": () => (/* binding */ CheckoutCardComponent)
 /* harmony export */ });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 48111);
-/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_checkout_card_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./checkout-card.component.html */ 52741);
-/* harmony import */ var _checkout_card_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./checkout-card.component.scss */ 24554);
+/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_checkout_card_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./checkout-card.component.html */ 52741);
+/* harmony import */ var _checkout_card_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./checkout-card.component.scss */ 73623);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 14001);
 /* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
-/* harmony import */ var _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../services/cafe/product.service */ 41575);
+/* harmony import */ var _services_store_product_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../services/store/product.service */ 86250);
 /* harmony import */ var _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../services/auth/auth.service */ 68927);
 
 
@@ -1853,7 +1952,7 @@ let CheckoutCardComponent = class CheckoutCardComponent {
     }
 };
 CheckoutCardComponent.ctorParameters = () => [
-    { type: _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_2__.ProductService },
+    { type: _services_store_product_service__WEBPACK_IMPORTED_MODULE_2__.ProductService },
     { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.Firestore },
     { type: _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_3__.AuthService }
 ];
@@ -1863,7 +1962,7 @@ CheckoutCardComponent.propDecorators = {
 CheckoutCardComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.Component)({
         selector: 'app-checkout-card',
-        template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_checkout_card_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        template: _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_checkout_card_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_checkout_card_component_scss__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], CheckoutCardComponent);
@@ -1883,12 +1982,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "FavCardComponent": () => (/* binding */ FavCardComponent)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 48111);
-/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_fav_card_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./fav-card.component.html */ 35120);
-/* harmony import */ var _fav_card_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./fav-card.component.scss */ 3335);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 14001);
-/* harmony import */ var _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../services/cafe/product.service */ 41575);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ 91346);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 48111);
+/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_fav_card_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./fav-card.component.html */ 35120);
+/* harmony import */ var _fav_card_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./fav-card.component.scss */ 71980);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 14001);
+/* harmony import */ var _services_store_product_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../services/store/product.service */ 86250);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 91346);
+/* harmony import */ var _modal_choose_options_choose_options_page__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../modal/choose-options/choose-options.page */ 17542);
+
 
 
 
@@ -1896,20 +1997,29 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let FavCardComponent = class FavCardComponent {
-    constructor(product, alertController) {
+    constructor(product, alertController, modalController, routerOutlet) {
         this.product = product;
         this.alertController = alertController;
-        this.childEvent = new _angular_core__WEBPACK_IMPORTED_MODULE_3__.EventEmitter();
+        this.modalController = modalController;
+        this.routerOutlet = routerOutlet;
+        this.childEvent = new _angular_core__WEBPACK_IMPORTED_MODULE_4__.EventEmitter();
     }
     ngOnInit() { }
-    addToCart(name, id, ownerId) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
-            this.product.addToCart(id, ownerId);
-            yield this.showAlert(name + ' (x1) is added to your cart!');
+    openChooseOptionsModal(id, owner) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            this.product.editOption = true;
+            this.product.itemId = id;
+            this.product.itemOwner = owner;
+            const modal = yield this.modalController.create({
+                component: _modal_choose_options_choose_options_page__WEBPACK_IMPORTED_MODULE_3__.ChooseOptionsPage,
+                swipeToClose: true,
+                presentingElement: this.routerOutlet.nativeEl,
+            });
+            return yield modal.present();
         });
     }
     deleteItem() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
             yield this.product.deleteItemFav(this.fav.id);
             setTimeout(() => {
                 this.childEvent.emit();
@@ -1917,7 +2027,7 @@ let FavCardComponent = class FavCardComponent {
         });
     }
     showAlert(message) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
             const alert = yield this.alertController.create({
                 message,
                 buttons: ['OK'],
@@ -1927,17 +2037,19 @@ let FavCardComponent = class FavCardComponent {
     }
 };
 FavCardComponent.ctorParameters = () => [
-    { type: _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_2__.ProductService },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.AlertController }
+    { type: _services_store_product_service__WEBPACK_IMPORTED_MODULE_2__.ProductService },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.AlertController },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.ModalController },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.IonRouterOutlet }
 ];
 FavCardComponent.propDecorators = {
-    fav: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input }],
-    childEvent: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Output }]
+    fav: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_4__.Input }],
+    childEvent: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_4__.Output }]
 };
-FavCardComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_3__.Component)({
+FavCardComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.Component)({
         selector: 'app-fav-card',
-        template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_fav_card_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        template: _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_fav_card_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_fav_card_component_scss__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], FavCardComponent);
@@ -1958,8 +2070,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "FoodCardComponent": () => (/* binding */ FoodCardComponent)
 /* harmony export */ });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 48111);
-/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_food_card_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./food-card.component.html */ 62234);
-/* harmony import */ var _food_card_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./food-card.component.scss */ 60555);
+/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_food_card_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./food-card.component.html */ 62234);
+/* harmony import */ var _food_card_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./food-card.component.scss */ 9037);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 14001);
 
 
@@ -1973,7 +2085,7 @@ FoodCardComponent.propDecorators = {
 FoodCardComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.Component)({
         selector: 'app-food-card',
-        template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_food_card_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        template: _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_food_card_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_food_card_component_scss__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], FoodCardComponent);
@@ -1993,21 +2105,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "CARDS_COMPONENTS": () => (/* binding */ CARDS_COMPONENTS),
 /* harmony export */   "FoodCardComponent": () => (/* reexport safe */ _food_card_food_card_component__WEBPACK_IMPORTED_MODULE_0__.FoodCardComponent),
-/* harmony export */   "MainOptionCardComponent": () => (/* reexport safe */ _main_option_card_main_option_card_component__WEBPACK_IMPORTED_MODULE_1__.MainOptionCardComponent),
+/* harmony export */   "CafeCardComponent": () => (/* reexport safe */ _cafe_card_cafe_card_component__WEBPACK_IMPORTED_MODULE_1__.CafeCardComponent),
 /* harmony export */   "OrderCardComponent": () => (/* reexport safe */ _order_card_order_card_component__WEBPACK_IMPORTED_MODULE_2__.OrderCardComponent),
 /* harmony export */   "CartCardComponent": () => (/* reexport safe */ _cart_card_cart_card_component__WEBPACK_IMPORTED_MODULE_3__.CartCardComponent),
-/* harmony export */   "CheckoutCardComponent": () => (/* reexport safe */ _checkout_card_checkout_card_component__WEBPACK_IMPORTED_MODULE_4__.CheckoutCardComponent),
-/* harmony export */   "WalletCardComponent": () => (/* reexport safe */ _wallet_card_wallet_card_component__WEBPACK_IMPORTED_MODULE_5__.WalletCardComponent)
+/* harmony export */   "CheckoutCardComponent": () => (/* reexport safe */ _checkout_card_checkout_card_component__WEBPACK_IMPORTED_MODULE_4__.CheckoutCardComponent)
 /* harmony export */ });
 /* harmony import */ var _food_card_food_card_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./food-card/food-card.component */ 92887);
-/* harmony import */ var _main_option_card_main_option_card_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./main-option-card/main-option-card.component */ 95978);
+/* harmony import */ var _cafe_card_cafe_card_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./cafe-card/cafe-card.component */ 73081);
 /* harmony import */ var _order_card_order_card_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./order-card/order-card.component */ 70950);
 /* harmony import */ var _cart_card_cart_card_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./cart-card/cart-card.component */ 50041);
 /* harmony import */ var _checkout_card_checkout_card_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./checkout-card/checkout-card.component */ 64788);
-/* harmony import */ var _wallet_card_wallet_card_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./wallet-card/wallet-card.component */ 9535);
-/* harmony import */ var _fav_card_fav_card_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./fav-card/fav-card.component */ 15937);
-/* harmony import */ var _track_orders_track_orders_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./track-orders/track-orders.component */ 90214);
-
+/* harmony import */ var _fav_card_fav_card_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./fav-card/fav-card.component */ 15937);
+/* harmony import */ var _track_orders_track_orders_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./track-orders/track-orders.component */ 90214);
 
 
 
@@ -2016,48 +2125,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 // eslint-disable-next-line max-len
-const CARDS_COMPONENTS = [_track_orders_track_orders_component__WEBPACK_IMPORTED_MODULE_7__.TrackOrdersComponent, _fav_card_fav_card_component__WEBPACK_IMPORTED_MODULE_6__.FavCardComponent, _wallet_card_wallet_card_component__WEBPACK_IMPORTED_MODULE_5__.WalletCardComponent, _food_card_food_card_component__WEBPACK_IMPORTED_MODULE_0__.FoodCardComponent, _main_option_card_main_option_card_component__WEBPACK_IMPORTED_MODULE_1__.MainOptionCardComponent, _order_card_order_card_component__WEBPACK_IMPORTED_MODULE_2__.OrderCardComponent, _cart_card_cart_card_component__WEBPACK_IMPORTED_MODULE_3__.CartCardComponent, _checkout_card_checkout_card_component__WEBPACK_IMPORTED_MODULE_4__.CheckoutCardComponent];
+const CARDS_COMPONENTS = [_track_orders_track_orders_component__WEBPACK_IMPORTED_MODULE_6__.TrackOrdersComponent, _fav_card_fav_card_component__WEBPACK_IMPORTED_MODULE_5__.FavCardComponent, _food_card_food_card_component__WEBPACK_IMPORTED_MODULE_0__.FoodCardComponent, _cafe_card_cafe_card_component__WEBPACK_IMPORTED_MODULE_1__.CafeCardComponent, _order_card_order_card_component__WEBPACK_IMPORTED_MODULE_2__.OrderCardComponent, _cart_card_cart_card_component__WEBPACK_IMPORTED_MODULE_3__.CartCardComponent, _checkout_card_checkout_card_component__WEBPACK_IMPORTED_MODULE_4__.CheckoutCardComponent];
 
 
 
 
-
-
-
-
-/***/ }),
-
-/***/ 95978:
-/*!****************************************************************************************!*\
-  !*** ./src/app/shared/components/cards/main-option-card/main-option-card.component.ts ***!
-  \****************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "MainOptionCardComponent": () => (/* binding */ MainOptionCardComponent)
-/* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 48111);
-/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_main_option_card_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./main-option-card.component.html */ 78197);
-/* harmony import */ var _main_option_card_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./main-option-card.component.scss */ 44637);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 14001);
-
-
-
-
-let MainOptionCardComponent = class MainOptionCardComponent {
-};
-MainOptionCardComponent.propDecorators = {
-    option: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__.Input }]
-};
-MainOptionCardComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.Component)({
-        selector: 'app-main-option-card',
-        template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_main_option_card_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
-        styles: [_main_option_card_component_scss__WEBPACK_IMPORTED_MODULE_1__]
-    })
-], MainOptionCardComponent);
 
 
 
@@ -2074,17 +2146,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "OrderCardComponent": () => (/* binding */ OrderCardComponent)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! tslib */ 48111);
-/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_order_card_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./order-card.component.html */ 80716);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 14001);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ 13252);
-/* harmony import */ var _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../services/cafe/product.service */ 41575);
-/* harmony import */ var _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/fire/compat/firestore */ 27091);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 48111);
+/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_order_card_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./order-card.component.html */ 80716);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core */ 14001);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ 13252);
+/* harmony import */ var _services_store_product_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../services/store/product.service */ 86250);
+/* harmony import */ var _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/fire/compat/firestore */ 27091);
 /* harmony import */ var _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../services/auth/auth.service */ 68927);
-/* harmony import */ var _services_iroha_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../services/iroha.service */ 49187);
-/* harmony import */ var pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! pdfmake/build/pdfmake */ 44298);
-/* harmony import */ var pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var pdfmake_build_vfs_fonts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! pdfmake/build/vfs_fonts */ 47177);
+/* harmony import */ var pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! pdfmake/build/pdfmake */ 44298);
+/* harmony import */ var pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var pdfmake_build_vfs_fonts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! pdfmake/build/vfs_fonts */ 47177);
+/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
 
 
 
@@ -2095,46 +2167,88 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-(pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_4___default().vfs) = pdfmake_build_vfs_fonts__WEBPACK_IMPORTED_MODULE_5__.pdfMake.vfs;
+(pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_3___default().vfs) = pdfmake_build_vfs_fonts__WEBPACK_IMPORTED_MODULE_4__.pdfMake.vfs;
 let OrderCardComponent = class OrderCardComponent {
-    constructor(router, product, afs, ionicAuthService, iroha) {
+    constructor(router, product, afs, ionicAuthService, _firestore) {
         this.router = router;
         this.product = product;
         this.afs = afs;
         this.ionicAuthService = ionicAuthService;
-        this.iroha = iroha;
-        this.id = this.ionicAuthService.getUid();
+        this._firestore = _firestore;
+        this.option = [];
+        this.options = [];
+        this.uid = this.ionicAuthService.getUid();
     }
-    goToCheckStatusUser(name, id, price, owner, ownerId) {
+    ngOnInit() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            yield this.getOptions();
+            console.log(this.options[0].data);
+        });
+    }
+    goToCheckStatusUser(name, id, price, owner, ownerId, deliveryTime) {
         this.product.orderName = name;
         this.product.orderId = id;
         this.product.price = price;
         this.product.owner = owner;
         this.product.ownerId = ownerId;
+        this.product.deliveryTime = deliveryTime;
         this.router.navigate(['check-status-user']);
     }
-    generatePdf(name, id, price, owner, ownerId, quantity, amountPaid, status, orderTime, deliverTime) {
-        const documentDefinition = { content: 'Name : ' + name + '\nOrder ID : '
-                + id + '\nPrice: RM ' + price + '\nPrice: RM ' + owner + '\nPrice: RM ' + ownerId + '\nPrice: RM '
-                + quantity + '\nPrice: RM ' + amountPaid + '\nPrice: RM ' +
-                status + '\nPrice: RM ' + orderTime + '\nPrice: RM ' + deliverTime };
-        pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_4___default().createPdf(documentDefinition).open();
+    getOptions() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            if (this.product.orderHistory == false) {
+                const opt = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.collection)(this._firestore, `users/${(this.uid)}/activeOrders/${(this.order.id)}/options`);
+                const optSnapshot = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.getDocs)(opt);
+                optSnapshot.forEach((docs) => {
+                    console.log(docs.id, ' => ', docs.data());
+                    this.options.push({
+                        data: docs.data()
+                    });
+                });
+                for (const i in this.options) {
+                    const key = Object.keys(this.options[i].data);
+                    const value = Object.values(this.options[i].data);
+                    this.option.push({
+                        name: key,
+                        value: value
+                    });
+                }
+            }
+            else {
+                const opt = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.collection)(this._firestore, `users/${(this.uid)}/allOrders/${(this.order.id)}/options`);
+                const optSnapshot = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.getDocs)(opt);
+                optSnapshot.forEach((docs) => {
+                    console.log(docs.id, ' => ', docs.data());
+                    this.options.push({
+                        data: docs.data()
+                    });
+                });
+                for (const i in this.options) {
+                    const key = Object.keys(this.options[i].data);
+                    const value = Object.values(this.options[i].data);
+                    this.option.push({
+                        name: key,
+                        value: value
+                    });
+                }
+            }
+        });
     }
 };
 OrderCardComponent.ctorParameters = () => [
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_6__.Router },
-    { type: _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_1__.ProductService },
-    { type: _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_7__.AngularFirestore },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__.Router },
+    { type: _services_store_product_service__WEBPACK_IMPORTED_MODULE_1__.ProductService },
+    { type: _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_8__.AngularFirestore },
     { type: _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__.AuthService },
-    { type: _services_iroha_service__WEBPACK_IMPORTED_MODULE_3__.IrohaService }
+    { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.Firestore }
 ];
 OrderCardComponent.propDecorators = {
-    order: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_8__.Input }]
+    order: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__.Input }]
 };
-OrderCardComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_9__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.Component)({
+OrderCardComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.Component)({
         selector: 'app-order-card',
-        template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_order_card_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        template: _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_order_card_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
     })
 ], OrderCardComponent);
 
@@ -2154,15 +2268,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "TrackOrdersComponent": () => (/* binding */ TrackOrdersComponent)
 /* harmony export */ });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 48111);
-/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_track_orders_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./track-orders.component.html */ 12577);
-/* harmony import */ var _track_orders_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./track-orders.component.scss */ 83470);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core */ 14001);
-/* harmony import */ var _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../services/cafe/product.service */ 41575);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ 13252);
-/* harmony import */ var _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/fire/compat/firestore */ 27091);
+/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_track_orders_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./track-orders.component.html */ 12577);
+/* harmony import */ var _track_orders_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./track-orders.component.scss */ 29847);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/core */ 14001);
+/* harmony import */ var _services_store_product_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../services/store/product.service */ 86250);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ 13252);
+/* harmony import */ var _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/fire/compat/firestore */ 27091);
 /* harmony import */ var _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../services/auth/auth.service */ 68927);
-/* harmony import */ var _services_iroha_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../services/iroha.service */ 49187);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic/angular */ 91346);
+/* harmony import */ var _services_iroha_iroha_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../services/iroha/iroha.service */ 52857);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic/angular */ 91346);
+/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
+
 
 
 
@@ -2174,17 +2290,25 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let TrackOrdersComponent = class TrackOrdersComponent {
-    constructor(product, router, afs, ionicAuthService, iroha, alertController) {
+    constructor(product, router, afs, ionicAuthService, iroha, alertController, _firestore) {
         this.product = product;
         this.router = router;
         this.afs = afs;
         this.ionicAuthService = ionicAuthService;
         this.iroha = iroha;
         this.alertController = alertController;
+        this._firestore = _firestore;
+        this.option = [];
+        this.options = [];
+        this.isLoading = false;
         this.id = this.ionicAuthService.getUid();
     }
-    ngOnInit() { }
-    goToCheckStatusStore(name, id, price, user, status, userId) {
+    ngOnInit() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            yield this.getOptions();
+        });
+    }
+    goToCheckStatusStore(name, id, price, user, status, userId, deliveryTime) {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
             this.product.orderName = name;
             this.product.orderId = id;
@@ -2192,15 +2316,26 @@ let TrackOrdersComponent = class TrackOrdersComponent {
             this.product.user = user;
             this.product.status = status;
             this.product.userId = userId;
+            this.product.deliveryTime = deliveryTime;
             yield this.product.changeStatus('status');
             yield this.router.navigate(['check-status-store']);
         });
     }
     cancelOrder(id, user, userId, paid) {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            this.isLoading = true;
             yield this.iroha.payment(user, 'refund', paid).then((r) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+                yield this.afs.collection(`users/${(userId)}/activeOrders`).doc(id).update({
+                    status: 'cancelled',
+                });
+                setTimeout(() => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+                    yield this.afs.collection(`users/${(userId)}/activeOrders`).doc(id).delete();
+                }), 3000);
                 yield this.afs.collection(`users/${(userId)}/activeOrders`).doc(id).delete();
                 yield this.afs.collection(`users/${(userId)}/allOrders`).doc(id).update({
+                    status: 'cancelled',
+                });
+                yield this.afs.collection(`trackOrders/${(this.id)}/activeOrders`).doc(id).update({
                     status: 'cancelled',
                 });
                 yield this.afs.collection(`trackOrders/${(this.id)}/activeOrders`).doc(id).delete();
@@ -2208,9 +2343,30 @@ let TrackOrdersComponent = class TrackOrdersComponent {
                     status: 'cancelled',
                 });
                 yield this.showAlert('Order cancelled.', 'This order has been cancelled. Money has been refunded to the customer.');
-                yield this.router.navigateByUrl('tabs/account', { replaceUrl: true });
+                this.isLoading = false;
+                this.router.navigate(['account']);
             }))
                 .catch((e) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () { return yield this.showAlert('Cancellation failed', e); }));
+        });
+    }
+    getOptions() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            const opt = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.collection)(this._firestore, `trackOrders/${(this.id)}/activeOrders/${(this.trackOrder.id)}/options`);
+            const optSnapshot = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.getDocs)(opt);
+            optSnapshot.forEach((docs) => {
+                console.log(docs.id, ' => ', docs.data());
+                this.options.push({
+                    data: docs.data()
+                });
+            });
+            for (const i in this.options) {
+                const key = Object.keys(this.options[i].data);
+                const value = Object.values(this.options[i].data);
+                this.option.push({
+                    name: key,
+                    value: value
+                });
+            }
         });
     }
     showAlert(header, message) {
@@ -2223,79 +2379,50 @@ let TrackOrdersComponent = class TrackOrdersComponent {
             yield alert.present();
         });
     }
-};
-TrackOrdersComponent.ctorParameters = () => [
-    { type: _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_2__.ProductService },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_6__.Router },
-    { type: _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_7__.AngularFirestore },
-    { type: _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_3__.AuthService },
-    { type: _services_iroha_service__WEBPACK_IMPORTED_MODULE_4__.IrohaService },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.AlertController }
-];
-TrackOrdersComponent.propDecorators = {
-    trackOrder: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__.Input }]
-};
-TrackOrdersComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.Component)({
-        selector: 'app-track-orders',
-        template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_track_orders_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
-        styles: [_track_orders_component_scss__WEBPACK_IMPORTED_MODULE_1__]
-    })
-], TrackOrdersComponent);
-
-
-
-/***/ }),
-
-/***/ 9535:
-/*!******************************************************************************!*\
-  !*** ./src/app/shared/components/cards/wallet-card/wallet-card.component.ts ***!
-  \******************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "WalletCardComponent": () => (/* binding */ WalletCardComponent)
-/* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 48111);
-/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_wallet_card_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./wallet-card.component.html */ 13340);
-/* harmony import */ var _wallet_card_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./wallet-card.component.scss */ 89190);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 14001);
-/* harmony import */ var _services_iroha_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../services/iroha.service */ 49187);
-
-
-
-
-
-let WalletCardComponent = class WalletCardComponent {
-    constructor(iroha) {
-        this.iroha = iroha;
-        this.childEvent = new _angular_core__WEBPACK_IMPORTED_MODULE_3__.EventEmitter();
-        this.name = '';
-        this.balance = '';
-    }
-    ngOnInit() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
-            yield this.childEvent.emit();
-            this.name = this.iroha.wallet.name;
-            this.balance = this.iroha.wallet.balance;
+    showAlertCancel(header, message, id, user, userId, paid) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            const alert = yield this.alertController.create({
+                header,
+                message,
+                buttons: [
+                    {
+                        text: 'Cancel',
+                        role: 'cancel',
+                        handler: data => {
+                            console.log('Cancel clicked');
+                        }
+                    },
+                    {
+                        text: 'OK',
+                        handler: (data) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+                            yield this.cancelOrder(id, user, userId, paid);
+                        })
+                    }
+                ]
+            });
+            yield alert.present();
         });
     }
 };
-WalletCardComponent.ctorParameters = () => [
-    { type: _services_iroha_service__WEBPACK_IMPORTED_MODULE_2__.IrohaService }
+TrackOrdersComponent.ctorParameters = () => [
+    { type: _services_store_product_service__WEBPACK_IMPORTED_MODULE_2__.ProductService },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__.Router },
+    { type: _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_8__.AngularFirestore },
+    { type: _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_3__.AuthService },
+    { type: _services_iroha_iroha_service__WEBPACK_IMPORTED_MODULE_4__.IrohaService },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_9__.AlertController },
+    { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.Firestore }
 ];
-WalletCardComponent.propDecorators = {
-    childEvent: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Output }]
+TrackOrdersComponent.propDecorators = {
+    trackOrder: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_10__.Input }]
 };
-WalletCardComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_3__.Component)({
-        selector: 'app-wallet-card',
-        template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_wallet_card_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
-        styles: [_wallet_card_component_scss__WEBPACK_IMPORTED_MODULE_1__]
+TrackOrdersComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_10__.Component)({
+        selector: 'app-track-orders',
+        template: _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_track_orders_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        styles: [_track_orders_component_scss__WEBPACK_IMPORTED_MODULE_1__]
     })
-], WalletCardComponent);
+], TrackOrdersComponent);
 
 
 
@@ -2312,12 +2439,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "COMPONENTS": () => (/* binding */ COMPONENTS),
 /* harmony export */   "CARDS_COMPONENTS": () => (/* reexport safe */ _cards__WEBPACK_IMPORTED_MODULE_0__.CARDS_COMPONENTS),
+/* harmony export */   "CafeCardComponent": () => (/* reexport safe */ _cards__WEBPACK_IMPORTED_MODULE_0__.CafeCardComponent),
 /* harmony export */   "CartCardComponent": () => (/* reexport safe */ _cards__WEBPACK_IMPORTED_MODULE_0__.CartCardComponent),
 /* harmony export */   "CheckoutCardComponent": () => (/* reexport safe */ _cards__WEBPACK_IMPORTED_MODULE_0__.CheckoutCardComponent),
 /* harmony export */   "FoodCardComponent": () => (/* reexport safe */ _cards__WEBPACK_IMPORTED_MODULE_0__.FoodCardComponent),
-/* harmony export */   "MainOptionCardComponent": () => (/* reexport safe */ _cards__WEBPACK_IMPORTED_MODULE_0__.MainOptionCardComponent),
-/* harmony export */   "OrderCardComponent": () => (/* reexport safe */ _cards__WEBPACK_IMPORTED_MODULE_0__.OrderCardComponent),
-/* harmony export */   "WalletCardComponent": () => (/* reexport safe */ _cards__WEBPACK_IMPORTED_MODULE_0__.WalletCardComponent)
+/* harmony export */   "OrderCardComponent": () => (/* reexport safe */ _cards__WEBPACK_IMPORTED_MODULE_0__.OrderCardComponent)
 /* harmony export */ });
 /* harmony import */ var _cards__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./cards */ 28314);
 /* harmony import */ var _modal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modal */ 57782);
@@ -2341,10 +2467,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "ChooseOptionsPage": () => (/* binding */ ChooseOptionsPage)
 /* harmony export */ });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 48111);
-/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_choose_options_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./choose-options.page.html */ 57930);
-/* harmony import */ var _choose_options_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./choose-options.page.scss */ 33230);
+/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_choose_options_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./choose-options.page.html */ 57930);
+/* harmony import */ var _choose_options_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./choose-options.page.scss */ 13240);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 14001);
-/* harmony import */ var _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../services/cafe/product.service */ 41575);
+/* harmony import */ var _services_store_product_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../services/store/product.service */ 86250);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 91346);
 /* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
 /* harmony import */ var _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../services/auth/auth.service */ 68927);
@@ -2406,6 +2532,7 @@ let ChooseOptionsPage = class ChooseOptionsPage {
                     for (const j in this.product.customOptions[i].data) {
                         console.log(this.product.customOptions[i].data[j]);
                         const priceTag = this.product.customOptions[i].name + this.product.customOptions[i].data[j];
+                        // eslint-disable-next-line max-len
                         const optionRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.doc)(this._firestore, `stores/${(this.product.itemOwner)}/items/${(this.product.itemId.split('@')[0])}/optionPrice/${(priceTag)}`);
                         const optSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.getDoc)(optionRef);
                         const optionSnap = optSnap.data().price;
@@ -2440,7 +2567,8 @@ let ChooseOptionsPage = class ChooseOptionsPage {
     }
     addToCart() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
-            if (this.valueSelected === '') {
+            console.log(this.form);
+            if (this.valueSelected === '' && this.form.length !== 0) {
                 yield this.showAlert('Please pick an option.');
             }
             else {
@@ -2465,7 +2593,7 @@ let ChooseOptionsPage = class ChooseOptionsPage {
     }
 };
 ChooseOptionsPage.ctorParameters = () => [
-    { type: _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_2__.ProductService },
+    { type: _services_store_product_service__WEBPACK_IMPORTED_MODULE_2__.ProductService },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.AlertController },
     { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.Firestore },
     { type: _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_3__.AuthService },
@@ -2474,7 +2602,7 @@ ChooseOptionsPage.ctorParameters = () => [
 ChooseOptionsPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.Component)({
         selector: 'app-choose-options',
-        template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_choose_options_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        template: _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_choose_options_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_choose_options_page_scss__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], ChooseOptionsPage);
@@ -2517,12 +2645,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "NoteComponent": () => (/* binding */ NoteComponent)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 48111);
-/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_note_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./note.component.html */ 65686);
-/* harmony import */ var _note_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./note.component.scss */ 60413);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 14001);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ 91346);
-/* harmony import */ var _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../services/cafe/product.service */ 41575);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 48111);
+/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_note_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./note.component.html */ 65686);
+/* harmony import */ var _note_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./note.component.scss */ 5186);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 14001);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 91346);
+/* harmony import */ var _services_store_product_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../services/store/product.service */ 86250);
+/* harmony import */ var _services_iroha_iroha_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../services/iroha/iroha.service */ 52857);
+
 
 
 
@@ -2530,28 +2660,37 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let NoteComponent = class NoteComponent {
-    constructor(modalController, product, alertController) {
+    constructor(modalController, product, alertController, iroha) {
         this.modalController = modalController;
         this.product = product;
         this.alertController = alertController;
-        this.childEvent = new _angular_core__WEBPACK_IMPORTED_MODULE_3__.EventEmitter();
+        this.iroha = iroha;
+        this.childEvent = new _angular_core__WEBPACK_IMPORTED_MODULE_4__.EventEmitter();
         this.newMsg = '';
     }
-    ngOnInit() { }
+    ionViewDidEnter() {
+        if (this.product.orderNotePair.get(this.product.noteId) === undefined) {
+            this.newMsg = '';
+        }
+        else {
+            this.newMsg = this.product.orderNotePair.get(this.product.noteId);
+        }
+    }
     addNote() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
             if (this.newMsg !== '' && this.newMsg.length > 63) {
                 yield this.showAlert('Message too long.', 'Your message must not exceed 63 characters');
                 yield this.back();
             }
             else {
                 yield this.product.addNote(this.product.noteId, this.newMsg);
+                this.iroha.noteDraft = this.newMsg;
                 yield this.back();
             }
         });
     }
     showAlert(header, message) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
             const alert = yield this.alertController.create({
                 header,
                 message,
@@ -2561,23 +2700,24 @@ let NoteComponent = class NoteComponent {
         });
     }
     back() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
             yield this.modalController.dismiss();
         });
     }
 };
 NoteComponent.ctorParameters = () => [
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.ModalController },
-    { type: _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_2__.ProductService },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.AlertController }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.ModalController },
+    { type: _services_store_product_service__WEBPACK_IMPORTED_MODULE_2__.ProductService },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.AlertController },
+    { type: _services_iroha_iroha_service__WEBPACK_IMPORTED_MODULE_3__.IrohaService }
 ];
 NoteComponent.propDecorators = {
-    childEvent: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Output }]
+    childEvent: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_4__.Output }]
 };
-NoteComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_3__.Component)({
+NoteComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.Component)({
         selector: 'app-note',
-        template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_note_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        template: _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_note_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_note_component_scss__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], NoteComponent);
@@ -2598,11 +2738,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "StoreSalesComponent": () => (/* binding */ StoreSalesComponent)
 /* harmony export */ });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 48111);
-/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_store_sales_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./store-sales.component.html */ 93475);
-/* harmony import */ var _store_sales_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./store-sales.component.scss */ 6886);
+/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_store_sales_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./store-sales.component.html */ 93475);
+/* harmony import */ var _store_sales_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./store-sales.component.scss */ 23648);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 14001);
 /* harmony import */ var chart_js_auto__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! chart.js/auto */ 60192);
-/* harmony import */ var _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../services/cafe/product.service */ 41575);
+/* harmony import */ var _services_store_product_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../services/store/product.service */ 86250);
 
 
 
@@ -2628,7 +2768,7 @@ let StoreSalesComponent = class StoreSalesComponent {
             data: {
                 labels: this.product.label,
                 datasets: [{
-                        label: 'This is chart',
+                        label: 'Sales Chart',
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
                             'rgba(54, 162, 235, 0.2)',
@@ -2656,7 +2796,7 @@ let StoreSalesComponent = class StoreSalesComponent {
     }
 };
 StoreSalesComponent.ctorParameters = () => [
-    { type: _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_3__.ProductService }
+    { type: _services_store_product_service__WEBPACK_IMPORTED_MODULE_3__.ProductService }
 ];
 StoreSalesComponent.propDecorators = {
     childEvent: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_4__.Output }]
@@ -2664,7 +2804,7 @@ StoreSalesComponent.propDecorators = {
 StoreSalesComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.Component)({
         selector: 'app-store-sales-component',
-        template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_store_sales_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        template: _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_store_sales_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_store_sales_component_scss__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], StoreSalesComponent);
@@ -2685,12 +2825,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "SharedModule": () => (/* reexport safe */ _shared_module__WEBPACK_IMPORTED_MODULE_0__.SharedModule),
 /* harmony export */   "CARDS_COMPONENTS": () => (/* reexport safe */ _components__WEBPACK_IMPORTED_MODULE_1__.CARDS_COMPONENTS),
 /* harmony export */   "COMPONENTS": () => (/* reexport safe */ _components__WEBPACK_IMPORTED_MODULE_1__.COMPONENTS),
+/* harmony export */   "CafeCardComponent": () => (/* reexport safe */ _components__WEBPACK_IMPORTED_MODULE_1__.CafeCardComponent),
 /* harmony export */   "CartCardComponent": () => (/* reexport safe */ _components__WEBPACK_IMPORTED_MODULE_1__.CartCardComponent),
 /* harmony export */   "CheckoutCardComponent": () => (/* reexport safe */ _components__WEBPACK_IMPORTED_MODULE_1__.CheckoutCardComponent),
 /* harmony export */   "FoodCardComponent": () => (/* reexport safe */ _components__WEBPACK_IMPORTED_MODULE_1__.FoodCardComponent),
-/* harmony export */   "MainOptionCardComponent": () => (/* reexport safe */ _components__WEBPACK_IMPORTED_MODULE_1__.MainOptionCardComponent),
-/* harmony export */   "OrderCardComponent": () => (/* reexport safe */ _components__WEBPACK_IMPORTED_MODULE_1__.OrderCardComponent),
-/* harmony export */   "WalletCardComponent": () => (/* reexport safe */ _components__WEBPACK_IMPORTED_MODULE_1__.WalletCardComponent)
+/* harmony export */   "OrderCardComponent": () => (/* reexport safe */ _components__WEBPACK_IMPORTED_MODULE_1__.OrderCardComponent)
 /* harmony export */ });
 /* harmony import */ var _shared_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./shared.module */ 12187);
 /* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components */ 14862);
@@ -2889,6 +3028,7 @@ var map = {
 	],
 	"./ion-infinite-scroll_2.entry.js": [
 		5194,
+		"common",
 		"node_modules_ionic_core_dist_esm_ion-infinite-scroll_2_entry_js"
 	],
 	"./ion-input.entry.js": [
@@ -2966,7 +3106,7 @@ var map = {
 		"node_modules_ionic_core_dist_esm_ion-reorder_2_entry_js"
 	],
 	"./ion-ripple-effect.entry.js": [
-		96219,
+		75316,
 		"node_modules_ionic_core_dist_esm_ion-ripple-effect_entry_js"
 	],
 	"./ion-route_4.entry.js": [
@@ -3406,7 +3546,7 @@ webpackContext.id = 46700;
 
 /***/ }),
 
-/***/ 30836:
+/***/ 73467:
 /*!************************************!*\
   !*** ./src/app/app.component.scss ***!
   \************************************/
@@ -3417,7 +3557,18 @@ module.exports = ".menu-header-bg {\n  height: 180px;\n  width: 350px;\n  backgr
 
 /***/ }),
 
-/***/ 10463:
+/***/ 59035:
+/*!****************************************************************************!*\
+  !*** ./src/app/shared/components/cards/cafe-card/cafe-card.component.scss ***!
+  \****************************************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = ".option-image-mask {\n  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3));\n}\n\nion-img {\n  object-fit: cover;\n  height: 250px;\n  box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.16);\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNhZmUtY2FyZC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGtHQUFBO0FBQ0Y7O0FBT0E7RUFDRSxpQkFBQTtFQUNBLGFBQUE7RUFDQSxpREFBQTtBQUpGIiwiZmlsZSI6ImNhZmUtY2FyZC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5vcHRpb24taW1hZ2UtbWFzayB7XG4gIGJhY2tncm91bmQ6IGxpbmVhci1ncmFkaWVudChcbiAgICB0byBib3R0b20sXG4gICAgcmdiYSgwLCAwLCAwLCAwLjMpLFxuICAgIHJnYmEoMCwgMCwgMCwgMC41KSxcbiAgICByZ2JhKDAsIDAsIDAsIDAuMylcbiAgKTtcbn1cblxuaW9uLWltZyB7XG4gIG9iamVjdC1maXQ6IGNvdmVyO1xuICBoZWlnaHQ6IDI1MHB4O1xuICBib3gtc2hhZG93OiAwcHggMTBweCAzMHB4IDBweCByZ2JhKDAsIDAsIDAsIDAuMTYpO1xufVxuIl19 */";
+
+/***/ }),
+
+/***/ 10006:
 /*!****************************************************************************!*\
   !*** ./src/app/shared/components/cards/cart-card/cart-card.component.scss ***!
   \****************************************************************************/
@@ -3428,7 +3579,7 @@ module.exports = "ion-card {\n  margin-left: 0;\n  margin-right: 0;\n  border-ra
 
 /***/ }),
 
-/***/ 24554:
+/***/ 73623:
 /*!************************************************************************************!*\
   !*** ./src/app/shared/components/cards/checkout-card/checkout-card.component.scss ***!
   \************************************************************************************/
@@ -3439,7 +3590,7 @@ module.exports = "ion-card {\n  margin-left: 0;\n  margin-right: 0;\n  border-ra
 
 /***/ }),
 
-/***/ 3335:
+/***/ 71980:
 /*!**************************************************************************!*\
   !*** ./src/app/shared/components/cards/fav-card/fav-card.component.scss ***!
   \**************************************************************************/
@@ -3450,7 +3601,7 @@ module.exports = "ion-card-content .item-info p {\n  font-size: 16px;\n}\nion-ca
 
 /***/ }),
 
-/***/ 60555:
+/***/ 9037:
 /*!****************************************************************************!*\
   !*** ./src/app/shared/components/cards/food-card/food-card.component.scss ***!
   \****************************************************************************/
@@ -3461,18 +3612,7 @@ module.exports = "ion-img {\n  object-fit: cover;\n  height: 250px;\n  box-shado
 
 /***/ }),
 
-/***/ 44637:
-/*!******************************************************************************************!*\
-  !*** ./src/app/shared/components/cards/main-option-card/main-option-card.component.scss ***!
-  \******************************************************************************************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = ".option-image-mask {\n  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3));\n}\n\nion-img {\n  object-fit: cover;\n  height: 250px;\n  box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.16);\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm1haW4tb3B0aW9uLWNhcmQuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxrR0FBQTtBQUNGOztBQU9BO0VBQ0UsaUJBQUE7RUFDQSxhQUFBO0VBQ0EsaURBQUE7QUFKRiIsImZpbGUiOiJtYWluLW9wdGlvbi1jYXJkLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLm9wdGlvbi1pbWFnZS1tYXNrIHtcbiAgYmFja2dyb3VuZDogbGluZWFyLWdyYWRpZW50KFxuICAgIHRvIGJvdHRvbSxcbiAgICByZ2JhKDAsIDAsIDAsIDAuMyksXG4gICAgcmdiYSgwLCAwLCAwLCAwLjUpLFxuICAgIHJnYmEoMCwgMCwgMCwgMC4zKVxuICApO1xufVxuXG5pb24taW1nIHtcbiAgb2JqZWN0LWZpdDogY292ZXI7XG4gIGhlaWdodDogMjUwcHg7XG4gIGJveC1zaGFkb3c6IDBweCAxMHB4IDMwcHggMHB4IHJnYmEoMCwgMCwgMCwgMC4xNik7XG59XG4iXX0= */";
-
-/***/ }),
-
-/***/ 83470:
+/***/ 29847:
 /*!**********************************************************************************!*\
   !*** ./src/app/shared/components/cards/track-orders/track-orders.component.scss ***!
   \**********************************************************************************/
@@ -3483,18 +3623,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 
 /***/ }),
 
-/***/ 89190:
-/*!********************************************************************************!*\
-  !*** ./src/app/shared/components/cards/wallet-card/wallet-card.component.scss ***!
-  \********************************************************************************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = ".no {\n  color: rgba(0, 0, 0, 0.66);\n  font-weight: bold;\n  font-size: 16px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndhbGxldC1jYXJkLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsMEJBQUE7RUFDQSxpQkFBQTtFQUNBLGVBQUE7QUFDRiIsImZpbGUiOiJ3YWxsZXQtY2FyZC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5ubyB7XG4gIGNvbG9yOiByZ2JhKDAsIDAsIDAsIC42Nik7XG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xuICBmb250LXNpemU6IDE2cHg7XG59XG5cbiJdfQ== */";
-
-/***/ }),
-
-/***/ 33230:
+/***/ 13240:
 /*!*********************************************************************************!*\
   !*** ./src/app/shared/components/modal/choose-options/choose-options.page.scss ***!
   \*********************************************************************************/
@@ -3505,7 +3634,7 @@ module.exports = ".qty-selector {\n  display: flex;\n  justify-content: center;\
 
 /***/ }),
 
-/***/ 60413:
+/***/ 5186:
 /*!******************************************************************!*\
   !*** ./src/app/shared/components/modal/note/note.component.scss ***!
   \******************************************************************/
@@ -3516,7 +3645,7 @@ module.exports = ".message-input {\n  width: 100%;\n  border: 1px solid var(--io
 
 /***/ }),
 
-/***/ 6886:
+/***/ 23648:
 /*!********************************************************************************!*\
   !*** ./src/app/shared/components/modal/store-sales/store-sales.component.scss ***!
   \********************************************************************************/

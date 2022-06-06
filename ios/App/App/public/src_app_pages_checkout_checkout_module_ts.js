@@ -107,16 +107,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "CheckoutPage": () => (/* binding */ CheckoutPage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 48111);
-/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_checkout_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./checkout.page.html */ 41898);
-/* harmony import */ var _checkout_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./checkout.page.scss */ 52980);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core */ 14001);
-/* harmony import */ var _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/cafe/product.service */ 41575);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ 13252);
-/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
-/* harmony import */ var _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/fire/compat/firestore */ 27091);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 48111);
+/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_checkout_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./checkout.page.html */ 41898);
+/* harmony import */ var _checkout_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./checkout.page.scss */ 28944);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/core */ 14001);
+/* harmony import */ var _services_store_product_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/store/product.service */ 86250);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ 13252);
+/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
+/* harmony import */ var _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/fire/compat/firestore */ 27091);
 /* harmony import */ var _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/auth/auth.service */ 68927);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic/angular */ 91346);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic/angular */ 91346);
+/* harmony import */ var _services_storage_storage_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/storage/storage.service */ 74065);
+
 
 
 
@@ -128,13 +130,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let CheckoutPage = class CheckoutPage {
-    constructor(product, router, afs, _firestore, ionicAuthService, menu) {
+    constructor(product, router, afs, _firestore, ionicAuthService, menu, storage) {
         this.product = product;
         this.router = router;
         this.afs = afs;
         this._firestore = _firestore;
         this.ionicAuthService = ionicAuthService;
         this.menu = menu;
+        this.storage = storage;
         this.total = 0;
         this.checkout = [];
         this.owner = '';
@@ -142,52 +145,57 @@ let CheckoutPage = class CheckoutPage {
         this.menu.enable(false);
     }
     ionViewDidLeave() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
             yield this.menu.enable(true);
         });
     }
     ngOnInit() {
         this.addItemsToCart();
     }
+    // get details of orders and display on view for double checking
     addItemsToCart() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
             let data;
             this.total = 0;
             // eslint-disable-next-line no-underscore-dangle
-            const itemIdRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.doc)(this._firestore, `carts/${(this.id)}`);
-            yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.getDoc)(itemIdRef)
+            const itemIdRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.doc)(this._firestore, `carts/${(this.id)}`);
+            yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.getDoc)(itemIdRef)
                 .then(snap => { data = snap.data(); delete data.lastUpdate; delete data.id; });
             for (const key in data) {
                 console.log(key);
-                const idOwnerRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.doc)(this._firestore, `idOwner/${(key.split('@')[0])}`);
-                const idOwnerSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.getDoc)(idOwnerRef);
+                const idOwnerRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.doc)(this._firestore, `idOwner/${(key.split('@')[0])}`);
+                const idOwnerSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.getDoc)(idOwnerRef);
                 const idOwnerName = idOwnerSnap.data();
                 this.owner = idOwnerName.owner;
                 console.log(this.owner);
-                const ownerRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.doc)(this._firestore, `stores/${(this.owner)}`);
-                const ownerSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.getDoc)(ownerRef);
+                const ownerRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.doc)(this._firestore, `stores/${(this.owner)}`);
+                const ownerSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.getDoc)(ownerRef);
                 const ownerName = ownerSnap.data();
                 // eslint-disable-next-line no-underscore-dangle
-                const dataRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.doc)(this._firestore, `stores/${(this.owner)}/items/${(key.split('@')[0])}`);
-                const docSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.getDoc)(dataRef);
+                const dataRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.doc)(this._firestore, `stores/${(this.owner)}/items/${(key.split('@')[0])}`);
+                const docSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.getDoc)(dataRef);
                 const dataSnap = docSnap.data();
                 const value = data[key];
                 const keys = key.split('@')[1].split('-').slice(0, -1);
                 let optionSnap = 0;
                 for (const price of keys) {
                     // eslint-disable-next-line max-len
-                    const optionRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.doc)(this._firestore, `stores/${(this.owner)}/items/${(key.split('@')[0])}/optionPrice/${(price)}`);
-                    const optSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.getDoc)(optionRef);
+                    const optionRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.doc)(this._firestore, `stores/${(this.owner)}/items/${(key.split('@')[0])}/optionPrice/${(price)}`);
+                    const optSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.getDoc)(optionRef);
                     optionSnap += Number(optSnap.data().price);
                 }
+                const paymentDetails = this.product.orderNotePair.get(key);
+                const deliveryTime = this.product.orderTimePair.get(key);
                 this.checkout.push({
                     name: dataSnap.name,
                     owner: ownerName.name,
                     price: Number(dataSnap.price) + optionSnap,
                     image: dataSnap.imageUrl,
                     id: key,
+                    message: paymentDetails,
                     ownerId: this.owner,
                     quantity: value,
+                    deliveryTime
                 });
                 this.total += (Number(dataSnap.price) + optionSnap) * value;
             }
@@ -198,17 +206,18 @@ let CheckoutPage = class CheckoutPage {
     }
 };
 CheckoutPage.ctorParameters = () => [
-    { type: _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_2__.ProductService },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_6__.Router },
-    { type: _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_7__.AngularFirestore },
-    { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.Firestore },
+    { type: _services_store_product_service__WEBPACK_IMPORTED_MODULE_2__.ProductService },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__.Router },
+    { type: _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_8__.AngularFirestore },
+    { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.Firestore },
     { type: _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_3__.AuthService },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.MenuController }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_9__.MenuController },
+    { type: _services_storage_storage_service__WEBPACK_IMPORTED_MODULE_4__.StorageService }
 ];
-CheckoutPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.Component)({
+CheckoutPage = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_10__.Component)({
         selector: 'app-checkout',
-        template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_checkout_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        template: _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_checkout_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_checkout_page_scss__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], CheckoutPage);
@@ -217,7 +226,7 @@ CheckoutPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
 
 /***/ }),
 
-/***/ 52980:
+/***/ 28944:
 /*!***************************************************!*\
   !*** ./src/app/pages/checkout/checkout.page.scss ***!
   \***************************************************/

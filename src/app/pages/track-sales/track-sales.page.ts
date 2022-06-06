@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+  import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {AlertController, IonRouterOutlet, MenuController} from '@ionic/angular';
 import {format, parseISO} from 'date-fns';
 import {collection, Firestore, getDocs} from '@angular/fire/firestore';
 import {AuthService} from '../../services/auth/auth.service';
 import {AngularFirestore} from '@angular/fire/compat/firestore';
-import {Labels, ProductService} from '../../services/cafe/product.service';
+import {Labels, ProductService} from '../../services/store/product.service';
 import {ModalController} from '@ionic/angular';
 import {StoreSalesPage} from '../store-sales/store-sales.page';
 
@@ -52,7 +52,6 @@ export class TrackSalesPage implements OnInit {
       const q = collection(this._firestore, `trackSales/${(this.id)}/${(this.yearValue)}/${(this.monthValue)}/${(this.dayValue)}/`);
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((docs) => {
-        console.log(docs.id, ' => ', docs.data());
         this.labels.push(
           {
             name: docs.data().itemName,
@@ -60,7 +59,6 @@ export class TrackSalesPage implements OnInit {
           },
         );
       });
-      console.log(this.labels);
       const holder = {};
 
       this.labels.forEach(d => {

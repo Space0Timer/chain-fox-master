@@ -15,7 +15,7 @@
       <ion-button (click)="chat()">
         <ion-icon name="chatbubbles-outline"></ion-icon>
       </ion-button>
-      <ion-button (click)="logOut()">
+      <ion-button (click)="showAlertLogOut('Log out', 'Are you sure?')">
         <ion-icon name="lock-closed"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -25,7 +25,6 @@
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content [fullscreen]="true" style="background-color: #F7F7FA">
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
@@ -33,7 +32,7 @@
   <div class="p-1">
     <ng-container *ngFor="let option of searchedItem">
       <div>
-        <app-main-option-card (click)="goToLunch(option.id)" [option]="option"></app-main-option-card>
+        <app-cafe-card (click)="goToLunch(option.id)" [option]="option"></app-cafe-card>
       </div>
     </ng-container>
   </div>

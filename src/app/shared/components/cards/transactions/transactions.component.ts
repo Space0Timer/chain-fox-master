@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {StoreSalesPage} from "../../../../pages/store-sales/store-sales.page";
 import {TransactionDetailsComponent} from "../../modal/transaction-details/transaction-details.component";
 import {IonRouterOutlet, ModalController} from "@ionic/angular";
-import {IrohaService} from "../../../../services/iroha.service";
+import {IrohaService} from "../../../../services/iroha/iroha.service";
 
 export interface Transactions {
   from: string;

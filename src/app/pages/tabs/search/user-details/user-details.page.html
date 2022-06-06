@@ -20,6 +20,11 @@
         *ngIf="form.get('amount').hasError('required')">
         * Please enter the amount
       </ion-text>
+      <ion-text
+        class="error"
+        *ngIf="form.get('amount').hasError('pattern')">
+        * Please enter a proper amount
+      </ion-text>
     </ion-text>
   </div>
   <div class="ion-margin-vertical">

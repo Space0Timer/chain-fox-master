@@ -11,7 +11,6 @@
 #endif
 
 #import "APPBadge.h"
-#import "FileOpener2.h"
 
 FOUNDATION_EXPORT double CordovaPluginsVersionNumber;
 FOUNDATION_EXPORT const unsigned char CordovaPluginsVersionString[];

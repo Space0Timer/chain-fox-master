@@ -3,12 +3,12 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import {AlertController, LoadingController, MenuController} from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import {IrohaService} from '../../../services/iroha.service';
+import {IrohaService} from '../../../services/iroha/iroha.service';
 import {AngularFirestore} from '@angular/fire/compat/firestore';
 import {AngularFireAuth} from '@angular/fire/compat/auth';
 import {doc, Firestore, getDoc, setDoc} from '@angular/fire/firestore';
 import {AvailableResult, BiometryType, Credentials, NativeBiometric} from 'capacitor-native-biometric';
-import {StorageService} from "../../../services/storage.service";
+import {StorageService} from "../../../services/storage/storage.service";
 
 @Component({
   selector: 'app-sign-in',
@@ -38,16 +38,19 @@ export class SignInComponent implements OnInit {
     this.afAuth.onAuthStateChanged(user => {
       this.currentUser = user;
     });
+    // stop the side menu from appearing when there is a side menu icon
     this.menu.enable(false);
   }
 
+// enable side menu to appear on a next page. If the next page does not side menu icon, it will be disabled again
   async ionViewDidLeave() {
     await this.menu.enable(true);
   }
 
+  ngOnInit() {
+  }
 
-  ngOnInit() {}
-
+  // create html form
   initForm() {
     this.form = new FormGroup({
       email: new FormControl(null, {validators: [Validators.required]}),
@@ -55,27 +58,26 @@ export class SignInComponent implements OnInit {
     });
   }
 
+  // change password visibility
   changeType() {
     this.type = !this.type;
   }
 
+  // login with fingerprint or face id
   biometricLogin() {
     NativeBiometric.isAvailable().then(
       (result: AvailableResult) => {
         const isAvailable = result.isAvailable;
         const isFaceId = result.biometryType === BiometryType.FACE_ID;
-
-        if (isAvailable) {
+        if (isAvailable || isFaceId) {
           // Get user's credentials
           NativeBiometric.getCredentials({
             server: 'chainfox',
           }).then((credentials: Credentials) => {
             // Authenticate using biometrics before logging the user in
             NativeBiometric.verifyIdentity({
-              reason: 'Login',
-              title: 'Log in',
-              subtitle: 'Maybe add subtitle here?',
-              description: 'Maybe a description too?',
+              reason: 'Verification',
+              title: 'Verification',
             }).then(
               () => {
                 const form = {email: credentials.username, password: credentials.password};
@@ -86,15 +88,6 @@ export class SignInComponent implements OnInit {
                   this.loading = overlay;
                   this.loading.present();
                   this.authService.login(form).then(async (data) => {
-                    const docRef = doc(this._firestore, 'users', this.currentUser.uid);
-                    const docSnap = await getDoc(docRef);
-                    if (docSnap.exists()) {
-                      const name = docSnap.data().username.concat('@test');
-                      this.iroha.wallet.name = '';
-                      await this.iroha.setName(name);
-                      this.iroha.wallet.balance = 0;
-                      await this.iroha.setBalance(name);
-                    }
                     this.form.reset();
                     this.loading.dismiss();
                     await this.router.navigateByUrl('/tabs', {replaceUrl: true});
@@ -106,7 +99,6 @@ export class SignInComponent implements OnInit {
                       } else if(e.code === 'auth/wrong-password') {
                         msg = 'Wrong Password';
                       }
-                      this.loading.dismiss();
                       this.authService.logout();
                       this.showAlert('Authetication Failed', msg);
                     });
@@ -124,33 +116,23 @@ export class SignInComponent implements OnInit {
       }
     );
   }
+
+  // function when the login button is pressed
   async onSubmit() {
     if (!this.form.valid) {
       this.form.markAllAsTouched();
       return;
     }
-    this.loadingController.create({
-      message: 'Logging in...',
-    }).then(async overlay => {
-      this.loading = overlay;
-      this.loading.present();
+    this.authService.loginIsLoading = true;
       this.authService.login(this.form.value).then(async (data) => {
         const docRef = doc(this._firestore, 'users', this.currentUser.uid);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-          const name = docSnap.data().username.concat('@test');
-          this.iroha.wallet.name = '';
-          await this.iroha.setName(name);
-          this.iroha.wallet.balance = 0;
-          await this.iroha.topUpVerify(name, '', '1');
-          await this.iroha.payment('admin', '', '1');
-          await this.iroha.setBalance(name);
-          await this.iroha.setAccDetail(this.form.value.password);
+          // set biometric login credentials
           await this.authService.setBiometricLogin(this.form.value.email, this.form.value.password);
         }
         this.form.reset();
-        this.loading.dismiss();
-        await this.router.navigateByUrl('/tabs', {replaceUrl: true});
+        await this.router.navigate(['tabs']);
       })
         .catch(e => {
           let msg = e;
@@ -159,11 +141,14 @@ export class SignInComponent implements OnInit {
           } else if (e.code === 'auth/wrong-password') {
             msg = 'Wrong Password';
           }
-          this.loading.dismiss();
           this.authService.logout();
+          this.authService.loginIsLoading = false;
           this.showAlert('Authentication Failed', msg);
         });
-    });
+  }
+
+  goToLogin(){
+    this.router.navigateByUrl('/auth-screen', {replaceUrl: true});
   }
 
   async forgotPassword() {

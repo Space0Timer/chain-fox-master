@@ -25,7 +25,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-button color=\"primary\" (click)=\"back()\" routerDirection=\"forward\">\n        <ion-icon name=\"chevron-back-outline\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n\n<ion-content fullscreen=\"true\">\n  <h1 class=\"title\">My Orders</h1>\n  <ion-row><ion-label>Date: </ion-label></ion-row>\n  <ion-row><ion-label>{{this.date}}</ion-label></ion-row>\n<ion-datetime #datetime (ionChange)=\"dateChanges(datetime.value)\" presentation=\"date\"></ion-datetime>\n  <div class=\"ion-margin-vertical\">\n    <ion-button\n      class=\"ion-margin-horizontal\"\n      size=\"large\"\n      expand=\"block\"\n      shape=\"round\"\n      color=\"primary\"\n      (click)=\"checkSales()\">\n      <ion-text>Check Sales</ion-text>\n    </ion-button>\n  </div>\n</ion-content>\n\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-button color=\"primary\" (click)=\"back()\" routerDirection=\"forward\">\n        <ion-icon name=\"chevron-back-outline\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n\n<ion-content fullscreen=\"true\">\n  <h1 class=\"title\">Check your daily sales!</h1>\n  <ion-row><ion-label>Date: </ion-label></ion-row>\n  <ion-row><ion-label>{{this.date}}</ion-label></ion-row>\n<ion-datetime #datetime (ionChange)=\"dateChanges(datetime.value)\" presentation=\"date\"></ion-datetime>\n  <div class=\"ion-margin-vertical\">\n    <ion-button\n      class=\"ion-margin-horizontal\"\n      size=\"large\"\n      expand=\"block\"\n      shape=\"round\"\n      color=\"primary\"\n      (click)=\"checkSales()\">\n      <ion-text>Check Sales</ion-text>\n    </ion-button>\n  </div>\n</ion-content>\n\n");
 
 /***/ }),
 
@@ -489,8 +489,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "StoreSalesPage": () => (/* binding */ StoreSalesPage)
 /* harmony export */ });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 48111);
-/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_store_sales_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./store-sales.page.html */ 46597);
-/* harmony import */ var _store_sales_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./store-sales.page.scss */ 99864);
+/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_store_sales_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./store-sales.page.html */ 46597);
+/* harmony import */ var _store_sales_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./store-sales.page.scss */ 29915);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 14001);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ 91346);
 
@@ -527,7 +527,7 @@ StoreSalesPage.propDecorators = {
 StoreSalesPage = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.Component)({
         selector: 'app-store-sales',
-        template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_store_sales_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        template: _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_store_sales_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_store_sales_page_scss__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], StoreSalesPage);
@@ -631,8 +631,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "TrackSalesPage": () => (/* binding */ TrackSalesPage)
 /* harmony export */ });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 48111);
-/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_track_sales_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./track-sales.page.html */ 56448);
-/* harmony import */ var _track_sales_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./track-sales.page.scss */ 94259);
+/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_track_sales_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./track-sales.page.html */ 56448);
+/* harmony import */ var _track_sales_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./track-sales.page.scss */ 62004);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/core */ 14001);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/router */ 13252);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @ionic/angular */ 91346);
@@ -641,7 +641,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
 /* harmony import */ var _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/auth/auth.service */ 68927);
 /* harmony import */ var _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/fire/compat/firestore */ 27091);
-/* harmony import */ var _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/cafe/product.service */ 41575);
+/* harmony import */ var _services_store_product_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/store/product.service */ 86250);
 /* harmony import */ var _store_sales_store_sales_page__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../store-sales/store-sales.page */ 83077);
 
 
@@ -692,13 +692,11 @@ let TrackSalesPage = class TrackSalesPage {
                 const q = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.collection)(this._firestore, `trackSales/${(this.id)}/${(this.yearValue)}/${(this.monthValue)}/${(this.dayValue)}/`);
                 const querySnapshot = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.getDocs)(q);
                 querySnapshot.forEach((docs) => {
-                    console.log(docs.id, ' => ', docs.data());
                     this.labels.push({
                         name: docs.data().itemName,
                         price: Number(docs.data().price),
                     });
                 });
-                console.log(this.labels);
                 const holder = {};
                 this.labels.forEach(d => {
                     if (holder.hasOwnProperty(d.name)) {
@@ -763,7 +761,7 @@ TrackSalesPage.ctorParameters = () => [
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_9__.Router },
     { type: _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__.AuthService },
     { type: _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_10__.AngularFirestore },
-    { type: _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_3__.ProductService },
+    { type: _services_store_product_service__WEBPACK_IMPORTED_MODULE_3__.ProductService },
     { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.Firestore },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_11__.ModalController },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_11__.IonRouterOutlet },
@@ -773,7 +771,7 @@ TrackSalesPage.ctorParameters = () => [
 TrackSalesPage = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_12__.Component)({
         selector: 'app-track-sales',
-        template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_track_sales_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        template: _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_track_sales_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_track_sales_page_scss__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], TrackSalesPage);
@@ -782,7 +780,7 @@ TrackSalesPage = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
 
 /***/ }),
 
-/***/ 99864:
+/***/ 29915:
 /*!*********************************************************!*\
   !*** ./src/app/pages/store-sales/store-sales.page.scss ***!
   \*********************************************************/
@@ -792,7 +790,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 
 /***/ }),
 
-/***/ 94259:
+/***/ 62004:
 /*!*********************************************************!*\
   !*** ./src/app/pages/track-sales/track-sales.page.scss ***!
   \*********************************************************/

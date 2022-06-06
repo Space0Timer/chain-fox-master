@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header translucent=\"true\">\n  <ion-toolbar>\n    <ion-title>\n      <div class=\"title\">\n        <img style=\"height: 30px\" src='assets/header/chainfox.png'>\n      </div>\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content [fullscreen]=\"true\">\n    <div class=\"banner\">\n      <ion-slides pager #mySlider class=\"slides\" (ionSlidesDidLoad)=\"slidesDidLoad(mySlider)\">\n        <ion-slide *ngFor=\"let number of [1,2,3]\">\n          <img src=\"assets/imgs/screen{{number}}.png\" alt=\"\" width=\"640\" height=\"360\">\n        </ion-slide>\n      </ion-slides>\n    </div>\n  <ion-card style=\"\">\n    <div class=\"ion-margin\" (ionChange)=\"segmentChanged($event)\">\n      <ion-segment mode=\"ios\" class=\"custom-icon\" [value]=\"segmentValue\">\n        <ion-segment-button value=\"1\">\n          <ion-label>Log In</ion-label>\n        </ion-segment-button>\n        <ion-segment-button value=\"2\">\n          <ion-label>Sign Up</ion-label>\n        </ion-segment-button>\n      </ion-segment>\n    </div>\n    <app-sign-in *ngIf=\"segmentValue === '1'\"></app-sign-in>\n    <app-sign-up *ngIf=\"segmentValue === '2'\"></app-sign-up>\n  </ion-card>\n</ion-content>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header translucent=\"true\">\n  <ion-toolbar>\n    <ion-title>\n      <div class=\"title\">\n        <img style=\"height: 30px\" src='assets/header/chainfox.png'>\n      </div>\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content [fullscreen]=\"true\">\n    <div class=\"banner\">\n      <ion-slides pager #mySlider class=\"slides\" (ionSlidesDidLoad)=\"slidesDidLoad(mySlider)\">\n        <ion-slide *ngFor=\"let images of options\">\n          <img src=\"{{images}}.png\" alt=\"\" width=\"640\" height=\"360\">\n        </ion-slide>\n      </ion-slides>\n    </div>\n  <ion-card style=\"\">\n    <div class=\"ion-margin\" (ionChange)=\"segmentChanged($event)\">\n      <ion-segment mode=\"ios\" class=\"custom-icon\" [value]=\"segmentValue\">\n        <ion-segment-button value=\"1\">\n          <ion-label>Log In</ion-label>\n        </ion-segment-button>\n        <ion-segment-button value=\"2\">\n          <ion-label>Sign Up</ion-label>\n        </ion-segment-button>\n      </ion-segment>\n    </div>\n    <app-sign-in *ngIf=\"segmentValue === '1'\"></app-sign-in>\n    <app-sign-up *ngIf=\"segmentValue === '2'\"></app-sign-up>\n  </ion-card>\n</ion-content>\n");
 
 /***/ }),
 
@@ -25,7 +25,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\n<form [formGroup]=\"form\" class=\"ion-margin\">\n  <div class=\"ion-margin-vertical\">\n  <ion-item lines=\"full\" color=\"light\" >\n    <ion-icon\n      *ngIf=\"this.authService.biometricLogin === 'true'\"\n      name=\"finger-print-outline\"\n      slot=\"end\"\n      color=\"dark\"\n      (click)=\"biometricLogin()\">\n    </ion-icon>\n    <ion-input formControlName=\"email\" [type]=\"type ? 'text' : 'text'\" placeholder=\"Enter email\"></ion-input>\n  </ion-item>\n  <ion-text\n    color=\"danger\"\n    *ngIf=\"!form.get('email').valid && form.get('email').touched\">\n    <ion-text\n      class=\"error\"\n      *ngIf=\"form.get('email').hasError('required')\">\n      * Please enter the email\n    </ion-text>\n    <!-- for email error -->\n    <ion-text\n      class=\"error\"\n      *ngIf=\"!form.get('email').hasError('required')\">\n      * Please enter a proper email\n    </ion-text>\n  </ion-text>\n  </div>\n\n  <div class=\"ion-margin-vertical\">\n    <ion-item lines=\"full\" color=\"light\" shape=\"round\">\n      <ion-icon\n        [name]=\"type ? 'eye' : 'eye-off'\"\n        slot=\"end\"\n        color=\"dark\"\n        (click)=\"changeType()\">\n      </ion-icon>\n      <ion-input formControlName=\"password\" [type]=\"type ? 'password' : 'text'\" placeholder=\"Enter password\"></ion-input>\n    </ion-item>\n      <ion-text\n        color=\"danger\"\n        *ngIf=\"!form.get('password').valid && form.get('password').touched\">\n        <ion-text\n          class=\"error\"\n          *ngIf=\"form.get('password').hasError('required')\">\n          * Please enter your password\n        </ion-text>\n        <ion-text\n          class=\"error\"\n          *ngIf=\"!form.get('password').hasError('required') && form.get('password').hasError('minlength')\">\n          * Please enter a password of at least 8 characters long\n        </ion-text>\n      </ion-text>\n  </div>\n</form>\n\n<p class=\"ion-text-right ion-margin-horizontal\">\n  <ion-text color=\"medium\" (click)=\"forgotPassword()\">Forgot password?</ion-text>\n</p>\n\n<div class=\"ion-margin-horizontal\">\n  <ion-button\n    *ngIf=\"!isLoading\"\n   class=\"ion-margin-horizontal\"\n    size=\"large\"\n    expand=\"block\"\n    shape=\"round\"\n    color=\"primary\"\n    (click)=\"onSubmit()\">\n    <ion-text style=\"color: white;font-size: 18px\">Log In</ion-text>\n  </ion-button>\n  <ion-button\n    *ngIf=\"isLoading\"\n   class=\"ion-margin-horizontal\"\n    size=\"large\"\n    expand=\"block\"\n    shape=\"round\"\n    color=\"primary\">\n    <ion-spinner></ion-spinner>\n  </ion-button>\n</div>\n\n\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\n<form [formGroup]=\"form\" class=\"ion-margin\">\n  <div class=\"ion-margin-vertical\">\n  <ion-item lines=\"full\" color=\"light\" >\n    <ion-icon\n      *ngIf=\"this.authService.biometricLogin === 'true'\"\n      name=\"finger-print-outline\"\n      slot=\"end\"\n      color=\"dark\"\n      (click)=\"biometricLogin()\">\n    </ion-icon>\n    <ion-input formControlName=\"email\" [type]=\"type ? 'text' : 'text'\" placeholder=\"Enter email\"></ion-input>\n  </ion-item>\n  <ion-text\n    color=\"danger\"\n    *ngIf=\"!form.get('email').valid && form.get('email').touched\">\n    <ion-text\n      class=\"error\"\n      *ngIf=\"form.get('email').hasError('required')\">\n      * Please enter the email\n    </ion-text>\n    <!-- for email error -->\n    <ion-text\n      class=\"error\"\n      *ngIf=\"form.get('email').hasError('email')\">\n      * Please enter a proper email\n    </ion-text>\n  </ion-text>\n  </div>\n\n  <div class=\"ion-margin-vertical\">\n    <ion-item lines=\"full\" color=\"light\" shape=\"round\">\n      <ion-icon\n        [name]=\"type ? 'eye' : 'eye-off'\"\n        slot=\"end\"\n        color=\"dark\"\n        (click)=\"changeType()\">\n      </ion-icon>\n      <ion-input formControlName=\"password\" [type]=\"type ? 'password' : 'text'\" placeholder=\"Enter password\"></ion-input>\n    </ion-item>\n      <ion-text\n        color=\"danger\"\n        *ngIf=\"!form.get('password').valid && form.get('password').touched\">\n        <ion-text\n          class=\"error\"\n          *ngIf=\"form.get('password').hasError('required')\">\n          * Please enter your password\n        </ion-text>\n        <ion-text\n          class=\"error\"\n          *ngIf=\"!form.get('password').hasError('required') && form.get('password').hasError('minlength')\">\n          * Please enter a password of at least 8 characters long\n        </ion-text>\n      </ion-text>\n  </div>\n</form>\n\n<p class=\"ion-text-right ion-margin-horizontal\">\n  <ion-text color=\"medium\" (click)=\"forgotPassword()\">Forgot password?</ion-text>\n</p>\n\n<div class=\"ion-margin-horizontal\">\n  <ion-button\n    *ngIf=\"!this.authService.loginIsLoading\"\n   class=\"ion-margin-horizontal\"\n    size=\"large\"\n    expand=\"block\"\n    shape=\"round\"\n    color=\"primary\"\n    (click)=\"onSubmit()\">\n    <ion-text style=\"color: white;font-size: 18px\">Log In</ion-text>\n  </ion-button>\n  <ion-button\n    *ngIf=\"this.authService.loginIsLoading\"\n   class=\"ion-margin-horizontal\"\n    size=\"large\"\n    expand=\"block\"\n    shape=\"round\"\n    color=\"primary\">\n    <ion-spinner></ion-spinner>\n  </ion-button>\n</div>\n\n\n");
 
 /***/ }),
 
@@ -39,7 +39,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<form [formGroup]=\"form\" class=\"ion-margin\">\n  <!-- Username -->\n  <div class=\"ion-margin-vertical\">\n    <!-- Username input field -->\n    <ion-item lines=\"full\" color=\"light\">\n      <ion-input formControlName=\"username\" [type]=\"type ? 'text' : 'text'\" placeholder=\"Enter username\"></ion-input>\n    </ion-item>\n    <!-- Invalid username check -->\n    <ion-text\n      color=\"danger\"\n      *ngIf=\"!form.get('username').valid && form.get('username').touched\">\n      <ion-text\n        class=\"error\"\n        *ngIf=\"form.get('username').hasError('required')\">\n        * Please enter your username\n      </ion-text>\n      <ion-text\n        class=\"error\"\n        *ngIf=\"form.get('username').hasError('pattern')\">\n        * Invalid username. Only characters a-z and A-Z are allowed.\n      </ion-text>\n      <ion-text\n        class=\"error\"\n        *ngIf=\"!form.get('username').hasError('required') &&!form.get('username').hasError('pattern') && form.get('username').hasError('minlength')\">\n        * Invalid username. Your username must have at least 6 characters.\n      </ion-text>\n      <ion-text\n        class=\"error\"\n        *ngIf=\"!form.get('username').hasError('required') && !form.get('username').hasError('pattern') && !form.get('username').hasError('minlength') && form.get('username').hasError('maxlength')\">\n        * Invalid username. Your username must have at most 10 characters.\n      </ion-text>\n    </ion-text>\n  </div>\n  <!-- Email -->\n  <div class=\"ion-margin-vertical\">\n    <ion-item lines=\"full\" color=\"light\">\n      <ion-input formControlName=\"email\" [type]=\"type ? 'text' : 'text'\" placeholder=\"Enter email\"></ion-input>\n    </ion-item>\n    <!-- Invalid email check -->\n    <ion-text\n      color=\"danger\"\n      *ngIf=\"!form.get('email').valid && form.get('email').touched\">\n      <ion-text\n        class=\"error\"\n        *ngIf=\"form.get('email').hasError('required')\">\n        * Please enter the email\n      </ion-text>\n      <ion-text\n        class=\"error\"\n        *ngIf=\"!form.get('email').hasError('required')\n          && form.get('email').hasError('email')\">\n        * Please enter a proper email\n      </ion-text>\n    </ion-text>\n  </div>\n  <!-- Password -->\n  <div class=\"ion-margin-vertical\">\n    <ion-item lines=\"full\" color=\"light\">\n      <!-- Password visibility -->\n      <ion-icon\n        [name]=\"type ? 'eye' : 'eye-off'\"\n        slot=\"end\"\n        color=\"dark\"\n        (click)=\"changeType()\">\n      </ion-icon>\n      <!-- Password input field -->\n      <ion-input formControlName=\"password\" [type]=\"type ? 'password' : 'text'\" placeholder=\"Enter password\"></ion-input>\n      <!-- Invalid password check -->\n    </ion-item>\n      <ion-text\n        color=\"danger\"\n        *ngIf=\"!form.get('password').valid && form.get('password').touched\">\n        <ion-text\n          class=\"error\"\n          *ngIf=\"form.get('password').hasError('required')\">\n          * Please enter your password\n        </ion-text>\n        <ion-text\n          class=\"error\"\n          *ngIf=\"!form.get('password').hasError('required') && form.get('password').hasError('minlength')\">\n          * Please enter a password of at least 8 characters long\n        </ion-text>\n        <ion-text\n          class=\"error\"\n          *ngIf=\"!form.get('password').hasError('required') && !form.get('password').hasError('minlength') && form.get('password').hasError('pattern')\">\n          * Please enter a password with at least one uppercase letter, one lowercase letter, and one digit, and one special character\n        </ion-text>\n        <ion-text\n          class=\"error\"\n          *ngIf=\"!form.get('password').hasError('required') && !form.get('password').hasError('minlength') && !form.get('password').hasError('pattern') && form.get('password').hasError('maxlength')\">\n          * Please enter a password of at most 15 characters long\n        </ion-text>\n      </ion-text>\n  </div>\n</form>\n\n<div class=\"ion-margin-horizontal\">\n  <ion-button\n    *ngIf=\"!isLoading\"\n    size=\"large\"\n    expand=\"block\"\n    shape=\"round\"\n    color=\"primary\"\n    (click)=\"onSubmit()\">\n    <ion-text>Sign Up</ion-text>\n  </ion-button>\n  <ion-button\n    *ngIf=\"isLoading\"\n    size=\"large\"\n    expand=\"block\"\n    shape=\"round\"\n    color=\"primary\">\n    <ion-spinner></ion-spinner>\n  </ion-button>\n</div>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<form [formGroup]=\"form\" class=\"ion-margin\">\n  <!-- Username -->\n  <div class=\"ion-margin-vertical\">\n    <!-- Username input field -->\n    <ion-item lines=\"full\" color=\"light\">\n      <ion-input formControlName=\"username\" [type]=\"type ? 'text' : 'text'\" placeholder=\"Enter username\"></ion-input>\n    </ion-item>\n    <!-- Invalid username check -->\n    <ion-text\n      color=\"danger\"\n      *ngIf=\"!form.get('username').valid && form.get('username').touched\">\n      <ion-text\n        class=\"error\"\n        *ngIf=\"form.get('username').hasError('required')\">\n        * Please enter your username\n      </ion-text>\n      <ion-text\n        class=\"error\"\n        *ngIf=\"form.get('username').hasError('pattern')\">\n        * Invalid username. Only characters a-z and A-Z are allowed.\n      </ion-text>\n      <ion-text\n        class=\"error\"\n        *ngIf=\"!form.get('username').hasError('required') &&!form.get('username').hasError('pattern') && form.get('username').hasError('minlength')\">\n        * Invalid username. Your username must have at least 6 characters.\n      </ion-text>\n      <ion-text\n        class=\"error\"\n        *ngIf=\"!form.get('username').hasError('required') && !form.get('username').hasError('pattern') && !form.get('username').hasError('minlength') && form.get('username').hasError('maxlength')\">\n        * Invalid username. Your username must have at most 15 characters.\n      </ion-text>\n    </ion-text>\n  </div>\n  <!-- Email -->\n  <div class=\"ion-margin-vertical\">\n    <ion-item lines=\"full\" color=\"light\">\n      <ion-input formControlName=\"email\" [type]=\"type ? 'text' : 'text'\" placeholder=\"Enter email\"></ion-input>\n    </ion-item>\n    <!-- Invalid email check -->\n    <ion-text\n      color=\"danger\"\n      *ngIf=\"!form.get('email').valid && form.get('email').touched\">\n      <ion-text\n        class=\"error\"\n        *ngIf=\"form.get('email').hasError('required')\">\n        * Please enter the email\n      </ion-text>\n      <ion-text\n        class=\"error\"\n        *ngIf=\"!form.get('email').hasError('required')\n          && form.get('email').hasError('email')\">\n        * Please enter a proper email\n      </ion-text>\n    </ion-text>\n  </div>\n  <!-- Password -->\n  <div class=\"ion-margin-vertical\">\n    <ion-item lines=\"full\" color=\"light\">\n      <!-- Password visibility -->\n      <ion-icon\n        [name]=\"type ? 'eye' : 'eye-off'\"\n        slot=\"end\"\n        color=\"dark\"\n        (click)=\"changeType()\">\n      </ion-icon>\n      <!-- Password input field -->\n      <ion-input formControlName=\"password\" [type]=\"type ? 'password' : 'text'\" placeholder=\"Enter password\"></ion-input>\n      <!-- Invalid password check -->\n    </ion-item>\n      <ion-text\n        color=\"danger\"\n        *ngIf=\"!form.get('password').valid && form.get('password').touched\">\n        <ion-text\n          class=\"error\"\n          *ngIf=\"form.get('password').hasError('required')\">\n          * Please enter your password\n        </ion-text>\n        <ion-text\n          class=\"error\"\n          *ngIf=\"!form.get('password').hasError('required') && form.get('password').hasError('minlength')\">\n          * Please enter a password of at least 8 characters long\n        </ion-text>\n        <ion-text\n          class=\"error\"\n          *ngIf=\"!form.get('password').hasError('required') && !form.get('password').hasError('minlength') && form.get('password').hasError('pattern')\">\n          * Please enter a password with at least one uppercase letter, one lowercase letter, and one digit, and one special character\n        </ion-text>\n        <ion-text\n          class=\"error\"\n          *ngIf=\"!form.get('password').hasError('required') && !form.get('password').hasError('minlength') && !form.get('password').hasError('pattern') && form.get('password').hasError('maxlength')\">\n          * Please enter a password of at most 15 characters long\n        </ion-text>\n      </ion-text>\n  </div>\n</form>\n\n<div class=\"ion-margin-horizontal\">\n  <ion-button\n    *ngIf=\"!this.authService.isLoadingSignUp\"\n    size=\"large\"\n    expand=\"block\"\n    shape=\"round\"\n    color=\"primary\"\n    (click)=\"onSubmit()\">\n    <ion-text style=\"color: white;font-size: 18px\">Sign Up</ion-text>\n  </ion-button>\n  <ion-button\n    *ngIf=\"this.authService.isLoadingSignUp\"\n    size=\"large\"\n    expand=\"block\"\n    shape=\"round\"\n    color=\"primary\">\n    <ion-spinner></ion-spinner>\n  </ion-button>\n</div>\n");
 
 /***/ }),
 
@@ -2243,15 +2243,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AuthScreenPage": () => (/* binding */ AuthScreenPage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 48111);
-/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_auth_screen_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./auth-screen.page.html */ 58969);
-/* harmony import */ var _auth_screen_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./auth-screen.page.scss */ 92655);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 14001);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tslib */ 48111);
+/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_auth_screen_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./auth-screen.page.html */ 58969);
+/* harmony import */ var _auth_screen_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./auth-screen.page.scss */ 63732);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/core */ 14001);
 /* harmony import */ var src_app_services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/auth/auth.service */ 68927);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ 13252);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic/angular */ 91346);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/router */ 13252);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic/angular */ 91346);
 /* harmony import */ var _capacitor_splash_screen__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @capacitor/splash-screen */ 26391);
-/* harmony import */ var _services_storage_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/storage.service */ 17208);
+/* harmony import */ var _services_storage_storage_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/storage/storage.service */ 74065);
+/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
+/* harmony import */ var _capacitor_app__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @capacitor/app */ 94058);
+
+
 
 
 
@@ -2262,12 +2266,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let AuthScreenPage = class AuthScreenPage {
-    constructor(auth, router, menu, storage) {
+    constructor(auth, router, menu, storage, _firestore, platform, routerOutlet) {
         this.auth = auth;
         this.router = router;
         this.menu = menu;
         this.storage = storage;
+        this._firestore = _firestore;
+        this.platform = platform;
+        this.routerOutlet = routerOutlet;
+        this.options = [];
         this.segmentValue = '1';
+        // image slides settings
         this.config = {
             slidesPerView: 3,
             spaceBetween: 50,
@@ -2276,64 +2285,65 @@ let AuthScreenPage = class AuthScreenPage {
             scrollbar: { draggable: true },
         };
         this.menu.enable(false);
+        // enable the back button to exit the app on Android devices
+        this.platform.backButton.subscribeWithPriority(-1, () => {
+            if (!this.routerOutlet.canGoBack()) {
+                _capacitor_app__WEBPACK_IMPORTED_MODULE_5__.App.exitApp();
+            }
+        });
     }
     slidesDidLoad(slides) {
         slides.startAutoplay();
     }
     ionViewDidLeave() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
             yield this.menu.enable(true);
         });
     }
     ionViewDidEnter() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
             this.auth.biometricLogin = yield this.storage.get('bio-login');
             console.log(this.auth.biometricLogin);
         });
     }
+    // get slider image from database
+    getImagesFromFirebase() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+            for (const i of Array(3).keys()) {
+                const imageRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_7__.doc)(this._firestore, `images/info${(i + 1)}`);
+                const imageSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_7__.getDoc)(imageRef);
+                const imageName = imageSnap.data().url;
+                this.options.push(imageName);
+            }
+        });
+    }
     ngOnInit() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+            yield this.getImagesFromFirebase();
             yield _capacitor_splash_screen__WEBPACK_IMPORTED_MODULE_3__.SplashScreen.hide();
         });
     }
+    // check if the users switches from login to sign up and vice versa
     segmentChanged(event) {
-        console.log(event);
         this.segmentValue = event.detail.value;
-    }
-    checkAuth() {
-        this.auth.checkAuth().then(response => {
-            console.log(response);
-            if (response) {
-                return true;
-            }
-            this.navigate();
-            return false;
-        })
-            .catch(e => {
-            this.navigate();
-            return false;
-        });
     }
     navigate() {
         this.router.navigateByUrl('/tabs', { replaceUrl: true });
     }
-    onSwiper([swiper]) {
-        console.log(swiper);
-    }
-    onSlideChange() {
-        console.log('slide change');
-    }
 };
 AuthScreenPage.ctorParameters = () => [
     { type: src_app_services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__.AuthService },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_6__.Router },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.MenuController },
-    { type: _services_storage_service__WEBPACK_IMPORTED_MODULE_4__.StorageService }
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_8__.Router },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_9__.MenuController },
+    { type: _services_storage_storage_service__WEBPACK_IMPORTED_MODULE_4__.StorageService },
+    { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_7__.Firestore },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_9__.Platform },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_9__.IonRouterOutlet }
 ];
-AuthScreenPage = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.Component)({
+AuthScreenPage = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_10__.Component)({
         selector: 'app-auth-screen',
-        template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_auth_screen_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        template: _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_auth_screen_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_auth_screen_page_scss__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], AuthScreenPage);
@@ -2353,18 +2363,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "SignInComponent": () => (/* binding */ SignInComponent)
 /* harmony export */ });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tslib */ 48111);
-/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_sign_in_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./sign-in.component.html */ 86103);
-/* harmony import */ var _sign_in_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./sign-in.component.scss */ 36862);
+/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_sign_in_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./sign-in.component.html */ 86103);
+/* harmony import */ var _sign_in_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./sign-in.component.scss */ 92357);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/core */ 14001);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/forms */ 18346);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/router */ 13252);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic/angular */ 91346);
 /* harmony import */ var src_app_services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/auth/auth.service */ 68927);
-/* harmony import */ var _services_iroha_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../services/iroha.service */ 49187);
+/* harmony import */ var _services_iroha_iroha_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../services/iroha/iroha.service */ 52857);
 /* harmony import */ var _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/fire/compat/auth */ 60111);
 /* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
 /* harmony import */ var capacitor_native_biometric__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! capacitor-native-biometric */ 41380);
-/* harmony import */ var _services_storage_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../services/storage.service */ 17208);
+/* harmony import */ var _services_storage_storage_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../services/storage/storage.service */ 74065);
 
 
 
@@ -2394,38 +2404,42 @@ let SignInComponent = class SignInComponent {
         this.afAuth.onAuthStateChanged(user => {
             this.currentUser = user;
         });
+        // stop the side menu from appearing when there is a side menu icon
         this.menu.enable(false);
     }
+    // enable side menu to appear on a next page. If the next page does not side menu icon, it will be disabled again
     ionViewDidLeave() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
             yield this.menu.enable(true);
         });
     }
-    ngOnInit() { }
+    ngOnInit() {
+    }
+    // create html form
     initForm() {
         this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_7__.FormGroup({
             email: new _angular_forms__WEBPACK_IMPORTED_MODULE_7__.FormControl(null, { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_7__.Validators.required] }),
             password: new _angular_forms__WEBPACK_IMPORTED_MODULE_7__.FormControl(null, { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_7__.Validators.required, _angular_forms__WEBPACK_IMPORTED_MODULE_7__.Validators.minLength(8)] }),
         });
     }
+    // change password visibility
     changeType() {
         this.type = !this.type;
     }
+    // login with fingerprint or face id
     biometricLogin() {
         capacitor_native_biometric__WEBPACK_IMPORTED_MODULE_4__.NativeBiometric.isAvailable().then((result) => {
             const isAvailable = result.isAvailable;
             const isFaceId = result.biometryType === capacitor_native_biometric__WEBPACK_IMPORTED_MODULE_4__.BiometryType.FACE_ID;
-            if (isAvailable) {
+            if (isAvailable || isFaceId) {
                 // Get user's credentials
                 capacitor_native_biometric__WEBPACK_IMPORTED_MODULE_4__.NativeBiometric.getCredentials({
                     server: 'chainfox',
                 }).then((credentials) => {
                     // Authenticate using biometrics before logging the user in
                     capacitor_native_biometric__WEBPACK_IMPORTED_MODULE_4__.NativeBiometric.verifyIdentity({
-                        reason: 'Login',
-                        title: 'Log in',
-                        subtitle: 'Maybe add subtitle here?',
-                        description: 'Maybe a description too?',
+                        reason: 'Verification',
+                        title: 'Verification',
                     }).then(() => {
                         const form = { email: credentials.username, password: credentials.password };
                         // Authentication successful
@@ -2435,15 +2449,6 @@ let SignInComponent = class SignInComponent {
                             this.loading = overlay;
                             this.loading.present();
                             this.authService.login(form).then((data) => (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
-                                const docRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_8__.doc)(this._firestore, 'users', this.currentUser.uid);
-                                const docSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_8__.getDoc)(docRef);
-                                if (docSnap.exists()) {
-                                    const name = docSnap.data().username.concat('@test');
-                                    this.iroha.wallet.name = '';
-                                    yield this.iroha.setName(name);
-                                    this.iroha.wallet.balance = 0;
-                                    yield this.iroha.setBalance(name);
-                                }
                                 this.form.reset();
                                 this.loading.dismiss();
                                 yield this.router.navigateByUrl('/tabs', { replaceUrl: true });
@@ -2456,7 +2461,6 @@ let SignInComponent = class SignInComponent {
                                 else if (e.code === 'auth/wrong-password') {
                                     msg = 'Wrong Password';
                                 }
-                                this.loading.dismiss();
                                 this.authService.logout();
                                 this.showAlert('Authetication Failed', msg);
                             });
@@ -2470,49 +2474,40 @@ let SignInComponent = class SignInComponent {
             // Couldn't check availability
         });
     }
+    // function when the login button is pressed
     onSubmit() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
             if (!this.form.valid) {
                 this.form.markAllAsTouched();
                 return;
             }
-            this.loadingController.create({
-                message: 'Logging in...',
-            }).then((overlay) => (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
-                this.loading = overlay;
-                this.loading.present();
-                this.authService.login(this.form.value).then((data) => (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
-                    const docRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_8__.doc)(this._firestore, 'users', this.currentUser.uid);
-                    const docSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_8__.getDoc)(docRef);
-                    if (docSnap.exists()) {
-                        const name = docSnap.data().username.concat('@test');
-                        this.iroha.wallet.name = '';
-                        yield this.iroha.setName(name);
-                        this.iroha.wallet.balance = 0;
-                        yield this.iroha.topUpVerify(name, '', '1');
-                        yield this.iroha.payment('admin', '', '1');
-                        yield this.iroha.setBalance(name);
-                        yield this.iroha.setAccDetail(this.form.value.password);
-                        yield this.authService.setBiometricLogin(this.form.value.email, this.form.value.password);
-                    }
-                    this.form.reset();
-                    this.loading.dismiss();
-                    yield this.router.navigateByUrl('/tabs', { replaceUrl: true });
-                }))
-                    .catch(e => {
-                    let msg = e;
-                    if (e.code === 'auth/user-not-found') {
-                        msg = 'Email not found.';
-                    }
-                    else if (e.code === 'auth/wrong-password') {
-                        msg = 'Wrong Password';
-                    }
-                    this.loading.dismiss();
-                    this.authService.logout();
-                    this.showAlert('Authentication Failed', msg);
-                });
-            }));
+            this.authService.loginIsLoading = true;
+            this.authService.login(this.form.value).then((data) => (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+                const docRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_8__.doc)(this._firestore, 'users', this.currentUser.uid);
+                const docSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_8__.getDoc)(docRef);
+                if (docSnap.exists()) {
+                    // set biometric login credentials
+                    yield this.authService.setBiometricLogin(this.form.value.email, this.form.value.password);
+                }
+                this.form.reset();
+                yield this.router.navigate(['tabs']);
+            }))
+                .catch(e => {
+                let msg = e;
+                if (e.code === 'auth/user-not-found') {
+                    msg = 'Email not found.';
+                }
+                else if (e.code === 'auth/wrong-password') {
+                    msg = 'Wrong Password';
+                }
+                this.authService.logout();
+                this.authService.loginIsLoading = false;
+                this.showAlert('Authentication Failed', msg);
+            });
         });
+    }
+    goToLogin() {
+        this.router.navigateByUrl('/auth-screen', { replaceUrl: true });
     }
     forgotPassword() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
@@ -2575,16 +2570,16 @@ SignInComponent.ctorParameters = () => [
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_9__.Router },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_10__.AlertController },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_10__.LoadingController },
-    { type: _services_iroha_service__WEBPACK_IMPORTED_MODULE_3__.IrohaService },
+    { type: _services_iroha_iroha_service__WEBPACK_IMPORTED_MODULE_3__.IrohaService },
     { type: _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_11__.AngularFireAuth },
     { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_8__.Firestore },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_10__.MenuController },
-    { type: _services_storage_service__WEBPACK_IMPORTED_MODULE_5__.StorageService }
+    { type: _services_storage_storage_service__WEBPACK_IMPORTED_MODULE_5__.StorageService }
 ];
 SignInComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_12__.Component)({
         selector: 'app-sign-in',
-        template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_sign_in_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        template: _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_sign_in_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_sign_in_component_scss__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], SignInComponent);
@@ -2604,14 +2599,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "SignUpComponent": () => (/* binding */ SignUpComponent)
 /* harmony export */ });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 48111);
-/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_sign_up_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./sign-up.component.html */ 27174);
-/* harmony import */ var _sign_up_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./sign-up.component.scss */ 376);
+/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_sign_up_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./sign-up.component.html */ 27174);
+/* harmony import */ var _sign_up_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./sign-up.component.scss */ 4399);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/core */ 14001);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ 18346);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ 13252);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic/angular */ 91346);
 /* harmony import */ var src_app_services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/auth/auth.service */ 68927);
-/* harmony import */ var src_app_services_iroha_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/iroha.service */ 49187);
+/* harmony import */ var src_app_services_iroha_iroha_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/iroha/iroha.service */ 52857);
 /* harmony import */ var _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/fire/compat/firestore */ 27091);
 /* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
 /* harmony import */ var _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/fire/compat/auth */ 60111);
@@ -2655,7 +2650,7 @@ let SignUpComponent = class SignUpComponent {
     ngOnInit() { }
     initForm() {
         this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormGroup({
-            username: new _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormControl(null, { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.pattern('^[a-zA-Z]+$'), _angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.maxLength(10), _angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.minLength(6)] }),
+            username: new _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormControl(null, { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.pattern('^[a-zA-Z]+$'), _angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.maxLength(15), _angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.minLength(6)] }),
             email: new _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormControl(null, { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.email] }),
             // eslint-disable-next-line max-len
             password: new _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormControl(null, { validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.minLength(8), _angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.maxLength(15), _angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.pattern('^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\\s).{8,}$'),] })
@@ -2682,6 +2677,7 @@ let SignUpComponent = class SignUpComponent {
             });
         });
     }
+    // match the entered username with the database to find duplicates
     checkUsernameExists(username) {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             // eslint-disable-next-line no-underscore-dangle
@@ -2705,11 +2701,12 @@ let SignUpComponent = class SignUpComponent {
     }
     onSubmit() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
-            console.log('tes');
             if (!this.form.valid) {
                 this.form.markAllAsTouched();
                 return;
             }
+            this.authService.isLoadingSignUp = true;
+            console.log(this.form.value);
             let auth = true;
             this.form.value.username.toLowerCase();
             console.log(this.form.value.username.toLowerCase());
@@ -2719,24 +2716,20 @@ let SignUpComponent = class SignUpComponent {
                 }
             });
             if (auth) {
-                this.loadingController.create({
-                    message: 'Signing up...',
-                }).then((overlay) => (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
-                    this.loading = overlay;
-                    this.loading.present();
-                    this.authService.register(this.form.value).then((data) => (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
-                    }))
-                        .catch(e => {
-                        console.log(e);
-                        this.isLoading = false;
-                        let msg = e;
-                        if (e.code === 'auth/email-already-in-use') {
-                            msg = 'Email is already in use.';
-                        }
-                        this.loading.dismiss();
-                        this.showAlert(msg);
-                    });
-                }));
+                // register the user
+                this.authService.register(this.form.value).then((data) => (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+                }))
+                    .catch(e => {
+                    console.log(e);
+                    this.isLoading = false;
+                    let msg = e;
+                    if (e.code === 'auth/email-already-in-use') {
+                        msg = 'Email is already in use.';
+                    }
+                    this.isLoading = false;
+                    this.showAlert(msg);
+                });
+                this.form.reset();
             }
         });
     }
@@ -2755,7 +2748,7 @@ SignUpComponent.ctorParameters = () => [
     { type: src_app_services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__.AuthService },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__.Router },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.AlertController },
-    { type: src_app_services_iroha_service__WEBPACK_IMPORTED_MODULE_3__.IrohaService },
+    { type: src_app_services_iroha_iroha_service__WEBPACK_IMPORTED_MODULE_3__.IrohaService },
     { type: src_app_services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__.AuthService },
     { type: _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_9__.AngularFirestore },
     { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.Firestore },
@@ -2766,7 +2759,7 @@ SignUpComponent.ctorParameters = () => [
 SignUpComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_11__.Component)({
         selector: 'app-sign-up',
-        template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_sign_up_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        template: _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_sign_up_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_sign_up_component_scss__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], SignUpComponent);
@@ -2775,7 +2768,7 @@ SignUpComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
 
 /***/ }),
 
-/***/ 92655:
+/***/ 63732:
 /*!*********************************************************!*\
   !*** ./src/app/pages/auth-screen/auth-screen.page.scss ***!
   \*********************************************************/
@@ -2785,7 +2778,7 @@ module.exports = "ion-content ion-card {\n  margin: 20px 20px 20px 20px;\n}\nion
 
 /***/ }),
 
-/***/ 36862:
+/***/ 92357:
 /*!******************************************************************!*\
   !*** ./src/app/pages/auth-screen/sign-in/sign-in.component.scss ***!
   \******************************************************************/
@@ -2795,13 +2788,13 @@ module.exports = "ion-input, iontext {\n  font-size: 0.9rem;\n}\n\n.error {\n  f
 
 /***/ }),
 
-/***/ 376:
+/***/ 4399:
 /*!******************************************************************!*\
   !*** ./src/app/pages/auth-screen/sign-up/sign-up.component.scss ***!
   \******************************************************************/
 /***/ ((module) => {
 
-module.exports = "ion-input {\n  font-size: 0.9rem;\n}\n\nion-text {\n  font-size: 18px;\n  color: white;\n}\n\n.error {\n  font-size: 0.7rem !important;\n}\n\np ion-icon {\n  font-size: 1.8rem;\n  margin: 0 2vh;\n}\n\nion-button {\n  margin: 5vh 0;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNpZ24tdXAuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxpQkFBQTtBQUNKOztBQUVBO0VBQ0UsZUFBQTtFQUNBLFlBQUE7QUFDRjs7QUFHQTtFQUNJLDRCQUFBO0FBQUo7O0FBR0k7RUFDSSxpQkFBQTtFQUNBLGFBQUE7QUFBUjs7QUFHQTtFQUNJLGFBQUE7QUFBSiIsImZpbGUiOiJzaWduLXVwLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiaW9uLWlucHV0IHtcbiAgICBmb250LXNpemU6IDAuOXJlbTtcbn1cblxuaW9uLXRleHQge1xuICBmb250LXNpemU6IDE4cHg7XG4gIGNvbG9yOiB3aGl0ZTtcbn1cblxuXG4uZXJyb3Ige1xuICAgIGZvbnQtc2l6ZTogMC43cmVtICFpbXBvcnRhbnQ7XG59XG5wIHtcbiAgICBpb24taWNvbiB7XG4gICAgICAgIGZvbnQtc2l6ZTogMS44cmVtO1xuICAgICAgICBtYXJnaW46IDAgMnZoO1xuICAgIH1cbn1cbmlvbi1idXR0b24ge1xuICAgIG1hcmdpbjogNXZoIDA7XG59XG4iXX0= */";
+module.exports = "ion-input, iontext {\n  font-size: 0.9rem;\n}\n\n.error {\n  font-size: 0.7rem !important;\n}\n\np ion-icon {\n  font-size: 1.8rem;\n  margin: 1vh 2vh;\n}\n\nion-button {\n  margin: 5vh 0;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNpZ24tdXAuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxpQkFBQTtBQUNGOztBQUNBO0VBQ0UsNEJBQUE7QUFFRjs7QUFDRTtFQUNFLGlCQUFBO0VBQ0EsZUFBQTtBQUVKOztBQUNBO0VBQ0UsYUFBQTtBQUVGIiwiZmlsZSI6InNpZ24tdXAuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJpb24taW5wdXQsIGlvbnRleHR7XG4gIGZvbnQtc2l6ZTogMC45cmVtO1xufVxuLmVycm9yIHtcbiAgZm9udC1zaXplOiAwLjdyZW0gIWltcG9ydGFudDtcbn1cbnAge1xuICBpb24taWNvbiB7XG4gICAgZm9udC1zaXplOiAxLjhyZW07XG4gICAgbWFyZ2luOiAxdmggMnZoO1xuICB9XG59XG5pb24tYnV0dG9uIHtcbiAgbWFyZ2luOiA1dmggMDtcbn1cbiJdfQ== */";
 
 /***/ }),
 
@@ -6556,7 +6549,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _setGrabCursor_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./setGrabCursor.js */ 57450);
+/* harmony import */ var _setGrabCursor_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./setGrabCursor.js */ 37564);
 /* harmony import */ var _unsetGrabCursor_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./unsetGrabCursor.js */ 79628);
 
 
@@ -6567,7 +6560,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 57450:
+/***/ 37564:
 /*!***************************************************************!*\
   !*** ./node_modules/swiper/core/grab-cursor/setGrabCursor.js ***!
   \***************************************************************/

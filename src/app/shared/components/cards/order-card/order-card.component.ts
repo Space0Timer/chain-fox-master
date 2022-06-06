@@ -1,9 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {ProductService} from '../../../../services/cafe/product.service';
+import {ProductService} from '../../../../services/store/product.service';
 import {AngularFirestore} from '@angular/fire/compat/firestore';
 import {AuthService} from '../../../../services/auth/auth.service';
-import {IrohaService} from '../../../../services/iroha.service';
+import {IrohaService} from '../../../../services/iroha/iroha.service';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import {collection, doc, Firestore, getDoc, getDocs} from "@angular/fire/firestore";
@@ -22,6 +22,7 @@ export interface IOrderCard {
   amountPaid: string;
   orderTime: string;
   deliverTime: string;
+  message: string;
   quantity: string;
 }
 
@@ -46,12 +47,13 @@ export class OrderCardComponent implements OnInit{
     console.log(this.options[0].data);
   }
 
-  goToCheckStatusUser(name, id, price, owner, ownerId) {
+  goToCheckStatusUser(name, id, price, owner, ownerId, deliveryTime) {
     this.product.orderName = name;
     this.product.orderId = id;
     this.product.price = price;
     this.product.owner = owner;
     this.product.ownerId = ownerId;
+    this.product.deliveryTime = deliveryTime;
     this.router.navigate(['check-status-user']);
   }
 

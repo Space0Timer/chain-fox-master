@@ -1,11 +1,11 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {Router} from "@angular/router";
-import {Observable} from "rxjs";
+import {Router} from '@angular/router';
+import {Observable} from 'rxjs';
 import {IonContent, MenuController} from '@ionic/angular';
-import {ChatService, Message} from "../../services/chat.service";
-import {doc, Firestore, getDoc} from "@angular/fire/firestore";
-import {ProductService} from "../../services/cafe/product.service";
-
+import {ChatService, Message} from '../../services/chat/chat.service';
+import {doc, Firestore, getDoc} from '@angular/fire/firestore';
+import {ProductService} from '../../services/store/product.service';
+import {AuthService} from '../../services/auth/auth.service';
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.page.html',
@@ -17,38 +17,34 @@ export class ChatPage implements OnInit {
   messages: Observable<Message[]>;
   newMsg = '';
   text = true;
-  private storeName: string;
+  private id = this.ionicAuthService.getUid();
+
 
   constructor(private chatService: ChatService, private router: Router,
               private _firestore: Firestore, private product: ProductService,
-              private menu: MenuController) {
-    this.menu.enable(false);
+              private menu: MenuController, private ionicAuthService: AuthService) {
+
   }
   async ionViewDidLeave() {
     await this.menu.enable(true);
   }
 
+  // get all chat messages
   async ngOnInit() {
-    await this.getStoreName();
-    this.messages = this.chatService.getChatMessagesCafe();
+    await this.menu.enable(false);
+    this.messages = this.chatService.getChatMessages(this.id, this.chatService.otherId);
   }
 
-  async getStoreName() {
-    const ownerRef = doc(this._firestore, `stores/${(this.product.store.name)}`);
-    const ownerSnap = await getDoc(ownerRef);
-    const ownerName = ownerSnap.data();
-    this.storeName = ownerName.name;
-  }
-
+  // function for the user to send chat message
   sendMessage() {
-    this.chatService.addChatMessageCafe(this.newMsg).then(() => {
-      this.chatService.returnChatMessageCafe(this.newMsg);
+    this.chatService.addChatMessage(this.newMsg, this.id, this.chatService.otherId).then(() => {
       this.newMsg = '';
       this.content.scrollToBottom();
     });
   }
 
   back() {
-    this.router.navigateByUrl('tabs/home', {replaceUrl: true});
+    this.router.navigate(['chat-list']);
   }
+
 }

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Injectable, Input, OnInit, Output} from '@angular/core';
-import {ProductService} from '../../../../services/cafe/product.service';
+import {ProductService} from '../../../../services/store/product.service';
 import {Router} from '@angular/router';
 import {doc, Firestore, getDoc, getDocs, onSnapshot, query} from '@angular/fire/firestore';
 import {AlertController, IonRouterOutlet, ModalController} from '@ionic/angular';
@@ -16,6 +16,8 @@ export interface ICartCard {
   id: string;
   ownerId: string;
   quantity: string;
+  message: string;
+  deliveryTime: string;
 }
 
 @Component({

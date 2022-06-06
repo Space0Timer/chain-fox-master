@@ -3,11 +3,10 @@ import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTre
 import { Observable } from 'rxjs';
 import {AuthService} from '../../services/auth/auth.service';
 import {doc, Firestore, getDoc, setDoc} from '@angular/fire/firestore';
-import {IrohaService} from '../../services/iroha.service';
-import {StorageService} from '../../services/storage.service';
+import {IrohaService} from '../../services/iroha/iroha.service';
+import {StorageService} from '../../services/storage/storage.service';
 import {AngularFirestore} from '@angular/fire/compat/firestore';
-import {NativeBiometric} from "capacitor-native-biometric";
-import {LoadingController} from "@ionic/angular";
+import {AlertController, LoadingController} from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -22,43 +21,41 @@ export class VerifyGuard implements CanActivate {
     private storage: StorageService,
     private _firestore: Firestore,
     private afs: AngularFirestore,
+    private alertController: AlertController,
     private loadingController: LoadingController
   ) {}
+  // check if the email used verified
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    // firebase check account verification
     return this.auth.checkVerify().then(async response => {
+      const docRef = doc(this._firestore, 'users', this.auth.currentUser.uid);
+      const docSnap = await getDoc(docRef);
         if (response) {
-          const docRef = doc(this._firestore, 'users', this.auth.currentUser.uid);
-          const docSnap = await getDoc(docRef);
+          // this is always false for first time users
           if (docSnap.data().verify === false) {
-            const user = await this.storage.get(docSnap.data().username);
-            await this.iroha.createAccount(docSnap.data().username);
-            this.iroha.wallet.name = '';
-            await this.iroha.setName(docSnap.data().username + '@test');
-            console.log(docSnap.data().username);
-            this.iroha.wallet.balance = 0;
-            await this.iroha.topUpVerify(docSnap.data().username + '@test', '', '1');
-            await this.iroha.payment('admin', '', '1');
-            await this.iroha.setBalance(docSnap.data().username + '@test');
-            await this.iroha.setAccDetail(user);
-            await this.createCart();
-            await this.createFav();
-            await this.afs.collection('messages').doc(this.auth.currentUser.uid).set({
-              test: 'test'
-            });
-            if (docSnap.exists()) {
-              await this.afs.collection('users').doc(this.auth.currentUser.uid).update({
-                verify: true
+            // create iroha account
+              await this.iroha.createAccount(docSnap.data().username).then(async p => {
+                // create cart, favourites and message path for the user
+                await this.createCart();
+                await this.createFav();
+                await this.afs.collection('messages').doc(this.auth.currentUser.uid).set({});
+                // update verification status. Indicate the account is not a first time user
+                await this.afs.collection('users').doc(this.auth.currentUser.uid).update({
+                  verify: true
+                });
               });
-            }
-            return true;
+              return true;
           }
+          // not first time user comes here and go to the home page
           if (docSnap.data().verify === true) {
             return true;
           }
-        } else {
-          this.navigate();
+        }
+        // Firebase states not verified, send user to verify email page
+        else {
+          this.verifyEmail();
           return false;
         }
     })
@@ -68,9 +65,7 @@ export class VerifyGuard implements CanActivate {
       });
   }
 
-
-
-  navigate() {
+  verifyEmail() {
     this.router.navigateByUrl('/verify-email-address', {replaceUrl: true});
   }
 
@@ -97,4 +92,15 @@ export class VerifyGuard implements CanActivate {
       id: this.auth.currentUser.uid,
     });
   }
+
+  async showAlert(header, message) {
+    const alert = await this.alertController.create({
+      header,
+      message,
+      buttons: ['OK'],
+    });
+
+    await alert.present();
+  }
+
 }

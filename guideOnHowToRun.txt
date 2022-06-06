@@ -1,0 +1,14 @@
+1. ionic build to build the file
+2. cap sync to sync the code across all platform
+3. ionic serve to run in browser
+4. To run code in XCode:
+- ionic build
+- cap sync
+- cap open ios
+5. To run code in Android Studio:
+- ionic build
+- cap sync
+- cap open android
+6. The Iroha blockchain server must be online in order to run the app
+7. You can change the IROHA ADDRESS to a local address and run the Iroha server locally on docker
+8. Check out the docker folder on how to run the Iroha server

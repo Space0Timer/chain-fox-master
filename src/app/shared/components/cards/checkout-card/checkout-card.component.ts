@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ICartCard} from '../cart-card/cart-card.component';
 import {doc, Firestore, getDoc} from '@angular/fire/firestore';
-import {ProductService} from '../../../../services/cafe/product.service';
+import {ProductService} from '../../../../services/store/product.service';
 import {AuthService} from '../../../../services/auth/auth.service';
 
 @Component({

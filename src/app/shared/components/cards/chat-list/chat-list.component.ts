@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ChatService} from "../../../../services/chat.service";
+import {ChatService} from "../../../../services/chat/chat.service";
 import {Router} from "@angular/router";
 import {doc, getDoc} from "@angular/fire/firestore";
 
@@ -25,9 +25,8 @@ export class ChatListComponent implements OnInit {
   ngOnInit() {}
 
   goToChat(name, id) {
-    console.log(id);
     this.chatService.chatName = name;
-    this.chatService.chatId = id;
-    this.router.navigate(['chat-rooms']);
+    this.chatService.otherId = id;
+    this.router.navigate(['chat']);
   }
 }

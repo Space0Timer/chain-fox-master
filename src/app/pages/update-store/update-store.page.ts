@@ -1,11 +1,11 @@
 import {Component, OnInit, Optional} from '@angular/core';
-import {FirebaseUploadService} from '../../services/cafe/firebase-upload.service';
+import {FirebaseUploadService} from '../../services/utils/firebase-upload.service';
 import {Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {collection, doc, Firestore, getDocs, query, setDoc} from '@angular/fire/firestore';
 import {AuthService} from '../../services/auth/auth.service';
 import {AngularFirestore} from '@angular/fire/compat/firestore';
-import {ProductService} from '../../services/cafe/product.service';
+import {ProductService} from '../../services/store/product.service';
 import {IFoodCard} from '../../shared';
 import {AlertController, IonRouterOutlet, MenuController, ModalController} from '@ionic/angular';
 import {AddItemComponent} from '../../shared/components/modal/add-item/add-item.component';

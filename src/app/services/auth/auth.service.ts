@@ -9,14 +9,11 @@ import {
 import {collection, doc, Firestore, getDocs, query, setDoc, where} from '@angular/fire/firestore';
 import {AngularFirestore} from '@angular/fire/compat/firestore';
 import firebase from 'firebase/compat/app';
-import {tryCatch} from 'rxjs/internal-compatibility';
 import {AngularFireAuth} from '@angular/fire/compat/auth';
 import {Router} from '@angular/router';
-import {ControlContainer} from '@angular/forms';
 import {LoadingController} from '@ionic/angular';
-import {StorageService} from '../storage.service';
+import {StorageService} from '../storage/storage.service';
 import {NativeBiometric} from 'capacitor-native-biometric';
-import {FCM} from '@capacitor-community/fcm';
 
 export interface AccData {
   mywallet: string;
@@ -43,8 +40,10 @@ export interface WalletDataTo {
 export class AuthService {
   uid = '';
   currentUser: any;
+  loginIsLoading = false;
   private id: string;
   biometricLogin: string;
+  isLoadingSignUp = false;
 
   constructor(
     private _fireAuth: Auth,
@@ -52,7 +51,8 @@ export class AuthService {
     private afAuth: AngularFireAuth,
     private router: Router,
     private loading: LoadingController,
-    private storage: StorageService
+    private storage: StorageService,
+    private afs: AngularFirestore
   ) {     this.afAuth.onAuthStateChanged(async user => {
     this.currentUser = user;
     if (await this.storage.get('bio-login') === undefined) {
@@ -66,11 +66,11 @@ export class AuthService {
   // Creating a firebase account
   async register(formValue) {
     try {
+      console.log(formValue.email, formValue.password);
       const registeredUser = await createUserWithEmailAndPassword(this._fireAuth, formValue.email, formValue.password)
         .then(async result => {
           await this.uploadFirestore(formValue.username, formValue.email);
           await this.storage.set(formValue.username, formValue.password);
-          await this.loading.dismiss();
           await this.sendVerificationMail();
         });
     } catch(e) {
@@ -85,16 +85,13 @@ export class AuthService {
         this.router.navigate(['verify-email-address']);
       });
   }
+
   async uploadFirestore(username, email) {
-    let token = '';
-    FCM.getToken()
-      .then((r) => token = r.token);
-    console.log(token);
     const dataRef = doc(this._firestore, `users/${this.currentUser.uid}`);
     await setDoc(dataRef, {
       username,
       email,
-      fcm: token,
+      fcm: '',
       verify: false
     });
   }
@@ -190,6 +187,9 @@ export class AuthService {
 
   async setBiometricLogin(email, password) {
     try {
+      await NativeBiometric.deleteCredentials({
+        server: 'chainfox',
+      });
       await NativeBiometric.setCredentials({
         username: email,
         password,

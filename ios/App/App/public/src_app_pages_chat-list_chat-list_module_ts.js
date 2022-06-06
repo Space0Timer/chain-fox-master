@@ -29,6 +29,139 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ 83946:
+/*!****************************************************!*\
+  !*** ./node_modules/date-fns/esm/getDate/index.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ getDate)
+/* harmony export */ });
+/* harmony import */ var _toDate_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../toDate/index.js */ 37342);
+/* harmony import */ var _lib_requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../_lib/requiredArgs/index.js */ 97096);
+
+
+/**
+ * @name getDate
+ * @category Day Helpers
+ * @summary Get the day of the month of the given date.
+ *
+ * @description
+ * Get the day of the month of the given date.
+ *
+ * ### v2.0.0 breaking changes:
+ *
+ * - [Changes that are common for the whole library](https://github.com/date-fns/date-fns/blob/master/docs/upgradeGuide.md#Common-Changes).
+ *
+ * @param {Date|Number} date - the given date
+ * @returns {Number} the day of month
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // Which day of the month is 29 February 2012?
+ * const result = getDate(new Date(2012, 1, 29))
+ * //=> 29
+ */
+
+function getDate(dirtyDate) {
+  (0,_lib_requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__["default"])(1, arguments);
+  var date = (0,_toDate_index_js__WEBPACK_IMPORTED_MODULE_1__["default"])(dirtyDate);
+  var dayOfMonth = date.getDate();
+  return dayOfMonth;
+}
+
+/***/ }),
+
+/***/ 686:
+/*!*****************************************************!*\
+  !*** ./node_modules/date-fns/esm/getMonth/index.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ getMonth)
+/* harmony export */ });
+/* harmony import */ var _toDate_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../toDate/index.js */ 37342);
+/* harmony import */ var _lib_requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../_lib/requiredArgs/index.js */ 97096);
+
+
+/**
+ * @name getMonth
+ * @category Month Helpers
+ * @summary Get the month of the given date.
+ *
+ * @description
+ * Get the month of the given date.
+ *
+ * ### v2.0.0 breaking changes:
+ *
+ * - [Changes that are common for the whole library](https://github.com/date-fns/date-fns/blob/master/docs/upgradeGuide.md#Common-Changes).
+ *
+ * @param {Date|Number} date - the given date
+ * @returns {Number} the month
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // Which month is 29 February 2012?
+ * const result = getMonth(new Date(2012, 1, 29))
+ * //=> 1
+ */
+
+function getMonth(dirtyDate) {
+  (0,_lib_requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__["default"])(1, arguments);
+  var date = (0,_toDate_index_js__WEBPACK_IMPORTED_MODULE_1__["default"])(dirtyDate);
+  var month = date.getMonth();
+  return month;
+}
+
+/***/ }),
+
+/***/ 35925:
+/*!****************************************************!*\
+  !*** ./node_modules/date-fns/esm/getYear/index.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ getYear)
+/* harmony export */ });
+/* harmony import */ var _toDate_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../toDate/index.js */ 37342);
+/* harmony import */ var _lib_requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../_lib/requiredArgs/index.js */ 97096);
+
+
+/**
+ * @name getYear
+ * @category Year Helpers
+ * @summary Get the year of the given date.
+ *
+ * @description
+ * Get the year of the given date.
+ *
+ * ### v2.0.0 breaking changes:
+ *
+ * - [Changes that are common for the whole library](https://github.com/date-fns/date-fns/blob/master/docs/upgradeGuide.md#Common-Changes).
+ *
+ * @param {Date|Number} date - the given date
+ * @returns {Number} the year
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // Which year is 2 July 2014?
+ * const result = getYear(new Date(2014, 6, 2))
+ * //=> 2014
+ */
+
+function getYear(dirtyDate) {
+  (0,_lib_requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__["default"])(1, arguments);
+  return (0,_toDate_index_js__WEBPACK_IMPORTED_MODULE_1__["default"])(dirtyDate).getFullYear();
+}
+
+/***/ }),
+
 /***/ 4959:
 /*!*************************************************************!*\
   !*** ./src/app/pages/chat-list/chat-list-routing.module.ts ***!
@@ -121,17 +254,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "ChatListPage": () => (/* binding */ ChatListPage)
 /* harmony export */ });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tslib */ 48111);
-/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_chat_list_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./chat-list.page.html */ 41814);
-/* harmony import */ var _chat_list_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chat-list.page.scss */ 15544);
+/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_chat_list_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./chat-list.page.html */ 41814);
+/* harmony import */ var _chat_list_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chat-list.page.scss */ 96858);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/core */ 14001);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/router */ 13252);
 /* harmony import */ var _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/fire/compat/firestore */ 27091);
 /* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
 /* harmony import */ var _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/auth/auth.service */ 68927);
-/* harmony import */ var _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/cafe/product.service */ 41575);
+/* harmony import */ var _services_store_product_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/store/product.service */ 86250);
 /* harmony import */ var firebase_compat_app__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! firebase/compat/app */ 50947);
 /* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! date-fns */ 26039);
-/* harmony import */ var _services_chat_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../services/chat.service */ 52160);
+/* harmony import */ var _services_chat_chat_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../services/chat/chat.service */ 72362);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @ionic/angular */ 91346);
 
 
@@ -147,17 +280,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let ChatListPage = class ChatListPage {
-    constructor(router, ionicAuthService, afs, product, _firestore, chatService, menu) {
+    constructor(router, ionicAuthService, afs, product, firestore, chatService, menu) {
         this.router = router;
         this.ionicAuthService = ionicAuthService;
         this.afs = afs;
         this.product = product;
-        this._firestore = _firestore;
+        this.firestore = firestore;
         this.chatService = chatService;
         this.menu = menu;
         this.chat = [];
         this.id = this.ionicAuthService.getUid();
-        this.menu.enable(false);
     }
     ionViewDidLeave() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
@@ -166,37 +298,39 @@ let ChatListPage = class ChatListPage {
     }
     ionViewWillEnter() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+            yield this.menu.enable(false);
             this.chat = [];
             yield this.addChatToChatList();
         });
     }
+    // add individual chat to chat list
     addChatToChatList() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
             let data;
-            // eslint-disable-next-line no-underscore-dangle
-            const userRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_7__.doc)(this._firestore, `messages/${(this.id)}`);
+            const userRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_7__.doc)(this.firestore, `messages/${(this.id)}`);
+            // get all conversation partners
             yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_7__.getDoc)(userRef)
                 .then(snap => {
                 data = snap.data();
             });
+            // eslint-disable-next-line guard-for-in
             for (const key in data) {
                 this.chatService.keys.push(key);
                 // get name
-                const nameRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_7__.doc)(this._firestore, `users/${(key)}`);
+                const nameRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_7__.doc)(this.firestore, `users/${(key)}`);
                 yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_7__.getDoc)(nameRef)
                     .then(snap => {
                     data = snap.data();
                 });
-                // get time
                 let username = '';
                 const dataSource = [];
+                // get the messages from database
                 this.subscribe = firebase_compat_app__WEBPACK_IMPORTED_MODULE_4__["default"].firestore()
                     .collection(`messages/${(this.id)}/${(key)}`)
                     .orderBy('createdAt', 'desc')
                     .onSnapshot((docSnapshot) => {
                     docSnapshot.forEach((docu) => {
                         if (data.username !== username) {
-                            console.log(docu.data().createdAt.toDate());
                             dataSource.push((docu.data().createdAt.toDate()));
                             this.chat.push({
                                 name: data.username,
@@ -221,18 +355,138 @@ ChatListPage.ctorParameters = () => [
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_9__.Router },
     { type: _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__.AuthService },
     { type: _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_10__.AngularFirestore },
-    { type: _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_3__.ProductService },
+    { type: _services_store_product_service__WEBPACK_IMPORTED_MODULE_3__.ProductService },
     { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_7__.Firestore },
-    { type: _services_chat_service__WEBPACK_IMPORTED_MODULE_5__.ChatService },
+    { type: _services_chat_chat_service__WEBPACK_IMPORTED_MODULE_5__.ChatService },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_11__.MenuController }
 ];
 ChatListPage = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_12__.Component)({
         selector: 'app-chat-list',
-        template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_chat_list_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        template: _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_chat_list_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_chat_list_page_scss__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], ChatListPage);
+
+
+
+/***/ }),
+
+/***/ 72362:
+/*!***********************************************!*\
+  !*** ./src/app/services/chat/chat.service.ts ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ChatService": () => (/* binding */ ChatService)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 48111);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/core */ 14001);
+/* harmony import */ var firebase_compat_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/compat/app */ 50947);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs/operators */ 62257);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rxjs/operators */ 8343);
+/* harmony import */ var _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/fire/compat/firestore */ 27091);
+/* harmony import */ var _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/fire/compat/auth */ 60111);
+/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! date-fns */ 83946);
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! date-fns */ 686);
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! date-fns */ 35925);
+/* harmony import */ var _store_product_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store/product.service */ 86250);
+
+
+
+
+
+
+
+
+
+let ChatService = class ChatService {
+    constructor(afAuth, afs, product, _firestore) {
+        this.afAuth = afAuth;
+        this.afs = afs;
+        this.product = product;
+        this._firestore = _firestore;
+        this.currentUser = null;
+        this.keys = [];
+        this.chatName = '';
+        this.chatId = '';
+        this.otherId = '';
+        this.afAuth.onAuthStateChanged(user => {
+            this.currentUser = user;
+        });
+    }
+    addChatMessage(msg, idSender, idReceiver) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
+            let msgId = '';
+            yield this.afs.collection('messages').doc(idSender).update({
+                [idReceiver]: 1,
+            });
+            yield this.afs.collection('messages/' + idSender + '/' + idReceiver).add({
+                msg,
+                from: this.currentUser.uid,
+                createdAt: firebase_compat_app__WEBPACK_IMPORTED_MODULE_0__["default"].firestore.FieldValue.serverTimestamp()
+            });
+            yield this.afs.collection('messages').doc(idReceiver).update({
+                [idSender]: 1,
+            });
+            yield this.afs.collection('messages/' + idReceiver + '/' + idSender).add({
+                msg,
+                from: this.currentUser.uid,
+                status: 'sent',
+                createdAt: firebase_compat_app__WEBPACK_IMPORTED_MODULE_0__["default"].firestore.FieldValue.serverTimestamp()
+            }).then(docRef => msgId = docRef.id);
+            yield this.afs.collection('messages/' + idReceiver + '/' + idSender).doc(msgId).update({
+                status: 'unread',
+            });
+        });
+    }
+    getDate(date) {
+        const curDate = new Date();
+        this.today = ((0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])(date) === (0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])(curDate) &&
+            (0,date_fns__WEBPACK_IMPORTED_MODULE_4__["default"])(date) === (0,date_fns__WEBPACK_IMPORTED_MODULE_4__["default"])(curDate) &&
+            (0,date_fns__WEBPACK_IMPORTED_MODULE_5__["default"])(date) === (0,date_fns__WEBPACK_IMPORTED_MODULE_5__["default"])(curDate));
+    }
+    // user chat
+    getChatMessages(idYou, idOthers) {
+        let users = [];
+        return this.getUsers().pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_6__.switchMap)(res => {
+            users = res;
+            // eslint-disable-next-line max-len
+            return this.afs.collection('messages/' + idYou + '/' + idOthers, ref => ref.orderBy('createdAt')).valueChanges({ idField: 'id' });
+        }), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_7__.map)(messages => {
+            for (const m of messages) {
+                m.fromName = this.getUserForMsg(m.from, users);
+                m.myMsg = this.currentUser.uid === m.from;
+            }
+            return messages;
+        }));
+    }
+    getUsers() {
+        return this.afs.collection('users').valueChanges({ idField: 'uid' });
+    }
+    getUserForMsg(msgFromId, users) {
+        for (const usr of users) {
+            if (usr.uid === msgFromId) {
+                return usr.email;
+            }
+        }
+        return 'Deleted';
+    }
+};
+ChatService.ctorParameters = () => [
+    { type: _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_8__.AngularFireAuth },
+    { type: _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_9__.AngularFirestore },
+    { type: _store_product_service__WEBPACK_IMPORTED_MODULE_1__.ProductService },
+    { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_10__.Firestore }
+];
+ChatService = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_11__.Injectable)({
+        providedIn: 'root'
+    })
+], ChatService);
 
 
 
@@ -249,10 +503,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "ChatListComponent": () => (/* binding */ ChatListComponent)
 /* harmony export */ });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 48111);
-/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_chat_list_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./chat-list.component.html */ 89114);
-/* harmony import */ var _chat_list_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chat-list.component.scss */ 20930);
+/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_chat_list_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./chat-list.component.html */ 89114);
+/* harmony import */ var _chat_list_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chat-list.component.scss */ 14577);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 14001);
-/* harmony import */ var _services_chat_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../services/chat.service */ 52160);
+/* harmony import */ var _services_chat_chat_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../services/chat/chat.service */ 72362);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ 13252);
 
 
@@ -267,14 +521,13 @@ let ChatListComponent = class ChatListComponent {
     }
     ngOnInit() { }
     goToChat(name, id) {
-        console.log(id);
         this.chatService.chatName = name;
-        this.chatService.chatId = id;
-        this.router.navigate(['chat-rooms']);
+        this.chatService.otherId = id;
+        this.router.navigate(['chat']);
     }
 };
 ChatListComponent.ctorParameters = () => [
-    { type: _services_chat_service__WEBPACK_IMPORTED_MODULE_2__.ChatService },
+    { type: _services_chat_chat_service__WEBPACK_IMPORTED_MODULE_2__.ChatService },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__.Router }
 ];
 ChatListComponent.propDecorators = {
@@ -283,7 +536,7 @@ ChatListComponent.propDecorators = {
 ChatListComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.Component)({
         selector: 'app-chat-list-component',
-        template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_chat_list_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        template: _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_chat_list_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_chat_list_component_scss__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], ChatListComponent);
@@ -292,7 +545,7 @@ ChatListComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
 
 /***/ }),
 
-/***/ 15544:
+/***/ 96858:
 /*!*****************************************************!*\
   !*** ./src/app/pages/chat-list/chat-list.page.scss ***!
   \*****************************************************/
@@ -302,7 +555,7 @@ module.exports = "ion-segment {\n  --background: #128c7e;\n}\nion-segment ion-se
 
 /***/ }),
 
-/***/ 20930:
+/***/ 14577:
 /*!****************************************************************************!*\
   !*** ./src/app/shared/components/cards/chat-list/chat-list.component.scss ***!
   \****************************************************************************/

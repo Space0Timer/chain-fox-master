@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 import {collection, Firestore, getDocs, orderBy, query} from "@angular/fire/firestore";
 import {AuthService} from "../../services/auth/auth.service";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
-import {ProductService} from "../../services/cafe/product.service";
+import {ProductService} from "../../services/store/product.service";
 import {ITrackOrderCard} from "../../shared/components/cards/track-orders/track-orders.component";
 import {MenuController} from "@ionic/angular";
 
@@ -75,7 +75,8 @@ export class TrackOrdersPage {
           id: docs.data().orderId,
           status: docs.data().status,
           amountPaid: docs.data().amountPaid,
-          deliverTime: docs.data().deliverTime
+          deliverTime: docs.data().deliverTime,
+          message: docs.data().message
         },
       );
     });

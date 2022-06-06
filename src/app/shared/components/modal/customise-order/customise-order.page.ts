@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {AlertController, ModalController} from '@ionic/angular';
+import {AlertController, ModalController, ToastController} from '@ionic/angular';
 import {AngularFirestore} from '@angular/fire/compat/firestore';
 import {AuthService} from '../../../../services/auth/auth.service';
-import {CustomOptions, ProductService} from "../../../../services/cafe/product.service";
+import {CustomOptions, ProductService} from "../../../../services/store/product.service";
 import {doc, Firestore, getDoc, setDoc} from "@angular/fire/firestore";
 import {Auth} from "@angular/fire/auth";
 import firebase from "firebase/compat";
-import {StorageService} from "../../../../services/storage.service";
+import {StorageService} from "../../../../services/storage/storage.service";
 
 
 @Component({
@@ -33,7 +33,7 @@ export class CustomiseOrderPage{
               private alertController: AlertController,
               private _firestore: Firestore,
               private ionicAuthService: AuthService,
-              private storage: StorageService){
+              private toastController: ToastController){
 
    }
 
@@ -135,6 +135,9 @@ async addName() {
       else if (!this.form.value[this.optionCount].match('^.{6,15}$')) {
         await this.showAlert('Invalid option.', 'Your option must have at most 15 characters.');
       }
+      else if (this.form.value[this.optionCount] === 'default') {
+        await this.showAlert('Invalid option.', 'Default is a reserved keyword.');
+      }
       else {
         await this.presentPrompt();
       }
@@ -227,26 +230,39 @@ async addName() {
           text: 'Confirm',
           handler: async data => {
             console.log(data.price);
-            const key = this.name+this.form.value[this.optionCount];
-            console.log(`stores/${(this.uid)}/items/${(this.product.editItemId)}/optionPrice/${(key)}`);
-            const trackOrderRef = doc(this._firestore, `stores/${(this.uid)}/items/${(this.product.editItemId)}/optionPrice/${(key)}`);
-            await setDoc(trackOrderRef, {
-                price: data.price
-            });
-            await this.refreshPrice(this.form.value[this.optionCount], data.price);
-            // eslint-disable-next-line max-len
-            this.optionCount++;
-            // eslint-disable-next-line max-len
-            while (this.form.value[this.optionCount]!==undefined) {
-              this.optionCount++;
+            if (!data.price.match('^(\\d+(\\.\\d{0,2})?|\\.?\\d{1,2})$')) {
+              await this.presentToast('Please enter a valid price.');
             }
-            // eslint-disable-next-line max-len
-            this.form.addControl(String(this.optionCount), new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z ]+$'), Validators.maxLength(10), Validators.minLength(6)]));
+            else {
+              const key = this.name+this.form.value[this.optionCount];
+              console.log(`stores/${(this.uid)}/items/${(this.product.editItemId)}/optionPrice/${(key)}`);
+              const trackOrderRef = doc(this._firestore, `stores/${(this.uid)}/items/${(this.product.editItemId)}/optionPrice/${(key)}`);
+              await setDoc(trackOrderRef, {
+                price: data.price
+              });
+              await this.refreshPrice(this.form.value[this.optionCount], data.price);
+              // eslint-disable-next-line max-len
+              this.optionCount++;
+              // eslint-disable-next-line max-len
+              while (this.form.value[this.optionCount]!==undefined) {
+                this.optionCount++;
+              }
+              // eslint-disable-next-line max-len
+              this.form.addControl(String(this.optionCount), new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z ]+$'), Validators.maxLength(10), Validators.minLength(6)]));
+            }
           }
         }
       ]
     });
     await alert.present();
+  }
+
+  async presentToast(message) {
+    const toast = await this.toastController.create({
+      message,
+      duration: 2000
+    });
+    await toast.present();
   }
 
   async back() {

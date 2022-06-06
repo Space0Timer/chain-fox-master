@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {doc, Firestore, getDoc} from '@angular/fire/firestore';
 import {AuthService} from '../../../../services/auth/auth.service';
-import {IrohaService} from '../../../../services/iroha.service';
+import {IrohaService} from '../../../../services/iroha/iroha.service';
 import {ICartCard} from '../../../../shared';
 import {Transactions} from "../../../../shared/components/cards/transactions/transactions.component";
 import {format, parseISO} from "date-fns";
@@ -33,8 +33,6 @@ export class ListPage implements OnInit {
     await this.iroha.getTransactions();
     await this.getList();
   }
-
-
 
   async getList() {
     this.iroha.txs.forEach(c => {

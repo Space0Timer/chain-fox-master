@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ProductService} from '../../services/cafe/product.service';
+import {ProductService} from '../../services/store/product.service';
 import {Router} from '@angular/router';
 import {doc, Firestore, getDoc, setDoc} from "@angular/fire/firestore";
 import {ICartCard} from "../../shared";
@@ -7,6 +7,7 @@ import {AngularFirestore, DocumentData} from "@angular/fire/compat/firestore";
 import {AuthService} from "../../services/auth/auth.service";
 import {MyCartPage} from "../my-cart/my-cart.page";
 import {MenuController} from "@ionic/angular";
+import {StorageService} from "../../services/storage/storage.service";
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.page.html',
@@ -28,7 +29,8 @@ export class CheckoutPage implements OnInit {
     private afs: AngularFirestore,
     private _firestore: Firestore,
     private ionicAuthService: AuthService,
-    private menu: MenuController
+    private menu: MenuController,
+    private storage: StorageService
   ) {
     this.menu.enable(false);
   }
@@ -40,6 +42,7 @@ export class CheckoutPage implements OnInit {
     this.addItemsToCart();
   }
 
+  // get details of orders and display on view for double checking
   async addItemsToCart() {
     let data: DocumentData;
     this.total = 0;
@@ -70,6 +73,8 @@ export class CheckoutPage implements OnInit {
         const optSnap = await getDoc(optionRef);
         optionSnap += Number(optSnap.data().price);
       }
+      const paymentDetails = this.product.orderNotePair.get(key);
+      const deliveryTime = this.product.orderTimePair.get(key);
       this.checkout.push(
         {
           name: dataSnap.name,
@@ -77,8 +82,10 @@ export class CheckoutPage implements OnInit {
           price: Number(dataSnap.price)+ optionSnap,
           image: dataSnap.imageUrl,
           id: key,
+          message: paymentDetails,
           ownerId: this.owner,
           quantity: value,
+          deliveryTime
         },
       );
       this.total += (Number(dataSnap.price)+optionSnap)*value;

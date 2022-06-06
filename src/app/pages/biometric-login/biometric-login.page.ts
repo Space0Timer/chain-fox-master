@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {AuthService} from "../../services/auth/auth.service";
-import {Router} from "@angular/router";
-import {Firestore} from "@angular/fire/firestore";
-import {IrohaService} from "../../services/iroha.service";
-import {AlertController, LoadingController, MenuController} from "@ionic/angular";
-import {AngularFireAuth} from "@angular/fire/compat/auth";
-import {StorageService} from "../../services/storage.service";
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from '../../services/auth/auth.service';
+import {Router} from '@angular/router';
+import {Firestore} from '@angular/fire/firestore';
+import {IrohaService} from '../../services/iroha/iroha.service';
+import {AlertController, IonRouterOutlet, LoadingController, MenuController, Platform} from '@ionic/angular';
+import {AngularFireAuth} from '@angular/fire/compat/auth';
+import {StorageService} from '../../services/storage/storage.service';
 
 @Component({
   selector: 'app-biometric-login',
@@ -31,7 +31,9 @@ export class BiometricLoginPage implements OnInit {
     private afAuth: AngularFireAuth,
     private alertController: AlertController,
     private menu: MenuController,
-    private storage: StorageService
+    private storage: StorageService,
+    private platform: Platform,
+    private routerOutlet: IonRouterOutlet
   ) {
 
     this.initForm();
@@ -39,13 +41,21 @@ export class BiometricLoginPage implements OnInit {
       this.currentUser = user;
     });
     this.menu.enable(false);
+    // back button on android returns to home
+    this.platform.backButton.subscribeWithPriority(-1, () => {
+      if (!this.routerOutlet.canGoBack()) {
+        this.router.navigateByUrl('/tabs', {replaceUrl: true});
+      }
+    });
+
   }
   async ionViewDidLeave() {
     await this.menu.enable(true);
   }
 
+  // check biometric activation status
   async ngOnInit() {
-    this.isToggled = await this.storage.get('bio-login') !== 'false';
+    this.isToggled = await this.storage.get('bio-login') === 'true';
   }
 
   initForm() {
@@ -55,10 +65,14 @@ export class BiometricLoginPage implements OnInit {
     });
   }
 
+  // detect changes on toggle
   async _ionChange(event) {
     console.log(await this.storage.get('bio-login'));
     if (this.isToggled) {
       if (await this.storage.get('bio-login') === 'false') {
+        await this.presentPrompt();
+      }
+      if (await this.storage.get('bio-login') === null) {
         await this.presentPrompt();
       }
     }
@@ -73,19 +87,6 @@ export class BiometricLoginPage implements OnInit {
     this.type = !this.type;
   }
 
-  async setBiometricLogin() {
-    this.authService.reAuth(this.form.value.email, this.form.value.password).then(async r => {
-      await this.authService.resetPassword(this.form.value.email)
-        .then(async d => {
-          await this.showAlert('Authentication Success', 'You ca.');
-        })
-        .catch(async e => {
-          await this.showAlert('Authentication Failed', e);
-        });
-    })
-      .catch(async e => await this.showAlert('Authentication Failed', e));
-
-  }
 
   async showAlert(header, message) {
     const alert = await this.alertController.create({

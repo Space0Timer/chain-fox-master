@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AlertController, AnimationController, IonRouterOutlet, MenuController, ModalController} from '@ionic/angular';
 import {Router} from '@angular/router';
 import {Firestore} from "@angular/fire/firestore";
-import {ProductService} from "../../services/cafe/product.service";
+import {ProductService} from "../../services/store/product.service";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {ChooseOptionsPage} from "../../shared/components/modal/choose-options/choose-options.page";
 
@@ -11,7 +11,7 @@ import {ChooseOptionsPage} from "../../shared/components/modal/choose-options/ch
   templateUrl: './item-details.page.html',
   styleUrls: ['./item-details.page.scss'],
 })
-export class ItemDetailsPage implements OnInit {
+export class ItemDetailsPage {
 
   name: string;
   price: string;
@@ -37,9 +37,15 @@ export class ItemDetailsPage implements OnInit {
   }
   async ionViewDidLeave() {
     await this.menu.enable(true);
+    this.name = '';
+    this.price = '';
+    this.description = '';
+    this.owner = '';
+    this.id = '';
+    this.image = '';
   }
 
-  ngOnInit() {
+  ionViewDidEnter() {
     this.getItemDetails();
     if (this.product.item.status === 'available') {
       this.cartIcon = 'Add to Cart';
@@ -48,6 +54,7 @@ export class ItemDetailsPage implements OnInit {
       this.cartIcon = 'Sold Out';
     }
   }
+
   async openChooseOptionsModal(id, owner) {
     this.product.editOption = true;
     this.product.itemId = id;
@@ -64,6 +71,7 @@ export class ItemDetailsPage implements OnInit {
     await this.product.addToFav(id, owner);
     await this.showAlert(this.product.item.name + ' is added to your favourites!');
   }
+
   getItemDetails() {
     this.name = this.product.item.name;
     this.price = this.product.item.price;
@@ -74,7 +82,7 @@ export class ItemDetailsPage implements OnInit {
   }
 
   back() {
-    this.router.navigate(['lunch']);
+    this.router.navigate(['store']);
   }
 
   goToCart() {

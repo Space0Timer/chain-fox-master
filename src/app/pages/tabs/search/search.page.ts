@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthService} from 'src/app/services/auth/auth.service';
-import {IonSearchbar, NavController, NavParams} from '@ionic/angular';
-import {Firestore} from '@angular/fire/firestore';
-import {IrohaService} from '../../../services/iroha.service';
-import {StorageService} from "../../../services/storage.service";
+import {AlertController, IonSearchbar, NavController, NavParams} from '@ionic/angular';
+import {collection, doc, Firestore, getDoc, getDocs, query} from '@angular/fire/firestore';
+import {IrohaService} from '../../../services/iroha/iroha.service';
+import {StorageService} from "../../../services/storage/storage.service";
 
 @Component({
   selector: 'app-search',
@@ -14,9 +14,10 @@ import {StorageService} from "../../../services/storage.service";
 
 export class SearchPage implements OnInit {
 
-  fav = [];
-
   @ViewChild('search', { static: false }) search: IonSearchbar;
+  fav =[];
+  private uid = this.ionicAuthService.getUid();
+  private id: any;
   private errorMsg: string;
   private successMsg: string;
   private spinner = false;
@@ -28,14 +29,31 @@ export class SearchPage implements OnInit {
     public navCtrl: NavController,
     public navParams: NavParams,
     public iroha: IrohaService,
-    public storage: StorageService
+    public storage: StorageService,
+    private alertController: AlertController
   ) {
   }
 
   async ngOnInit() {
-    this.fav = [await this.storage.get('favperson')];
+    const docRef = doc(this._firestore, 'users', this.uid);
+    const docSnap = await getDoc(docRef);
+    this.id = docSnap.data().username.concat('@test');
+    this.iroha.wallet.name = '';
+    await this.iroha.setName(this.id);
     this.iroha.otherWallet.name = '';
+    await this.iroha.getTransactions();
+    await this.getList();
+    this.fav = [...new Set(this.fav)];
+    console.log(this.iroha.wallet.name);
   }
+
+  async getList() {
+    this.iroha.txs.forEach(c => {
+        this.fav.push(c.to);
+      }
+    );
+  }
+
 
   ionViewWillEnter() {
     setTimeout(() => {
@@ -49,6 +67,7 @@ export class SearchPage implements OnInit {
 
   frequentReceivers(fav) {
     this.iroha.otherWallet.name = fav;
+    console.log(this.iroha.otherWallet.name);
     this.getRoute();
   }
 
@@ -69,6 +88,29 @@ export class SearchPage implements OnInit {
 
   getRoute() {
     this.router.navigate(['user-details']);
+  }
+
+  async showAlertLogOut(header, message) {
+    const alert = await this.alertController.create({
+      header,
+      message,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'OK',
+          handler: async data => {
+            this.logOut();
+          }
+        }
+      ]
+    });
+    await alert.present();
   }
 
   logOut() {

@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import {Router} from '@angular/router';
-import SwiperCore, { SwiperOptions } from 'swiper';
-import {MenuController} from "@ionic/angular";
-import {SplashScreen} from "@capacitor/splash-screen";
-import {StorageService} from "../../services/storage.service";
+import { SwiperOptions } from 'swiper';
+import {IonRouterOutlet, MenuController, Platform} from '@ionic/angular';
+import {SplashScreen} from '@capacitor/splash-screen';
+import {StorageService} from '../../services/storage/storage.service';
+import {doc, Firestore, getDoc} from '@angular/fire/firestore';
+import {App} from '@capacitor/app';
 
 @Component({
   selector: 'app-auth-screen',
@@ -14,7 +16,9 @@ import {StorageService} from "../../services/storage.service";
 
 export class AuthScreenPage implements OnInit {
 
+  options = [];
   segmentValue = '1';
+  // image slides settings
   config: SwiperOptions = {
     slidesPerView: 3,
     spaceBetween: 50,
@@ -23,9 +27,17 @@ export class AuthScreenPage implements OnInit {
     scrollbar: { draggable: true },
   };
   constructor(private auth: AuthService, private router: Router, private menu: MenuController,
-              private storage: StorageService) {
+              private storage: StorageService, private _firestore: Firestore,
+              private platform: Platform,
+              private routerOutlet: IonRouterOutlet) {
 
     this.menu.enable(false);
+    // enable the back button to exit the app on Android devices
+    this.platform.backButton.subscribeWithPriority(-1, () => {
+      if (!this.routerOutlet.canGoBack()) {
+        App.exitApp();
+      }
+    });
   }
   slidesDidLoad(slides) {
     slides.startAutoplay();
@@ -38,36 +50,28 @@ export class AuthScreenPage implements OnInit {
     console.log(this.auth.biometricLogin);
   }
 
+  // get slider image from database
+  async getImagesFromFirebase() {
+    for (const i of Array(3).keys()) {
+      const imageRef = doc(this._firestore, `images/info${(i + 1)}`);
+      const imageSnap = await getDoc(imageRef);
+      const imageName = imageSnap.data().url;
+      this.options.push(imageName);
+    }
+  }
+
   async ngOnInit() {
+    await this.getImagesFromFirebase();
     await SplashScreen.hide();
   }
 
-
+  // check if the users switches from login to sign up and vice versa
   segmentChanged(event) {
-    console.log(event);
     this.segmentValue = event.detail.value;
   }
 
-  checkAuth() {
-    this.auth.checkAuth().then(response => {
-      console.log(response);
-      if(response) {return true;}
-      this.navigate();
-      return false;
-    })
-      .catch(e => {
-        this.navigate();
-        return false;
-      });
-  }
   navigate() {
     this.router.navigateByUrl('/tabs', {replaceUrl: true});
   }
 
-  onSwiper([swiper]) {
-    console.log(swiper);
-  }
-  onSlideChange() {
-    console.log('slide change');
-  }
 }

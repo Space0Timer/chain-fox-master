@@ -11,7 +11,140 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\n  <ion-toolbar>\n    <ion-title>\n      Track Orders\n    </ion-title>\n    <ion-buttons slot=\"start\">\n      <ion-icon (click)=\"back()\" color=\"primary\" slot=\"icon-only\" name=\"chevron-back-outline\"></ion-icon>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-refresher slot=\"fixed\" (ionRefresh)=\"doRefresh($event)\">\n    <ion-refresher-content></ion-refresher-content>\n  </ion-refresher>\n  <ion-row style=\"padding-left: 0\">\n    <ion-col size=\"10\">\n      <ion-text  color=\"primary\" style=\"font-size: 26px; font-weight: bold\">Current Items</ion-text>\n    </ion-col>\n  </ion-row>\n  <div class=\"center\">\n    <div class = \"skill\">\n      <div class = \"outer\">\n        <div class = \"inner\">\n          <div class = \"number\">\n            {{this.product.percentage}}%\n          </div>\n        </div>\n      </div>\n    </div>\n    <svg class = \"svg25\" xmlns=\"http://www.w3.org/2000/svg\"  width=\"160px\" height=\"160px\" *ngIf=\"this.product.percentage === 25\">\n      <defs>\n        <linearGradient id=\"GradientColor\">\n          <stop offset=\"0%\" stop-color=\"#e91e63\" />\n          <stop offset=\"100%\" stop-color=\"#673ab7\" />\n        </linearGradient>\n      </defs>\n      <circle class = \"circle25\" cx=\"80\" cy=\"80\" r=\"70\" stroke-linecap=\"round\" />\n    </svg>\n    <svg class = \"svg50\" xmlns=\"http://www.w3.org/2000/svg\"  width=\"160px\" height=\"160px\" *ngIf=\"this.product.percentage === 50\">\n      <defs>\n        <linearGradient id=\"GradientColor\">\n          <stop offset=\"0%\" stop-color=\"#e91e63\" />\n          <stop offset=\"100%\" stop-color=\"#673ab7\" />\n        </linearGradient>\n      </defs>\n      <circle class = \"circle50\" cx=\"80\" cy=\"80\" r=\"70\" stroke-linecap=\"round\" />\n    </svg>\n    <svg class = \"svg75\" xmlns=\"http://www.w3.org/2000/svg\"  width=\"160px\" height=\"160px\" *ngIf=\"this.product.percentage === 75\">\n      <defs>\n        <linearGradient id=\"GradientColor\">\n          <stop offset=\"0%\" stop-color=\"#e91e63\" />\n          <stop offset=\"100%\" stop-color=\"#673ab7\" />\n        </linearGradient>\n      </defs>\n      <circle class = \"circle75\" cx=\"80\" cy=\"80\" r=\"70\" stroke-linecap=\"round\" />\n    </svg>\n    <svg class = \"svg100\" xmlns=\"http://www.w3.org/2000/svg\"  width=\"160px\" height=\"160px\" *ngIf=\"this.product.percentage === 100\">\n      <defs>\n        <linearGradient id=\"GradientColor\">\n          <stop offset=\"0%\" stop-color=\"#e91e63\" />\n          <stop offset=\"100%\" stop-color=\"#673ab7\" />\n        </linearGradient>\n      </defs>\n      <circle class = \"circle100\" cx=\"80\" cy=\"80\" r=\"70\" stroke-linecap=\"round\" />\n    </svg>\n  </div>\n  <ion-text>Order Status: {{this.product.statusName}}</ion-text>\n  <div class=\"order-items\">\n    <ion-card-content>\n      <div class=\"item-info\">\n        <p>Item Name: {{this.product.orderName}}</p>\n        <p>User: {{this.product.user}}</p>\n        <p>Price: RM {{this.product.price}}</p>\n        <p>Order ID: {{this.product.orderId}}</p>\n      </div>\n    </ion-card-content>\n  </div>\n  <div class=\"ion-margin-vertical\">\n    <ion-button\n      [disabled]=\"(((this.icon==='Order fulfilled.' || this.icon==='Waiting for customer pick up.')))\"\n      class=\"ion-margin-horizontal\"\n      size=\"large\"\n      expand=\"block\"\n      shape=\"round\"\n      color=\"primary\"\n      (click)=\"informUser()\">\n      <ion-text>{{this.icon}}</ion-text>\n    </ion-button>\n  </div>\n</ion-content>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\n  <ion-toolbar>\n    <ion-title>\n      Track Orders\n    </ion-title>\n    <ion-buttons slot=\"start\">\n      <ion-icon (click)=\"back()\" color=\"primary\" slot=\"icon-only\" name=\"chevron-back-outline\"></ion-icon>\n    </ion-buttons>\n    <ion-buttons slot=\"end\">\n      <ion-button (click)=\"chat(this.product.buyer, this.id)\">\n        <ion-icon name=\"chatbox-ellipses-outline\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-refresher slot=\"fixed\" (ionRefresh)=\"doRefresh($event)\">\n    <ion-refresher-content></ion-refresher-content>\n  </ion-refresher>\n  <ion-row style=\"padding-left: 0\">\n    <ion-col size=\"10\">\n      <ion-text  color=\"primary\" style=\"font-size: 26px; font-weight: bold\">Current Items</ion-text>\n    </ion-col>\n  </ion-row>\n  <div class=\"center\">\n    <div class = \"skill\">\n      <div class = \"outer\">\n        <div class = \"inner\">\n          <div class = \"number\">\n            {{this.product.percentage}}%\n          </div>\n        </div>\n      </div>\n    </div>\n    <svg class = \"svg25\" xmlns=\"http://www.w3.org/2000/svg\"  width=\"160px\" height=\"160px\" *ngIf=\"this.product.percentage === 25\">\n      <defs>\n        <linearGradient id=\"GradientColor\">\n          <stop offset=\"0%\" stop-color=\"#e91e63\" />\n          <stop offset=\"100%\" stop-color=\"#673ab7\" />\n        </linearGradient>\n      </defs>\n      <circle class = \"circle25\" cx=\"80\" cy=\"80\" r=\"70\" stroke-linecap=\"round\" />\n    </svg>\n    <svg class = \"svg50\" xmlns=\"http://www.w3.org/2000/svg\"  width=\"160px\" height=\"160px\" *ngIf=\"this.product.percentage === 50\">\n      <defs>\n        <linearGradient id=\"GradientColor\">\n          <stop offset=\"0%\" stop-color=\"#e91e63\" />\n          <stop offset=\"100%\" stop-color=\"#673ab7\" />\n        </linearGradient>\n      </defs>\n      <circle class = \"circle50\" cx=\"80\" cy=\"80\" r=\"70\" stroke-linecap=\"round\" />\n    </svg>\n    <svg class = \"svg75\" xmlns=\"http://www.w3.org/2000/svg\"  width=\"160px\" height=\"160px\" *ngIf=\"this.product.percentage === 75\">\n      <defs>\n        <linearGradient id=\"GradientColor\">\n          <stop offset=\"0%\" stop-color=\"#e91e63\" />\n          <stop offset=\"100%\" stop-color=\"#673ab7\" />\n        </linearGradient>\n      </defs>\n      <circle class = \"circle75\" cx=\"80\" cy=\"80\" r=\"70\" stroke-linecap=\"round\" />\n    </svg>\n    <svg class = \"svg100\" xmlns=\"http://www.w3.org/2000/svg\"  width=\"160px\" height=\"160px\" *ngIf=\"this.product.percentage === 100\">\n      <defs>\n        <linearGradient id=\"GradientColor\">\n          <stop offset=\"0%\" stop-color=\"#e91e63\" />\n          <stop offset=\"100%\" stop-color=\"#673ab7\" />\n        </linearGradient>\n      </defs>\n      <circle class = \"circle100\" cx=\"80\" cy=\"80\" r=\"70\" stroke-linecap=\"round\" />\n    </svg>\n  </div>\n  <ion-text>Order Status: {{this.product.statusName}}</ion-text>\n  <div class=\"order-items\">\n    <ion-card-content>\n      <div class=\"item-info\">\n        <p>Item Name: {{this.product.orderName}}</p>\n        <p>Options: </p>\n        <p *ngFor=\"let entry of option\">{{entry.name}} - {{entry.value}}&nbsp;</p>\n        <p>User: {{this.product.user}}</p>\n        <p>Price: RM {{this.product.price}}</p>\n        <p>Order ID: {{this.product.orderId}}</p>\n        <p>Pickup Time: {{this.product.deliveryTime}}</p>\n      </div>\n    </ion-card-content>\n  </div>\n  <div class=\"ion-margin-vertical\">\n    <ion-button\n      [disabled]=\"(((this.icon==='Order fulfilled.' || this.icon==='Waiting for customer pick up.')))\"\n      class=\"ion-margin-horizontal\"\n      size=\"large\"\n      expand=\"block\"\n      shape=\"round\"\n      color=\"primary\"\n      (click)=\"showAlertComplete('Update status', 'Are you sure?')\">\n      <ion-text>{{this.icon}}</ion-text>\n    </ion-button>\n  </div>\n</ion-content>\n");
+
+/***/ }),
+
+/***/ 83946:
+/*!****************************************************!*\
+  !*** ./node_modules/date-fns/esm/getDate/index.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ getDate)
+/* harmony export */ });
+/* harmony import */ var _toDate_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../toDate/index.js */ 37342);
+/* harmony import */ var _lib_requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../_lib/requiredArgs/index.js */ 97096);
+
+
+/**
+ * @name getDate
+ * @category Day Helpers
+ * @summary Get the day of the month of the given date.
+ *
+ * @description
+ * Get the day of the month of the given date.
+ *
+ * ### v2.0.0 breaking changes:
+ *
+ * - [Changes that are common for the whole library](https://github.com/date-fns/date-fns/blob/master/docs/upgradeGuide.md#Common-Changes).
+ *
+ * @param {Date|Number} date - the given date
+ * @returns {Number} the day of month
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // Which day of the month is 29 February 2012?
+ * const result = getDate(new Date(2012, 1, 29))
+ * //=> 29
+ */
+
+function getDate(dirtyDate) {
+  (0,_lib_requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__["default"])(1, arguments);
+  var date = (0,_toDate_index_js__WEBPACK_IMPORTED_MODULE_1__["default"])(dirtyDate);
+  var dayOfMonth = date.getDate();
+  return dayOfMonth;
+}
+
+/***/ }),
+
+/***/ 686:
+/*!*****************************************************!*\
+  !*** ./node_modules/date-fns/esm/getMonth/index.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ getMonth)
+/* harmony export */ });
+/* harmony import */ var _toDate_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../toDate/index.js */ 37342);
+/* harmony import */ var _lib_requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../_lib/requiredArgs/index.js */ 97096);
+
+
+/**
+ * @name getMonth
+ * @category Month Helpers
+ * @summary Get the month of the given date.
+ *
+ * @description
+ * Get the month of the given date.
+ *
+ * ### v2.0.0 breaking changes:
+ *
+ * - [Changes that are common for the whole library](https://github.com/date-fns/date-fns/blob/master/docs/upgradeGuide.md#Common-Changes).
+ *
+ * @param {Date|Number} date - the given date
+ * @returns {Number} the month
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // Which month is 29 February 2012?
+ * const result = getMonth(new Date(2012, 1, 29))
+ * //=> 1
+ */
+
+function getMonth(dirtyDate) {
+  (0,_lib_requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__["default"])(1, arguments);
+  var date = (0,_toDate_index_js__WEBPACK_IMPORTED_MODULE_1__["default"])(dirtyDate);
+  var month = date.getMonth();
+  return month;
+}
+
+/***/ }),
+
+/***/ 35925:
+/*!****************************************************!*\
+  !*** ./node_modules/date-fns/esm/getYear/index.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ getYear)
+/* harmony export */ });
+/* harmony import */ var _toDate_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../toDate/index.js */ 37342);
+/* harmony import */ var _lib_requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../_lib/requiredArgs/index.js */ 97096);
+
+
+/**
+ * @name getYear
+ * @category Year Helpers
+ * @summary Get the year of the given date.
+ *
+ * @description
+ * Get the year of the given date.
+ *
+ * ### v2.0.0 breaking changes:
+ *
+ * - [Changes that are common for the whole library](https://github.com/date-fns/date-fns/blob/master/docs/upgradeGuide.md#Common-Changes).
+ *
+ * @param {Date|Number} date - the given date
+ * @returns {Number} the year
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // Which year is 2 July 2014?
+ * const result = getYear(new Date(2014, 6, 2))
+ * //=> 2014
+ */
+
+function getYear(dirtyDate) {
+  (0,_lib_requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__["default"])(1, arguments);
+  return (0,_toDate_index_js__WEBPACK_IMPORTED_MODULE_1__["default"])(dirtyDate).getFullYear();
+}
 
 /***/ }),
 
@@ -104,17 +237,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "CheckStatusStorePage": () => (/* binding */ CheckStatusStorePage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 48111);
-/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_check_status_store_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./check-status-store.page.html */ 35329);
-/* harmony import */ var _check_status_store_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./check-status-store.page.scss */ 30846);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/core */ 14001);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ 13252);
-/* harmony import */ var _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/cafe/product.service */ 41575);
-/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tslib */ 48111);
+/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_check_status_store_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./check-status-store.page.html */ 35329);
+/* harmony import */ var _check_status_store_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./check-status-store.page.scss */ 27555);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/core */ 14001);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/router */ 13252);
+/* harmony import */ var _services_store_product_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/store/product.service */ 86250);
+/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
 /* harmony import */ var firebase_compat_app__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! firebase/compat/app */ 50947);
 /* harmony import */ var _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/auth/auth.service */ 68927);
-/* harmony import */ var _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/fire/compat/firestore */ 27091);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic/angular */ 91346);
+/* harmony import */ var _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/fire/compat/firestore */ 27091);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic/angular */ 91346);
+/* harmony import */ var _services_chat_chat_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../services/chat/chat.service */ 72362);
+
 
 
 
@@ -127,32 +262,37 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let CheckStatusStorePage = class CheckStatusStorePage {
-    constructor(router, product, _firestore, ionicAuthService, afs, menu) {
+    constructor(router, product, firestore, ionicAuthService, afs, menu, alertController, chatService) {
         this.router = router;
         this.product = product;
-        this._firestore = _firestore;
+        this.firestore = firestore;
         this.ionicAuthService = ionicAuthService;
         this.afs = afs;
         this.menu = menu;
+        this.alertController = alertController;
+        this.chatService = chatService;
         this.percentage = 0;
         this.orderStatus = '';
         this.icon = '';
+        this.option = [];
+        this.options = [];
         this.id = this.ionicAuthService.getUid();
         this.menu.enable(false);
     }
     ionViewDidLeave() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
             yield this.menu.enable(true);
         });
     }
     ngOnInit() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
             yield this.changeIcon();
             yield this.updateStatus();
+            yield this.getOptions();
         });
     }
     doRefresh(event) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
             yield this.changeIcon();
             yield this.updateStatus();
             setTimeout(() => {
@@ -161,16 +301,38 @@ let CheckStatusStorePage = class CheckStatusStorePage {
         });
     }
     updateStatus() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
             try {
-                const orderRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.doc)(this._firestore, `trackOrders/${(this.id)}/activeOrders/${(this.product.orderId)}`);
-                const orderSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.getDoc)(orderRef);
+                const orderRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_7__.doc)(this.firestore, `trackOrders/${(this.id)}/activeOrders/${(this.product.orderId)}`);
+                const orderSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_7__.getDoc)(orderRef);
                 const dataSnap = orderSnap.data();
                 this.product.status = dataSnap.status;
                 yield this.product.changeStatus('status');
             }
             catch (_a) {
                 yield this.router.navigate(['track-orders']);
+            }
+        });
+    }
+    getOptions() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+            this.options = [];
+            const opt = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_7__.collection)(this.firestore, `trackOrders/${(this.id)}/activeOrders/${(this.product.orderId)}/options`);
+            const optSnapshot = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_7__.getDocs)(opt);
+            optSnapshot.forEach((docs) => {
+                console.log(docs.id, ' => ', docs.data());
+                this.options.push({
+                    data: docs.data()
+                });
+            });
+            // eslint-disable-next-line guard-for-in
+            for (const i in this.options) {
+                const key = Object.keys(this.options[i].data);
+                const value = Object.values(this.options[i].data);
+                this.option.push({
+                    name: key,
+                    value
+                });
             }
         });
     }
@@ -192,7 +354,7 @@ let CheckStatusStorePage = class CheckStatusStorePage {
     }
     // change user order status
     informUser() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
             switch (this.product.status) {
                 case 'paid':
                     this.product.status = 'prepare';
@@ -221,22 +383,53 @@ let CheckStatusStorePage = class CheckStatusStorePage {
             }
         });
     }
+    showAlertComplete(header, message) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+            const alert = yield this.alertController.create({
+                header,
+                message,
+                buttons: [
+                    {
+                        text: 'Cancel',
+                        role: 'cancel',
+                        handler: data => {
+                            console.log('Cancel clicked');
+                        }
+                    },
+                    {
+                        text: 'OK',
+                        handler: (data) => (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+                            yield this.informUser();
+                        })
+                    }
+                ]
+            });
+            yield alert.present();
+        });
+    }
     back() {
         this.router.navigate(['track-orders']);
     }
+    chat() {
+        this.chatService.chatName = this.product.user;
+        this.chatService.otherId = this.product.userId;
+        this.router.navigate(['chat']);
+    }
 };
 CheckStatusStorePage.ctorParameters = () => [
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__.Router },
-    { type: _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_2__.ProductService },
-    { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__.Firestore },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_8__.Router },
+    { type: _services_store_product_service__WEBPACK_IMPORTED_MODULE_2__.ProductService },
+    { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_7__.Firestore },
     { type: _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_4__.AuthService },
-    { type: _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_8__.AngularFirestore },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_9__.MenuController }
+    { type: _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_9__.AngularFirestore },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_10__.MenuController },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_10__.AlertController },
+    { type: _services_chat_chat_service__WEBPACK_IMPORTED_MODULE_5__.ChatService }
 ];
-CheckStatusStorePage = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_10__.Component)({
+CheckStatusStorePage = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_11__.Component)({
         selector: 'app-check-status-store',
-        template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_check_status_store_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        template: _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_check_status_store_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_check_status_store_page_scss__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], CheckStatusStorePage);
@@ -245,7 +438,127 @@ CheckStatusStorePage = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
 
 /***/ }),
 
-/***/ 30846:
+/***/ 72362:
+/*!***********************************************!*\
+  !*** ./src/app/services/chat/chat.service.ts ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ChatService": () => (/* binding */ ChatService)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 48111);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/core */ 14001);
+/* harmony import */ var firebase_compat_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/compat/app */ 50947);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs/operators */ 62257);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rxjs/operators */ 8343);
+/* harmony import */ var _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/fire/compat/firestore */ 27091);
+/* harmony import */ var _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/fire/compat/auth */ 60111);
+/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! date-fns */ 83946);
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! date-fns */ 686);
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! date-fns */ 35925);
+/* harmony import */ var _store_product_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store/product.service */ 86250);
+
+
+
+
+
+
+
+
+
+let ChatService = class ChatService {
+    constructor(afAuth, afs, product, _firestore) {
+        this.afAuth = afAuth;
+        this.afs = afs;
+        this.product = product;
+        this._firestore = _firestore;
+        this.currentUser = null;
+        this.keys = [];
+        this.chatName = '';
+        this.chatId = '';
+        this.otherId = '';
+        this.afAuth.onAuthStateChanged(user => {
+            this.currentUser = user;
+        });
+    }
+    addChatMessage(msg, idSender, idReceiver) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
+            let msgId = '';
+            yield this.afs.collection('messages').doc(idSender).update({
+                [idReceiver]: 1,
+            });
+            yield this.afs.collection('messages/' + idSender + '/' + idReceiver).add({
+                msg,
+                from: this.currentUser.uid,
+                createdAt: firebase_compat_app__WEBPACK_IMPORTED_MODULE_0__["default"].firestore.FieldValue.serverTimestamp()
+            });
+            yield this.afs.collection('messages').doc(idReceiver).update({
+                [idSender]: 1,
+            });
+            yield this.afs.collection('messages/' + idReceiver + '/' + idSender).add({
+                msg,
+                from: this.currentUser.uid,
+                status: 'sent',
+                createdAt: firebase_compat_app__WEBPACK_IMPORTED_MODULE_0__["default"].firestore.FieldValue.serverTimestamp()
+            }).then(docRef => msgId = docRef.id);
+            yield this.afs.collection('messages/' + idReceiver + '/' + idSender).doc(msgId).update({
+                status: 'unread',
+            });
+        });
+    }
+    getDate(date) {
+        const curDate = new Date();
+        this.today = ((0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])(date) === (0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])(curDate) &&
+            (0,date_fns__WEBPACK_IMPORTED_MODULE_4__["default"])(date) === (0,date_fns__WEBPACK_IMPORTED_MODULE_4__["default"])(curDate) &&
+            (0,date_fns__WEBPACK_IMPORTED_MODULE_5__["default"])(date) === (0,date_fns__WEBPACK_IMPORTED_MODULE_5__["default"])(curDate));
+    }
+    // user chat
+    getChatMessages(idYou, idOthers) {
+        let users = [];
+        return this.getUsers().pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_6__.switchMap)(res => {
+            users = res;
+            // eslint-disable-next-line max-len
+            return this.afs.collection('messages/' + idYou + '/' + idOthers, ref => ref.orderBy('createdAt')).valueChanges({ idField: 'id' });
+        }), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_7__.map)(messages => {
+            for (const m of messages) {
+                m.fromName = this.getUserForMsg(m.from, users);
+                m.myMsg = this.currentUser.uid === m.from;
+            }
+            return messages;
+        }));
+    }
+    getUsers() {
+        return this.afs.collection('users').valueChanges({ idField: 'uid' });
+    }
+    getUserForMsg(msgFromId, users) {
+        for (const usr of users) {
+            if (usr.uid === msgFromId) {
+                return usr.email;
+            }
+        }
+        return 'Deleted';
+    }
+};
+ChatService.ctorParameters = () => [
+    { type: _angular_fire_compat_auth__WEBPACK_IMPORTED_MODULE_8__.AngularFireAuth },
+    { type: _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_9__.AngularFirestore },
+    { type: _store_product_service__WEBPACK_IMPORTED_MODULE_1__.ProductService },
+    { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_10__.Firestore }
+];
+ChatService = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_11__.Injectable)({
+        providedIn: 'root'
+    })
+], ChatService);
+
+
+
+/***/ }),
+
+/***/ 27555:
 /*!***********************************************************************!*\
   !*** ./src/app/pages/check-status-store/check-status-store.page.scss ***!
   \***********************************************************************/

@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {FirebaseUploadService} from "../../services/cafe/firebase-upload.service";
+import {FirebaseUploadService} from "../../services/utils/firebase-upload.service";
 import {Router} from "@angular/router";
-import {doc, Firestore, setDoc} from "@angular/fire/firestore";
+import {doc, Firestore, getDoc, setDoc} from "@angular/fire/firestore";
 import {AuthService} from "../../services/auth/auth.service";
-import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {AlertController, MenuController} from "@ionic/angular";
 
 @Component({
@@ -80,18 +79,26 @@ export class StartSellingPage implements OnInit {
       this.form.markAllAsTouched();
       return;
     }
-    if(this.imageUrl === '') {
-      this.errorMessage = 'You must upload an image for your storefront to proceed.';
-      return;
+      const userID = doc(this._firestore, `users/${(this.uid)}`);
+      const userIDSnap = await getDoc(userID);
+      const userIDRole = userIDSnap.data().role;
+      if (userIDRole === 'seller') {
+        if(this.imageUrl === '') {
+          this.errorMessage = 'You must upload an image for your storefront to proceed.';
+          return;
+        }
+        this.isLoading = true;
+        console.log(this.form.value);
+        await this.uploadStoreDetails(this.form.value);
+        await this.createTrackSales();
+        await this.createTrackOrders();
+        this.isLoading = false;
+        await this.showAlert('Creation Success', 'Your online store ' + this.form.value.name + ' has been created');
+      }
+      else {
+        await this.showAlert('Creation Failed', 'You are not authorised to perform this action. Please contact the app owner.')
+      }
     }
-    this.isLoading = true;
-    console.log(this.form.value);
-    await this.uploadStoreDetails(this.form.value);
-    await this.createTrackSales();
-    await this.createTrackOrders();
-    this.isLoading = false;
-    await this.showAlert('Creation Success', 'Your online store ' + this.form.value.name + ' has been created');
-  }
 
   async uploadStoreDetails(formValue) {
     // eslint-disable-next-line no-underscore-dangle

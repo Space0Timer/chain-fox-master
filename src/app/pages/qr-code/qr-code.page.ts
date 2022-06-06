@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
-import {IrohaService} from '../../services/iroha.service';
+import {IrohaService} from '../../services/iroha/iroha.service';
 import {Firestore} from '@angular/fire/firestore';
 import {AuthService} from '../../services/auth/auth.service';
 import {MenuController} from "@ionic/angular";

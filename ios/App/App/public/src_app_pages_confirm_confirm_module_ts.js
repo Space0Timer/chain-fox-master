@@ -15,40 +15,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 99469:
-/*!*************************************************************!*\
-  !*** ./node_modules/@capacitor/app/dist/esm/definitions.js ***!
-  \*************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-
-
-
-/***/ }),
-
-/***/ 94058:
-/*!*******************************************************!*\
-  !*** ./node_modules/@capacitor/app/dist/esm/index.js ***!
-  \*******************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "App": () => (/* binding */ App)
-/* harmony export */ });
-/* harmony import */ var _capacitor_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @capacitor/core */ 24249);
-/* harmony import */ var _definitions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./definitions */ 99469);
-
-const App = (0,_capacitor_core__WEBPACK_IMPORTED_MODULE_0__.registerPlugin)('App', {
-    web: () => __webpack_require__.e(/*! import() */ "node_modules_capacitor_app_dist_esm_web_js").then(__webpack_require__.bind(__webpack_require__, /*! ./web */ 21132)).then(m => new m.AppWeb()),
-});
-
-
-
-
-/***/ }),
-
 /***/ 16953:
 /*!*********************************************************!*\
   !*** ./src/app/pages/confirm/confirm-routing.module.ts ***!
@@ -96,16 +62,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "ConfirmPageModule": () => (/* binding */ ConfirmPageModule)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 48111);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 14001);
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common */ 28267);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/forms */ 18346);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic/angular */ 91346);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 48111);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 14001);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common */ 28267);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/forms */ 18346);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic/angular */ 91346);
 /* harmony import */ var _confirm_routing_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./confirm-routing.module */ 16953);
 /* harmony import */ var _confirm_page__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./confirm.page */ 23988);
-/* harmony import */ var _pin_code_pin_code_module__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../pin-code/pin-code.module */ 14596);
-/* harmony import */ var _shared__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../shared */ 54113);
-
+/* harmony import */ var _shared__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../shared */ 54113);
 
 
 
@@ -116,15 +80,14 @@ __webpack_require__.r(__webpack_exports__);
 
 let ConfirmPageModule = class ConfirmPageModule {
 };
-ConfirmPageModule = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.NgModule)({
+ConfirmPageModule = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.NgModule)({
         imports: [
-            _angular_common__WEBPACK_IMPORTED_MODULE_6__.CommonModule,
-            _angular_forms__WEBPACK_IMPORTED_MODULE_7__.FormsModule,
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.IonicModule,
+            _angular_common__WEBPACK_IMPORTED_MODULE_5__.CommonModule,
+            _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormsModule,
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.IonicModule,
             _confirm_routing_module__WEBPACK_IMPORTED_MODULE_0__.ConfirmPageRoutingModule,
-            _pin_code_pin_code_module__WEBPACK_IMPORTED_MODULE_2__.PinCodePageModule,
-            _shared__WEBPACK_IMPORTED_MODULE_3__.SharedModule
+            _shared__WEBPACK_IMPORTED_MODULE_2__.SharedModule
         ],
         declarations: [_confirm_page__WEBPACK_IMPORTED_MODULE_1__.ConfirmPage]
     })
@@ -145,16 +108,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "ConfirmPage": () => (/* binding */ ConfirmPage)
 /* harmony export */ });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! tslib */ 48111);
-/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_confirm_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./confirm.page.html */ 36863);
-/* harmony import */ var _confirm_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./confirm.page.scss */ 80919);
+/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_confirm_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./confirm.page.html */ 36863);
+/* harmony import */ var _confirm_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./confirm.page.scss */ 58431);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @angular/core */ 14001);
 /* harmony import */ var _services_auth_access_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/auth/access.service */ 47766);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/router */ 13252);
-/* harmony import */ var _services_iroha_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/iroha.service */ 49187);
+/* harmony import */ var _services_iroha_iroha_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/iroha/iroha.service */ 52857);
 /* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
 /* harmony import */ var _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/auth/auth.service */ 68927);
 /* harmony import */ var _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/fire/compat/firestore */ 27091);
-/* harmony import */ var _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../services/cafe/product.service */ 41575);
+/* harmony import */ var _services_store_product_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../services/store/product.service */ 86250);
 /* harmony import */ var firebase_compat_app__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! firebase/compat/app */ 50947);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @ionic/angular */ 91346);
 /* harmony import */ var capacitor_native_biometric__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! capacitor-native-biometric */ 41380);
@@ -227,10 +190,9 @@ let ConfirmPage = class ConfirmPage {
                 }).then((credentials) => {
                     // Authenticate using biometrics before logging the user in
                     capacitor_native_biometric__WEBPACK_IMPORTED_MODULE_7__.NativeBiometric.verifyIdentity({
-                        reason: "For easy log in",
-                        title: "Log in",
-                        subtitle: "Maybe add subtitle here?",
-                        description: "Maybe a description too?",
+                        reason: "Please verify your identity",
+                        title: "Verification",
+                        description: "You need to verify your identity to complete the payment.",
                     }).then(() => (0,tslib__WEBPACK_IMPORTED_MODULE_10__.__awaiter)(this, void 0, void 0, function* () {
                         // Authentication successful
                         yield this.payment();
@@ -250,6 +212,7 @@ let ConfirmPage = class ConfirmPage {
     ionViewDidEnter() {
         this.access.resetLogoutTimer();
     }
+    // get details of orders and display on view for double checking
     addItemsToCart() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_10__.__awaiter)(this, void 0, void 0, function* () {
             let data;
@@ -259,7 +222,6 @@ let ConfirmPage = class ConfirmPage {
             yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.getDoc)(itemIdRef)
                 .then(snap => { data = snap.data(); delete data.lastUpdate; delete data.id; });
             for (const key in data) {
-                console.log(key);
                 const idOwnerRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.doc)(this._firestore, `idOwner/${(key.split('@')[0])}`);
                 const idOwnerSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.getDoc)(idOwnerRef);
                 const idOwnerName = idOwnerSnap.data();
@@ -281,14 +243,18 @@ let ConfirmPage = class ConfirmPage {
                     const optSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.getDoc)(optionRef);
                     optionSnap += Number(optSnap.data().price);
                 }
+                const paymentDetails = this.product.orderNotePair.get(key);
+                const deliveryTime = this.product.orderTimePair.get(key);
                 this.checkout.push({
                     name: dataSnap.name,
                     owner: ownerName.name,
                     price: Number(dataSnap.price) + optionSnap,
                     image: dataSnap.imageUrl,
                     id: key,
+                    message: paymentDetails,
                     ownerId: this.owner,
                     quantity: value,
+                    deliveryTime: deliveryTime
                 });
                 this.total += (Number(dataSnap.price) + optionSnap) * value;
             }
@@ -435,7 +401,7 @@ let ConfirmPage = class ConfirmPage {
                     yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.setDoc)(optRef, {});
                     for (const key in this.options)
                         yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.updateDoc)(optRef, {
-                            [this.options[key].name]: [this.options[key].val]
+                            [this.options[key].name]: this.options[key].val
                         });
                     // add orders for stall
                     const trackActiveOrderRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.doc)(this._firestore, `trackOrders/${(this.owner)}/activeOrders/${(pushKey)}`);
@@ -460,7 +426,7 @@ let ConfirmPage = class ConfirmPage {
                     yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.setDoc)(optRef, {});
                     for (const key in this.options)
                         yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.updateDoc)(optRef, {
-                            [this.options[key].name]: [this.options[key].val]
+                            [this.options[key].name]: this.options[key].val
                         });
                     // add all orders for stall
                     const trackOrderRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.doc)(this._firestore, `trackOrders/${(this.owner)}/allOrders/${(pushKey)}`);
@@ -484,7 +450,7 @@ let ConfirmPage = class ConfirmPage {
                     yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.setDoc)(optRef, {});
                     for (const key in this.options)
                         yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.updateDoc)(optRef, {
-                            [this.options[key].name]: [this.options[key].val]
+                            [this.options[key].name]: this.options[key].val
                         });
                     // add to sales
                     const currentDate = new Date();
@@ -579,10 +545,10 @@ let ConfirmPage = class ConfirmPage {
 ConfirmPage.ctorParameters = () => [
     { type: _services_auth_access_service__WEBPACK_IMPORTED_MODULE_2__.AccessService },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_12__.Router },
-    { type: _services_iroha_service__WEBPACK_IMPORTED_MODULE_3__.IrohaService },
+    { type: _services_iroha_iroha_service__WEBPACK_IMPORTED_MODULE_3__.IrohaService },
     { type: _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_4__.AuthService },
     { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__.Firestore },
-    { type: _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_5__.ProductService },
+    { type: _services_store_product_service__WEBPACK_IMPORTED_MODULE_5__.ProductService },
     { type: _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_13__.AngularFirestore },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_14__.AlertController },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_14__.LoadingController },
@@ -593,7 +559,7 @@ ConfirmPage.ctorParameters = () => [
 ConfirmPage = (0,tslib__WEBPACK_IMPORTED_MODULE_10__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_15__.Component)({
         selector: 'app-confirm',
-        template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_confirm_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        template: _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_confirm_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_confirm_page_scss__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], ConfirmPage);
@@ -637,7 +603,7 @@ let AccessService = class AccessService {
         });
     }
     resetLogoutTimer() {
-        this.logoutTimer.next(100);
+        this.logoutTimer.next(300);
         this.decreaseTimer();
     }
     decreaseTimer() {
@@ -672,7 +638,7 @@ AccessService = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
 
 /***/ }),
 
-/***/ 80919:
+/***/ 58431:
 /*!*************************************************!*\
   !*** ./src/app/pages/confirm/confirm.page.scss ***!
   \*************************************************/

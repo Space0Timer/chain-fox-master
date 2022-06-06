@@ -106,15 +106,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "TopUpPage": () => (/* binding */ TopUpPage)
 /* harmony export */ });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 48111);
-/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_top_up_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./top-up.page.html */ 13196);
-/* harmony import */ var _top_up_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./top-up.page.scss */ 24153);
+/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_top_up_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./top-up.page.html */ 13196);
+/* harmony import */ var _top_up_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./top-up.page.scss */ 90018);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/core */ 14001);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/router */ 13252);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic/angular */ 91346);
 /* harmony import */ var src_app_services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/auth/auth.service */ 68927);
 /* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/forms */ 18346);
-/* harmony import */ var _services_iroha_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../services/iroha.service */ 49187);
+/* harmony import */ var _services_iroha_iroha_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../services/iroha/iroha.service */ 52857);
 /* harmony import */ var _capacitor_community_barcode_scanner__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @capacitor-community/barcode-scanner */ 72807);
 /* harmony import */ var _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/fire/compat/firestore */ 27091);
 
@@ -241,9 +241,9 @@ let TopUpPage = class TopUpPage {
                 console.log(this.form.value);
                 yield this.transferMoney();
                 this.iroha.wallet.name = '';
-                yield this.iroha.setName(this.id);
+                yield this.iroha.setName(this.username);
                 this.iroha.wallet.balance = 0;
-                yield this.iroha.setBalance(this.id);
+                yield this.iroha.setBalance(this.username);
             }));
         });
     }
@@ -266,8 +266,7 @@ let TopUpPage = class TopUpPage {
             const docRef = (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_7__.doc)(this._firestore, 'users', this.uid);
             const docSnap = yield (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_7__.getDoc)(docRef);
             if (docSnap.exists()) {
-                console.log(docSnap.data().username.concat('@test'));
-                this.id = docSnap.data().username.concat('@test');
+                this.username = docSnap.data().username.concat('@test');
                 // eslint-disable-next-line max-len
                 yield this.iroha.addSignatory(this.result);
                 yield this.getFirebaseData(this.result);
@@ -276,7 +275,7 @@ let TopUpPage = class TopUpPage {
                     yield this.showAlert('You entered the wrong amount!', 'Top Up Failed');
                 }
                 else {
-                    yield this.iroha.topUp(this.id, '', this.form.value.amount, this.prk).then((d) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+                    yield this.iroha.topUp(this.username, '', this.form.value.amount, this.prk).then((d) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
                         yield this.iroha.removeSignatory(this.result);
                         this.loading.dismiss();
                         yield this.showAlert('RM' + this.form.value.amount + ' has been added to your balance.', 'Top Up Success');
@@ -309,7 +308,7 @@ TopUpPage.ctorParameters = () => [
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_9__.Router },
     { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_7__.Firestore },
     { type: src_app_services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__.AuthService },
-    { type: _services_iroha_service__WEBPACK_IMPORTED_MODULE_3__.IrohaService },
+    { type: _services_iroha_iroha_service__WEBPACK_IMPORTED_MODULE_3__.IrohaService },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.AlertController },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.LoadingController },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.Platform },
@@ -319,7 +318,7 @@ TopUpPage.ctorParameters = () => [
 TopUpPage = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_11__.Component)({
         selector: 'app-top-up',
-        template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_top_up_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        template: _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_top_up_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_top_up_page_scss__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], TopUpPage);
@@ -328,7 +327,7 @@ TopUpPage = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
 
 /***/ }),
 
-/***/ 24153:
+/***/ 90018:
 /*!*********************************************************!*\
   !*** ./src/app/pages/tabs/home/top-up/top-up.page.scss ***!
   \*********************************************************/

@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ProductService} from "../../../../services/cafe/product.service";
-import {AlertController} from "@ionic/angular";
+import {ProductService} from "../../../../services/store/product.service";
+import {AlertController, IonRouterOutlet, ModalController} from "@ionic/angular";
+import {ChooseOptionsPage} from "../../modal/choose-options/choose-options.page";
 
 
 export interface IFavCard {
@@ -23,13 +24,22 @@ export class FavCardComponent implements OnInit {
   @Input() fav: IFavCard;
   @Output() childEvent: EventEmitter<any> = new EventEmitter();
   constructor(private product: ProductService,
-              private alertController: AlertController) { }
+              private alertController: AlertController,
+              private modalController: ModalController,
+              private routerOutlet: IonRouterOutlet) { }
 
   ngOnInit() {}
 
-  async addToCart(name, id, ownerId) {
-    this.product.addToCart(id, ownerId);
-    await this.showAlert(name + ' (x1) is added to your cart!');
+  async openChooseOptionsModal(id, owner) {
+    this.product.editOption = true;
+    this.product.itemId = id;
+    this.product.itemOwner = owner;
+    const modal = await this.modalController.create({
+      component: ChooseOptionsPage,
+      swipeToClose: true,
+      presentingElement: this.routerOutlet.nativeEl,
+    });
+    return await modal.present();
   }
 
   async deleteItem() {

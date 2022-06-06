@@ -3,7 +3,7 @@ import {Router} from "@angular/router";
 import {AuthService} from "../../services/auth/auth.service";
 import {AlertController, LoadingController, MenuController} from "@ionic/angular";
 import {doc, Firestore, getDoc} from "@angular/fire/firestore";
-import {StorageService} from "../../services/storage.service";
+import {StorageService} from "../../services/storage/storage.service";
 import {SplashScreen} from "@capacitor/splash-screen";
 
 @Component({
@@ -13,20 +13,26 @@ import {SplashScreen} from "@capacitor/splash-screen";
 })
 export class VerifyEmailAddressPage implements OnInit {
   isLoading = false;
+  isLoading1 = false;
   constructor(private router: Router,
               private ionicAuthService: AuthService,
               private alertController: AlertController,
               private _firestore: Firestore,
               private storage: StorageService,
-              private menu: MenuController) {
-    this.menu.enable(false);
+              private menu: MenuController,) {
   }
+
+
   async ionViewDidLeave() {
     await this.menu.enable(true);
   }
 
+  async ionViewDidEnter() {
+    this.ionicAuthService.isLoadingSignUp = false;
+  }
 
   async ngOnInit() {
+    await this.menu.enable(false);
     await SplashScreen.hide();
   }
 
@@ -37,11 +43,13 @@ export class VerifyEmailAddressPage implements OnInit {
     const username1 = await this.storage.get(docSnap1.data().username);
     await this.ionicAuthService.reAuth(docSnap1.data().email, username1);
     if (await this.ionicAuthService.checkVerify() === true) {
-      await this.router.navigate(['tabs']);
+      this.isLoading = false;
+      await this.showAlert('Verification Success', 'Email has been verified! You can now login to your account.');
+      await this.router.navigate(['auth-screen']);
     }
     else {
       this.isLoading = false;
-      await this.showAlert('Email not yet verified!');
+      await this.showAlert('Verification Failed', 'Email not yet verified!');
     }
   }
 
@@ -49,9 +57,16 @@ export class VerifyEmailAddressPage implements OnInit {
     await this.router.navigate(['auth-screen']);
   }
 
-  async showAlert(message) {
+  async resend() {
+    this.isLoading1 = true;
+    await this.ionicAuthService.sendVerificationMail();
+    await this.showAlert('Verification mail sent', 'Please check your inbox or junk for new verification mail.');
+    this.isLoading1 = false;
+  }
+
+  async showAlert(header, message) {
     const alert = await this.alertController.create({
-      header: 'Authentication Failed',
+      header,
       message,
       buttons: ['OK'],
     });

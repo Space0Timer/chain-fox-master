@@ -3,11 +3,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import {doc, Firestore, getDoc} from '@angular/fire/firestore';
-import { IrohaService } from '../../../../services/iroha.service';
-import {AlertController, LoadingController} from '@ionic/angular';
+import { IrohaService } from '../../../../services/iroha/iroha.service';
+import {AlertController, LoadingController, MenuController} from '@ionic/angular';
 import {AngularFireAuth} from '@angular/fire/compat/auth';
 import {AvailableResult, BiometryType, Credentials, NativeBiometric} from 'capacitor-native-biometric';
-import {StorageService} from "../../../../services/storage.service";
+import {StorageService} from "../../../../services/storage/storage.service";
 
 @Component({
   selector: 'app-user-details',
@@ -33,20 +33,26 @@ export class UserDetailsPage implements OnInit {
     private loadingController: LoadingController,
     private afAuth: AngularFireAuth,
     private alertController: AlertController,
-    private storage: StorageService
+    private menu: MenuController
 ) {
     this.initForm();
     this.afAuth.onAuthStateChanged(user => {
       this.currentUser = user;
     });
-    };
+    this.menu.enable(false);
+  }
+  async ionViewDidLeave() {
+    await this.menu.enable(true);
+    this.iroha.otherWallet.name = '';
+  }
 
   ngOnInit() {
+
   }
 
   initForm() {
     this.form = new FormGroup({
-      amount: new FormControl(null, {validators: [Validators.required]}),
+      amount: new FormControl(null, {validators: [Validators.required, Validators.pattern('^(\\d+(\\.\\d{0,2})?|\\.?\\d{1,2})$')]}),
       reference: new FormControl(null, {validators: [Validators.required]}), // added email validator also
     });
   }
@@ -56,6 +62,10 @@ export class UserDetailsPage implements OnInit {
   }
 
   biometricAuth() {
+    if(!this.form.valid) {
+      this.form.markAllAsTouched();
+      return;
+    }
     NativeBiometric.isAvailable().then(
       async (result: AvailableResult) => {
         const isAvailable = result.isAvailable;
@@ -94,50 +104,28 @@ export class UserDetailsPage implements OnInit {
   }
 
   async onSubmit() {
-    if(!this.form.valid) {
-      this.form.markAllAsTouched();
-      return;
-    }
-    this.loadingController.create({
-      message: 'Sending coins...',
-    }).then(async overlay => {
-      this.loading = overlay;
-      this.loading.present();
-      // eslint-disable-next-line no-underscore-dangle
+
+    const temp = this.iroha.otherWallet.name;
+    this.isLoading = true;
+    // eslint-disable-next-line no-underscore-dangle
     const docRef = doc(this._firestore, 'users', this.currentUser.uid);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       const name = docSnap.data().username.concat('@test');
       this.iroha.wallet.name = '';
       await this.iroha.setName(name);
-      this.iroha.wallet.balance = 0;
-      await this.iroha.topUpVerify(name, '', '1');
-      await this.iroha.payment('admin', '', '1');
-      await this.iroha.setBalance(name);
     }
-      await this.iroha.sendMoney(this.form.value.reference, this.form.value.amount)
-        .then(async d => {
-          this.iroha.wallet.balance = '0';
-          await this.iroha.setBalance(this.iroha.wallet.name + '@test');
-          this.loading.dismiss();
-          // eslint-disable-next-line max-len
-          await this.showAlert('Transfer Success', 'You have sent RM' + this.form.value.amount + ' to ' + this.iroha.otherWallet.name + '.');
-          this.form.reset();
-          let fav = [await this.storage.get('favperson')];
-          fav.push(this.iroha.otherWallet.name);
-          fav = [...new Set(fav)];
-          await this.storage.set('favperson', fav);
-          this.iroha.otherWallet.name = '';
-        })
-        .catch(e => {
-      this.loading.dismiss();
-      this.showAlert('Transfer Failed', e);
-    });
-  });
+    await this.iroha.sendMoney(this.form.value.reference, this.form.value.amount, temp).catch(async e => {
+        this.isLoading = false;
+        await this.showAlert('Transfer Failed', e);
+        await this.router.navigate(['tabs']);
+      }
+    );
+    this.isLoading = false;
   }
 
   back() {
-    this.router.navigateByUrl('/tabs/home', {replaceUrl: true});
+    this.router.navigateByUrl('/tabs/search', {replaceUrl: true});
   }
 
   async showAlert(header, message) {

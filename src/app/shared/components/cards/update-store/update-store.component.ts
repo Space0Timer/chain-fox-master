@@ -2,9 +2,10 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {IFoodCard} from '../food-card/food-card.component';
 import {AuthService} from '../../../../services/auth/auth.service';
 import {AngularFirestore} from '@angular/fire/compat/firestore';
-import {IonRouterOutlet, ModalController} from '@ionic/angular';
+import {AlertController, IonRouterOutlet, ModalController} from '@ionic/angular';
 import {EditItemComponent} from "../../modal/edit-item/edit-item.component";
-import {ProductService} from '../../../../services/cafe/product.service';
+import {ProductService} from '../../../../services/store/product.service';
+import {doc, Firestore, getDoc} from "@angular/fire/firestore";
 
 @Component({
   selector: 'app-update-store-component',
@@ -20,8 +21,9 @@ export class UpdateStoreComponent{
               private afs: AngularFirestore,
               private modalCtrl: ModalController,
               private routerOutlet: IonRouterOutlet,
-              private product: ProductService) {
-
+              private product: ProductService,
+              private _firestore: Firestore,
+              private alertController: AlertController) {
   }
 
   async openEditItemModal(id, name, price, category, description) {
@@ -37,7 +39,6 @@ export class UpdateStoreComponent{
     });
     return await modal.present();
   }
-
 
   async soldOut(id) {
     await this.afs.collection(`stores/${(this.id)}/items`).doc(id).update({
@@ -56,5 +57,74 @@ export class UpdateStoreComponent{
     setTimeout(() => {
       this.childEvent.emit();
     }, 500);
+  }
+
+  async showAlertDelete(header, message, id) {
+    const alert = await this.alertController.create({
+      header,
+      message,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'OK',
+          handler: async data => {
+            await this.delete(id);
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  async showAlertSoldOut(header, message, id) {
+    const alert = await this.alertController.create({
+      header,
+      message,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'OK',
+          handler: async data => {
+            await this.soldOut(id);
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  async showAlertAvailable(header, message, id) {
+    const alert = await this.alertController.create({
+      header,
+      message,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'OK',
+          handler: async data => {
+            await this.restock(id);
+          }
+        }
+      ]
+    });
+    await alert.present();
   }
 }

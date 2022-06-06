@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 import {IOrderCard} from '../../shared';
 import {AuthService} from '../../services/auth/auth.service';
 import {AngularFirestore} from '@angular/fire/compat/firestore';
-import {ProductService} from '../../services/cafe/product.service';
+import {ProductService} from '../../services/store/product.service';
 import {collection, Firestore, getDocs} from '@angular/fire/firestore';
 import {format, parseISO} from 'date-fns';
 import {timestamp} from "rxjs/operators";
@@ -36,6 +36,7 @@ export class OrderHistoryPage {
   async ionViewWillEnter() {
     this.order = [];
     await this.addItemsToOrder();
+    this.searchedItem = this.order;
     this.product.orderHistory = true;
   }
 
@@ -66,7 +67,8 @@ export class OrderHistoryPage {
           amountPaid: docs.data().amountPaid,
           deliverTime: docs.data().deliverTime,
           orderTime: docs.data().orderTime,
-          quantity: docs.data().quantity
+          quantity: docs.data().quantity,
+          message: docs.data().message
         },
       );
     });

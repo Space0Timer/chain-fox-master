@@ -6,15 +6,17 @@ import { CafePage } from './cafe.page';
 
 import { CafePageRoutingModule } from './cafe-routing.module';
 import {SharedModule} from '../../../shared';
+import {StorePageModule} from "../../store/store.module";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    CafePageRoutingModule,
-    SharedModule,
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        CafePageRoutingModule,
+        SharedModule,
+        StorePageModule,
+    ],
   declarations: [CafePage],
 })
 export class CafePageModule {}

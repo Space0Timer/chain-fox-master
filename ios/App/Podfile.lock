@@ -3,7 +3,7 @@ PODS:
     - CapacitorCordova
   - CapacitorApp (1.1.0):
     - Capacitor
-  - CapacitorCommunityBarcodeScanner (2.1.0):
+  - CapacitorCommunityBarcodeScanner (2.1.1):
     - Capacitor
   - CapacitorCommunityFcm (2.0.2):
     - Capacitor
@@ -11,7 +11,7 @@ PODS:
   - CapacitorCordova (3.4.3)
   - CapacitorHaptics (1.1.4):
     - Capacitor
-  - CapacitorKeyboard (1.2.1):
+  - CapacitorKeyboard (1.2.2):
     - Capacitor
   - CapacitorNativeBiometric (0.0.1):
     - Capacitor
@@ -152,11 +152,11 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Capacitor: a8d7fa9fb3b50adc610247bb8d0310e83424f746
   CapacitorApp: c927de41f3853ffcccf5944090af8b501cf7ba9b
-  CapacitorCommunityBarcodeScanner: cdc2b3604229abd95fb1ac2f036c5fc1e74c83c5
+  CapacitorCommunityBarcodeScanner: bea57c113f36d86a12407d4094a1e6211f4e8b1e
   CapacitorCommunityFcm: af38ba6452104d1b3c4eef9007d9856b2805a6e8
   CapacitorCordova: 687b7d3ef4872c03aa2a2eb052d23008be9ad76b
   CapacitorHaptics: cbf7ea645db90c005c96bedd0034aa7a447fe5cc
-  CapacitorKeyboard: a80157079045a0353ecb33eac1c94e202afc97c6
+  CapacitorKeyboard: 2d8c03dfc9e15c459ec50ecb28c0cc7fe7acddac
   CapacitorNativeBiometric: 454f14f2cc471d8c3972431b997fa97f6070ad0d
   CapacitorNetwork: 185fc56570cfd4e3d41119d3ccd2a3ab3bd07806
   CapacitorPushNotifications: 5efe2b9e8f71995bb935ffed1d29539ad037dff2

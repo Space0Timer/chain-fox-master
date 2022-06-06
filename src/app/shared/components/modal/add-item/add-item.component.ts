@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {FirebaseUploadService} from '../../../../services/cafe/firebase-upload.service';
+import {FirebaseUploadService} from '../../../../services/utils/firebase-upload.service';
 import {Router} from '@angular/router';
 import {collection, doc, Firestore, getDocs, query, setDoc} from '@angular/fire/firestore';
 import {AuthService} from '../../../../services/auth/auth.service';
@@ -8,8 +8,8 @@ import {AngularFirestore} from '@angular/fire/compat/firestore';
 import {AlertController, ModalController} from '@ionic/angular';
 import {IFoodCard} from '../../cards';
 import {CustomiseOrderPage} from '../customise-order/customise-order.page';
-import {ProductService} from "../../../../services/cafe/product.service";
-import {StorageService} from "../../../../services/storage.service";
+import {ProductService} from '../../../../services/store/product.service';
+import {StorageService} from '../../../../services/storage/storage.service';
 
 @Component({
   selector: 'app-add-item',
@@ -45,11 +45,13 @@ export class AddItemComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.product.customOptions = [];
+    this.product.customOption = [];
   }
 
   async openCustomiseOrderModal(nameInput) {
     const name = nameInput;
-    for (const key in  this.product.customOptions) {
+    for (const key in this.product.customOptions) {
       if (this.product.customOptions[key].name === name) {
         this.product.customOption = this.product.customOptions[key].data;
         console.log(this.product.customOption);
@@ -143,12 +145,15 @@ export class AddItemComponent implements OnInit {
     await setDoc(dataRef, {
       owner: this.uid,
     });
-    if (this.product.customOptions !== []) {
-      for (const key in this.product.customOptions) {
-        dataRef = doc(this._firestore, `stores/${(this.uid)}/items/${(pushKey)}/options/${(this.product.customOptions[key].name)}`);
-        await setDoc(dataRef, this.product.customOptions[key].data);
-      }
-    }
+    dataRef = doc(this._firestore, `stores/${(this.uid)}/items/${(pushKey)}/options/default`);
+    await setDoc(dataRef, {
+      1: 'original',
+      name: 'default',
+    });
+    dataRef = doc(this._firestore, `stores/${(this.uid)}/items/${(pushKey)}/optionPrice/defaultoriginal`);
+    await setDoc(dataRef, {
+      price: 0
+    });
   }
 
   async back() {

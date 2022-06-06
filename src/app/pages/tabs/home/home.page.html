@@ -15,7 +15,7 @@
       <ion-button (click)="chat()">
         <ion-icon name="chatbubbles-outline"></ion-icon>
       </ion-button>
-      <ion-button (click)="logOut()">
+      <ion-button (click)="showAlertLogOut('Log out', 'Are you sure?')">
         <ion-icon name="lock-closed"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -30,7 +30,7 @@
     </ion-refresher-content>
   </ion-refresher>
   <div class="banner">
-    <img  src="assets/imgs/screen1.png" alt="">
+    <img src="{{this.image}}" alt="">
   </div>
   <div class="live-event">
     <img src="../../assets/wallet.png" />
@@ -45,9 +45,6 @@
         </div>
       </div>
   </div>
-  <div class="default-top-padding title">
-    <h2>Wallet Management</h2>
-  </div>
   <ion-grid style="margin: 5px 10px 0px 10px" >
     <ion-row class="ion-align-items-center ion-margin-top" >
       <ion-col size="6" *ngFor="let feature of features" class="ion-text-center">
@@ -60,14 +57,11 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <div class="default-top-padding title">
-    <h2>Promotions</h2>
-  </div>
-  <div class="ion-padding">
+  <div style="margin: 5px 10px 0px 10px" >
     <ion-col size="4">
       <ion-slides pager #mySlider class="slides" (ionSlidesDidLoad)="slidesDidLoad(mySlider)">
-        <ion-slide *ngFor="let number of [1,2,3]">
-          <img src="assets/imgs/screen{{number}}.png" alt="" width="640" height="360">
+        <ion-slide *ngFor="let img of options">
+          <img src="{{img}}" alt="" width="640" height="360">
         </ion-slide>
       </ion-slides>
     </ion-col>

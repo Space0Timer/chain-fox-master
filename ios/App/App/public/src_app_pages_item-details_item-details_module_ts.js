@@ -105,13 +105,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "ItemDetailsPage": () => (/* binding */ ItemDetailsPage)
 /* harmony export */ });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 48111);
-/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_item_details_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./item-details.page.html */ 30863);
-/* harmony import */ var _item_details_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./item-details.page.scss */ 51865);
+/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_item_details_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./item-details.page.html */ 30863);
+/* harmony import */ var _item_details_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./item-details.page.scss */ 50823);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core */ 14001);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ 91346);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ 13252);
 /* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
-/* harmony import */ var _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/cafe/product.service */ 41575);
+/* harmony import */ var _services_store_product_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/store/product.service */ 86250);
 /* harmony import */ var _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/fire/compat/firestore */ 27091);
 /* harmony import */ var _shared_components_modal_choose_options_choose_options_page__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../shared/components/modal/choose-options/choose-options.page */ 17542);
 
@@ -141,9 +141,15 @@ let ItemDetailsPage = class ItemDetailsPage {
     ionViewDidLeave() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             yield this.menu.enable(true);
+            this.name = '';
+            this.price = '';
+            this.description = '';
+            this.owner = '';
+            this.id = '';
+            this.image = '';
         });
     }
-    ngOnInit() {
+    ionViewDidEnter() {
         this.getItemDetails();
         if (this.product.item.status === 'available') {
             this.cartIcon = 'Add to Cart';
@@ -180,7 +186,7 @@ let ItemDetailsPage = class ItemDetailsPage {
         this.image = this.product.item.image;
     }
     back() {
-        this.router.navigate(['lunch']);
+        this.router.navigate(['store']);
     }
     goToCart() {
         this.router.navigate(['my-cart']);
@@ -200,7 +206,7 @@ ItemDetailsPage.ctorParameters = () => [
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_6__.Router },
     { type: _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_7__.AngularFirestore },
     { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_8__.Firestore },
-    { type: _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_2__.ProductService },
+    { type: _services_store_product_service__WEBPACK_IMPORTED_MODULE_2__.ProductService },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.AlertController },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.ModalController },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.IonRouterOutlet },
@@ -209,7 +215,7 @@ ItemDetailsPage.ctorParameters = () => [
 ItemDetailsPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.Component)({
         selector: 'app-item-details',
-        template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_item_details_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        template: _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_item_details_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_item_details_page_scss__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], ItemDetailsPage);
@@ -218,7 +224,7 @@ ItemDetailsPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
 
 /***/ }),
 
-/***/ 51865:
+/***/ 50823:
 /*!***********************************************************!*\
   !*** ./src/app/pages/item-details/item-details.page.scss ***!
   \***********************************************************/

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ProductService} from '../../../../services/cafe/product.service';
+import {ProductService} from '../../../../services/store/product.service';
 import {AlertController, ModalController} from '@ionic/angular';
 import {collection, doc, Firestore, getDoc, getDocs, query} from '@angular/fire/firestore';
 import {AuthService} from '../../../../services/auth/auth.service';
@@ -101,7 +101,8 @@ export class ChooseOptionsPage implements OnInit {
     this.quantity -= 1;
   }
   async addToCart() {
-    if (this.valueSelected === '') {
+    console.log(this.form);
+    if (this.valueSelected === '' && this.form.length !== 0) {
       await this.showAlert('Please pick an option.');
     }
     else {

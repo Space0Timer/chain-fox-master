@@ -108,14 +108,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "MyCartPage": () => (/* binding */ MyCartPage)
 /* harmony export */ });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 48111);
-/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_my_cart_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./my-cart.page.html */ 6769);
-/* harmony import */ var _my_cart_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./my-cart.page.scss */ 53608);
+/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_my_cart_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./my-cart.page.html */ 6769);
+/* harmony import */ var _my_cart_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./my-cart.page.scss */ 39281);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core */ 14001);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ 13252);
 /* harmony import */ var _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/auth/auth.service */ 68927);
 /* harmony import */ var _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/fire/compat/firestore */ 27091);
 /* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
-/* harmony import */ var _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/cafe/product.service */ 41575);
+/* harmony import */ var _services_store_product_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/store/product.service */ 86250);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic/angular */ 91346);
 
 
@@ -204,6 +204,8 @@ let MyCartPage = class MyCartPage {
                     image: dataSnap.imageUrl,
                     id: key,
                     ownerId: this.owner,
+                    message: '',
+                    deliveryTime: '',
                     quantity: value,
                 });
                 this.total += Number(dataSnap.price) + optionSnap;
@@ -214,6 +216,7 @@ let MyCartPage = class MyCartPage {
         this.cart = [];
         this.addItemsToCart();
     }
+    // check for illegal time (out business hours) pickup time
     checkOut() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             for (const key in this.keys) {
@@ -253,7 +256,7 @@ MyCartPage.ctorParameters = () => [
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_6__.Router },
     { type: _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__.AuthService },
     { type: _angular_fire_compat_firestore__WEBPACK_IMPORTED_MODULE_7__.AngularFirestore },
-    { type: _services_cafe_product_service__WEBPACK_IMPORTED_MODULE_3__.ProductService },
+    { type: _services_store_product_service__WEBPACK_IMPORTED_MODULE_3__.ProductService },
     { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__.Firestore },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.LoadingController },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.AlertController },
@@ -262,7 +265,7 @@ MyCartPage.ctorParameters = () => [
 MyCartPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.Component)({
         selector: 'app-my-cart',
-        template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_my_cart_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        template: _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_my_cart_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_my_cart_page_scss__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], MyCartPage);
@@ -271,7 +274,7 @@ MyCartPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
 
 /***/ }),
 
-/***/ 53608:
+/***/ 39281:
 /*!*************************************************!*\
   !*** ./src/app/pages/my-cart/my-cart.page.scss ***!
   \*************************************************/

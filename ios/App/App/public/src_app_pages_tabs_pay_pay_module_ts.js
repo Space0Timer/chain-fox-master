@@ -105,13 +105,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "PayPage": () => (/* binding */ PayPage)
 /* harmony export */ });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 48111);
-/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_pay_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./pay.page.html */ 56101);
-/* harmony import */ var _pay_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./pay.page.scss */ 65218);
+/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_pay_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./pay.page.html */ 56101);
+/* harmony import */ var _pay_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./pay.page.scss */ 26596);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 14001);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ 13252);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 91346);
 /* harmony import */ var _capacitor_community_barcode_scanner__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @capacitor-community/barcode-scanner */ 72807);
-/* harmony import */ var _services_iroha_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../services/iroha.service */ 49187);
+/* harmony import */ var _services_iroha_iroha_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../services/iroha/iroha.service */ 52857);
 
 
 
@@ -152,7 +152,10 @@ let PayPage = class PayPage {
                 if (result.hasContent) {
                     this.iroha.result = result.content;
                     this.scanActive = false;
-                    console.log(this.iroha.result);
+                    this.iroha.setOtherName(this.iroha.result + '@test').catch((e) => (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+                        yield this.showAlert('Invalid code', e);
+                        yield this.router.navigate(['tabs']);
+                    }));
                     yield this.router.navigate(['scan-pay']);
                 }
             }
@@ -209,13 +212,13 @@ let PayPage = class PayPage {
 PayPage.ctorParameters = () => [
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__.Router },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.Platform },
-    { type: _services_iroha_service__WEBPACK_IMPORTED_MODULE_3__.IrohaService },
+    { type: _services_iroha_iroha_service__WEBPACK_IMPORTED_MODULE_3__.IrohaService },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.AlertController }
 ];
 PayPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.Component)({
         selector: 'app-home',
-        template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_pay_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        template: _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_pay_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_pay_page_scss__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], PayPage);
@@ -224,7 +227,7 @@ PayPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
 
 /***/ }),
 
-/***/ 65218:
+/***/ 26596:
 /*!**********************************************!*\
   !*** ./src/app/pages/tabs/pay/pay.page.scss ***!
   \**********************************************/

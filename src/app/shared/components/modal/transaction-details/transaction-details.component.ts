@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ModalController} from "@ionic/angular";
-import {IrohaService} from "../../../../services/iroha.service";
+import {IrohaService} from "../../../../services/iroha/iroha.service";
 
 @Component({
   selector: 'app-transaction-details',

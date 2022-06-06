@@ -184,7 +184,7 @@ const routes = [
             },
             {
                 path: 'cafe',
-                loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_pages_tabs_cafe_cafe_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./cafe/cafe.module */ 63029)).then(m => m.CafePageModule)
+                loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_pages_store_store_module_ts"), __webpack_require__.e("src_app_pages_tabs_cafe_cafe_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./cafe/cafe.module */ 63029)).then(m => m.CafePageModule)
             },
             {
                 path: 'account',
@@ -259,8 +259,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "TabsPage": () => (/* binding */ TabsPage)
 /* harmony export */ });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 48111);
-/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_tabs_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./tabs.page.html */ 13869);
-/* harmony import */ var _tabs_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tabs.page.scss */ 73081);
+/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_tabs_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./tabs.page.html */ 13869);
+/* harmony import */ var _tabs_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tabs.page.scss */ 51202);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 14001);
 /* harmony import */ var _capacitor_keyboard__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @capacitor/keyboard */ 28126);
 /* harmony import */ var _robingenz_capacitor_badge__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @robingenz/capacitor-badge */ 96841);
@@ -299,7 +299,7 @@ TabsPage.propDecorators = {
 TabsPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Component)({
         selector: 'app-tabs',
-        template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_tabs_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        template: _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_tabs_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_tabs_page_scss__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], TabsPage);
@@ -308,7 +308,7 @@ TabsPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
 
 /***/ }),
 
-/***/ 73081:
+/***/ 51202:
 /*!*******************************************!*\
   !*** ./src/app/pages/tabs/tabs.page.scss ***!
   \*******************************************/

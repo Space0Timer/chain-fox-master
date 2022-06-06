@@ -6,7 +6,7 @@
 
 <ion-content>
   <div class="ion-padding">
-<p>Please check your email and verify your email address.</p>
+<p>Please check your email inbox or junk and verify your email address.</p>
   <p>You cannot proceed with this app with verifying your email.</p>
   <p>Your unverified new account will be deleted within 1 hour. You can use your account once it's verified.</p>
   <div class="ion-padding" *ngIf="!isLoading">
@@ -15,11 +15,22 @@
       <ion-icon class = ion-margin-horizontal name="arrow-forward-circle-outline"></ion-icon>
     </ion-button>
   </div>
-  <div class="ion-padding" *ngIf="isLoading">
-    <ion-button (click)="unlock()" expand="block" class="main-button">
-      <ion-spinner></ion-spinner>
-    </ion-button>
-  </div>
+    <div class="ion-padding" *ngIf="isLoading">
+      <ion-button (click)="unlock()" expand="block" class="main-button">
+        <ion-spinner></ion-spinner>
+      </ion-button>
+    </div>
+    <div class="ion-padding" *ngIf="!isLoading1">
+      <ion-button (click)="resend()" expand="block" class="main-button">
+        <ion-text class = ion-margin-horizontal >Resend verification email</ion-text>
+        <ion-icon class = ion-margin-horizontal name="arrow-forward-circle-outline"></ion-icon>
+      </ion-button>
+    </div>
+    <div class="ion-padding" *ngIf="isLoading1">
+      <ion-button (click)="unlock()" expand="block" class="main-button">
+        <ion-spinner></ion-spinner>
+      </ion-button>
+    </div>
   <p> Login with another account?</p>
   <div class="ion-padding">
     <ion-button (click)="switch()" expand="block" class="main-button">

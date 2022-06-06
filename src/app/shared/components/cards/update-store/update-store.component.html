@@ -5,19 +5,20 @@
       <ion-card-title style="font-size: 18px; padding-bottom: 5px">Item Name: {{food.name}}</ion-card-title>
       <ion-card-subtitle>Price: RM {{food.price}}</ion-card-subtitle>
       <ion-card-subtitle>Category: {{food.category}}</ion-card-subtitle>
+      <ion-card-subtitle>Status: {{food.status}}</ion-card-subtitle>
     </ion-col>
     <ion-col size="6" class="ion-text-right">
       <ion-buttons>
         <ion-button (click)="openEditItemModal(food.id, food.name, food.price, food.category, food.description)">
         <ion-icon name="pencil-outline" ></ion-icon>
       </ion-button>
-        <ion-button (click)="delete(food.id)">
+        <ion-button (click)="showAlertDelete('Delete item', 'Are you sure?', food.id)">
           <ion-icon name="trash-outline" ></ion-icon>
         </ion-button>
-        <ion-button (click)="soldOut(food.id)">
+        <ion-button (click)="showAlertSoldOut('Lock item from purchase', 'Are you sure?', food.id)">
           <ion-icon name="lock-closed-outline"></ion-icon>
         </ion-button>
-        <ion-button (click)="restock(food.id)">
+        <ion-button (click)="showAlertAvailable('Unlock item for purchase', 'Are you sure?',food.id)">
           <ion-icon name="lock-open-outline"></ion-icon>
         </ion-button>
       </ion-buttons>

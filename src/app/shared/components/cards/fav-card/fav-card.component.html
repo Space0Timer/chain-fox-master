@@ -1,12 +1,14 @@
-<ion-card mode="ios">
-  <ion-card-content>
-    <div class="item-info">
-  <img [src]="fav.image" />
-  <p style="margin-top: 5px">Item Name: {{ fav.name }}</p>
-  <p>Merchant: {{ fav.owner }}</p>
-  <p style="margin-bottom: 5px">Price: RM {{ fav.price }}</p>
-  </div>
-  <ion-icon name="trash-outline" (click) = "deleteItem()"></ion-icon>
-  <ion-button expand="block" (click)="addToCart(fav.name, fav.itemId, fav.ownerId)">Add to Cart</ion-button>
-  </ion-card-content>
-</ion-card>
+<ng-container *ngIf="fav">
+  <ion-card mode="ios">
+    <ion-card-content>
+      <div class="item-info">
+    <img [src]="fav.image" />
+    <p style="margin-top: 5px">Item Name: {{ fav.name }}</p>
+    <p>Merchant: {{ fav.owner }}</p>
+    <p style="margin-bottom: 5px">Price: RM {{ fav.price }}</p>
+    </div>
+    <ion-icon name="trash-outline" (click) = "deleteItem()"></ion-icon>
+    <ion-button expand="block" (click)="openChooseOptionsModal(fav.itemId, fav.ownerId)">Add to Cart</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ng-container>

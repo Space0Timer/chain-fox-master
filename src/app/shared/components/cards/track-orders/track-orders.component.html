@@ -6,13 +6,23 @@
         <p>Item Name: {{trackOrder.name}}</p>
         <p>Options: </p>
         <p *ngFor="let entry of option">{{entry.name}} - {{entry.value}}&nbsp;</p>
+        <p>Remark: {{trackOrder.message}}</p>
         <p>Customer: {{trackOrder.user}}</p>
         <p>Price: {{trackOrder.price}}</p>
         <p>Order Time: {{trackOrder.time}}</p>
-        <p>Deliver Time: {{trackOrder.deliverTime}}</p>
+        <p>Pickup Time: {{trackOrder.deliverTime}}</p>
         <p>Status: {{trackOrder.status}}</p>
-        <ion-button expand="block" class="main-button" (click) = 'cancelOrder(trackOrder.id, trackOrder.user, trackOrder.userId, trackOrder.amountPaid)'>Cancel Order</ion-button>
-        <ion-button expand="block" class="main-button" (click)="goToCheckStatusStore(trackOrder.name, trackOrder.id, trackOrder.price, trackOrder.user, trackOrder.status, trackOrder.userId)">Check Status</ion-button>
+        <ion-button *ngIf="!this.isLoading" expand="block" class="main-button" (click) = 'showAlertCancel("Cancel Order", "Are you sure?",  trackOrder.id, trackOrder.user, trackOrder.userId, trackOrder.amountPaid)'>Cancel Order</ion-button>
+        <ion-button
+          *ngIf="this.isLoading"
+          class="ion-margin-horizontal"
+          size="large"
+          expand="block"
+          shape="round"
+          color="primary">
+          <ion-spinner></ion-spinner>
+        </ion-button>
+        <ion-button expand="block" class="main-button" (click)="goToCheckStatusStore(trackOrder.name, trackOrder.id, trackOrder.price, trackOrder.user, trackOrder.status, trackOrder.userId, trackOrder.deliverTime)">Check Status</ion-button>
      </div>
     </ion-card-content>
   </ion-card>

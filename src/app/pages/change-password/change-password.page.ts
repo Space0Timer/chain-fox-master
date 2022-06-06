@@ -3,8 +3,8 @@ import {Router} from "@angular/router";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../services/auth/auth.service";
 import {Firestore} from "@angular/fire/firestore";
-import {IrohaService} from "../../services/iroha.service";
-import {AlertController, LoadingController, MenuController} from "@ionic/angular";
+import {IrohaService} from "../../services/iroha/iroha.service";
+import {AlertController, IonRouterOutlet, LoadingController, MenuController, Platform} from "@ionic/angular";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 
 @Component({
@@ -29,14 +29,22 @@ export class ChangePasswordPage implements OnInit {
     private loadingController: LoadingController,
     private afAuth: AngularFireAuth,
     private alertController: AlertController,
-    private menu: MenuController
+    private menu: MenuController,
+    private platform: Platform,
+    private routerOutlet: IonRouterOutlet
   ) {
-    this.initForm();
     this.afAuth.onAuthStateChanged(user => {
       this.currentUser = user;
     });
+    this.initForm();
     this.menu.enable(false);
+    this.platform.backButton.subscribeWithPriority(-1, () => {
+      if (!this.routerOutlet.canGoBack()) {
+        this.router.navigateByUrl('/tabs', {replaceUrl: true});
+      }
+    });
   }
+
   async ionViewDidLeave() {
     await this.menu.enable(true);
   }
@@ -55,6 +63,7 @@ export class ChangePasswordPage implements OnInit {
     this.type = !this.type;
   }
 
+  // verify the user by re-authentication, then only send the reset password email
   async changePassword() {
     this.isLoading = true;
     this.authService.reAuth(this.form.value.email, this.form.value.password).then(async r => {

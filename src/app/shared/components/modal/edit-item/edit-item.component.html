@@ -92,7 +92,7 @@
       </ion-col>
     </ion-row>
     <ion-item *ngFor="let customOption of this.product.customOptions">
-      <ion-card mode="ios" class="ion-padding">
+      <ion-card mode="ios" class="ion-padding" *ngIf="customOption.name!=='default'">
         <ion-row>
           <ion-col>
             <ion-card-title style="font-size: 18px; padding-top: 3px" >{{customOption.name}}</ion-card-title>
@@ -102,7 +102,7 @@
               <ion-button (click)="openCustomiseOrderModal(customOption.name)">
                 <ion-icon name="pencil-outline"></ion-icon>
               </ion-button>
-              <ion-button (click)="deleteCustomisation(customOption.name)">
+              <ion-button (click)="showAlertDelete('Delete customisation', 'Are you sure?', customOption.name)">
                 <ion-icon name="trash-outline"></ion-icon>
               </ion-button>
             </ion-buttons>

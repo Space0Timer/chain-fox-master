@@ -10,7 +10,7 @@ import {MenuController} from "@ionic/angular";
   templateUrl: './favourite.page.html',
   styleUrls: ['./favourite.page.scss'],
 })
-export class FavouritePage {
+export class FavouritePage implements OnInit{
 
   fav: IFavCard [] = [
   ];
@@ -30,11 +30,12 @@ export class FavouritePage {
     await this.menu.enable(true);
   }
 
-  async ionViewWillEnter() {
+  async ngOnInit() {
     await this.loadFav();
   }
 
   async loadFav() {
+    this.fav = [];
     let data: DocumentData;
     // eslint-disable-next-line no-underscore-dangle
     const itemIdRef = doc(this._firestore, `favourites/${(this.id)}`);
@@ -47,17 +48,19 @@ export class FavouritePage {
       this.owner = idOwnerName.owner;
       const ownerRef = doc(this._firestore, `stores/${(this.owner)}`);
       const ownerSnap = await getDoc(ownerRef);
-      const ownerName = ownerSnap.data();
+      const ownerName = ownerSnap.data().name;
       // eslint-disable-next-line no-underscore-dangle
       const dataRef = doc(this._firestore, `stores/${(this.owner)}/items/${(key)}`);
       const docSnap = await getDoc(dataRef);
-      const dataSnap = docSnap.data();
+      const name = docSnap.data().name;
+      const price = docSnap.data().price;
+      const imageUrl = docSnap.data().imageUrl;
       this.fav.push(
         {
-          name: dataSnap.name,
-          owner: ownerName.name,
-          price: dataSnap.price,
-          image: dataSnap.imageUrl,
+          name,
+          owner: ownerName,
+          price,
+          image: imageUrl,
           itemId: key,
           ownerId: idOwnerName.owner,
           id: key,

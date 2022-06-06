@@ -2,11 +2,11 @@
 import { Component, OnInit } from '@angular/core';
 import {AccessService} from '../../services/auth/access.service';
 import {Router} from '@angular/router';
-import {IrohaService} from '../../services/iroha.service';
+import {IrohaService} from '../../services/iroha/iroha.service';
 import {doc, Firestore, getDoc, setDoc, updateDoc} from '@angular/fire/firestore';
 import {AuthService} from '../../services/auth/auth.service';
 import {AngularFirestore, DocumentData} from '@angular/fire/compat/firestore';
-import {ProductService} from '../../services/cafe/product.service';
+import {ProductService} from '../../services/store/product.service';
 import firebase from 'firebase/compat/app';
 import {AlertController, IonRouterOutlet, LoadingController, MenuController, ModalController} from "@ionic/angular";
 import {AvailableResult, BiometryType, Credentials, NativeBiometric} from "capacitor-native-biometric";
@@ -73,10 +73,9 @@ export class ConfirmPage implements OnInit {
           }).then((credentials: Credentials) => {
             // Authenticate using biometrics before logging the user in
             NativeBiometric.verifyIdentity({
-              reason: "For easy log in",
-              title: "Log in",
-              subtitle: "Maybe add subtitle here?",
-              description: "Maybe a description too?",
+              reason: "Please verify your identity",
+              title: "Verification",
+              description: "You need to verify your identity to complete the payment.",
             }).then(
               async () => {
                 // Authentication successful
@@ -103,6 +102,7 @@ export class ConfirmPage implements OnInit {
     this.access.resetLogoutTimer();
   }
 
+  // get details of orders and display on view for double checking
   async addItemsToCart() {
     let data: DocumentData;
     this.total = 0;
@@ -111,7 +111,6 @@ export class ConfirmPage implements OnInit {
     await getDoc(itemIdRef)
       .then(snap =>   { data = snap.data(); delete data.lastUpdate; delete data.id;});
     for (const key in data) {
-      console.log(key);
       const idOwnerRef = doc(this._firestore, `idOwner/${(key.split('@')[0])}`);
       const idOwnerSnap = await getDoc(idOwnerRef);
       const idOwnerName = idOwnerSnap.data();
@@ -133,6 +132,8 @@ export class ConfirmPage implements OnInit {
         const optSnap = await getDoc(optionRef);
         optionSnap += Number(optSnap.data().price);
       }
+      const paymentDetails = this.product.orderNotePair.get(key);
+      const deliveryTime = this.product.orderTimePair.get(key);
       this.checkout.push(
         {
           name: dataSnap.name,
@@ -140,8 +141,10 @@ export class ConfirmPage implements OnInit {
           price: Number(dataSnap.price)+ optionSnap,
           image: dataSnap.imageUrl,
           id: key,
+          message: paymentDetails,
           ownerId: this.owner,
           quantity: value,
+          deliveryTime: deliveryTime
         },
       );
       this.total += (Number(dataSnap.price)+optionSnap)*value;

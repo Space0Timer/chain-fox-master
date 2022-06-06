@@ -103,13 +103,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "ListPage": () => (/* binding */ ListPage)
 /* harmony export */ });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 48111);
-/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_list_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./list.page.html */ 86401);
-/* harmony import */ var _list_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./list.page.scss */ 61525);
+/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_list_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./list.page.html */ 86401);
+/* harmony import */ var _list_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./list.page.scss */ 51167);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core */ 14001);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ 13252);
 /* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
 /* harmony import */ var _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../services/auth/auth.service */ 68927);
-/* harmony import */ var _services_iroha_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../services/iroha.service */ 49187);
+/* harmony import */ var _services_iroha_iroha_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../services/iroha/iroha.service */ 52857);
 /* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! date-fns */ 26039);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic/angular */ 91346);
 
@@ -165,13 +165,13 @@ ListPage.ctorParameters = () => [
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_6__.Router },
     { type: _services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__.AuthService },
     { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_7__.Firestore },
-    { type: _services_iroha_service__WEBPACK_IMPORTED_MODULE_3__.IrohaService },
+    { type: _services_iroha_iroha_service__WEBPACK_IMPORTED_MODULE_3__.IrohaService },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.MenuController }
 ];
 ListPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.Component)({
         selector: 'app-list',
-        template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_list_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        template: _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_list_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_list_page_scss__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], ListPage);
@@ -191,12 +191,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "TransactionsComponent": () => (/* binding */ TransactionsComponent)
 /* harmony export */ });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 48111);
-/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_transactions_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./transactions.component.html */ 80706);
-/* harmony import */ var _transactions_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./transactions.component.scss */ 21900);
+/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_transactions_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./transactions.component.html */ 80706);
+/* harmony import */ var _transactions_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./transactions.component.scss */ 93449);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 14001);
 /* harmony import */ var _modal_transaction_details_transaction_details_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../modal/transaction-details/transaction-details.component */ 8960);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ 91346);
-/* harmony import */ var _services_iroha_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../services/iroha.service */ 49187);
+/* harmony import */ var _services_iroha_iroha_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../services/iroha/iroha.service */ 52857);
 
 
 
@@ -233,7 +233,7 @@ let TransactionsComponent = class TransactionsComponent {
 TransactionsComponent.ctorParameters = () => [
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.ModalController },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.IonRouterOutlet },
-    { type: _services_iroha_service__WEBPACK_IMPORTED_MODULE_3__.IrohaService }
+    { type: _services_iroha_iroha_service__WEBPACK_IMPORTED_MODULE_3__.IrohaService }
 ];
 TransactionsComponent.propDecorators = {
     transactions: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_6__.Input }]
@@ -241,7 +241,7 @@ TransactionsComponent.propDecorators = {
 TransactionsComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.Component)({
         selector: 'app-transactions',
-        template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_transactions_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        template: _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_transactions_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_transactions_component_scss__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], TransactionsComponent);
@@ -261,11 +261,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "TransactionDetailsComponent": () => (/* binding */ TransactionDetailsComponent)
 /* harmony export */ });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 48111);
-/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_transaction_details_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./transaction-details.component.html */ 33772);
-/* harmony import */ var _transaction_details_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./transaction-details.component.scss */ 42834);
+/* harmony import */ var _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_transaction_details_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./transaction-details.component.html */ 33772);
+/* harmony import */ var _transaction_details_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./transaction-details.component.scss */ 61201);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 14001);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ 91346);
-/* harmony import */ var _services_iroha_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../services/iroha.service */ 49187);
+/* harmony import */ var _services_iroha_iroha_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../services/iroha/iroha.service */ 52857);
 
 
 
@@ -286,12 +286,12 @@ let TransactionDetailsComponent = class TransactionDetailsComponent {
 };
 TransactionDetailsComponent.ctorParameters = () => [
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__.ModalController },
-    { type: _services_iroha_service__WEBPACK_IMPORTED_MODULE_2__.IrohaService }
+    { type: _services_iroha_iroha_service__WEBPACK_IMPORTED_MODULE_2__.IrohaService }
 ];
 TransactionDetailsComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Component)({
         selector: 'app-transaction-details',
-        template: _Users_spacetimer_Documents_chain_fox_master_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_transaction_details_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        template: _Users_spacetimer_Documents_chain_fox_master_2_2_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_transaction_details_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_transaction_details_component_scss__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], TransactionDetailsComponent);
@@ -300,7 +300,7 @@ TransactionDetailsComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)(
 
 /***/ }),
 
-/***/ 61525:
+/***/ 51167:
 /*!*****************************************************!*\
   !*** ./src/app/pages/tabs/home/list/list.page.scss ***!
   \*****************************************************/
@@ -310,7 +310,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 
 /***/ }),
 
-/***/ 21900:
+/***/ 93449:
 /*!**********************************************************************************!*\
   !*** ./src/app/shared/components/cards/transactions/transactions.component.scss ***!
   \**********************************************************************************/
@@ -320,7 +320,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 
 /***/ }),
 
-/***/ 42834:
+/***/ 61201:
 /*!************************************************************************************************!*\
   !*** ./src/app/shared/components/modal/transaction-details/transaction-details.component.scss ***!
   \************************************************************************************************/

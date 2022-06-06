@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import {AlertController, LoadingController, MenuController} from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { IrohaService } from 'src/app/services/iroha.service';
+import { IrohaService } from 'src/app/services/iroha/iroha.service';
 import {AngularFirestore} from '@angular/fire/compat/firestore';
 import {collection, doc, Firestore, getDoc, getDocs, query, setDoc, where} from '@angular/fire/firestore';
 import {AngularFireAuth} from '@angular/fire/compat/auth';
@@ -49,7 +49,7 @@ export class SignUpComponent implements OnInit {
 
   initForm() {
     this.form = new FormGroup({
-      username: new FormControl(null, {validators: [Validators.required, Validators.pattern('^[a-zA-Z]+$'), Validators.maxLength(10), Validators.minLength(6)]}),
+      username: new FormControl(null, {validators: [Validators.required, Validators.pattern('^[a-zA-Z]+$'), Validators.maxLength(15), Validators.minLength(6)]}),
       email: new FormControl(null, {validators: [Validators.required, Validators.email]}), // added email validator also
       // eslint-disable-next-line max-len
       password: new FormControl(null, {validators: [Validators.required, Validators.minLength(8), Validators.maxLength(15),Validators.pattern('^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\\s).{8,}$'),]})
@@ -76,6 +76,7 @@ export class SignUpComponent implements OnInit {
     });
   }
 
+  // match the entered username with the database to find duplicates
   async checkUsernameExists(username) {
     // eslint-disable-next-line no-underscore-dangle
     const usernameRef = collection(this._firestore, 'users');
@@ -96,14 +97,13 @@ export class SignUpComponent implements OnInit {
     }
   }
 
-
-
   async onSubmit() {
-    console.log('tes');
     if (!this.form.valid) {
       this.form.markAllAsTouched();
       return;
     }
+    this.authService.isLoadingSignUp = true;
+    console.log(this.form.value);
     let auth = true;
     this.form.value.username.toLowerCase();
     console.log(this.form.value.username.toLowerCase());
@@ -113,11 +113,7 @@ export class SignUpComponent implements OnInit {
       }
     });
     if (auth) {
-      this.loadingController.create({
-        message: 'Signing up...',
-      }).then(async overlay => {
-        this.loading = overlay;
-        this.loading.present();
+      // register the user
         this.authService.register(this.form.value).then(async (data) => {
         })
           .catch(e => {
@@ -127,11 +123,12 @@ export class SignUpComponent implements OnInit {
             if (e.code === 'auth/email-already-in-use') {
               msg = 'Email is already in use.';
             }
-            this.loading.dismiss();
+            this.isLoading = false;
             this.showAlert(msg);
           });
-      });
+        this.form.reset();
     }
+
   }
 
   async showAlert(message) {
